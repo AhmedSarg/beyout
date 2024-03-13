@@ -35,6 +35,8 @@ class AppTextStyles {
         fontSize: FontSize.s24,
 
       );
+
+
   static TextStyle getStartTextStyle(BuildContext? context, ) =>
       getBoldStyle(
         fontFamily: FontConstants.kreon,
@@ -95,11 +97,14 @@ class AppTextStyles {
 
       );
 
+  static TextStyle logintitleTextStyle(BuildContext? context) => getBoldStyle(
+    fontFamily: FontConstants.kreon,
+    color: ColorManager.white,
+    fontSize: FontSize.s24,
+  );
 
 
-
-
-
+/////////////////////////
   static TextStyle onBoardingButtonTextStyle(BuildContext? context) =>
       getBoldStyle(
         fontFamily: FontConstants.comfortaa,
@@ -133,11 +138,7 @@ class AppTextStyles {
     color: ColorManager.white,
     fontSize: FontSize.s24,
   );
-  static TextStyle logintitleTextStyle(BuildContext? context) => getBoldStyle(
-    fontFamily: FontConstants.kreon,
-    color: ColorManager.white,
-    fontSize: FontSize.s24,
-  );
+
 
   static TextStyle homeSectionTitleTextStyle(BuildContext? context) =>
       getSemiBoldStyle(

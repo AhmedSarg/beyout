@@ -55,54 +55,61 @@ class LoginBody extends StatelessWidget {
             hintText: AppStrings.loginScreenPassWordFieldHint.tr(),
             iconData: Icons.remove_red_eye_outlined,
           ),
-          const SizedBox(height: 10,),
+          const SizedBox(
+            height: 10,
+          ),
           Row(
             children: [
               const Spacer(),
-              InkWell(
-                  onTap: () {
-      
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 12.0),
-                    child: Text('Forgot Password',style: AppTextStyles.authSpeachialTextStyle(context),),
-                  )),
+              Padding(
+                padding: const EdgeInsets.only(right: 12.0),
+                child: TextButton(
+                  onPressed: () {},
+                  child: Text('Forgot Password',
+                      style: AppTextStyles.authSpeachialTextStyle(context)),
+                ),
+              ),
             ],
           ),
           Row(
             children: [
               const Spacer(),
               InkWell(
-                  onTap: () {
-      
-                  },
+                  onTap: () {},
                   child: Padding(
                     padding: const EdgeInsets.only(right: 12.0),
-                    child: Text('Create Account',style: AppTextStyles.authSpeachialTextStyle(context),),
+                    child: Text(
+                      'Create Account',
+                      style: AppTextStyles.authSpeachialTextStyle(context),
+                    ),
                   )),
             ],
           ),
-          const SizedBox(height: 10,),
-      
-          Center(child: CommonBtnTransperant(title: 'Login',  )),
-          const SizedBox(height: 30,),
-      
+          const SizedBox(
+            height: 10,
+          ),
+          Center(
+              child: CommonBtnTransperant(
+            title: 'Login',
+          )),
+          const SizedBox(
+            height: 30,
+          ),
           const Center(
-            child:  Column(
-      
+            child: Column(
               children: [
-                SocialContainer(title: 'Sign up with google',image: SVGAssets.facebook,),
-                SizedBox(height: 10,),
-                SocialContainer(title: 'Sign up with facebook',image :SVGAssets.gamil),
+                SocialContainer(
+                  title: 'Sign up with google',
+                  image: SVGAssets.facebook,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                SocialContainer(
+                    title: 'Sign up with facebook', image: SVGAssets.gamil),
               ],
             ),
           )
-      
-      
-      
-      
-      
-      
         ],
       ),
     );
