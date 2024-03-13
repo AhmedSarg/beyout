@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../resources/assets_manager.dart';
 
-class OnBoardingImageWidget extends StatelessWidget {
-  const OnBoardingImageWidget({super.key});
+class OnboardingImage extends StatelessWidget {
+  const OnboardingImage({super.key});
 
   @override
   Widget build(BuildContext context) {

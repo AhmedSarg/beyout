@@ -5,8 +5,8 @@ import '../../../resources/color_manager.dart';
 import '../../../resources/strings_manager.dart';
 import '../../../resources/text_styles.dart';
 
-class OnBoardingTextWidget extends StatelessWidget {
-  const OnBoardingTextWidget({super.key});
+class OnboardingText extends StatelessWidget {
+  const OnboardingText({super.key});
 
   @override
   Widget build(BuildContext context) {
