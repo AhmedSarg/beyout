@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:temp_house/presentation/resources/color_manager.dart';
 
 import '../../resources/text_styles.dart';
 
@@ -13,7 +14,7 @@ final String  image;
       width: MediaQuery.of(context).size.width * .90,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
-        color: const Color(0xFF00162E).withOpacity(.15),
+        color: ColorManager.darkGrey.withOpacity(.15),
       ),
       child: Row(
         children: [

@@ -37,27 +37,27 @@ class RegisterBody extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: MainTextField(
-              text: AppStrings.registerScreenUsernameLabel.tr(),
+              label: AppStrings.registerScreenUsernameLabel.tr(),
               isObscured: false,
-              hintText: AppStrings.registerScreenUsernameHint.tr(),
+              hint: AppStrings.registerScreenUsernameHint.tr(),
               textInputType: TextInputType.text,
             ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: MainTextField(
-              text: AppStrings.registerScreenEmailLabel.tr(),
+              label: AppStrings.registerScreenEmailLabel.tr(),
               isObscured: false,
-              hintText: AppStrings.registerScreenEmailHint.tr(),
+              hint: AppStrings.registerScreenEmailHint.tr(),
               textInputType: TextInputType.emailAddress,
             ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: MainTextField(
-              text: AppStrings.registerScreenPasswordLabel.tr(),
+              label: AppStrings.registerScreenPasswordLabel.tr(),
               isObscured: true,
-              hintText: AppStrings.registerScreenPasswordHint.tr(),
+              hint: AppStrings.registerScreenPasswordHint.tr(),
               iconData: Icons.remove_red_eye_outlined,
               textInputType: TextInputType.text,
             ),
@@ -65,9 +65,9 @@ class RegisterBody extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: MainTextField(
-              text: AppStrings.registerScreenPhoneNumberLabel.tr(),
+              label: AppStrings.registerScreenPhoneNumberLabel.tr(),
               isObscured: false,
-              hintText: AppStrings.registerScreenPhoneNumberHint.tr(),
+              hint: AppStrings.registerScreenPhoneNumberHint.tr(),
               textInputType: TextInputType.phone,
             ),
           ),
@@ -82,36 +82,36 @@ class RegisterBody extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: MainTextField(
-              text: AppStrings.registerScreenJobLabel.tr(),
+              label: AppStrings.registerScreenJobLabel.tr(),
               isObscured: false,
-              hintText: AppStrings.registerScreenJobHint.tr(),
+              hint: AppStrings.registerScreenJobHint.tr(),
               textInputType: TextInputType.text,
             ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: MainTextField(
-              text: AppStrings.registerScreenSalaryLabel.tr(),
+              label: AppStrings.registerScreenSalaryLabel.tr(),
               isObscured: false,
-              hintText: AppStrings.registerScreenSalaryHint.tr(),
+              hint: AppStrings.registerScreenSalaryHint.tr(),
               textInputType: TextInputType.phone,
             ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: MainTextField(
-              text: AppStrings.registerScreenAgeLabel.tr(),
+              label: AppStrings.registerScreenAgeLabel.tr(),
               isObscured: false,
-              hintText: AppStrings.registerScreenAgeHint.tr(),
+              hint: AppStrings.registerScreenAgeHint.tr(),
               textInputType: TextInputType.phone,
             ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: MainTextField(
-              text: AppStrings.registerScreenMartialStatusLabel.tr(),
+              label: AppStrings.registerScreenMartialStatusLabel.tr(),
               isObscured: false,
-              hintText: AppStrings.registerScreenMartialStatusHint.tr(),
+              hint: AppStrings.registerScreenMartialStatusHint.tr(),
               textInputType: TextInputType.text,
             ),
           ),

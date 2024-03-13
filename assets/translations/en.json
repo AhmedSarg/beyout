@@ -27,6 +27,10 @@
   "loginScreenGoogle": "Sign up with google",
   "loginScreenButton": "Login",
 
+  "forgotPasswordTitle": "Forgot Password",
+  "forgotPasswordEmailValue": "Rea************@gmail.com",
+  "forgotPasswordSendCode": "Send Code",
+
   "registerScreenTitle": "Create Account",
   "registerScreenSubTitle": "Start booking with creating account",
   "registerScreenUsernameLabel": "Username",

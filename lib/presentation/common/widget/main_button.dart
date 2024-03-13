@@ -24,7 +24,7 @@ class MainButton extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width * .55,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(AppSize.s24),
+        borderRadius: BorderRadius.circular(AppSize.s30),
         color: backgroundColor,
       ),
       child: TextButton(

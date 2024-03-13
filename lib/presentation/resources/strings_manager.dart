@@ -32,6 +32,11 @@ class AppStrings {
   static const loginScreenGoogle = "loginScreenGoogle";
   static const loginScreenButton = "loginScreenButton";
 
+  ///forgot password
+  static const forgotPasswordTitle = "forgotPasswordTitle";
+  static const forgotPasswordEmailValue = "forgotPasswordEmailValue";
+  static const forgotPasswordSendCode = "forgotPasswordSendCode";
+
   ///register screen
   static const registerScreenTitle = "registerScreenTitle";
   static const registerScreenSubTitle = "registerScreenSubTitle";

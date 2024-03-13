@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:temp_house/presentation/resources/values_manager.dart';
 
 import '../../../common/widget/main_button.dart';
 import '../../../common/widget/main_text_field.dart';
@@ -15,100 +16,81 @@ class LoginBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height * .12,
-          ),
-          Row(
-            children: [
-              const SizedBox(width: 60),
-              Text(
-                AppStrings.loginScreenTitle.tr(),
-                style: AppTextStyles.loginTitleTextStyle(context),
-              ),
-            ],
-          ),
-          const SizedBox(height: 15),
-          const Line(),
-          const SizedBox(height: 35),
-          MainTextField(
-            text: AppStrings.loginScreenEmailLabel.tr(),
-            isObscured: false,
-            hintText: AppStrings.loginScreenEmailHint.tr(),
-            textInputType: TextInputType.text,
-          ),
-          const SizedBox(height: 15),
-          MainTextField(
-            text: AppStrings.loginScreenPasswordLabel.tr(),
-            isObscured: true,
-            hintText: AppStrings.loginScreenPasswordHint.tr(),
-            iconData: Icons.remove_red_eye_outlined,
-            textInputType: TextInputType.text,
-          ),
-          const SizedBox(height: 10),
-          Row(
-            children: [
-              const Spacer(),
-              Padding(
-                padding: const EdgeInsets.only(right: 12.0),
-                child: TextButton(
-                  onPressed: () {},
+    return SafeArea(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20, vertical: AppSize.s50),
+        child: Column(
+          children: [
+            MainTextField(
+              label: AppStrings.loginScreenEmailLabel.tr(),
+              isObscured: false,
+              hint: AppStrings.loginScreenEmailHint.tr(),
+              textInputType: TextInputType.text,
+            ),
+            const SizedBox(height: AppSize.s20),
+            MainTextField(
+              label: AppStrings.loginScreenPasswordLabel.tr(),
+              isObscured: true,
+              hint: AppStrings.loginScreenPasswordHint.tr(),
+              iconData: Icons.remove_red_eye_outlined,
+              textInputType: TextInputType.text,
+            ),
+            const SizedBox(height: AppSize.s20),
+            Row(
+              children: [
+                const Spacer(),
+                TextButton(
+                  onPressed: () {
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (context) => const ForgotPassword(),
+                    );
+                  },
                   child: Text(
                     AppStrings.loginScreenForgotPassword.tr(),
                     style: AppTextStyles.authActionsTextStyle(context),
                   ),
                 ),
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              const Spacer(),
-              Padding(
-                padding: const EdgeInsets.only(right: 12.0),
-                child: TextButton(
+              ],
+            ),
+            Row(
+              children: [
+                const Spacer(),
+                TextButton(
                   onPressed: () {},
                   child: Text(
                     AppStrings.loginScreenCreateAccount.tr(),
                     style: AppTextStyles.authActionsTextStyle(context),
                   ),
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 30),
-          Center(
-            child: MainButton(
-              text: AppStrings.loginScreenButton.tr(),
-              onTap: () {
-                showModalBottomSheet(
-                  context: context,
-                  builder: (context) => const ForgotPassword(),
-                );
-              },
-              textStyle: AppTextStyles.authButtonTextStyle(context),
-            ),
-          ),
-          const SizedBox(height: 30),
-          Center(
-            child: Column(
-              children: [
-                SocialContainer(
-                  title: AppStrings.loginScreenFacebook.tr(),
-                  image: SVGAssets.facebook,
-                ),
-                const SizedBox(height: 10),
-                SocialContainer(
-                  title: AppStrings.loginScreenGoogle.tr(),
-                  image: SVGAssets.gmail,
-                ),
               ],
             ),
-          )
-        ],
+            const SizedBox(height: AppSize.s50),
+            Center(
+              child: MainButton(
+                text: AppStrings.loginScreenButton.tr(),
+                onTap: () {},
+                textStyle: AppTextStyles.authButtonTextStyle(context),
+              ),
+            ),
+            const SizedBox(height: AppSize.s50),
+            Center(
+              child: Column(
+                children: [
+                  SocialContainer(
+                    title: AppStrings.loginScreenFacebook.tr(),
+                    image: SVGAssets.facebook,
+                  ),
+                  const SizedBox(height: 10),
+                  SocialContainer(
+                    title: AppStrings.loginScreenGoogle.tr(),
+                    image: SVGAssets.gmail,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

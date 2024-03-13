@@ -9,18 +9,24 @@ import '../../resources/values_manager.dart';
 class MainTextField extends StatefulWidget {
   const MainTextField({
     super.key,
-    required this.text,
+    this.label,
+    required this.hint,
     this.isObscured = false,
-    required this.hintText,
     this.iconData,
     this.textInputType = TextInputType.text,
+    this.backgroundColor,
+    this.hintTextStyle,
+    this.cursorColor = ColorManager.white,
   });
 
   final bool isObscured;
-  final String text;
-  final String hintText;
+  final String? label;
+  final String hint;
   final TextInputType textInputType;
   final IconData? iconData;
+  final Color? backgroundColor;
+  final TextStyle? hintTextStyle;
+  final Color cursorColor;
 
   @override
   State<MainTextField> createState() => _MainTextFieldState();
@@ -28,59 +34,53 @@ class MainTextField extends StatefulWidget {
 
 class _MainTextFieldState extends State<MainTextField> {
   late bool hidden = widget.isObscured;
-
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 30, top: 4),
+        widget.label != null ? Padding(
+          padding: const EdgeInsets.only(left: AppPadding.p10, top: AppPadding.p4),
           child: Text(
-            widget.text,
+            widget.label!,
             style: AppTextStyles.authLabelTextStyle(context),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 40),
-          child: Container(
-            margin: const EdgeInsets.only(top: 5),
-            decoration: BoxDecoration(
-              color: ColorManager.offwhite.withOpacity(.07),
-              borderRadius: BorderRadius.circular(24),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(2.0),
-              child: TextField(
-                style: const TextStyle(color: Colors.white),
-                obscureText: hidden,
-                keyboardType: widget.textInputType,
-                obscuringCharacter: '*',
-                cursorColor: Colors.white,
-                decoration: InputDecoration(
-                  hintText: widget.hintText,
-                  suffixIcon: widget.isObscured
-                      ? IconButton(
-                          onPressed: () {
-                            setState(() {
-                              hidden = !hidden;
-                            });
-                          },
-                          iconSize: AppSize.s24,
-                          splashRadius: AppSize.s1,
-                          isSelected: !hidden,
-                          color: ColorManager.white,
-                          selectedIcon: const Icon(CupertinoIcons.eye),
-                          icon: const Icon(CupertinoIcons.eye_slash),
-                        )
-                      : null,
-                  hintStyle: AppTextStyles.authHintTextStyle(context),
-                  border: InputBorder.none,
-                  enabledBorder: InputBorder.none,
-                  filled: true,
-                  fillColor: Colors.transparent,
-                ),
-              ),
+        ) : const SizedBox(),
+        Container(
+          margin: const EdgeInsets.only(top: AppMargin.m5),
+          decoration: BoxDecoration(
+            color: widget.backgroundColor ?? ColorManager.darkGrey.withOpacity(.15),
+            borderRadius: BorderRadius.circular(AppSize.s24),
+          ),
+          child: TextField(
+            style: const TextStyle(color: Colors.white),
+            obscureText: hidden,
+            keyboardType: widget.textInputType,
+            obscuringCharacter: '*',
+            cursorColor: widget.cursorColor,
+            decoration: InputDecoration(
+              contentPadding: const EdgeInsets.all(AppPadding.p12),
+              hintText: widget.hint,
+              suffixIcon: widget.isObscured
+                  ? IconButton(
+                      onPressed: () {
+                        setState(() {
+                          hidden = !hidden;
+                        });
+                      },
+                      iconSize: AppSize.s24,
+                      splashRadius: AppSize.s1,
+                      isSelected: !hidden,
+                      color: ColorManager.white,
+                      selectedIcon: const Icon(CupertinoIcons.eye),
+                      icon: const Icon(CupertinoIcons.eye_slash),
+                    )
+                  : null,
+              hintStyle: widget.hintTextStyle ?? AppTextStyles.authHintTextStyle(context),
+              border: InputBorder.none,
+              enabledBorder: InputBorder.none,
+              filled: true,
+              fillColor: Colors.transparent,
             ),
           ),
         ),
