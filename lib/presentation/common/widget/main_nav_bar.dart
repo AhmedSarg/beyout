@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../resources/color_manager.dart';
 import '../../resources/langauge_manager.dart';
-import '../../resources/text_styles.dart';
 import '../../resources/values_manager.dart';
 import '../../../app/extensions.dart';
 
@@ -112,7 +111,6 @@ class NavBarItemWidget extends StatelessWidget {
                 : Center(
                     child: Text(
                       navBarItem.text,
-                      style: AppTextStyles.navBarItemTextStyle(context),
                     ),
                   ),
           ),

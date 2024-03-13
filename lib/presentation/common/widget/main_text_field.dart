@@ -1,31 +1,32 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:temp_house/presentation/resources/color_manager.dart';
-import 'package:temp_house/presentation/resources/text_styles.dart';
+
+import '../../resources/color_manager.dart';
+import '../../resources/text_styles.dart';
 
 import '../../resources/values_manager.dart';
 
-class CommonTextField extends StatefulWidget {
-  CommonTextField({
-    Key? key,
+class MainTextField extends StatefulWidget {
+  const MainTextField({
+    super.key,
     required this.text,
-    required this.isObscured,
+    this.isObscured = false,
     required this.hintText,
-    this.iconData, required this.textInputType,
-  }) : super(key: key);
+    this.iconData,
+    this.textInputType = TextInputType.text,
+  });
 
-    bool isObscured = true;
+  final bool isObscured;
   final String text;
   final String hintText;
   final TextInputType textInputType;
   final IconData? iconData;
 
   @override
-  _CommonTextFieldState createState() => _CommonTextFieldState();
+  State<MainTextField> createState() => _MainTextFieldState();
 }
 
-class _CommonTextFieldState extends State<CommonTextField> {
+class _MainTextFieldState extends State<MainTextField> {
   late bool hidden = widget.isObscured;
 
   @override
@@ -37,7 +38,7 @@ class _CommonTextFieldState extends State<CommonTextField> {
           padding: const EdgeInsets.only(left: 30, top: 4),
           child: Text(
             widget.text,
-            style: AppTextStyles.authTextStyle(context),
+            style: AppTextStyles.authLabelTextStyle(context),
           ),
         ),
         Padding(
@@ -60,20 +61,20 @@ class _CommonTextFieldState extends State<CommonTextField> {
                   hintText: widget.hintText,
                   suffixIcon: widget.isObscured
                       ? IconButton(
-                    onPressed: () {
-                      setState(() {
-                        hidden = !hidden;
-                      });
-                    },
-                    iconSize: AppSize.s24,
-                    splashRadius: AppSize.s1,
-                    isSelected: !hidden,
-                    color: ColorManager.white,
-                    selectedIcon: const Icon(CupertinoIcons.eye),
-                    icon: const Icon(CupertinoIcons.eye_slash),
-                  )
+                          onPressed: () {
+                            setState(() {
+                              hidden = !hidden;
+                            });
+                          },
+                          iconSize: AppSize.s24,
+                          splashRadius: AppSize.s1,
+                          isSelected: !hidden,
+                          color: ColorManager.white,
+                          selectedIcon: const Icon(CupertinoIcons.eye),
+                          icon: const Icon(CupertinoIcons.eye_slash),
+                        )
                       : null,
-                  hintStyle: AppTextStyles.authHintTextTextStyle(context),
+                  hintStyle: AppTextStyles.authHintTextStyle(context),
                   border: InputBorder.none,
                   enabledBorder: InputBorder.none,
                   filled: true,

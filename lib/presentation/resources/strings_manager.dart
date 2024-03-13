@@ -1,90 +1,65 @@
 class AppStrings {
-  //general
+  ///general
   static const noRouteFound = "noRouteFound";
   static const retryAgain = "retryAgain";
-  static const String success = "success";
+  static const success = "success";
 
-  //splash screen
+  ///splash screen
   static const splashScreenTitle = "splashScreenTitle";
   static const splashScreenSubTitle = "splashScreenSubTitle";
 
-  //onboard screen
-  static const onBoardTitle = "onBoardTitle";
-  static const onBoardSubTitle = "onBoardSubTitle";
+  ///onboarding screen
+  static const onBoardingScreenTitle1 = "onBoardingScreenTitle1";
+  static const onBoardingScreenTitle2 = "onBoardingScreenTitle2";
+  static const onBoardingScreenNextButton = "onBoardingScreenNextButton";
+  static const onBoardingScreenGetStartedButton = "onBoardingScreenGetStartedButton";
 
-  //Onboarding screen
-  static const onBoardingTitle = "onBoardingTitle";
-  static const onBoardingBtnTitle = "onBoardingBtnTitle";
+  ///selection screen
+  static const selectionScreenTitle = "selectionScreenTitle";
+  static const selectionScreenSubTitle = "selectionScreenSubTitle";
+  static const selectionScreenOwner = "selectionScreenOwner";
+  static const selectionScreenTenant = "selectionScreenTenant";
 
-  //getStarte screen
-  static const getStartRoleTitle = "getStartRoleTitle";
-  static const getStartTitle = "getStartTitle";
-  static const getStartSubTitle = "getStartSubTitle";
-
-
-  //Login Screen
+  ///login screen
   static const loginScreenTitle = "loginScreenTitle";
-  static const loginScreenEmailFieldLabel = "loginScreenEmailFieldLabel";
-  static const loginScreenPassWordFieldLabel = "loginScreenPassWordFieldLabel";
-  static const loginScreenEmailFieldHint = "loginScreenEmailFieldHint";
-  static const loginScreenPassWordFieldHint = "loginScreenPassWordFieldHint";
-  static const loginScreenLogInBtn = "loginScreenLogInBtn";
+  static const loginScreenEmailLabel = "loginScreenEmailLabel";
+  static const loginScreenEmailHint = "loginScreenEmailHint";
+  static const loginScreenPasswordLabel = "loginScreenPasswordLabel";
+  static const loginScreenPasswordHint = "loginScreenPasswordHint";
+  static const loginScreenForgotPassword = "loginScreenForgotPassword";
+  static const loginScreenCreateAccount = "loginScreenCreateAccount";
+  static const loginScreenFacebook = "loginScreenFacebook";
+  static const loginScreenGoogle = "loginScreenGoogle";
+  static const loginScreenButton = "loginScreenButton";
 
-  //navigation bar widget
-  static const navBarHomeTitle = "navBarHomeTitle";
-  static const navBarNewsTitle = "navBarNewsTitle";
-  static const navBarEventsTitle = "navBarEventsTitle";
-  static const navBarTracksTitle = "navBarTracksTitle";
-  static const navBarAwardsTitle = "navBarAwardsTitle";
+  ///register screen
+  static const registerScreenTitle = "registerScreenTitle";
+  static const registerScreenSubTitle = "registerScreenSubTitle";
+  static const registerScreenUsernameLabel = "registerScreenUsernameLabel";
+  static const registerScreenUsernameHint = "registerScreenUsernameHint";
+  static const registerScreenEmailLabel = "registerScreenEmailLabel";
+  static const registerScreenEmailHint = "registerScreenEmailHint";
+  static const registerScreenPasswordLabel = "registerScreenPasswordLabel";
+  static const registerScreenPasswordHint = "registerScreenPasswordHint";
+  static const registerScreenPhoneNumberLabel = "registerScreenPhoneNumberLabel";
+  static const registerScreenPhoneNumberHint = "registerScreenPhoneNumberHint";
+  static const registerScreenGenderLabel = "registerScreenGenderLabel";
+  static const registerScreenGenderHint = "registerScreenGenderHint";
+  static const registerScreenGenderMale = "registerScreenGenderMale";
+  static const registerScreenGenderFemale = "registerScreenGenderFemale";
+  static const registerScreenJobLabel = "registerScreenJobLabel";
+  static const registerScreenJobHint = "registerScreenJobHint";
+  static const registerScreenSalaryLabel = "registerScreenSalaryLabel";
+  static const registerScreenSalaryHint = "registerScreenSalaryHint";
+  static const registerScreenAgeLabel = "registerScreenAgeLabel";
+  static const registerScreenAgeHint = "registerScreenAgeHint";
+  static const registerScreenMartialStatusLabel = "registerScreenMartialStatusLabel";
+  static const registerScreenMartialStatusHint = "registerScreenMartialStatusHint";
+  static const registerScreenButton = "registerScreenButton";
+  static const registerScreenGoogle = "registerScreenGoogle";
+  static const registerScreenFacebook = "registerScreenFacebook";
 
-  //Home Screen
-  static const homeScreenNews = "homeScreenNews";
-  static const homeScreenEvents = "homeScreenEvents";
-  static const homeScreenAwards = "homeScreenAwards";
-  static const homeScreenSeeAll = "homeScreenSeeAll";
-
-  //OnGoingScreen
-  static const speakers = "speakers";
-
-  //Drawer
-  static const drawerLogInTitle = "drawerLogInTitle";
-  static const drawerEventsTitle = "drawerEventsTitle";
-  static const drawerTracksTitle = "drawerTracksTitle";
-  static const drawerAwardsTitle = "drawerAwardsTitle";
-  static const drawerBoardTitle = "drawerBoardTitle";
-  static const drawerNewsTitle = "drawerNewsTitle";
-  static const drawerLogOutBtnTitle = "drawerLogOutBtnTitle";
-  static const drawerLanguageBtnTitle = "drawerLanguageBtnTitle";
-
-  //Tracks Screen
-  static const tracksScreenTitle = "tracksScreenTitle";
-  static const committee = "committee";
-
-  //Board Screen
-  static const boardScreenTitle = "boardScreenTitle";
-
-  //No internet Screen
-  static const noInternetScreenTitle = "noInternetScreenTitle";
-  static const noInternetScreenSubtitle = "noInternetScreenSubtitle";
-  static const noInternetScreenBtnTitle = "noInternetScreenBtnTitle";
-
-  //Track Details Screen
-  static const trackDetailsScreenBoardTitle = "trackDetailsScreenBoardTitle";
-
-  //Events Screen
-  static const String eventsScreenTitle = "eventsScreenTitle";
-  static const String eventsScreenOnGoing = "eventsScreenOnGoing";
-  static const String eventsScreenOurLatestEvents = "eventsScreenOurLatestEvents";
-  static const String eventsScreenSeeAll = "eventsScreenSeeAll";
-  static const String eventsScreenNextEvent = "eventsScreenNextEvent";
-
-  //News Screen
-  static const String newsScreenTitle = "newsScreenTitle";
-
-  //awards page
-  static const String awardsPageTitle = "awardsPageTitle";
-
-  // error handler
+  ///error handler
   static const String badRequestError = "badRequestError";
   static const String noContent = "noContent";
   static const String forbiddenError = "forbiddenError";
@@ -104,64 +79,14 @@ class AppStrings {
   static const String sure = "sure";
   static const String cancel = "cancel";
 
-  //on going event navigation bar widget
-  static const onGoingEventNavBarEventTitle = "onGoingEventNavBarEventTitle";
-  static const onGoingEventNavBarTicketTitle = "onGoingEventNavBarTicketTitle";
-  static const onGoingEventNavBarScheduleTitle = "onGoingEventNavBarScheduleTitle";
-  static const onGoingEventNavBarOrderTitle = "onGoingEventNavBarOrderTitle";
-  static const onGoingEventNavBarScanTitle = "onGoingEventNavBarScanTitle";
-
-  //agenda page
-  static const agendaPageAgenda = "agendaPageAgenda";
-
-  //ticket page
-  static const ticketPageTicket = "ticketPageTicket";
-  static const ticketPageFullName = "ticketPageFullName";
-  static const ticketPageEmail = "ticketPageEmail";
-  static const ticketPagePhoneWhatsapp = "ticketPagePhoneWhatsapp";
-  static const ticketPageNationalID = "ticketPageNationalID";
-  static const ticketPageUniversity = "ticketPageUniversity";
-  static const ticketPageCollege = "ticketPageCollege";
-  static const ticketPageAcademicYear = "ticketPageAcademicYear";
-  static const ticketPageRegisterBtn = "ticketPageRegisterBtn";
-  static const ticketPageAcademicYearSelect = "ticketPageAcademicYearSelect";
-  static const ticketPageDialogGraduated = "ticketPageDialogGraduated";
-
-  //restaurant page
-  static const restaurantScreenTitle = "restaurantScreenTitle";
-
-  //Order Page
-  static const orderScreenTitle = "orderScreenTitle";
-  static const orderScreenDescription = "orderScreenDescription";
-  static const orderScreenOrderLabel = "orderScreenOrderLabel";
-  static const orderScreenQuantityLabel = "orderScreenQuantityLabel";
-  static const orderScreenCommentsLabel = "orderScreenCommentsLabel";
-  static const orderScreenOrderBtn = "orderScreenOrderBtn";
-  static const orderScreenOrderRecievedSuccessfully = "orderScreenOrderRecievedSuccessfully";
-
-  //scan page
-  static const scanPageTitle = "scanPageTitle";
-  static const scanPageFromGallery = "scanPageFromGallery";
-  static const scanPageFromCamera = "scanPageFromCamera";
-  static const scanPageFailedToLoadFromCamera =
-      "scanPageFailedToLoadFromCamera";
-  static const scanPageFailedToLoadFromGallery =
-      "scanPageFailedToLoadFromGallery";
-  static const scanPageFailedToScanImage = "scanPageFailedToScanImage";
-  static const scanPageFailedToScanCode = "scanPageFailedToScanCode";
-  static const scanPageImageScannedSuccessfully = "scanPageImageScannedSuccessfully";
-  static const scanPageWelcome = "scanPageWelcome";
-
-  //validations
+  ///validations
   static const validationsFieldRequired = "validationsFieldRequired";
   static const validationsFieldLengthMoreThen6 =
       "validationsFieldLengthMoreThen6";
-  static const validationsFullNameErrorText =
-      "validationsFullNameErrorText";
-
   static const validationsValidEmail = "validationsValidEmail";
   static const validationsNumbersOnly = "validationsNumbersOnly";
-  static const validationsNumbersMustEqual14Digit = "validationsNumbersMustEqual14Digit";
-  static const validationsNumbersMustEqual11Digit = "validationsNumbersMustEqual11Digit";
-
+  static const validationsNumbersMustEqual14Digit =
+      "validationsNumbersMustEqual14Digit";
+  static const validationsNumbersMustEqual11Digit =
+      "validationsNumbersMustEqual11Digit";
 }

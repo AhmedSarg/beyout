@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:temp_house/presentation/register_screen/view/register_view.dart';
-import '../get_starting_screen/view/get_starting_view.dart';
-import '../login_screen/view/loginScreen.dart';
+import '../login_screen/view/login_screen.dart';
 import '../onboarding_screen/view/onboarding_view.dart';
+import '../register_screen/view/register_view.dart';
+import '../selection_screen/selection_view.dart';
 import '../splash_screen/view/splash_view.dart';
 import 'strings_manager.dart';
 
@@ -12,7 +12,7 @@ class Routes {
 
   static const String splashRoute = "/";
   static const String onboardingRoute = "/onboarding";
-  static const String getStartingRoute = "/getStarting";
+  static const String selectionRoute = "/selection";
   static const String loginRoute = "/login";
   static const String registerRoute = "/register";
 }
@@ -26,8 +26,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const SplashScreen());
       case Routes.onboardingRoute:
         return MaterialPageRoute(builder: (_) => const OnboardingScreen());
-      case Routes.getStartingRoute:
-        return MaterialPageRoute(builder: (_) => const GetStartingScreen());
+      case Routes.selectionRoute:
+        return MaterialPageRoute(builder: (_) => const SelectionScreen());
       case Routes.loginRoute:
         return MaterialPageRoute(builder: (_) => const LoginScreen());
       case Routes.registerRoute:

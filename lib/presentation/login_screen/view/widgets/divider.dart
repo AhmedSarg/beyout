@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:temp_house/presentation/resources/color_manager.dart';
+
+import '../../../resources/color_manager.dart';
+import '../../../resources/values_manager.dart';
 
 class Line extends StatelessWidget {
   const Line({super.key});
@@ -7,7 +9,7 @@ class Line extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 1.4,
+      height: AppSize.s1_4,
       color: ColorManager.lightGrey,
     );
   }

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:temp_house/presentation/common/widget/main_btn_white.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:temp_house/presentation/common/widget/main_button.dart';
 import '../../../resources/color_manager.dart';
-import '../../../resources/strings_manager.dart';
 import '../../../resources/text_styles.dart';
 
 class OnboardingText extends StatelessWidget {
-  const OnboardingText({Key? key, required this.btnName, required this.title}) : super(key: key);
+  const OnboardingText({Key? key, required this.btnName, required this.title})
+      : super(key: key);
 
   final String btnName;
   final String title;
+
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -17,7 +17,7 @@ class OnboardingText extends StatelessWidget {
         height: MediaQuery.of(context).size.height * .35,
         width: double.infinity,
         decoration: const BoxDecoration(
-          color: ColorManager.scafoldBG,
+          color: ColorManager.primary,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(28),
             topRight: Radius.circular(28),
@@ -37,9 +37,15 @@ class OnboardingText extends StatelessWidget {
                 ),
               ),
 
-              const SizedBox(height: 30,),
-              CommonBtn(title: btnName),
-               const Spacer(),
+              const SizedBox(
+                height: 30,
+              ),
+              MainButton(
+                onTap: () {},
+                text: btnName,
+                textStyle: const TextStyle(),
+              ),
+              const Spacer(),
               // Row(
               //   children: [
               //     const Spacer(),

@@ -46,7 +46,7 @@ class SVGAssets {
   static const String _basePath = "assets/svg/";
 
   static const String facebook = "${_basePath}Ellipse 58.svg";
-  static const String gamil = "${_basePath}Ellipse 197.svg";
+  static const String gmail = "${_basePath}Ellipse 197.svg";
 
 
 

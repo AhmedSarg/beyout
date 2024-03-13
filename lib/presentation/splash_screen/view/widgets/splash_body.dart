@@ -15,21 +15,19 @@ class SplashScreenBody extends StatelessWidget {
     return AnimatedSplashScreen(
       nextScreen: const OnboardingScreen(),
       splashIconSize: 4000,
-      backgroundColor:  ColorManager.scafoldBG,
+      backgroundColor:  ColorManager.primary,
       splash: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const Spacer(flex: 2),
             Text(
               AppStrings.splashScreenTitle.tr(),
-              style: AppTextStyles.SplashScreenTitleTextStyle(context),
+              style: AppTextStyles.splashScreenTitleTextStyle(context),
             ),
             Text(AppStrings.splashScreenSubTitle.tr(),
                 style: AppTextStyles.splashScreenSubTitleTextStyle(context)),
-            const SizedBox(
-              height: 80,
-            )
+            const Spacer(flex: 5),
           ],
         ),
       ),
