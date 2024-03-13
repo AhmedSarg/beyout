@@ -15,7 +15,7 @@ final String  image;
       width: MediaQuery.of(context).size.width * .90,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
-        color: ColorManager.offwhite.withOpacity(.2),
+        color: Color(0xFF00162E).withOpacity(.15),
       ),
       child: Row(
         children: [

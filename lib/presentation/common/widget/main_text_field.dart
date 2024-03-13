@@ -12,12 +12,13 @@ class CommonTextField extends StatefulWidget {
     required this.text,
     required this.isObscured,
     required this.hintText,
-    this.iconData,
+    this.iconData, required this.textInputType,
   }) : super(key: key);
 
     bool isObscured = true;
   final String text;
   final String hintText;
+  final TextInputType textInputType;
   final IconData? iconData;
 
   @override
@@ -52,6 +53,7 @@ class _CommonTextFieldState extends State<CommonTextField> {
               child: TextField(
                 style: const TextStyle(color: Colors.white),
                 obscureText: hidden,
+                keyboardType: widget.textInputType,
                 obscuringCharacter: '*',
                 cursorColor: Colors.white,
                 decoration: InputDecoration(

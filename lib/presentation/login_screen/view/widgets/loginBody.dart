@@ -44,7 +44,7 @@ class LoginBody extends StatelessWidget {
           CommonTextField(
             text: AppStrings.loginScreenEmailFieldLabel.tr(),
             isObscured: false,
-            hintText: AppStrings.loginScreenEmailFieldHint.tr(),
+            hintText: AppStrings.loginScreenEmailFieldHint.tr(), textInputType: TextInputType.text,
           ),
           const SizedBox(
             height: 15,
@@ -53,7 +53,7 @@ class LoginBody extends StatelessWidget {
             text: AppStrings.loginScreenPassWordFieldLabel.tr(),
             isObscured: true,
             hintText: AppStrings.loginScreenPassWordFieldHint.tr(),
-            iconData: Icons.remove_red_eye_outlined,
+            iconData: Icons.remove_red_eye_outlined, textInputType: TextInputType.text,
           ),
           const SizedBox(
             height: 10,

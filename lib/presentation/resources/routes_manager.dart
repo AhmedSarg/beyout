@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:temp_house/presentation/register_screen/view/register_view.dart';
 import '../get_starting_screen/view/get_starting_view.dart';
 import '../login_screen/view/loginScreen.dart';
 import '../onboarding_screen/view/onboarding_view.dart';
@@ -13,6 +14,7 @@ class Routes {
   static const String onboardingRoute = "/onboarding";
   static const String getStartingRoute = "/getStarting";
   static const String loginRoute = "/login";
+  static const String registerRoute = "/register";
 }
 
 class RouteGenerator {
@@ -28,6 +30,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const GetStartingScreen());
       case Routes.loginRoute:
         return MaterialPageRoute(builder: (_) => const LoginScreen());
+      case Routes.registerRoute:
+        return MaterialPageRoute(builder: (_) => const RegiesterScreen());
       default:
         return unDefinedRoute();
     }
