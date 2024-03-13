@@ -18,10 +18,7 @@ AppBar buildMainAppBar(BuildContext context, Color? color, [double elevation = 4
     // )
     //     : null,
     actions: [
-      SvgPicture.asset(
-        SVGAssets.ieeeLogo,
-        width: AppSize.s80,
-      ),
+
       const SizedBox(width: AppSize.s20,),
     ],
     elevation: elevation,

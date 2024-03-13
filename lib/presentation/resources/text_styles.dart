@@ -21,13 +21,14 @@ class AppTextStyles {
         fontSize: FontSize.s24,
 
       );
-  static TextStyle getStartTextStyle(BuildContext? context) =>
+  static TextStyle getStartTextStyle(BuildContext? context, ) =>
       getBoldStyle(
         fontFamily: FontConstants.kreon,
         color: ColorManager.scafoldBG,
         fontSize: FontSize.s24,
 
       );
+
 
 
   // Auth Text Style
@@ -47,14 +48,28 @@ class AppTextStyles {
 
       );
 
-  static TextStyle authTextTextStyle(BuildContext? context) =>
-      getLightStyle(
+  static TextStyle authBtnTextStyle(BuildContext? context) =>
+      getBoldStyle(
         fontFamily: FontConstants.kreon,
-        color: ColorManager.lightBlue.withOpacity(.8),
-        fontSize: FontSize.s20,
+        color: ColorManager.white.withOpacity(.3),
+        fontSize: FontSize.s24,
 
       );
 
+  static TextStyle authSocialTextStyle(BuildContext? context, ) =>
+      getLightStyle(
+        fontFamily: FontConstants.kreon,
+        color: ColorManager.offwhite.withOpacity(.35),
+        fontSize: FontSize.s20,
+
+      );
+  static TextStyle authTextTextStyle(BuildContext? context, ) =>
+      getBoldStyle(
+        fontFamily: FontConstants.kreon,
+        color: ColorManager.offwhite.withOpacity(.35),
+        fontSize: FontSize.s24,
+
+      );
 
 
 
