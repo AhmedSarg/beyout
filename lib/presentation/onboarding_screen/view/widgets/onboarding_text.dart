@@ -46,22 +46,7 @@ class OnboardingText extends StatelessWidget {
                 textStyle: const TextStyle(),
               ),
               const Spacer(),
-              // Row(
-              //   children: [
-              //     const Spacer(),
-              //     IconButton(
-              //       onPressed: () {},
-              //       icon: Container(
-              //         decoration: const BoxDecoration(
-              //           shape: BoxShape.circle,
-              //           color: ColorManager.offwhite,
-              //         ),
-              //         child: const Icon(Icons.arrow_forward, color: Colors.white,),
-              //       ),
-              //     ),
-              //   ],
-              // ),
-              // const SizedBox(height: 5,),
+
             ],
           ),
         ),

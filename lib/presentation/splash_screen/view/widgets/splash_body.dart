@@ -6,9 +6,11 @@ import 'package:flutter/material.dart';
 
 import '../../../onboarding_screen/view/onboarding_view.dart';
 import '../../../resources/color_manager.dart';
+import '../../../resources/routes_manager.dart';
 import '../../../resources/strings_manager.dart';
 import '../../../resources/text_styles.dart';
 import '../../../selection_screen/selection_view.dart';
+import '../splash_view.dart';
 
 class SplashScreenBody extends StatefulWidget {
   const SplashScreenBody({super.key});
@@ -36,18 +38,20 @@ class _SplashScreenBodyState extends State<SplashScreenBody>
     _controller.forward();
 
     Timer(Duration(seconds: 3), () {
-      Navigator.of(context).pushReplacement(
-        PageRouteBuilder(
-          transitionDuration: Duration(seconds: 1),
-          pageBuilder: (_, __, ___) => SelectionScreen(),
-          transitionsBuilder: (_, animation, __, child) {
-            return FadeTransition(
-              opacity: animation,
-              child: child,
-            );
-          },
-        ),
-      );
+      if (ModalRoute.of(context)?.settings.name == Routes.splashRoute) {
+        Navigator.of(context).pushReplacement(
+          PageRouteBuilder(
+            transitionDuration: Duration(seconds: 1),
+            pageBuilder: (_, __, ___) => SelectionScreen(),
+            transitionsBuilder: (_, animation, __, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+          ),
+        );
+      }
     });
   }
 
@@ -59,22 +63,23 @@ class _SplashScreenBodyState extends State<SplashScreenBody>
 
   @override
   Widget build(BuildContext context) {
-    return  Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            AppStrings.splashScreenTitle.tr(),
-            style: AppTextStyles.splashScreenTitleTextStyle(context),
-          ),
-          Text(
-            AppStrings.splashScreenSubTitle.tr(),
-            style: AppTextStyles.splashScreenSubTitleTextStyle(context),
-          ),
-
-        ],
-      ),
-
-    );
+    return Center(
+        child: Container(
+      width: MediaQuery.of(context).size.width * 0.7,
+      height: MediaQuery.of(context).size.height * 0.22,
+     child: Column(
+       children: [
+         Text(
+           AppStrings.splashScreenTitle.tr(),
+           style: AppTextStyles.splashScreenTitleTextStyle(context),
+         ),
+         Text(
+           AppStrings.splashScreenSubTitle.tr(),
+           style: AppTextStyles.splashScreenSubTitleTextStyle(context),
+         ),
+       ],
+     ),
+      // Your child widgets here
+    ));
   }
 }
