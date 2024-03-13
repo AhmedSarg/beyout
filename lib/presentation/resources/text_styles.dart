@@ -28,6 +28,9 @@ class AppTextStyles {
         fontSize: FontSize.s24,
 
       );
+
+
+  // Auth Text Style
   static TextStyle authTextStyle(BuildContext? context) =>
       getBoldStyle(
         fontFamily: FontConstants.kurale,
@@ -35,6 +38,27 @@ class AppTextStyles {
         fontSize: FontSize.s24,
 
       );
+
+  static TextStyle authHintTextTextStyle(BuildContext? context) =>
+      getLightStyle(
+        fontFamily: FontConstants.kreon,
+        color: ColorManager.offwhite.withOpacity(.5),
+        fontSize: FontSize.s16,
+
+      );
+
+  static TextStyle authTextTextStyle(BuildContext? context) =>
+      getLightStyle(
+        fontFamily: FontConstants.kreon,
+        color: ColorManager.lightBlue.withOpacity(.8),
+        fontSize: FontSize.s20,
+
+      );
+
+
+
+
+
   static TextStyle baseStatesMessageTextStyle(BuildContext? context) =>
       getBoldStyle(
         fontFamily: FontConstants.comfortaa,

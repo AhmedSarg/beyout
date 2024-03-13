@@ -25,7 +25,9 @@ class AppStrings {
   //Login Screen
   static const loginScreenTitle = "loginScreenTitle";
   static const loginScreenEmailFieldLabel = "loginScreenEmailFieldLabel";
-  static const loginScreenCodeFieldLabel = "loginScreenCodeFieldLabel";
+  static const loginScreenPassWordFieldLabel = "loginScreenPassWordFieldLabel";
+  static const loginScreenEmailFieldHint = "loginScreenEmailFieldHint";
+  static const loginScreenPassWordFieldHint = "loginScreenPassWordFieldHint";
   static const loginScreenLogInBtn = "loginScreenLogInBtn";
 
   //navigation bar widget

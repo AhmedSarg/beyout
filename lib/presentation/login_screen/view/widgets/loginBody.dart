@@ -13,20 +13,70 @@ class LoginBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: MediaQuery.of(context).size.height*.12,),
+        SizedBox(
+          height: MediaQuery.of(context).size.height * .12,
+        ),
         Row(
           children: [
-            const SizedBox(width: 60,),
-            Text(AppStrings.loginScreenTitle.tr(),style: AppTextStyles.logintitleTextStyle(context),),
+            const SizedBox(
+              width: 60,
+            ),
+            Text(
+              AppStrings.loginScreenTitle.tr(),
+              style: AppTextStyles.logintitleTextStyle(context),
+            ),
           ],
         ),
-        const SizedBox(height: 15,),
+        const SizedBox(
+          height: 15,
+        ),
         const Line(),
-        CommonTextField(text: 'Email', isObscured: true, hintText: 'Enter your email',),
-        const SizedBox(height: 15,),
-        CommonTextField(text: 'Password', isObscured: false, hintText: 'Create your password',),
+        const SizedBox(
+          height: 35,
+        ),
+        CommonTextField(
+          text: AppStrings.loginScreenEmailFieldLabel.tr(),
+          isObscured: false,
+          hintText: AppStrings.loginScreenEmailFieldHint.tr(),
+        ),
+        const SizedBox(
+          height: 15,
+        ),
+        CommonTextField(
+          text: AppStrings.loginScreenPassWordFieldLabel.tr(),
+          isObscured: true,
+          hintText: AppStrings.loginScreenPassWordFieldHint.tr(),
+          iconData: Icons.remove_red_eye_outlined,
+        ),
+        SizedBox(height: 10,),
+        Row(
+          children: [
+            const Spacer(),
+            InkWell(
+                onTap: () {
+
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 12.0),
+                  child: Text('Forgot Password',style: AppTextStyles.authTextTextStyle(context),),
+                )),
+          ],
+        ),
+        Row(
+          children: [
+            const Spacer(),
+            InkWell(
+                onTap: () {
+
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 12.0),
+                  child: Text('Create Account',style: AppTextStyles.authTextTextStyle(context),),
+                )),
+          ],
+        ),
 
 
       ],

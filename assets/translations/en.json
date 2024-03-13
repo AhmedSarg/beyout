@@ -6,5 +6,9 @@
   "getStartTitle": "Owner",
   "getStartSubTitle": "Tenant",
   "getStartRoleTitle": "Choose your role in our app",
-  "loginScreenTitle": "Login Account"
+  "loginScreenTitle": "Login Account",
+  "loginScreenEmailFieldHint": "Enter your email",
+  "loginScreenPassWordFieldHint": "Create your password",
+  "loginScreenEmailFieldLabel": "Email",
+  "loginScreenPassWordFieldLabel": "Password"
 }
