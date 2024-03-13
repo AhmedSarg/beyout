@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 
 class ColorManager {
   ColorManager._();
+  static const Color scafoldBG = Color(0xff003366);
+  static const Color btn = Color(0xffC9CCCA);
 
-  static const Color primary = Color(0xff024272);
+
+  static const Color primary = Color(0xffFBFFFD);
   static const Color secondary = Color(0xffFFAE03);
   static const Color secondaryWithOpacity85 = Color(0xd9FFAE03);
   static Color secondaryWithOpacity11 = secondary.withOpacity(0.1);

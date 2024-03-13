@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:temp_house/presentation/login_screen/view/loginScreen.dart';
+import 'package:temp_house/presentation/onboarding_screen/view/onboardingScreen.dart';
 
 import '../../app/sl.dart';
+import '../SplashScreen/view/splashScreen.dart';
+import '../getStart_screen/view/getStartScreen.dart';
 import 'strings_manager.dart';
 
 class Routes {
   Routes._();
 
   static const String splashRoute = "/";
-  static const String onboardingRoute = "/onboarding";
-  static const String mainLayoutRoute = "/mainLayout";
+  static const String onboardingRoute = "/onboardingRoute";
+  static const String getStartingRoute = "/getStart";
   static const String loginRoute = "/login";
-  static const String boardRoute = "/board";
-  static const String noInternetRoute = "/noInternet";
-  static const String onGoingEventLayoutRoute = "/onGoingEventLayout";
-  static const String trackDetailsRoute = "/trackDetails";
-  static const String newsDetailsRoute = "/newsDetails";
-  static const String awardDetailsRoute = "/awardDetails";
-  static const String eventDetailsRoute = "/eventDetails";
-  static const String orderRoute = "/order";
+
 }
 
 class RouteGenerator {
@@ -27,7 +24,14 @@ class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.splashRoute:
-        // return MaterialPageRoute(builder: (_) => const SplashScreen());
+         return MaterialPageRoute(builder: (_) => const SplashScreen());
+      case Routes.onboardingRoute:
+        return MaterialPageRoute(builder: (_) => const OnboardingScreen());
+
+        case Routes.getStartingRoute:
+      return MaterialPageRoute(builder: (_) => const GetStartScreen());
+      case Routes.loginRoute:
+        return MaterialPageRoute(builder: (_) => const LoginScreen());
       default:
         return unDefinedRoute();
     }

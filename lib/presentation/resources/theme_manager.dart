@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 ThemeData getApplicationTheme() {
   return ThemeData(
+
     useMaterial3: true,
     // main colors
     primaryColor: ColorManager.primary,
@@ -13,7 +14,7 @@ ThemeData getApplicationTheme() {
     disabledColor: ColorManager.darkGrey,
     // ripple effect color
     splashColor: ColorManager.primary,
-    scaffoldBackgroundColor: ColorManager.light,
+    scaffoldBackgroundColor: ColorManager.scafoldBG,
     // app bar theme
     appBarTheme: const AppBarTheme(
       centerTitle: true,

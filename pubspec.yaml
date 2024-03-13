@@ -40,17 +40,18 @@ dependencies:
   lottie:
   shared_preferences:
   bloc:
-  flutter_bloc:
+  flutter_bloc: ^8.1.4
   dartz:
   easy_localization:
   dio:
-  flutter_svg:
   flutter_animate:
   json_annotation:
   url_launcher:
   pretty_dio_logger:
   ntp:
   gsheets:
+  animated_splash_screen: ^1.3.0
+  flutter_svg: ^2.0.10+1
 
 dev_dependencies:
   flutter_test:
@@ -76,6 +77,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/images/
     - assets/translations/
   #   - images/a_dot_ham.jpeg
 
@@ -90,10 +92,11 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+      - family: Kreon
+        fonts:
+          - asset: assets/fonts/Kreon-VariableFont_wght.ttf
+          - asset: assets/fonts/Kurale-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

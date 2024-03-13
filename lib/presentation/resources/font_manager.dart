@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
 class FontConstants {
+
+  static const String kreon = "Kreon";
+  static const String kurale = "Kurale";
+
+
   static const String comfortaa = "Comfortaa";
   static const String inter = "Inter";
   static const String poppins = "Poppins";

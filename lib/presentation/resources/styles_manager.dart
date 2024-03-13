@@ -29,7 +29,8 @@ TextStyle getExtraLightStyle(
 // light style
 
 TextStyle getLightStyle(
-    {fontFamily = FontConstants.inter, fontSize = FontSize.s12, required Color color, List<Shadow>? shadows}) {
+    {fontFamily = FontConstants.inter, fontSize = FontSize.s12, required Color color, List<Shadow>? shadows})
+{
   return _getTextStyle(fontFamily, fontSize, FontWeightManager.light, color, shadows);
 }
 
@@ -57,8 +58,8 @@ TextStyle getSemiBoldStyle(
 // bold style
 
 TextStyle getBoldStyle(
-    {fontFamily = FontConstants.inter, double fontSize = FontSize.s12, required Color color, List<Shadow>? shadows}) {
-  return _getTextStyle(fontFamily, fontSize, FontWeightManager.bold, color, shadows);
+    {fontFamily = FontConstants.inter,  double fontSize = FontSize.s12, required Color color, List<Shadow>? shadows}) {
+  return _getTextStyle(fontFamily, fontSize, FontWeightManager.bold, color, shadows,);
 }
 
 // extrabold style

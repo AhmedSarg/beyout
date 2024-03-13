@@ -1,8 +1,8 @@
 const String imagePath = "assets/images/";
 
 class ImageAssets {
-  static const String tempLogo = "${imagePath}temp.png";
-  static const String boardImage = "${imagePath}board_image.png";
+  static const String boardImage1 = "${imagePath}onBording1.png";
+  static const String boardImage2 = "${imagePath}onBording2.png";
   static const String placeholder1Image =
       "${imagePath}placeholders/placeholder1.png";
   static const String placeholder2Image =
@@ -47,7 +47,7 @@ class SVGAssets {
 
   static const String facebook = "${_basePath}facebook.svg";
   static const String gmail = "${_basePath}gmail.svg";
-  static const String ieeeLogo = "${_basePath}IEEE Logo.svg";
+  static const String ieeeLogo = "assets/images/image 1.svg";
   static const String instagram = "${_basePath}instagram.svg";
   static const String linkedin = "${_basePath}linkedin.svg";
   static const String qrCode = "${_basePath}QR Code.svg";

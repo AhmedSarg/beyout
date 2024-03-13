@@ -7,11 +7,39 @@ import 'styles_manager.dart';
 class AppTextStyles {
   AppTextStyles._();
 
+  static TextStyle SplashScreenTitleTextStyle(BuildContext? context) =>
+      getBoldStyle(
+        fontFamily: FontConstants.kreon,
+        color: ColorManager.white,
+        fontSize: FontSize.s32,
+
+      );
+  static TextStyle splashScreenSubTitleTextStyle(BuildContext? context) =>
+      getLightStyle(
+        fontFamily: FontConstants.kreon,
+        color: ColorManager.offwhite.withOpacity(.5),
+        fontSize: FontSize.s24,
+
+      );
+  static TextStyle getStartTextStyle(BuildContext? context) =>
+      getBoldStyle(
+        fontFamily: FontConstants.kreon,
+        color: ColorManager.scafoldBG,
+        fontSize: FontSize.s24,
+
+      );
+  static TextStyle authTextStyle(BuildContext? context) =>
+      getBoldStyle(
+        fontFamily: FontConstants.kurale,
+        color: ColorManager.white,
+        fontSize: FontSize.s24,
+
+      );
   static TextStyle baseStatesMessageTextStyle(BuildContext? context) =>
       getBoldStyle(
         fontFamily: FontConstants.comfortaa,
         color: ColorManager.primary,
-        fontSize: FontSize.s16,
+        fontSize: FontSize.s22,
       );
 
   static TextStyle baseStatesElevatedBtnTextStyle(BuildContext? context) =>
@@ -50,10 +78,15 @@ class AppTextStyles {
       );
 
   static TextStyle loginButtonTextStyle(BuildContext? context) => getBoldStyle(
-        fontFamily: FontConstants.comfortaa,
-        color: ColorManager.white,
-        fontSize: FontSize.s24,
-      );
+    fontFamily: FontConstants.comfortaa,
+    color: ColorManager.white,
+    fontSize: FontSize.s24,
+  );
+  static TextStyle logintitleTextStyle(BuildContext? context) => getBoldStyle(
+    fontFamily: FontConstants.kreon,
+    color: ColorManager.white,
+    fontSize: FontSize.s24,
+  );
 
   static TextStyle homeSectionTitleTextStyle(BuildContext? context) =>
       getSemiBoldStyle(

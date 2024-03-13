@@ -6,10 +6,21 @@ class AppStrings {
 
   //splash screen
   static const splashScreenTitle = "splashScreenTitle";
+  static const splashScreenSubTitle = "splashScreenSubTitle";
+
+  //onboard screen
+  static const onBoardTitle = "onBoardTitle";
+  static const onBoardSubTitle = "onBoardSubTitle";
 
   //Onboarding screen
   static const onBoardingTitle = "onBoardingTitle";
   static const onBoardingBtnTitle = "onBoardingBtnTitle";
+
+  //getStarte screen
+  static const getStartRoleTitle = "getStartRoleTitle";
+  static const getStartTitle = "getStartTitle";
+  static const getStartSubTitle = "getStartSubTitle";
+
 
   //Login Screen
   static const loginScreenTitle = "loginScreenTitle";
