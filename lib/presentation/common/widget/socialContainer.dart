@@ -6,8 +6,9 @@ import '../../resources/color_manager.dart';
 import '../../resources/text_styles.dart';
 
 class SocialContainer extends StatelessWidget {
-  const SocialContainer({super.key, required this.title});
+  const SocialContainer({super.key, required this.title, required this.image});
 final String title;
+final String  image;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,7 +19,10 @@ final String title;
       ),
       child: Row(
         children: [
-          SvgPicture.asset(SVGAssets.facebook,),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 18.0,vertical: 4),
+            child: ClipOval(child: SvgPicture.asset(image,width: 40,height: 40,)),
+          ),
           Text(
             title,
             style: AppTextStyles.authSocialTextStyle(context),

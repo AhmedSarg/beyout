@@ -4,6 +4,7 @@ class ColorManager {
   ColorManager._();
   static const Color scafoldBG = Color(0xff003366);
   static const Color btn = Color(0xffC9CCCA);
+  static const Color lightgreen = Color(0xff17F2CB);
 
 
   static const Color primary = Color(0xffFBFFFD);
