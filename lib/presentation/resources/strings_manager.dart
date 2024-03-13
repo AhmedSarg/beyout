@@ -37,6 +37,14 @@ class AppStrings {
   static const forgotPasswordEmailValue = "forgotPasswordEmailValue";
   static const forgotPasswordSendCode = "forgotPasswordSendCode";
 
+  ///reset password
+  static const resetPasswordTitle = "resetPasswordTitle";
+  static const resetPasswordEmailValue = "resetPasswordEmailValue";
+  static const resetPasswordPasswordHint = "resetPasswordPasswordHint";
+  static const resetPasswordPasswordLabel = "resetPasswordPasswordLabel";
+  static const resetPasswordConfirmLabel = "resetPasswordConfirmLabel";
+  static const resetPasswordChange = "resetPasswordChange";
+
   ///register screen
   static const registerScreenTitle = "registerScreenTitle";
   static const registerScreenSubTitle = "registerScreenSubTitle";

@@ -16,7 +16,9 @@ class MainTextField extends StatefulWidget {
     this.textInputType = TextInputType.text,
     this.backgroundColor,
     this.hintTextStyle,
+    this.labelTextStyle,
     this.cursorColor = ColorManager.white,
+    this.readOnly = false,
   });
 
   final bool isObscured;
@@ -26,7 +28,9 @@ class MainTextField extends StatefulWidget {
   final IconData? iconData;
   final Color? backgroundColor;
   final TextStyle? hintTextStyle;
+  final TextStyle? labelTextStyle;
   final Color cursorColor;
+  final bool readOnly;
 
   @override
   State<MainTextField> createState() => _MainTextFieldState();
@@ -43,7 +47,7 @@ class _MainTextFieldState extends State<MainTextField> {
           padding: const EdgeInsets.only(left: AppPadding.p10, top: AppPadding.p4),
           child: Text(
             widget.label!,
-            style: AppTextStyles.authLabelTextStyle(context),
+            style: widget.labelTextStyle ?? AppTextStyles.authLabelTextStyle(context),
           ),
         ) : const SizedBox(),
         Container(
@@ -53,7 +57,8 @@ class _MainTextFieldState extends State<MainTextField> {
             borderRadius: BorderRadius.circular(AppSize.s24),
           ),
           child: TextField(
-            style: const TextStyle(color: Colors.white),
+            readOnly: widget.readOnly,
+            style: widget.hintTextStyle ?? AppTextStyles.authHintTextStyle(context),
             obscureText: hidden,
             keyboardType: widget.textInputType,
             obscuringCharacter: '*',
@@ -71,7 +76,7 @@ class _MainTextFieldState extends State<MainTextField> {
                       iconSize: AppSize.s24,
                       splashRadius: AppSize.s1,
                       isSelected: !hidden,
-                      color: ColorManager.white,
+                      color: widget.cursorColor,
                       selectedIcon: const Icon(CupertinoIcons.eye),
                       icon: const Icon(CupertinoIcons.eye_slash),
                     )

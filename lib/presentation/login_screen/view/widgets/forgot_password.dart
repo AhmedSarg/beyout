@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:temp_house/app/extensions.dart';
 
 import '../../../common/widget/main_button.dart';
 import '../../../common/widget/main_text_field.dart';
@@ -8,16 +7,16 @@ import '../../../resources/color_manager.dart';
 import '../../../resources/strings_manager.dart';
 import '../../../resources/text_styles.dart';
 import '../../../resources/values_manager.dart';
+import 'reset_password.dart';
 
 class ForgotPassword extends StatelessWidget {
   const ForgotPassword({super.key});
 
   @override
   Widget build(BuildContext context) {
-    double height = context.height() / 1;
     bool keyboard = MediaQuery.of(context).viewInsets.bottom > 0;
     return Container(
-      height: height,
+      height: AppSize.infinity,
       width: AppSize.infinity,
       color: ColorManager.white,
       child: Column(
@@ -32,18 +31,20 @@ class ForgotPassword extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
             child: MainTextField(
               label: null,
-              isObscured: false,
               hint: AppStrings.forgotPasswordEmailValue.tr(),
               backgroundColor: ColorManager.darkGrey.withOpacity(.1),
               hintTextStyle: AppTextStyles.forgotPasswordEmailValueTextStyle(context),
-              cursorColor: ColorManager.primary,
+              cursorColor: ColorManager.primary.withOpacity(.3),
             ),
           ),
           keyboard ? const Spacer(flex: 2,) : const SizedBox(),
           const Divider(height: AppSize.s100),
           MainButton(
             text: AppStrings.forgotPasswordSendCode.tr(),
-            onTap: () {},
+            onTap: () {
+              Navigator.pop(context);
+              showModalBottomSheet(context: context, builder: (context) => const ResetPassword());
+            },
             textStyle: AppTextStyles.forgotPasswordSendCodeTextStyle(context),
             backgroundColor: ColorManager.grey,
           ),

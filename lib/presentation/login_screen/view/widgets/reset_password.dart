@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:temp_house/app/extensions.dart';
 
 import '../../../common/widget/main_button.dart';
 import '../../../common/widget/main_text_field.dart';
@@ -9,15 +8,13 @@ import '../../../resources/strings_manager.dart';
 import '../../../resources/text_styles.dart';
 import '../../../resources/values_manager.dart';
 
-class ForgotPassword extends StatelessWidget {
-  const ForgotPassword({super.key});
+class ResetPassword extends StatelessWidget {
+  const ResetPassword({super.key});
 
   @override
   Widget build(BuildContext context) {
-    double height = context.height() / 1;
-    bool keyboard = MediaQuery.of(context).viewInsets.bottom > 0;
     return Container(
-      height: height,
+      height: AppSize.infinity,
       width: AppSize.infinity,
       color: ColorManager.white,
       child: Column(
@@ -25,29 +22,56 @@ class ForgotPassword extends StatelessWidget {
         children: [
           const Spacer(),
           Text(
-            AppStrings.forgotPasswordTitle.tr(),
-            style: AppTextStyles.forgotPasswordTitleTextStyle(context),
+            AppStrings.resetPasswordTitle.tr(),
+            style: AppTextStyles.resetPasswordTitleTextStyle(context),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
             child: MainTextField(
               label: null,
-              isObscured: false,
-              hint: AppStrings.forgotPasswordEmailValue.tr(),
+              readOnly: true,
+              hint: AppStrings.resetPasswordEmailValue.tr(),
               backgroundColor: ColorManager.darkGrey.withOpacity(.1),
-              hintTextStyle: AppTextStyles.forgotPasswordEmailValueTextStyle(context),
-              cursorColor: ColorManager.primary,
+              hintTextStyle: AppTextStyles.resetPasswordEmailValueTextStyle(context),
             ),
           ),
-          keyboard ? const Spacer(flex: 2,) : const SizedBox(),
-          const Divider(height: AppSize.s100),
+          const SizedBox(),
+          const Divider(height: AppSize.s50),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
+            child: MainTextField(
+              isObscured: true,
+              label: AppStrings.resetPasswordPasswordLabel.tr(),
+              hint: AppStrings.resetPasswordPasswordHint.tr(),
+              backgroundColor: ColorManager.darkGrey.withOpacity(.1),
+              hintTextStyle: AppTextStyles.resetPasswordPasswordHintTextStyle(context),
+              cursorColor: ColorManager.primary,
+              labelTextStyle: AppTextStyles.resetPasswordPasswordLabelTextStyle(context),
+            ),
+          ),
+          const Spacer(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
+            child: MainTextField(
+              isObscured: true,
+              label: AppStrings.resetPasswordConfirmLabel.tr(),
+              hint: AppStrings.resetPasswordPasswordHint.tr(),
+              backgroundColor: ColorManager.darkGrey.withOpacity(.1),
+              hintTextStyle: AppTextStyles.resetPasswordPasswordHintTextStyle(context),
+              cursorColor: ColorManager.primary,
+              labelTextStyle: AppTextStyles.resetPasswordPasswordLabelTextStyle(context),
+            ),
+          ),
+          const Spacer(),
           MainButton(
-            text: AppStrings.forgotPasswordSendCode.tr(),
-            onTap: () {},
-            textStyle: AppTextStyles.forgotPasswordSendCodeTextStyle(context),
+            text: AppStrings.resetPasswordChange.tr(),
+            onTap: () {
+              Navigator.pop(context);
+            },
+            textStyle: AppTextStyles.resetPasswordChangeTextStyle(context),
             backgroundColor: ColorManager.grey,
           ),
-          Spacer(flex: keyboard ? 3 : 1),
+          const Spacer(),
         ],
       ),
     );

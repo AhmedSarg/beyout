@@ -31,6 +31,13 @@
   "forgotPasswordEmailValue": "Rea************@gmail.com",
   "forgotPasswordSendCode": "Send Code",
 
+  "resetPasswordTitle": "Create New Password",
+  "resetPasswordEmailValue": "Rea************@gmail.com",
+  "resetPasswordPasswordHint": "Realincroos@98",
+  "resetPasswordPasswordLabel": "Password",
+  "resetPasswordConfirmLabel": "Confirm Password",
+  "resetPasswordChange": "Change",
+
   "registerScreenTitle": "Create Account",
   "registerScreenSubTitle": "Start booking with creating account",
   "registerScreenUsernameLabel": "Username",

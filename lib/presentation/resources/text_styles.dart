@@ -130,4 +130,36 @@ class AppTextStyles {
     color: ColorManager.white,
     fontSize: FontSize.s30,
   );
+
+  ///Reset Password Text Styles
+
+  static TextStyle resetPasswordTitleTextStyle(BuildContext? context) => getBoldStyle(
+    fontFamily: FontConstants.kreon,
+    color: ColorManager.primary,
+    fontSize: FontSize.s24,
+  );
+
+  static TextStyle resetPasswordEmailValueTextStyle(BuildContext? context) => getLightStyle(
+    fontFamily: FontConstants.kreon,
+    color: ColorManager.primary.withOpacity(.3),
+    fontSize: FontSize.s20,
+  );
+
+  static TextStyle resetPasswordPasswordLabelTextStyle(BuildContext? context) => getLightStyle(
+    fontFamily: FontConstants.kurale,
+    color: ColorManager.primary,
+    fontSize: FontSize.s24,
+  );
+
+  static TextStyle resetPasswordPasswordHintTextStyle(BuildContext? context) => getLightStyle(
+    fontFamily: FontConstants.kreon,
+    color: ColorManager.primary.withOpacity(.3),
+    fontSize: FontSize.s20,
+  );
+
+  static TextStyle resetPasswordChangeTextStyle(BuildContext? context) => getBoldStyle(
+    fontFamily: FontConstants.kreon,
+    color: ColorManager.white,
+    fontSize: FontSize.s30,
+  );
 }
