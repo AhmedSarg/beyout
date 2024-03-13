@@ -1,13 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:temp_house/presentation/resources/routes_manager.dart';
 
 import '../../../common/widget/main_btn.dart';
+import '../../../resources/routes_manager.dart';
 import '../../../resources/strings_manager.dart';
 import '../../../resources/text_styles.dart';
 
-class GetStartBody extends StatelessWidget {
-  const GetStartBody({super.key});
+class GetStartingBody extends StatelessWidget {
+  const GetStartingBody({super.key});
 
   @override
   Widget build(BuildContext context) {
