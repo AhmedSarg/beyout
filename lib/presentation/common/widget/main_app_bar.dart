@@ -5,11 +5,13 @@ import '../../resources/assets_manager.dart';
 import '../../resources/color_manager.dart';
 import '../../resources/values_manager.dart';
 
-AppBar buildMainAppBar(BuildContext context, Widget? title) {
+AppBar buildMainAppBar(BuildContext context, Widget? title, ) {
   return AppBar(
+    toolbarHeight: 85,
     backgroundColor: ColorManager.transparent,
     centerTitle: false,
     title: title,
+
     bottom:  PreferredSize(
       preferredSize: const Size.fromHeight(AppSize.s1_4),
       child: Container(
@@ -21,3 +23,4 @@ AppBar buildMainAppBar(BuildContext context, Widget? title) {
     shadowColor: const Color.fromRGBO(0, 0, 0, 0.25),
   );
 }
+

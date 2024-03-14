@@ -42,6 +42,7 @@ class LoginBody extends StatelessWidget {
                 TextButton(
                   onPressed: () {
                     showModalBottomSheet(
+                      isScrollControlled: true,
                       context: context,
                       builder: (context) => const ForgotPassword(),
                     );

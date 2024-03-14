@@ -3,6 +3,11 @@ const String imagePath = "assets/images/";
 class ImageAssets {
   static const String boardImage1 = "${imagePath}onBording1.png";
   static const String boardImage2 = "${imagePath}onBording2.png";
+  static const String personImage =
+      "${imagePath}Ellipse 57.png";
+
+
+
   static const String placeholder1Image =
       "${imagePath}placeholders/placeholder1.png";
   static const String placeholder2Image =
@@ -19,6 +24,7 @@ class ImageAssets {
       "${imagePath}ieee_white_logo.png";
   static const String ieeeBlueLogo =
       "${imagePath}ieee_blue_logo.png";
+
 }
 
 class IconsAssets {
@@ -47,6 +53,9 @@ class SVGAssets {
 
   static const String facebook = "${_basePath}Ellipse 58.svg";
   static const String gmail = "${_basePath}Ellipse 197.svg";
+  static const String Bell_pin = "${_basePath}Bell_pin.svg";
+  static const String chat = "${_basePath}Chat_alt_2_duotone_line.svg";
+  static const String pin = "${_basePath}Pin.svg";
 
 
 
