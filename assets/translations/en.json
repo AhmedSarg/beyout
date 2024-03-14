@@ -66,6 +66,9 @@
 
   "notificationsScreenTitle": "Notifications",
   "notificationsScreenUnread": "Unread",
+  "notificationsScreenAll": "All",
+  "notificationsScreenMarkAllRead": "Mark All as Read",
+  "notificationsScreenRemoveAll": "Remove All",
 
   "badRequestError": "Bad Request Error",
   "noContent": "No Content",

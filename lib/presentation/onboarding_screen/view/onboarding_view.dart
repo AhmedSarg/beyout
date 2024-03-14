@@ -1,12 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:temp_house/presentation/onboarding_screen/view/widgets/onBoardingItems.dart';
-import 'package:temp_house/presentation/resources/assets_manager.dart';
 import 'package:temp_house/presentation/resources/routes_manager.dart';
 
-import '../../common/widget/main_button.dart';
 import '../../resources/color_manager.dart';
-import '../../resources/text_styles.dart';
 import 'widgets/onboarding_image.dart';
 import 'widgets/onboarding_text.dart';
 
@@ -23,6 +19,26 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final pageControler = PageController();
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // imageControler.addListener(() {
+    //   pageControler.animateTo(
+    //     imageControler.offset,
+    //     duration: const Duration(milliseconds: 600),
+    //     curve: Curves.easeInOut,
+    //   );
+    // });
+    // pageControler.addListener(() {
+    //   imageControler.animateTo(
+    //     pageControler.offset,
+    //     duration: const Duration(milliseconds: 600),
+    //     curve: Curves.easeInOut,
+    //   );
+    // });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
@@ -32,13 +48,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             itemCount: controller.items.length,
             controller: imageControler,
             itemBuilder: (context, index) {
-              if (index != null) {
-                pageControler.animateToPage(
-                  index,
-                  duration: const Duration(milliseconds: 600),
-                  curve: Curves.easeInOut,
-                );
-              }
               return OnboardingImage(
                 onboardImage: controller.items[index].image,
               );
@@ -61,11 +70,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   itemCount: controller.items.length,
                   controller: pageControler,
                   itemBuilder: (context, index) {
-                    imageControler.animateToPage(
-                      index,
-                      duration: const Duration(milliseconds: 600),
-                      curve: Curves.easeInOut,
-                    );
                     return OnboardingText(
                       btnName: controller.items[index].title,
                       title: controller.items[index].btnName,
