@@ -72,6 +72,10 @@ class AppStrings {
   static const registerScreenGoogle = "registerScreenGoogle";
   static const registerScreenFacebook = "registerScreenFacebook";
 
+  ///notifications screen
+  static const notificationsScreenTitle = "notificationsScreenTitle";
+  static const notificationsScreenUnread = "notificationsScreenUnread";
+
   ///error handler
   static const String badRequestError = "badRequestError";
   static const String noContent = "noContent";

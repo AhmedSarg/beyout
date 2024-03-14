@@ -64,6 +64,9 @@
   "registerScreenGoogle": "Sign up with google",
   "registerScreenFacebook": "Sign up with facebook",
 
+  "notificationsScreenTitle": "Notifications",
+  "notificationsScreenUnread": "Unread",
+
   "badRequestError": "Bad Request Error",
   "noContent": "No Content",
   "forbiddenError": "Forbidden Error",

@@ -37,7 +37,7 @@ class ForgotPassword extends StatelessWidget {
               cursorColor: ColorManager.primary.withOpacity(.3),
             ),
           ),
-          keyboard ? const Spacer(flex: 2,) : const SizedBox(),
+          keyboard ? const Spacer(flex: 2) : const SizedBox(),
           const Divider(height: AppSize.s100),
           MainButton(
             text: AppStrings.forgotPasswordSendCode.tr(),

@@ -17,11 +17,11 @@ Widget baseBuilder(BuildContext context, BaseStates state, Widget content) {
     return content;
   } else if (state is LoadingState) {
     return BaseWidgets.buildItemsColumn([
-      BaseWidgets.buildAnimatedImage(LottieAssets.loading),
+      // BaseWidgets.buildAnimatedImage(LottieAssets.loading),
     ]);
   } else if (state is ErrorState) {
     return BaseWidgets.buildItemsColumn([
-      BaseWidgets.buildAnimatedImage(LottieAssets.error),
+      // BaseWidgets.buildAnimatedImage(LottieAssets.error),
       BaseWidgets.buildMessage(context, state.failure.message),
       BaseWidgets.buildButton(
           displayType: state.displayType,
@@ -34,7 +34,7 @@ Widget baseBuilder(BuildContext context, BaseStates state, Widget content) {
     return content;
   } else if (state is EmptyState) {
     return BaseWidgets.buildItemsColumn([
-      BaseWidgets.buildAnimatedImage(LottieAssets.empty),
+      // BaseWidgets.buildAnimatedImage(LottieAssets.empty),
       BaseWidgets.buildMessage(context, AppStrings.emptyContent.tr()),
       BaseWidgets.buildButton(
           displayType: state.displayType,
@@ -44,7 +44,7 @@ Widget baseBuilder(BuildContext context, BaseStates state, Widget content) {
     ]);
   } else if (state is IntentEmptyState) {
     return BaseWidgets.buildItemsColumn([
-      BaseWidgets.buildAnimatedImage(LottieAssets.empty),
+      // BaseWidgets.buildAnimatedImage(LottieAssets.empty),
       BaseWidgets.buildMessage(context, AppStrings.intentError.tr()),
     ]);
   } else {

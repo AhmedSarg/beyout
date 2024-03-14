@@ -55,11 +55,7 @@ class SVGAssets {
 class LottieAssets {
   LottieAssets._();
 
-  static const String _basePath = "assets/lottie/";
+  static const String _basePath = "assets/lotties/";
 
-  static const String loading = "${_basePath}loading.json";
   static const String success = "${_basePath}success.json";
-  static const String empty = "${_basePath}empty.json";
-  static const String error = "${_basePath}error.json";
-  static const String areYouSure = "${_basePath}are_you_sure.json";
 }

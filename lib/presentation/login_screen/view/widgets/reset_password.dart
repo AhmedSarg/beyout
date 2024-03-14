@@ -7,6 +7,7 @@ import '../../../resources/color_manager.dart';
 import '../../../resources/strings_manager.dart';
 import '../../../resources/text_styles.dart';
 import '../../../resources/values_manager.dart';
+import 'reset_success.dart';
 
 class ResetPassword extends StatelessWidget {
   const ResetPassword({super.key});
@@ -67,6 +68,7 @@ class ResetPassword extends StatelessWidget {
             text: AppStrings.resetPasswordChange.tr(),
             onTap: () {
               Navigator.pop(context);
+              showModalBottomSheet(context: context, builder: (context) => const ResetSuccess());
             },
             textStyle: AppTextStyles.resetPasswordChangeTextStyle(context),
             backgroundColor: ColorManager.grey,

@@ -12,8 +12,10 @@ import '../../selection_screen/selection_view.dart';
 
 class SplashScreen extends StatefulWidget {
   static String routeName ='splashscreen';
+
+  const SplashScreen({super.key});
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
@@ -26,18 +28,18 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 2),
+      duration: const Duration(seconds: 2),
     );
 
     _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
 
     _controller.forward();
 
-    Timer(Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 3), () {
       Navigator.of(context).pushReplacement(
         PageRouteBuilder(
-          transitionDuration: Duration(seconds: 1),
-          pageBuilder: (_, __, ___) => SelectionScreen(),
+          transitionDuration: const Duration(seconds: 1),
+          pageBuilder: (_, __, ___) => const SelectionScreen(),
           transitionsBuilder: (_, animation, __, child) {
             return FadeTransition(
               opacity: animation,
@@ -59,37 +61,33 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   Widget build(BuildContext context) {
     return Scaffold(
 
-      body: Container(
-
-
-        child: Center(
-          child: AnimatedBuilder(
-            animation: _animation,
-            builder: (BuildContext context, Widget? child) {
-              return Transform.scale(
-                scale: _animation.value,
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 0.7,
-                  height: MediaQuery.of(context).size.height * 0.22,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                  ),
-                  child: Column(
-                    children: [
-                      Text(
-                        AppStrings.splashScreenTitle.tr(),
-                        style: AppTextStyles.splashScreenTitleTextStyle(context),
-                      ),
-                      Text(
-                        AppStrings.splashScreenSubTitle.tr(),
-                        style: AppTextStyles.splashScreenSubTitleTextStyle(context),
-                      ),
-                    ],
-                  ),
+      body: Center(
+        child: AnimatedBuilder(
+          animation: _animation,
+          builder: (BuildContext context, Widget? child) {
+            return Transform.scale(
+              scale: _animation.value,
+              child: Container(
+                width: MediaQuery.of(context).size.width * 0.7,
+                height: MediaQuery.of(context).size.height * 0.22,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
                 ),
-              );
-            },
-          ),
+                child: Column(
+                  children: [
+                    Text(
+                      AppStrings.splashScreenTitle.tr(),
+                      style: AppTextStyles.splashScreenTitleTextStyle(context),
+                    ),
+                    Text(
+                      AppStrings.splashScreenSubTitle.tr(),
+                      style: AppTextStyles.splashScreenSubTitleTextStyle(context),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
         ),
       ),
     );

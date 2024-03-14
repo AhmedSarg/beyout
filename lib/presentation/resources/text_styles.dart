@@ -162,4 +162,18 @@ class AppTextStyles {
     color: ColorManager.white,
     fontSize: FontSize.s30,
   );
+
+  ///Notifications Screen Text Styles
+
+  static TextStyle notificationsScreenTitleTextStyle(BuildContext? context) => getBoldStyle(
+    fontFamily: FontConstants.kreon,
+    color: ColorManager.white,
+    fontSize: FontSize.s24,
+  );
+
+  static TextStyle notificationsScreenSectionHeaderTextStyle(BuildContext? context) => getRegularStyle(
+    fontFamily: FontConstants.kurale,
+    color: ColorManager.white,
+    fontSize: FontSize.s20,
+  );
 }

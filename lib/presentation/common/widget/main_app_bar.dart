@@ -8,14 +8,7 @@ import '../../resources/values_manager.dart';
 AppBar buildMainAppBar(BuildContext context, Widget? title) {
   return AppBar(
     backgroundColor: ColorManager.transparent,
-    // leading: (Navigator.canPop(context))
-    //     ? IconButton(
-    //   icon: const Icon(CustomIcons.back, size: AppSize.s35,),
-    //   onPressed: () {
-    //     Navigator.pop(context);
-    //   },
-    // )
-    //     : null,
+    centerTitle: false,
     title: title,
     bottom:  PreferredSize(
       preferredSize: const Size.fromHeight(AppSize.s1_4),
