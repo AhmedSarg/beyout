@@ -162,4 +162,26 @@ class AppTextStyles {
     color: ColorManager.white,
     fontSize: FontSize.s30,
   );
+
+
+
+
+  // Chat Text Styles
+
+  static TextStyle personNameTextStyle(BuildContext? context) => getBoldStyle(
+    fontFamily: FontConstants.kreon,
+    color: ColorManager.secondary,
+    fontSize: FontSize.s19,
+  );
+  static TextStyle chatDateTextStyle(BuildContext? context) => getLightStyle(
+    fontFamily: FontConstants.kreon,
+    color: ColorManager.secondary,
+    fontSize: FontSize.s14,
+  );
+  static TextStyle messageTextStyle(BuildContext? context) => getLightStyle(
+    fontFamily: FontConstants.kreon,
+    color: ColorManager.secondary,
+    fontSize: FontSize.s17,
+  );
+
 }

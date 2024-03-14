@@ -37,22 +37,11 @@ class _SplashScreenBodyState extends State<SplashScreenBody>
 
     _controller.forward();
 
-    Timer(Duration(seconds: 3), () {
-      if (ModalRoute.of(context)?.settings.name == Routes.splashRoute) {
-        Navigator.of(context).pushReplacement(
-          PageRouteBuilder(
-            transitionDuration: Duration(seconds: 1),
-            pageBuilder: (_, __, ___) => SelectionScreen(),
-            transitionsBuilder: (_, animation, __, child) {
-              return FadeTransition(
-                opacity: animation,
-                child: child,
-              );
-            },
-          ),
-        );
-      }
-    });
+    // Timer(Duration(seconds: 3), () {
+    //
+    //     Navigator.pushReplacementNamed(context, Routes.onboardingRoute);
+    //
+    // });
   }
 
   @override
@@ -63,23 +52,38 @@ class _SplashScreenBodyState extends State<SplashScreenBody>
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Container(
-      width: MediaQuery.of(context).size.width * 0.7,
-      height: MediaQuery.of(context).size.height * 0.22,
-     child: Column(
-       children: [
-         Text(
-           AppStrings.splashScreenTitle.tr(),
-           style: AppTextStyles.splashScreenTitleTextStyle(context),
-         ),
-         Text(
-           AppStrings.splashScreenSubTitle.tr(),
-           style: AppTextStyles.splashScreenSubTitleTextStyle(context),
-         ),
-       ],
-     ),
-      // Your child widgets here
-    ));
+    return Container(
+
+
+      child: Center(
+        child: AnimatedBuilder(
+          animation: _animation,
+          builder: (BuildContext context, Widget? child) {
+            return Transform.scale(
+              scale: _animation.value,
+              child: Container(
+                width: MediaQuery.of(context).size.width * 0.7,
+                height: MediaQuery.of(context).size.height * 0.22,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                ),
+                child: Column(
+                  children: [
+                    Text(
+                      AppStrings.splashScreenTitle.tr(),
+                      style: AppTextStyles.splashScreenTitleTextStyle(context),
+                    ),
+                    Text(
+                      AppStrings.splashScreenSubTitle.tr(),
+                      style: AppTextStyles.splashScreenSubTitleTextStyle(context),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    );
   }
 }
