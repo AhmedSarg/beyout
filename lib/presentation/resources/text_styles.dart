@@ -45,7 +45,8 @@ class AppTextStyles {
         fontSize: FontSize.s24,
       );
 
-  static TextStyle onBoardingButtonTextStyle(BuildContext? context) => getBoldStyle(
+  static TextStyle onBoardingButtonTextStyle(BuildContext? context) =>
+      getBoldStyle(
         fontFamily: FontConstants.kreon,
         color: ColorManager.primary,
         fontSize: FontSize.s30,
@@ -106,6 +107,12 @@ class AppTextStyles {
         fontSize: FontSize.s20,
       );
 
+  static TextStyle authErrorTextStyle(BuildContext? context) => getRegularStyle(
+        fontFamily: FontConstants.kreon,
+        color: ColorManager.error,
+        fontSize: FontSize.s14,
+      );
+
   ///Login Text Styles
 
   static TextStyle loginTitleTextStyle(BuildContext? context) => getBoldStyle(
@@ -116,7 +123,8 @@ class AppTextStyles {
 
   ///Login Text Styles
 
-  static TextStyle registerTitleTextStyle(BuildContext? context) => getBoldStyle(
+  static TextStyle registerTitleTextStyle(BuildContext? context) =>
+      getBoldStyle(
         fontFamily: FontConstants.kreon,
         color: ColorManager.lightGrey,
         fontSize: FontSize.s24,

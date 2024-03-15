@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:temp_house/presentation/chat_screen/view/chat_screen.dart';
-import 'package:temp_house/presentation/chat_screen/view/widgets/person_item.dart';
-import 'package:temp_house/presentation/main_layout/view/main_layout_view.dart';
-import '../login_screen/view/login_screen.dart';
+import '../chat_screen/view/chat_view.dart';
+import '../chat_screen/view/widgets/person_item.dart';
+import '../login_screen/view/login_view.dart';
+import '../main_layout/view/main_layout_view.dart';
 import '../notifications_screen/view/notifications_view.dart';
 import '../onboarding_screen/view/onboarding_view.dart';
 import '../register_screen/view/register_view.dart';
@@ -31,7 +31,7 @@ class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.splashRoute:
-        return MaterialPageRoute(builder: (_) =>   SplashScreen());
+        return MaterialPageRoute(builder: (_) => const SplashScreen());
       case Routes.onboardingRoute:
         return MaterialPageRoute(builder: (_) => const OnboardingScreen());
       case Routes.selectionRoute:
@@ -39,15 +39,15 @@ class RouteGenerator {
       case Routes.loginRoute:
         return MaterialPageRoute(builder: (_) => const LoginScreen());
       case Routes.registerRoute:
-        return MaterialPageRoute(builder: (_) => const RegiesterScreen());
+        return MaterialPageRoute(builder: (_) => const RegisterScreen());
       case Routes.mainLayoutRoute:
-        return MaterialPageRoute(builder: (_) =>  MainLayoutScreen());
+        return MaterialPageRoute(builder: (_) => MainLayoutScreen());
       case Routes.chatRoute:
-        return MaterialPageRoute(builder: (_) =>  const ChatScreen());
+        return MaterialPageRoute(builder: (_) => const ChatScreen());
       case Routes.notificationsRoute:
         return MaterialPageRoute(builder: (_) => const NotificationsScreen());
-        case Routes.chatDetailsRoute:
-      return MaterialPageRoute(builder: (_) =>  ChatScreendetails());
+      case Routes.chatDetailsRoute:
+        return MaterialPageRoute(builder: (_) => ChatScreendetails());
       default:
         return unDefinedRoute();
     }

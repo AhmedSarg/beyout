@@ -8,11 +8,11 @@ import '../../base/cubit_listener.dart';
 import '../../common/widget/main_app_bar.dart';
 import '../../resources/strings_manager.dart';
 import '../../resources/text_styles.dart';
-import '../viewmodel/register_viewmodel.dart';
-import 'widgets/register_body_widget.dart';
+import '../viewmodel/login_viewmodel.dart';
+import 'widgets/login_body.dart';
 
-class RegisterScreen extends StatelessWidget {
-  const RegisterScreen({super.key});
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,18 +20,18 @@ class RegisterScreen extends StatelessWidget {
       appBar: buildMainAppBar(
         context,
         Text(
-          AppStrings.registerScreenTitle.tr(),
-          style: AppTextStyles.registerTitleTextStyle(context),
+          AppStrings.loginScreenTitle.tr(),
+          style: AppTextStyles.loginTitleTextStyle(context),
         ),
       ),
       body: BlocProvider(
-        create: (_) => RegisterViewModel()..start(),
-        child: BlocConsumer<RegisterViewModel, BaseStates>(
+        create: (_) => LoginViewModel()..start(),
+        child: BlocConsumer<LoginViewModel, BaseStates>(
           listener: (context, state) {
             baseListener(context, state);
           },
           builder: (context, state) {
-            return baseBuilder(context, state, RegisterBody());
+            return baseBuilder(context, state, LoginBody(viewModel: LoginViewModel(),));
           },
         ),
       ),

@@ -40,7 +40,7 @@ dependencies:
   lottie:
   shared_preferences:
   bloc:
-  flutter_bloc: ^8.1.4
+  flutter_bloc:
   dartz:
   easy_localization:
   dio:
@@ -50,8 +50,8 @@ dependencies:
   pretty_dio_logger:
   ntp:
   gsheets:
-  animated_splash_screen: ^1.3.0
-  flutter_svg: ^2.0.10+1
+  animated_splash_screen:
+  flutter_svg:
 
 dev_dependencies:
   flutter_test:

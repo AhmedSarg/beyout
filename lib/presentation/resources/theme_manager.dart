@@ -67,8 +67,6 @@ ThemeData getApplicationTheme() {
       contentPadding: const EdgeInsets.all(AppPadding.p8),
       // hint style
       labelStyle: AppTextStyles.authHintTextStyle(null),
-      filled: true,
-      fillColor: ColorManager.offwhite,
     ),
   );
 }

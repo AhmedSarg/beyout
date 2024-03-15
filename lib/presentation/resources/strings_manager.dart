@@ -105,8 +105,11 @@ class AppStrings {
       "validationsFieldLengthMoreThen6";
   static const validationsValidEmail = "validationsValidEmail";
   static const validationsNumbersOnly = "validationsNumbersOnly";
+  static const validationsUsername = "validationsUsername";
   static const validationsNumbersMustEqual14Digit =
       "validationsNumbersMustEqual14Digit";
   static const validationsNumbersMustEqual11Digit =
       "validationsNumbersMustEqual11Digit";
+  static const String validationsPasswordSpecifications = "validationsPasswordSpecifications";
+  static const String validationsEnterTheSamePassword = "validationsEnterTheSamePassword";
 }

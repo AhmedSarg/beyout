@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:temp_house/presentation/login_screen/viewmodel/login_viewmodel.dart';
 
 import '../../../common/validators/validators.dart';
 import '../../../common/widget/main_button.dart';
@@ -11,9 +13,16 @@ import '../../../resources/values_manager.dart';
 import 'reset_password.dart';
 
 class ForgotPassword extends StatelessWidget {
-  const ForgotPassword({super.key, required this.formKey});
+  const ForgotPassword({
+    super.key,
+    required this.viewModel,
+    required this.formKey,
+    required this.emailFocusNode,
+  });
 
   final GlobalKey<FormState> formKey;
+  final FocusNode emailFocusNode;
+  final LoginViewModel viewModel;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +38,7 @@ class ForgotPassword extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const SizedBox(height: AppSize.s60),
+            const Spacer(),
             Text(
               AppStrings.forgotPasswordTitle.tr(),
               style: AppTextStyles.forgotPasswordTitleTextStyle(context),
@@ -37,8 +46,10 @@ class ForgotPassword extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
               child: MainTextField(
-                label: null,
-                validation: AppValidators.validateEmailResetPassword,
+                controller: viewModel.getEmailController,
+                focusNode: emailFocusNode,
+                textInputType: TextInputType.emailAddress,
+                validation: AppValidators.validateEmail,
                 hint: AppStrings.forgotPasswordEmailValue.tr(),
                 backgroundColor: ColorManager.darkGrey.withOpacity(.1),
                 hintTextStyle:
@@ -46,21 +57,34 @@ class ForgotPassword extends StatelessWidget {
                 cursorColor: ColorManager.primary.withOpacity(.3),
               ),
             ),
-            const Divider(height: AppSize.s100),
+            const Spacer(),
+            const Divider(height: AppSize.s0),
+            const Spacer(),
             MainButton(
               text: AppStrings.forgotPasswordSendCode.tr(),
               onTap: () {
+                print(emailFocusNode.hasFocus);
                 if (formKey.currentState!.validate()) {
                   Navigator.pop(context);
                   showModalBottomSheet(
+                    isScrollControlled: true,
                     context: context,
-                    builder: (context) => const ResetPassword(),
+                    builder: (context) => Form(
+                      key: formKey,
+                      child: ResetPassword(
+                        viewModel: viewModel,
+                        formKey: formKey,
+                        passwordFocusNode: FocusNode(),
+                        confirmPasswordFocusNode: FocusNode(),
+                      ),
+                    ),
                   );
                 }
               },
               textStyle: AppTextStyles.forgotPasswordSendCodeTextStyle(context),
               backgroundColor: ColorManager.grey,
             ),
+            const Spacer(),
           ],
         ),
       ),
