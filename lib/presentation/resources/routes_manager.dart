@@ -13,7 +13,7 @@ import 'strings_manager.dart';
 class Routes {
   Routes._();
 
-  static const String splashRoute = "/splash";
+  static const String splashRoute = "/";
   static const String onboardingRoute = "/onboarding";
   static const String selectionRoute = "/selection";
   static const String loginRoute = "/login";
