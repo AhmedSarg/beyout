@@ -19,8 +19,19 @@ class OnboardingScreen extends StatefulWidget {
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
   final controller = OnBoardingItems();
-  final imageControler = PageController();
-  final pageControler = PageController();
+  final imageController = PageController();
+  final pageController = PageController();
+  int currentPageIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    pageController.addListener(() {
+      setState(() {
+        currentPageIndex = pageController.page!.round();
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,17 +41,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         children: [
           PageView.builder(
             itemCount: controller.items.length,
-            controller: imageControler,
+            controller: imageController,
             itemBuilder: (context, index) {
-              if (index != null) {
-                pageControler.animateToPage(
-                  index,
-                  duration: const Duration(milliseconds: 600),
-                  curve: Curves.easeInOut,
-                );
-              }
               return OnboardingImage(
                 onboardImage: controller.items[index].image,
+              );
+            },
+            onPageChanged: (index) {
+              pageController.animateToPage(
+                index,
+                duration: const Duration(milliseconds: 600),
+                curve: Curves.easeInOut,
               );
             },
           ),
@@ -59,19 +70,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 padding: const EdgeInsets.all(16.0),
                 child: PageView.builder(
                   itemCount: controller.items.length,
-                  controller: pageControler,
+                  controller: pageController,
                   itemBuilder: (context, index) {
-                    imageControler.animateToPage(
-                      index,
-                      duration: const Duration(milliseconds: 600),
-                      curve: Curves.easeInOut,
-                    );
                     return OnboardingText(
                       btnName: controller.items[index].title,
                       title: controller.items[index].btnName,
                       onPressed: () {
-                        if (index == 0) {
-                          pageControler.nextPage(
+                        if (currentPageIndex == 0) {
+                          pageController.nextPage(
                             duration: const Duration(milliseconds: 600),
                             curve: Curves.easeInOut,
                           );

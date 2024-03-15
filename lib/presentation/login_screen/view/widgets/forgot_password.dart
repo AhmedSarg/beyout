@@ -24,36 +24,42 @@ class ForgotPassword extends StatelessWidget {
         height: MediaQuery.of(context).size.height*.45,
         width: AppSize.infinity,
 
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-           const SizedBox(height: 60,),
-            Text(
-              AppStrings.forgotPasswordTitle.tr(),
-              style: AppTextStyles.forgotPasswordTitleTextStyle(context),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
-              child: MainTextField(
-                label: null,
-                hint: AppStrings.forgotPasswordEmailValue.tr(),
-                backgroundColor: ColorManager.darkGrey.withOpacity(.1),
-                hintTextStyle: AppTextStyles.forgotPasswordEmailValueTextStyle(context),
-                cursorColor: ColorManager.primary.withOpacity(.3),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+             const SizedBox(height: 60,),
+              Text(
+                AppStrings.forgotPasswordTitle.tr(),
+                style: AppTextStyles.forgotPasswordTitleTextStyle(context),
               ),
-            ),
-            const Divider(height: AppSize.s100),
-            MainButton(
-              text: AppStrings.forgotPasswordSendCode.tr(),
-              onTap: () {
-                Navigator.pop(context);
-                showModalBottomSheet(context: context, builder: (context) => const ResetPassword());
-              },
-              textStyle: AppTextStyles.forgotPasswordSendCodeTextStyle(context),
-              backgroundColor: ColorManager.grey,
-            ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
+                child: MainTextField(
+                  label: null,
+                  hint: AppStrings.forgotPasswordEmailValue.tr(),
+                  backgroundColor: ColorManager.darkGrey.withOpacity(.1),
+                  hintTextStyle: AppTextStyles.forgotPasswordEmailValueTextStyle(context),
+                  cursorColor: ColorManager.primary.withOpacity(.3),
+                ),
+              ),
+              const Divider(height: AppSize.s100),
+              MainButton(
+                text: AppStrings.forgotPasswordSendCode.tr(),
+                onTap: () {
+                  Navigator.pop(context);
+                  showModalBottomSheet(context: context, builder: (context) => const ResetPassword());
+                },
+                textStyle: AppTextStyles.forgotPasswordSendCodeTextStyle(context),
+                backgroundColor: ColorManager.grey,
+              ),
 
-          ],
+
+
+              
+          
+            ],
+          ),
         ),
       ),
     );
