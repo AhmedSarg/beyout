@@ -19,6 +19,7 @@ class MainTextField extends StatefulWidget {
     this.labelTextStyle,
     this.cursorColor = ColorManager.white,
     this.readOnly = false,
+    this.validation,
   });
 
   final bool isObscured;
@@ -31,6 +32,7 @@ class MainTextField extends StatefulWidget {
   final TextStyle? labelTextStyle;
   final Color cursorColor;
   final bool readOnly;
+  final String? Function(String? val)? validation;
 
   @override
   State<MainTextField> createState() => _MainTextFieldState();
@@ -56,13 +58,14 @@ class _MainTextFieldState extends State<MainTextField> {
             color: widget.backgroundColor ?? ColorManager.darkGrey.withOpacity(.15),
             borderRadius: BorderRadius.circular(AppSize.s24),
           ),
-          child: TextField(
+          child: TextFormField(
             readOnly: widget.readOnly,
             style: widget.hintTextStyle ?? AppTextStyles.authHintTextStyle(context),
             obscureText: hidden,
             keyboardType: widget.textInputType,
             obscuringCharacter: '*',
             cursorColor: widget.cursorColor,
+            validator: widget.validation ?? (v) => null,
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.all(AppPadding.p12),
               hintText: widget.hint,

@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:temp_house/presentation/resources/values_manager.dart';
 
 import '../../../common/widget/main_button.dart';
 import '../../../resources/routes_manager.dart';
@@ -18,26 +19,28 @@ class SelectionBody extends StatelessWidget {
         children: [
           Text(
             AppStrings.selectionScreenTitle.tr(),
-            style: AppTextStyles.splashScreenTitleTextStyle(context),
+            style: AppTextStyles.selectionTitleTextStyle(context),
           ),
-          Text(AppStrings.selectionScreenSubTitle.tr(),
-              style: AppTextStyles.splashScreenSubTitleTextStyle(context)),
+          Text(
+            AppStrings.selectionScreenSubTitle.tr(),
+            style: AppTextStyles.selectionSubTitleTextStyle(context),
+          ),
           const SizedBox(
-            height: 80,
+            height: AppSize.s80,
           ),
           MainButton(
             onTap: () {
-              Navigator.pushReplacementNamed(context, Routes.loginRoute);
+              Navigator.pushNamed(context, Routes.loginRoute);
             },
             text: AppStrings.selectionScreenOwner.tr(),
             textStyle: AppTextStyles.selectionOptionTextStyle(context),
           ),
           const SizedBox(
-            height: 30,
+            height: AppSize.s30
           ),
           MainButton(
             onTap: () {
-              Navigator.pushReplacementNamed(context, Routes.loginRoute);
+              Navigator.pushNamed(context, Routes.loginRoute);
             },
             text: AppStrings.selectionScreenTenant.tr(),
             textStyle: AppTextStyles.selectionOptionTextStyle(context),

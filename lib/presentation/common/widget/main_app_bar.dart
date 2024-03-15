@@ -7,11 +7,11 @@ import '../../resources/values_manager.dart';
 
 AppBar buildMainAppBar(BuildContext context, Widget? title, ) {
   return AppBar(
-    toolbarHeight: 85,
+    toolbarHeight: AppSize.s80,
     backgroundColor: ColorManager.transparent,
     centerTitle: false,
     title: title,
-
+    scrolledUnderElevation: AppSize.s0,
     bottom:  PreferredSize(
       preferredSize: const Size.fromHeight(AppSize.s1_4),
       child: Container(

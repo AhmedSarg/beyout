@@ -16,7 +16,7 @@ class LoginScreen extends StatelessWidget {
           AppStrings.loginScreenTitle.tr(),
           style: AppTextStyles.loginTitleTextStyle(context),
         ),),
-      body: const LoginBody(),
+      body: LoginBody(),
     );
   }
 }

@@ -30,9 +30,13 @@ class MainButton extends StatelessWidget {
       child: TextButton(
         onPressed: onTap,
         child: Center(
-          child: Text(
-            text,
-            style: textStyle,
+          child: FittedBox(
+            child: Text(
+              text,
+              style: textStyle,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
         ),
       ),

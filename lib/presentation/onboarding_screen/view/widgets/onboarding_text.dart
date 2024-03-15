@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:temp_house/presentation/common/widget/main_button.dart';
-import '../../../resources/color_manager.dart';
+import '../../../common/widget/main_button.dart';
 import '../../../resources/text_styles.dart';
 
 class OnboardingText extends StatelessWidget {
@@ -24,7 +23,7 @@ class OnboardingText extends StatelessWidget {
             child: Text(
               textAlign: TextAlign.center,
               title,
-              style: AppTextStyles.splashScreenSubTitleTextStyle(context),
+              style: AppTextStyles.onBoardingTextStyle(context),
             ),
           ),
         ),
@@ -36,7 +35,7 @@ class OnboardingText extends StatelessWidget {
             onPressed();
           },
           text: btnName,
-          textStyle: const TextStyle(),
+          textStyle: AppTextStyles.onBoardingButtonTextStyle(context),
         ),
         const Spacer(),
       ],

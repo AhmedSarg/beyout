@@ -1,8 +1,8 @@
 const String imagePath = "assets/images/";
 
 class ImageAssets {
-  static const String boardImage1 = "${imagePath}onBording1.png";
-  static const String boardImage2 = "${imagePath}onBording2.png";
+  static const String onboardingImage1 = "${imagePath}onBording1.png";
+  static const String onboardingImage2 = "${imagePath}onBording2.png";
   static const String personImage =
       "${imagePath}Ellipse 57.png";
 

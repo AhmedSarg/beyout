@@ -1,4 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:temp_house/presentation/resources/strings_manager.dart';
+import 'package:temp_house/presentation/resources/values_manager.dart';
 
 import '../../../resources/assets_manager.dart';
 import '../../../resources/color_manager.dart';
@@ -12,13 +15,15 @@ class OnBoardingBody extends StatelessWidget {
 
   final List<OnBoardingItem> onboardingItems = [
     OnBoardingItem(
-        image: ImageAssets.boardImage1,
-        title: 'Start',
-        btnName: 'Booking Home Anywhere Is\nEasier'),
+      image: ImageAssets.onboardingImage1,
+      title: AppStrings.onBoardingScreenTitle1.tr(),
+      btnName: AppStrings.onBoardingScreenNextButton.tr(),
+    ),
     OnBoardingItem(
-        image: ImageAssets.boardImage2,
-        title: 'GET STARTED',
-        btnName: 'Thousands Of Houses To Be\nFound'),
+      image: ImageAssets.onboardingImage2,
+      title: AppStrings.onBoardingScreenTitle2.tr(),
+      btnName: AppStrings.onBoardingScreenGetStartedButton.tr(),
+    ),
   ];
 
   final PageController imageController = PageController();
@@ -48,23 +53,23 @@ class OnBoardingBody extends StatelessWidget {
         Positioned(
           child: Container(
             height: MediaQuery.of(context).size.height * .35,
-            width: double.infinity,
+            width: AppSize.infinity,
             decoration: const BoxDecoration(
               color: ColorManager.primary,
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(28),
-                topRight: Radius.circular(28),
+                topLeft: Radius.circular(AppSize.s28),
+                topRight: Radius.circular(AppSize.s28),
               ),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(AppPadding.p16),
               child: PageView.builder(
                 itemCount: onboardingItems.length,
                 controller: boxController,
                 itemBuilder: (context, index) {
                   return OnboardingText(
-                    btnName: onboardingItems[index].title,
-                    title: onboardingItems[index].btnName,
+                    btnName: onboardingItems[index].btnName,
+                    title: onboardingItems[index].title,
                     onPressed: () {
                       if (index == 0) {
                         boxController.nextPage(

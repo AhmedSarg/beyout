@@ -1,24 +1,29 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:temp_house/presentation/resources/values_manager.dart';
 
 import '../../../common/widget/main_button.dart';
 import '../../../common/widget/main_text_field.dart';
-import '../../../common/widget/socialContainer.dart';
+import '../../../common/widget/social_container.dart';
 import '../../../resources/assets_manager.dart';
+import '../../../resources/routes_manager.dart';
 import '../../../resources/strings_manager.dart';
 import '../../../resources/text_styles.dart';
-import 'divider.dart';
+import '../../../resources/values_manager.dart';
 import 'forgot_password.dart';
 
 class LoginBody extends StatelessWidget {
-  const LoginBody({super.key});
+  LoginBody({super.key});
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20, vertical: AppSize.s50),
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppPadding.p20,
+          vertical: AppSize.s50,
+        ),
         child: Column(
           children: [
             MainTextField(
@@ -44,7 +49,14 @@ class LoginBody extends StatelessWidget {
                     showModalBottomSheet(
                       isScrollControlled: true,
                       context: context,
-                      builder: (context) => const ForgotPassword(),
+                      builder: (context) {
+                        return Form(
+                          key: _formKey,
+                          child: ForgotPassword(
+                            formKey: _formKey,
+                          ),
+                        );
+                      },
                     );
                   },
                   child: Text(
@@ -58,7 +70,9 @@ class LoginBody extends StatelessWidget {
               children: [
                 const Spacer(),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, Routes.registerRoute);
+                  },
                   child: Text(
                     AppStrings.loginScreenCreateAccount.tr(),
                     style: AppTextStyles.authActionsTextStyle(context),
@@ -82,7 +96,7 @@ class LoginBody extends StatelessWidget {
                     title: AppStrings.loginScreenFacebook.tr(),
                     image: SVGAssets.facebook,
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: AppSize.s10),
                   SocialContainer(
                     title: AppStrings.loginScreenGoogle.tr(),
                     image: SVGAssets.gmail,

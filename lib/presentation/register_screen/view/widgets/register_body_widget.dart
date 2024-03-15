@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../common/widget/main_button.dart';
 import '../../../common/widget/main_text_field.dart';
-import '../../../common/widget/socialContainer.dart';
+import '../../../common/widget/social_container.dart';
 import '../../../resources/assets_manager.dart';
 import '../../../resources/strings_manager.dart';
 import '../../../resources/text_styles.dart';
