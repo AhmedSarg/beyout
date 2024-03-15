@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../resources/assets_manager.dart';
 
 class OnboardingImage extends StatelessWidget {
   const OnboardingImage({Key? key, required this.onboardImage}) : super(key: key);

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:temp_house/presentation/common/widget/main_app_bar.dart';
 import 'package:temp_house/presentation/resources/strings_manager.dart';
@@ -14,13 +15,11 @@ class NotificationsScreen extends StatelessWidget {
       appBar: buildMainAppBar(
         context,
         Text(
-          AppStrings.notificationsScreenTitle,
+          AppStrings.notificationsScreenTitle.tr(),
           style: AppTextStyles.notificationsScreenTitleTextStyle(context),
         ),
       ),
-      body: const SafeArea(
-        child: NotificationsBody(),
-      ),
+      body: const NotificationsBody(),
     );
   }
 }

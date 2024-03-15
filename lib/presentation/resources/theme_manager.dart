@@ -28,6 +28,10 @@ ThemeData getApplicationTheme() {
       surfaceTintColor: ColorManager.transparent
     ),
 
+    dividerTheme: const DividerThemeData(
+      color: ColorManager.black,
+    ),
+
     // button theme
     buttonTheme: ButtonThemeData(
       shape: RoundedRectangleBorder(

@@ -75,6 +75,9 @@ class AppStrings {
   ///notifications screen
   static const notificationsScreenTitle = "notificationsScreenTitle";
   static const notificationsScreenUnread = "notificationsScreenUnread";
+  static const notificationsScreenAll = "notificationsScreenAll";
+  static const notificationsScreenMarkAllRead = "notificationsScreenMarkAllRead";
+  static const notificationsScreenRemoveAll = "notificationsScreenRemoveAll";
 
   ///error handler
   static const String badRequestError = "badRequestError";

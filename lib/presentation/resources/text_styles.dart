@@ -177,6 +177,30 @@ class AppTextStyles {
     fontSize: FontSize.s20,
   );
 
+  static TextStyle notificationsScreenPersonNameTextStyle(BuildContext? context) => getBoldStyle(
+    fontFamily: FontConstants.kurale,
+    color: ColorManager.white,
+    fontSize: FontSize.s20,
+  );
+
+  static TextStyle notificationsScreenItemBodyTextStyle(BuildContext? context) => getLightStyle(
+    fontFamily: FontConstants.kreon,
+    color: ColorManager.white,
+    fontSize: FontSize.s18,
+  );
+
+  static TextStyle notificationsScreenOptionTextStyle(BuildContext? context) => getBoldStyle(
+    fontFamily: FontConstants.kreon,
+    color: ColorManager.primary,
+    fontSize: FontSize.s15,
+  );
+
+  static TextStyle notificationsScreenDateTextStyle(BuildContext? context) => getLightStyle(
+    fontFamily: FontConstants.kreon,
+    color: ColorManager.offwhite.withOpacity(.6),
+    fontSize: FontSize.s14,
+  );
+
 
 
 
