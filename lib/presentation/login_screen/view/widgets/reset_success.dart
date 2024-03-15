@@ -12,7 +12,7 @@ class ResetSuccess extends StatelessWidget {
     return Container(
       height: AppSize.infinity,
       width: AppSize.infinity,
-      color: ColorManager.white,
+      
       child: Center(
         child: Material(
           color: Colors.transparent,
