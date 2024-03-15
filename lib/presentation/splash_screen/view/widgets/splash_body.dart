@@ -66,6 +66,8 @@ class _SplashScreenBodyState extends State<SplashScreenBody>
                 height: MediaQuery.of(context).size.height * 0.22,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
+
+
                 ),
                 child: Column(
                   children: [
