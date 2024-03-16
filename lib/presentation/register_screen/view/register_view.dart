@@ -1,6 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:temp_house/domain/models/enums.dart';
+import 'package:temp_house/presentation/common/data_intent/data_intent.dart';
+import 'package:temp_house/presentation/register_screen/view/widgets/register_owner_body.dart';
 
 import '../../base/base_states.dart';
 import '../../base/cubit_builder.dart';
@@ -9,7 +12,7 @@ import '../../common/widget/main_app_bar.dart';
 import '../../resources/strings_manager.dart';
 import '../../resources/text_styles.dart';
 import '../viewmodel/register_viewmodel.dart';
-import 'widgets/register_body_widget.dart';
+import 'widgets/register_tenant_body.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
@@ -31,7 +34,13 @@ class RegisterScreen extends StatelessWidget {
             baseListener(context, state);
           },
           builder: (context, state) {
-            return baseBuilder(context, state, RegisterBody(viewModel: RegisterViewModel(),));
+            UserRole? userRole = DataIntent.getUserRole();
+            return baseBuilder(
+                context,
+                state,
+                userRole == UserRole.owner
+                    ? RegisterOwnerBody(viewModel: RegisterViewModel())
+                    : RegisterTenantBody(viewModel: RegisterViewModel()));
           },
         ),
       ),

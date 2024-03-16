@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:temp_house/domain/models/enums.dart';
+import 'package:temp_house/presentation/common/data_intent/data_intent.dart';
 import 'package:temp_house/presentation/resources/values_manager.dart';
 
 import '../../../common/widget/main_button.dart';
@@ -30,6 +32,7 @@ class SelectionBody extends StatelessWidget {
           ),
           MainButton(
             onTap: () {
+              DataIntent.pushUserRole(UserRole.owner);
               Navigator.pushNamed(context, Routes.loginRoute);
             },
             text: AppStrings.selectionScreenOwner.tr(),
@@ -40,6 +43,7 @@ class SelectionBody extends StatelessWidget {
           ),
           MainButton(
             onTap: () {
+              DataIntent.pushUserRole(UserRole.tenant);
               Navigator.pushNamed(context, Routes.loginRoute);
             },
             text: AppStrings.selectionScreenTenant.tr(),

@@ -1,9 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-import '../../../resources/color_manager.dart';
-import '../../../resources/strings_manager.dart';
-import '../../../resources/text_styles.dart';
+import '../../resources/color_manager.dart';
+import '../../resources/strings_manager.dart';
+import '../../resources/text_styles.dart';
 
 void showRegisterDialog(
   BuildContext context, {

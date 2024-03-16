@@ -55,7 +55,7 @@ class ChatsScreenBody extends StatelessWidget {
         ListView.separated(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          itemCount: 10,
+          itemCount: 8,
           itemBuilder: (context, index) {
             return const ChatsItem();
           },

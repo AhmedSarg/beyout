@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:temp_house/app/extensions.dart';
+import 'package:temp_house/presentation/resources/langauge_manager.dart';
 
 import '../../../resources/assets_manager.dart';
 import '../../../resources/routes_manager.dart';
@@ -40,7 +41,10 @@ class ChatsItem extends StatelessWidget {
         ),
         trailing: Container(
           width: width * .35,
-          alignment: Alignment.centerRight,
+          alignment:
+              AppLanguages.getCurrentTextDirection(context) == TextDirection.rtl
+                  ? Alignment.centerLeft
+                  : Alignment.centerRight,
           child: Text(
             'Today at 09.00 AM',
             style: AppTextStyles.chatsScreenDateTextStyle(context),

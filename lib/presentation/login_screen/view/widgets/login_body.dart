@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:temp_house/domain/models/enums.dart';
+import 'package:temp_house/presentation/common/data_intent/data_intent.dart';
 
 import '../../../common/validators/validators.dart';
 import '../../../common/widget/main_button.dart';

@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../base/base_cubit.dart';
 
 class RegisterViewModel extends BaseCubit
-    implements RegisterViewModelInput, RegisterViewModelOutput {
+    implements RegisterTenantViewModelInput, RegisterTenantViewModelOutput {
 
   static RegisterViewModel get(context) => BlocProvider.of(context);
 
@@ -51,9 +51,9 @@ class RegisterViewModel extends BaseCubit
   TextEditingController get getUsernameController => _usernameController;
 }
 
-abstract class RegisterViewModelInput {}
+abstract class RegisterTenantViewModelInput {}
 
-abstract class RegisterViewModelOutput {
+abstract class RegisterTenantViewModelOutput {
   TextEditingController get getUsernameController;
 
   TextEditingController get getEmailController;
