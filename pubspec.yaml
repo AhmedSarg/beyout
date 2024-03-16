@@ -97,19 +97,33 @@ flutter:
   fonts:
       - family: Kreon
         fonts:
-          - asset: assets/fonts/kreon/Kreon-Bold.ttf
+          - asset: assets/fonts/english/kreon/Kreon-Bold.ttf
             weight: 700
-          - asset: assets/fonts/kreon/Kreon-SemiBold.ttf
+          - asset: assets/fonts/english/kreon/Kreon-SemiBold.ttf
             weight: 600
-          - asset: assets/fonts/kreon/Kreon-Medium.ttf
+          - asset: assets/fonts/english/kreon/Kreon-Medium.ttf
             weight: 500
-          - asset: assets/fonts/kreon/Kreon-Regular.ttf
+          - asset: assets/fonts/english/kreon/Kreon-Regular.ttf
             weight: 400
-          - asset: assets/fonts/kreon/Kreon-Light.ttf
+          - asset: assets/fonts/english/kreon/Kreon-Light.ttf
             weight: 300
       - family: Kurale
         fonts:
-          - asset: assets/fonts/kurale/Kurale-Regular.ttf
+          - asset: assets/fonts/english/kurale/Kurale-Regular.ttf
+            weight: 400
+      - family: Harmattan
+        fonts:
+          - asset: assets/fonts/arabic/harmattan/Harmattan-Bold.ttf
+            weight: 700
+          - asset: assets/fonts/arabic/harmattan/Harmattan-SemiBold.ttf
+            weight: 600
+          - asset: assets/fonts/arabic/harmattan/Harmattan-Medium.ttf
+            weight: 400
+          - asset: assets/fonts/arabic/harmattan/Harmattan-Regular.ttf
+            weight: 300
+      - family: Rakkas
+        fonts:
+          - asset: assets/fonts/arabic/rakkas/Rakkas-Regular.ttf
             weight: 400
   #   - family: Trajan Pro
   #     fonts:

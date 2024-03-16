@@ -31,7 +31,7 @@ class RegisterScreen extends StatelessWidget {
             baseListener(context, state);
           },
           builder: (context, state) {
-            return baseBuilder(context, state, RegisterBody());
+            return baseBuilder(context, state, RegisterBody(viewModel: RegisterViewModel(),));
           },
         ),
       ),

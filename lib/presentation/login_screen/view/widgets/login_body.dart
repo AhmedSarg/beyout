@@ -108,7 +108,11 @@ class LoginBody extends StatelessWidget {
                   text: AppStrings.loginScreenButton.tr(),
                   onTap: () {
                     if (_formKey.currentState!.validate()) {
-                      Navigator.pushNamed(context, Routes.mainLayoutRoute);
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        Routes.mainLayoutRoute,
+                        ModalRoute.withName('/'),
+                      );
                     }
                   },
                   textStyle: AppTextStyles.authButtonTextStyle(context),

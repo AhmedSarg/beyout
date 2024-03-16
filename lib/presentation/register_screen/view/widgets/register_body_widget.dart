@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:temp_house/presentation/register_screen/view/widgets/register_field_dialog.dart';
 
 import '../../../common/validators/validators.dart';
 import '../../../common/widget/main_button.dart';
@@ -13,7 +14,12 @@ import '../../../resources/values_manager.dart';
 import '../../viewmodel/register_viewmodel.dart';
 
 class RegisterBody extends StatelessWidget {
-  RegisterBody({super.key});
+  RegisterBody({
+    super.key,
+    required this.viewModel,
+  });
+
+  final RegisterViewModel viewModel;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -26,6 +32,19 @@ class RegisterBody extends StatelessWidget {
   final FocusNode salaryFocusNode = FocusNode();
   final FocusNode ageFocusNode = FocusNode();
   final FocusNode martialStatusFocusNode = FocusNode();
+
+  final genderList = [
+    AppStrings.registerScreenGenderMale.tr(),
+    AppStrings.registerScreenGenderFemale.tr(),
+  ];
+
+  final martialStatusList = [
+    AppStrings.registerScreenMartialStatusSingle.tr(),
+    AppStrings.registerScreenMartialStatusMarried.tr(),
+    AppStrings.registerScreenMartialStatusSeperated.tr(),
+    AppStrings.registerScreenMartialStatusDivorced.tr(),
+    AppStrings.registerScreenMartialStatusWidowed.tr(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +60,7 @@ class RegisterBody extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: MainTextField(
-                controller: RegisterViewModel().getUsernameController,
+                controller: viewModel.getUsernameController,
                 focusNode: usernameFocusNode,
                 nextFocus: emailFocusNode,
                 label: AppStrings.registerScreenUsernameLabel.tr(),
@@ -54,7 +73,7 @@ class RegisterBody extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: MainTextField(
-                controller: RegisterViewModel().getEmailController,
+                controller: viewModel.getEmailController,
                 focusNode: emailFocusNode,
                 nextFocus: passwordFocusNode,
                 label: AppStrings.registerScreenEmailLabel.tr(),
@@ -67,7 +86,7 @@ class RegisterBody extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: MainTextField(
-                controller: RegisterViewModel().getPasswordController,
+                controller: viewModel.getPasswordController,
                 focusNode: passwordFocusNode,
                 nextFocus: phoneNumberFocusNode,
                 label: AppStrings.registerScreenPasswordLabel.tr(),
@@ -81,7 +100,7 @@ class RegisterBody extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: MainTextField(
-                controller: RegisterViewModel().getPhoneNumberController,
+                controller: viewModel.getPhoneNumberController,
                 focusNode: phoneNumberFocusNode,
                 nextFocus: genderFocusNode,
                 label: AppStrings.registerScreenPhoneNumberLabel.tr(),
@@ -94,20 +113,31 @@ class RegisterBody extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: MainTextField(
-                controller: RegisterViewModel().getGenderController,
+                controller: viewModel.getGenderController,
                 focusNode: genderFocusNode,
                 nextFocus: jobFocusNode,
                 label: AppStrings.registerScreenGenderLabel.tr(),
                 isObscured: false,
+                readOnly: true,
                 hint: AppStrings.registerScreenGenderHint.tr(),
                 validation: AppValidators.validateGender,
                 textInputType: TextInputType.number,
+                onTap: () {
+                  showRegisterDialog(
+                    context,
+                    onSelect: (v) {
+                      viewModel.getGenderController.text = v;
+                    },
+                    title: AppStrings.registerScreenGenderLabel.tr(),
+                    items: genderList,
+                  );
+                },
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: MainTextField(
-                controller: RegisterViewModel().getJobController,
+                controller: viewModel.getJobController,
                 focusNode: jobFocusNode,
                 nextFocus: salaryFocusNode,
                 label: AppStrings.registerScreenJobLabel.tr(),
@@ -120,7 +150,7 @@ class RegisterBody extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: MainTextField(
-                controller: RegisterViewModel().getSalaryController,
+                controller: viewModel.getSalaryController,
                 focusNode: salaryFocusNode,
                 nextFocus: ageFocusNode,
                 label: AppStrings.registerScreenSalaryLabel.tr(),
@@ -133,7 +163,7 @@ class RegisterBody extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: MainTextField(
-                controller: RegisterViewModel().getAgeController,
+                controller: viewModel.getAgeController,
                 focusNode: ageFocusNode,
                 nextFocus: martialStatusFocusNode,
                 label: AppStrings.registerScreenAgeLabel.tr(),
@@ -146,13 +176,24 @@ class RegisterBody extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: MainTextField(
-                controller: RegisterViewModel().getMartialStatusController,
+                controller: viewModel.getMartialStatusController,
                 focusNode: martialStatusFocusNode,
                 label: AppStrings.registerScreenMartialStatusLabel.tr(),
                 isObscured: false,
+                readOnly: true,
                 validation: AppValidators.validateMartialStatus,
                 hint: AppStrings.registerScreenMartialStatusHint.tr(),
                 textInputType: TextInputType.text,
+                onTap: () {
+                  showRegisterDialog(
+                    context,
+                    onSelect: (v) {
+                      viewModel.getMartialStatusController.text = v;
+                    },
+                    title: AppStrings.registerScreenMartialStatusLabel.tr(),
+                    items: martialStatusList,
+                  );
+                },
               ),
             ),
             Padding(
@@ -162,7 +203,11 @@ class RegisterBody extends StatelessWidget {
                 textStyle: AppTextStyles.authButtonTextStyle(context),
                 onTap: () {
                   if (_formKey.currentState!.validate()) {
-                    Navigator.pushNamed(context, Routes.mainLayoutRoute);
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      Routes.mainLayoutRoute,
+                      ModalRoute.withName('/'),
+                    );
                   }
                 },
               ),

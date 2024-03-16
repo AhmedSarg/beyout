@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class FontConstants {
-  static const String kreon = "Kreon";
-  static const String kurale = "Kurale";
+  static const String primaryEnglishFont = "Kreon";
+  static const String secondaryEnglishFont = "Kurale";
+  static const String primaryArabicFont = "Harmattan";
+  static const String secondaryArabicFont = "Rakkas";
 }
 
 class FontWeightManager {
@@ -18,19 +20,19 @@ class FontWeightManager {
 }
 
 class FontSize {
-  static const double s10 = 10.0;
-  static const double s12 = 12.0;
-  static const double s14 = 14.0;
-  static const double s15 = 15.0;
-  static const double s16 = 16.0;
-  static const double s17 = 17.0;
-  static const double s18 = 18.0;
-  static const double s19 = 19.0;
-  static const double s20 = 20.0;
-  static const double s22 = 22.0;
-  static const double s24 = 24.0;
-  static const double s28 = 28.0;
-  static const double s30 = 30.0;
-  static const double s32 = 32.0;
-  static const double s35 = 35.0;
+  static const double f10 = 10.0;
+  static const double f12 = 12.0;
+  static const double f14 = 14.0;
+  static const double f15 = 15.0;
+  static const double f16 = 16.0;
+  static const double f17 = 17.0;
+  static const double f18 = 18.0;
+  static const double f19 = 19.0;
+  static const double f20 = 20.0;
+  static const double f22 = 22.0;
+  static const double f24 = 24.0;
+  static const double f28 = 28.0;
+  static const double f30 = 30.0;
+  static const double f32 = 32.0;
+  static const double f35 = 35.0;
 }

@@ -21,9 +21,9 @@ void main() async {
 
   //TODO: remove on release
   //Created by youssef samy
-  if (kDebugMode) {
-    test();
-  }
+  // if (kDebugMode) {
+  //   test();
+  // }
 
   runApp(
     EasyLocalization(

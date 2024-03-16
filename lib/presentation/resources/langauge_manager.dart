@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
+import 'package:temp_house/presentation/resources/font_manager.dart';
 
 import '../../main.dart';
 
@@ -30,6 +31,24 @@ class AppLanguages {
 
   static String getCurrentLocal(BuildContext context) {
     return context.locale.languageCode;
+  }
+
+  static String getPrimaryFont(BuildContext context) {
+    Languages language = getCurrentLang(context);
+    if (language == Languages.ar) {
+      return FontConstants.primaryArabicFont;
+    } else {
+      return FontConstants.primaryEnglishFont;
+    }
+  }
+
+  static String getSecondaryFont(BuildContext context) {
+    Languages language = getCurrentLang(context);
+    if (language == Languages.ar) {
+      return FontConstants.secondaryArabicFont;
+    } else {
+      return FontConstants.secondaryEnglishFont;
+    }
   }
 
   static Languages getCurrentLang(BuildContext context) {

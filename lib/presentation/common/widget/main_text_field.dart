@@ -23,6 +23,7 @@ class MainTextField extends StatefulWidget {
     this.cursorColor = ColorManager.white,
     this.readOnly = false,
     this.validation,
+    this.onTap,
   });
 
   final TextEditingController controller;
@@ -38,7 +39,8 @@ class MainTextField extends StatefulWidget {
   final TextStyle? labelTextStyle;
   final Color cursorColor;
   final bool readOnly;
-  final String? Function(String? val)? validation;
+  final String? Function(String?)? validation;
+  final void Function()? onTap;
 
   @override
   State<MainTextField> createState() => _MainTextFieldState();
@@ -71,6 +73,7 @@ class _MainTextFieldState extends State<MainTextField> {
                 ColorManager.darkGrey.withOpacity(.15),
             borderRadius: BorderRadius.circular(AppSize.s24),
           ),
+          clipBehavior: Clip.antiAliasWithSaveLayer,
           child: TextFormField(
             controller: widget.controller,
             focusNode: widget.focusNode,
@@ -81,6 +84,7 @@ class _MainTextFieldState extends State<MainTextField> {
             keyboardType: widget.textInputType,
             obscuringCharacter: '*',
             cursorColor: widget.cursorColor,
+            onTap: widget.onTap,
             onEditingComplete: () {
               widget.focusNode.unfocus();
               if (widget.nextFocus != null) {

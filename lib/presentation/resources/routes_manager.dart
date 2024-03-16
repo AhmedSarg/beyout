@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../chat_screen/view/chat_view.dart';
-import '../chat_screen/view/widgets/person_item.dart';
+import '../chats_screen/view/chats_view.dart';
 import '../login_screen/view/login_view.dart';
+import '../main_layout/pages/notifications_screen/view/notifications_view.dart';
 import '../main_layout/view/main_layout_view.dart';
-import '../notifications_screen/view/notifications_view.dart';
 import '../onboarding_screen/view/onboarding_view.dart';
 import '../register_screen/view/register_view.dart';
 import '../selection_screen/selection_view.dart';
@@ -21,8 +21,8 @@ class Routes {
   static const String registerRoute = "/register";
   static const String notificationsRoute = "/notifications";
   static const String mainLayoutRoute = "/mainLayout";
+  static const String chatsRoute = "/chats";
   static const String chatRoute = "/chat";
-  static const String chatDetailsRoute = "/chatDetails";
 }
 
 class RouteGenerator {
@@ -41,13 +41,13 @@ class RouteGenerator {
       case Routes.registerRoute:
         return MaterialPageRoute(builder: (_) => const RegisterScreen());
       case Routes.mainLayoutRoute:
-        return MaterialPageRoute(builder: (_) => MainLayoutScreen());
-      case Routes.chatRoute:
-        return MaterialPageRoute(builder: (_) => const ChatScreen());
+        return MaterialPageRoute(builder: (_) => const MainLayoutScreen());
+      case Routes.chatsRoute:
+        return MaterialPageRoute(builder: (_) => const ChatsScreen());
       case Routes.notificationsRoute:
         return MaterialPageRoute(builder: (_) => const NotificationsScreen());
-      case Routes.chatDetailsRoute:
-        return MaterialPageRoute(builder: (_) => ChatScreendetails());
+      case Routes.chatRoute:
+        return MaterialPageRoute(builder: (_) => const ChatScreen());
       default:
         return unDefinedRoute();
     }

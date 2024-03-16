@@ -12,7 +12,8 @@ class AppStrings {
   static const onBoardingScreenTitle1 = "onBoardingScreenTitle1";
   static const onBoardingScreenTitle2 = "onBoardingScreenTitle2";
   static const onBoardingScreenNextButton = "onBoardingScreenNextButton";
-  static const onBoardingScreenGetStartedButton = "onBoardingScreenGetStartedButton";
+  static const onBoardingScreenGetStartedButton =
+      "onBoardingScreenGetStartedButton";
 
   ///selection screen
   static const selectionScreenTitle = "selectionScreenTitle";
@@ -54,7 +55,8 @@ class AppStrings {
   static const registerScreenEmailHint = "registerScreenEmailHint";
   static const registerScreenPasswordLabel = "registerScreenPasswordLabel";
   static const registerScreenPasswordHint = "registerScreenPasswordHint";
-  static const registerScreenPhoneNumberLabel = "registerScreenPhoneNumberLabel";
+  static const registerScreenPhoneNumberLabel =
+      "registerScreenPhoneNumberLabel";
   static const registerScreenPhoneNumberHint = "registerScreenPhoneNumberHint";
   static const registerScreenGenderLabel = "registerScreenGenderLabel";
   static const registerScreenGenderHint = "registerScreenGenderHint";
@@ -66,18 +68,46 @@ class AppStrings {
   static const registerScreenSalaryHint = "registerScreenSalaryHint";
   static const registerScreenAgeLabel = "registerScreenAgeLabel";
   static const registerScreenAgeHint = "registerScreenAgeHint";
-  static const registerScreenMartialStatusLabel = "registerScreenMartialStatusLabel";
-  static const registerScreenMartialStatusHint = "registerScreenMartialStatusHint";
+  static const registerScreenMartialStatusLabel =
+      "registerScreenMartialStatusLabel";
+  static const registerScreenMartialStatusHint =
+      "registerScreenMartialStatusHint";
+  static const registerScreenMartialStatusSingle =
+      "registerScreenMartialStatusSingle";
+  static const registerScreenMartialStatusMarried =
+      "registerScreenMartialStatusMarried";
+  static const registerScreenMartialStatusSeperated =
+      "registerScreenMartialStatusSeperated";
+  static const registerScreenMartialStatusDivorced =
+      "registerScreenMartialStatusDivorced";
+  static const registerScreenMartialStatusWidowed =
+      "registerScreenMartialStatusWidowed";
   static const registerScreenButton = "registerScreenButton";
   static const registerScreenGoogle = "registerScreenGoogle";
   static const registerScreenFacebook = "registerScreenFacebook";
+
+  ///nav bar
+  static const homeNavBarHome = "homeNavBarHome";
+  static const homeNavBarFavourite = "homeNavBarFavourite";
+  static const homeNavBarNotifications = "homeNavBarNotifications";
+  static const homeNavBarProfile = "homeNavBarProfile";
 
   ///notifications screen
   static const notificationsScreenTitle = "notificationsScreenTitle";
   static const notificationsScreenUnread = "notificationsScreenUnread";
   static const notificationsScreenAll = "notificationsScreenAll";
-  static const notificationsScreenMarkAllRead = "notificationsScreenMarkAllRead";
-  static const notificationsScreenRemoveAll = "notificationsScreenRemoveAll";
+
+  ///chats screen
+  static const chatsScreenTitle = "chatsScreenTitle";
+  static const chatsScreenUnread = "chatsScreenUnread";
+  static const chatsScreenAll = "chatsScreenAll";
+
+  ///options menu
+  static const optionsMenuMarkAllRead = "optionsMenuMarkAllRead";
+  static const optionsMenuRemoveAll = "optionsMenuRemoveAll";
+
+  ///chat screen
+  static const chatScreenInputHint = "chatScreenInputHint";
 
   ///error handler
   static const String badRequestError = "badRequestError";
@@ -110,6 +140,8 @@ class AppStrings {
       "validationsNumbersMustEqual14Digit";
   static const validationsNumbersMustEqual11Digit =
       "validationsNumbersMustEqual11Digit";
-  static const String validationsPasswordSpecifications = "validationsPasswordSpecifications";
-  static const String validationsEnterTheSamePassword = "validationsEnterTheSamePassword";
+  static const String validationsPasswordSpecifications =
+      "validationsPasswordSpecifications";
+  static const String validationsEnterTheSamePassword =
+      "validationsEnterTheSamePassword";
 }

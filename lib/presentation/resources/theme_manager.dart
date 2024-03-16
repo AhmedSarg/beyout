@@ -1,5 +1,4 @@
 import 'color_manager.dart';
-import 'text_styles.dart';
 import 'values_manager.dart';
 import 'package:flutter/material.dart';
 
@@ -42,10 +41,11 @@ ThemeData getApplicationTheme() {
       splashColor: ColorManager.lightGrey,
     ),
 
+
+
     // elevated button them
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        textStyle: AppTextStyles.authButtonTextStyle(null),
         foregroundColor: ColorManager.white,
         backgroundColor: ColorManager.primary,
         shape: RoundedRectangleBorder(
@@ -62,11 +62,10 @@ ThemeData getApplicationTheme() {
     ),
 
     // input decoration theme (text form field)
-    inputDecorationTheme: InputDecorationTheme(
+    inputDecorationTheme: const InputDecorationTheme(
       // content padding
-      contentPadding: const EdgeInsets.all(AppPadding.p8),
+      contentPadding: EdgeInsets.all(AppPadding.p8),
       // hint style
-      labelStyle: AppTextStyles.authHintTextStyle(null),
     ),
   );
 }
