@@ -46,7 +46,7 @@ class ResetPassword extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
               child: MainTextField(
-                controller: viewModel.getEmailController,
+                controller: viewModel.getForgotPasswordEmailController,
                 focusNode: FocusNode(),
                 nextFocus: passwordFocusNode,
                 label: null,

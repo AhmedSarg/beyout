@@ -46,7 +46,7 @@ class ForgotPassword extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
               child: MainTextField(
-                controller: viewModel.getEmailController,
+                controller: viewModel.getForgotPasswordEmailController,
                 focusNode: emailFocusNode,
                 textInputType: TextInputType.emailAddress,
                 validation: AppValidators.validateEmail,

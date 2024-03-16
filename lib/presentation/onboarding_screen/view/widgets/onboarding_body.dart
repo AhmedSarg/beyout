@@ -77,9 +77,10 @@ class OnBoardingBody extends StatelessWidget {
                           curve: Curves.easeInOut,
                         );
                       } else {
-                        Navigator.pushReplacementNamed(
+                        Navigator.pushNamedAndRemoveUntil(
                           context,
                           Routes.selectionRoute,
+                          ModalRoute.withName('/'),
                         );
                       }
                     },

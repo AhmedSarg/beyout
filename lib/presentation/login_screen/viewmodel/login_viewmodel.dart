@@ -10,6 +10,7 @@ class LoginViewModel extends BaseCubit
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _forgotPasswordEmailController = TextEditingController();
   final TextEditingController _resetPasswordController = TextEditingController();
   final TextEditingController _resetPasswordConfirmController = TextEditingController();
 
@@ -27,6 +28,9 @@ class LoginViewModel extends BaseCubit
 
   @override
   TextEditingController get getResetPasswordConfirmController => _resetPasswordConfirmController;
+
+  @override
+  TextEditingController get getForgotPasswordEmailController => _forgotPasswordEmailController;
 }
 
 abstract class LoginViewModelInput {}
@@ -36,6 +40,8 @@ abstract class LoginViewModelOutput {
   TextEditingController get getEmailController;
 
   TextEditingController get getPasswordController;
+
+  TextEditingController get getForgotPasswordEmailController;
 
   TextEditingController get getResetPasswordController;
 
