@@ -69,6 +69,13 @@
   "registerScreenGoogle": "Sign up with google",
   "registerScreenFacebook": "Sign up with facebook",
 
+  "searchTextHint": "Search your Home...",
+  "popularStartedTextRow": "Popular Homes",
+  "popularEndedTextRow": "See all",
+
+
+
+
   "notificationsScreenTitle": "Notifications",
   "notificationsScreenUnread": "Unread",
   "notificationsScreenAll": "All",

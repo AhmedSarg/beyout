@@ -92,6 +92,14 @@ class AppStrings {
   static const homeNavBarNotifications = "homeNavBarNotifications";
   static const homeNavBarProfile = "homeNavBarProfile";
 
+  ///home screen
+  static const searchTextHint = "searchTextHint";
+
+  static const popularStartedTextRow = "popularStartedTextRow";
+  static const popularEndedTextRow = "popularEndedTextRow";
+
+
+
   ///notifications screen
   static const notificationsScreenTitle = "notificationsScreenTitle";
   static const notificationsScreenUnread = "notificationsScreenUnread";

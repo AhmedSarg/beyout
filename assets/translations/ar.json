@@ -69,6 +69,11 @@
   "registerScreenGoogle": "أنشاء الحساب بجوجل",
   "registerScreenFacebook": "أنشاء الحساب بفيسبوك",
 
+  "searchTextHint": "ابحث عن منزلك...",
+  "popularStartedTextRow": "المنازل المشهورة",
+  "popularEndedTextRow": "عرض الكل",
+
+
   "notificationsScreenTitle": "الأشعارات",
   "notificationsScreenUnread": "غير مقروء",
   "notificationsScreenAll": "الكل",

@@ -9,6 +9,7 @@ class AppMargin {
   static const double m16 = 16;
   static const double m20 = 20;
   static const double m32 = 32;
+  static const double m36 = 36;
   static const double m40 = 40;
   static const double m52 = 52;
   static const double m64 = 64;

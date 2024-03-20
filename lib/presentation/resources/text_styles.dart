@@ -221,6 +221,35 @@ class AppTextStyles {
         fontSize: FontSize.f24,
       );
 
+
+  // Home Screen
+
+  static TextStyle searchTextStyle(BuildContext context) => getRegularStyle(
+    fontFamily: AppLanguages.getSecondaryFont(context),
+    color: ColorManager.lightGrey,
+    fontSize: FontSize.f20,
+  );
+  static TextStyle searchHintTextStyle(BuildContext context) => getLightStyle(
+    fontFamily: AppLanguages.getPrimaryFont(context),
+    color: ColorManager.offwhite.withOpacity(.6),
+    fontSize: FontSize.f20,
+  );
+
+  static TextStyle PopularRowStartedTextStyle(BuildContext context) =>
+      getRegularStyle(
+        fontFamily: AppLanguages.getSecondaryFont(context),
+        color: ColorManager.white,
+        fontSize: FontSize.f24,
+      );
+
+  static TextStyle PopularRowEndedTextStyle(BuildContext context) => getLightStyle(
+    fontFamily: AppLanguages.getPrimaryFont(context),
+    color: ColorManager.tertiary.withOpacity(.4),
+    fontSize: FontSize.f20,
+  );
+
+
+
   ///Notifications Screen Text Styles
 
   static TextStyle notificationsScreenTitleTextStyle(BuildContext context) =>
