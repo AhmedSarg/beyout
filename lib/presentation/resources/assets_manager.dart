@@ -4,6 +4,7 @@ class ImageAssets {
   static const String onboardingImage1 = "${imagePath}onBording1.png";
   static const String onboardingImage2 = "${imagePath}onBording2.png";
   static const String personImage = "${imagePath}Ellipse 57.png";
+  static const String homeItem = "${imagePath}Rectangle 42.png";
 }
 
 class IconsAssets {
@@ -23,6 +24,9 @@ class SVGAssets {
   static const String bell = "${_basePath}Bell_pin.svg";
   static const String chat = "${_basePath}Chat_alt_2_duotone_line.svg";
   static const String pin = "${_basePath}Pin.svg";
+  static const String bathRoom = "${_basePath}Group.svg";
+  static const String bed = "${_basePath}fi-ss-bed.svg";
+  static const String wifi = "${_basePath}fi-sr-wifi-alt.svg";
 }
 
 class LottieAssets {

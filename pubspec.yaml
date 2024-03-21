@@ -52,6 +52,7 @@ dependencies:
   gsheets:
   animated_splash_screen:
   flutter_svg:
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:

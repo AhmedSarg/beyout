@@ -235,19 +235,49 @@ class AppTextStyles {
     fontSize: FontSize.f20,
   );
 
-  static TextStyle PopularRowStartedTextStyle(BuildContext context) =>
+  static TextStyle PopularRowStartedTextStyle(BuildContext context,Color color) =>
       getRegularStyle(
         fontFamily: AppLanguages.getSecondaryFont(context),
-        color: ColorManager.white,
+        color: color,
         fontSize: FontSize.f24,
       );
 
-  static TextStyle PopularRowEndedTextStyle(BuildContext context) => getLightStyle(
+  static TextStyle PopularRowEndedTextStyle(BuildContext context,Color color) => getLightStyle(
     fontFamily: AppLanguages.getPrimaryFont(context),
-    color: ColorManager.tertiary.withOpacity(.4),
+    color: color,
     fontSize: FontSize.f20,
   );
 
+  static TextStyle homeItemPriceTextStyle(BuildContext context) => getExtraBoldStyle(
+    fontFamily: AppLanguages.getPrimaryFont(context),
+    color: ColorManager.lightGrey,
+    fontSize: FontSize.f15,
+  );
+  static TextStyle homeItemRateTextStyle(BuildContext context) => getExtraBoldStyle(
+    fontFamily: AppLanguages.getPrimaryFont(context),
+    color: ColorManager.orange,
+    fontSize: FontSize.f15,
+  );
+  static TextStyle homeItemSecondTextStyle(BuildContext context) => getExtraBoldStyle(
+    fontFamily: AppLanguages.getSecondaryFont(context),
+    color: ColorManager.lightblue,
+    fontSize: FontSize.f15,
+  );
+  static TextStyle homeNameTextStyle(BuildContext context) => getSemiBoldStyle(
+    fontFamily: AppLanguages.getSecondaryFont(context),
+    color: ColorManager.additional,
+    fontSize: FontSize.f22,
+  );
+  static TextStyle homeAddressTextStyle(BuildContext context) => getSemiBoldStyle(
+    fontFamily: AppLanguages.getSecondaryFont(context),
+    color: ColorManager.primary.withOpacity(.5),
+    fontSize: FontSize.f16,
+  );
+  static TextStyle homeContentTextStyle(BuildContext context) => getSemiBoldStyle(
+    fontFamily: AppLanguages.getPrimaryFont(context),
+    color: ColorManager.primary.withOpacity(.5),
+    fontSize: FontSize.f16,
+  );
 
 
   ///Notifications Screen Text Styles
