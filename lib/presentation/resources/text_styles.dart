@@ -280,6 +280,34 @@ class AppTextStyles {
   );
 
 
+
+  //# near by home
+  static TextStyle nearHomeNameTextStyle(BuildContext context) => getSemiBoldStyle(
+    fontFamily: AppLanguages.getSecondaryFont(context),
+    color: ColorManager.additional,
+    fontSize: FontSize.f17,
+  );
+
+  static TextStyle nearHomeAddressTextStyle(BuildContext context) => getSemiBoldStyle(
+    fontFamily: AppLanguages.getSecondaryFont(context),
+    color: ColorManager.primary.withOpacity(.5),
+    fontSize: FontSize.f14,
+  );
+
+
+  // share post
+
+  static TextStyle sharePostTextStyle(BuildContext context) => getMediumStyle(
+    fontFamily: AppLanguages.getPrimaryFont(context),
+    color: ColorManager.offwhite.withOpacity(.6),
+    fontSize: FontSize.f16,
+  );
+  static TextStyle sharePostBtnTextStyle(BuildContext context) => getMediumStyle(
+    fontFamily: AppLanguages.getPrimaryFont(context),
+    color: ColorManager.black,
+    fontSize: FontSize.f16,
+  );
+
   ///Notifications Screen Text Styles
 
   static TextStyle notificationsScreenTitleTextStyle(BuildContext context) =>

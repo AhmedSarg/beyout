@@ -71,8 +71,31 @@
 
   "searchTextHint": "Search your Home...",
   "popularStartedTextRow": "Popular Homes",
-  "popularEndedTextRow": "See all",
+  "popularEndedTextRow": "see all",
 
+
+
+  "priceHome": "EGP/Month",
+  "bedHome": "bed",
+  "bathroomHome": "bathroom",
+  "wifiHome": "wifi",
+  "nearByHome": "Nearby Homes",
+  "addItem": "add home to favourite list",
+  "removeItem": "remove home from favourite list",
+
+
+
+
+  "publishHomeAppBarTextRow": "New listing ",
+  "addPhotos": "Add Photos ",
+  "addPhotosDescription": "Photos : 0/10 . Choose your listing’s main photo first.",
+  "title": "Title",
+  "price": "Price",
+  "category": "Category",
+  "condition": "Condition",
+  "description": "Description",
+  "location": "Location",
+  "publish": "Publish",
 
 
 

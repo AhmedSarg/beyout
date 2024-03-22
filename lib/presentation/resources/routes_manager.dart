@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:temp_house/presentation/main_layout/pages/home_screen/view/all_nearby_home.dart';
+import 'package:temp_house/presentation/main_layout/pages/home_screen/view/all_popular_home.dart';
+import 'package:temp_house/presentation/search_screen/view/search_screen.dart';
 import '../chat_screen/view/chat_view.dart';
 import '../chats_screen/view/chats_view.dart';
 import '../login_screen/view/login_view.dart';
@@ -8,6 +11,7 @@ import '../main_layout/view/main_layout_view.dart';
 import '../onboarding_screen/view/onboarding_view.dart';
 import '../register_screen/view/register_view.dart';
 import '../selection_screen/selection_view.dart';
+import '../share_post_screen/view/share_post_screen.dart';
 import '../splash_screen/view/splash_view.dart';
 import 'strings_manager.dart';
 
@@ -23,6 +27,10 @@ class Routes {
   static const String mainLayoutRoute = "/mainLayout";
   static const String chatsRoute = "/chats";
   static const String chatRoute = "/chat";
+  static const String publishHomePostRoute = "/PublishHomePost";
+  static const String allPopularHomesRoute = "/allPopularHome";
+  static const String allNearByHomesRoute = "/allNearByHomesHome";
+  static const String searchScreenRoute = "/searchScreen";
 }
 
 class RouteGenerator {
@@ -48,6 +56,14 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const NotificationsScreen());
       case Routes.chatRoute:
         return MaterialPageRoute(builder: (_) => const ChatScreen());
+      case Routes.publishHomePostRoute:
+        return MaterialPageRoute(builder: (_) => const SharePostScreen());
+      case Routes.allPopularHomesRoute:
+        return MaterialPageRoute(builder: (_) => const AllPopularHome());
+      case Routes.allNearByHomesRoute:
+        return MaterialPageRoute(builder: (_) => const AllNearByHome());
+      case Routes.searchScreenRoute:
+        return MaterialPageRoute(builder: (_) => const SearchScreen());
       default:
         return unDefinedRoute();
     }

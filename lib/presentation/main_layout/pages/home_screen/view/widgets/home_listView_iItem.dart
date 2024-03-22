@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:temp_house/presentation/main_layout/pages/home_screen/view/widgets/home_image.dart';
@@ -5,6 +6,7 @@ import 'package:temp_house/presentation/resources/assets_manager.dart';
 import 'package:temp_house/presentation/resources/color_manager.dart';
 import 'package:temp_house/presentation/resources/values_manager.dart';
 
+import '../../../../../resources/strings_manager.dart';
 import '../../../../../resources/text_styles.dart';
 
 class buildCarouselItem extends StatelessWidget {
@@ -36,52 +38,61 @@ class buildCarouselItem extends StatelessWidget {
           child: Column(
             children: [
               HomeImageWidget(),
-              SizedBox(height: AppPadding.p5,),
-
+              SizedBox(
+                height: AppPadding.p5,
+              ),
               Row(
                 children: [
                   Icon(
                     Icons.star,
                     color: Colors.orange,
                   ),
-                  const SizedBox(width: 3,),
+                  const SizedBox(
+                    width: 3,
+                  ),
                   Text('4.4',
                       style: AppTextStyles.homeItemRateTextStyle(context)),
                   Text('(480)',
                       style: AppTextStyles.homeItemSecondTextStyle(context)),
                 ],
               ),
-
               Row(
                 children: [
-
                   Text('Lerissa Galian Home',
                       style: AppTextStyles.homeNameTextStyle(context)),
-
                 ],
               ),
-              SizedBox(height: AppPadding.p5,),
-
+              SizedBox(
+                height: AppPadding.p5,
+              ),
               Row(
                 children: [
-                  SvgPicture.asset(SVGAssets.pin,color: ColorManager.primary,),
+                  SvgPicture.asset(
+                    SVGAssets.pin,
+                    color: ColorManager.primary,
+                  ),
                   Expanded(
                     child: Text('11/ B, Perera lane, Colombo 06',
                         overflow: TextOverflow.ellipsis,
                         style: AppTextStyles.homeAddressTextStyle(context)),
                   ),
-
                 ],
               ),
-SizedBox(height: AppPadding.p10,),
+              SizedBox(
+                height: AppPadding.p10,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  HomeContent(object: 'bed', icon: SVGAssets.bed,),
-                  HomeContent(object: 'wifi', icon: SVGAssets.wifi),
-                  HomeContent(object: 'bathroom', icon: SVGAssets.bathRoom,),
-
-
+                  HomeContent(
+                    object: '2 ${AppStrings.bedHome.tr()}',
+                    icon: SVGAssets.bed,
+                  ),
+                  HomeContent(object: '${AppStrings.wifiHome.tr()}', icon: SVGAssets.wifi),
+                  HomeContent(
+                    object: '1 ${AppStrings.bathroomHome.tr()}',
+                    icon: SVGAssets.bathRoom,
+                  ),
                 ],
               ),
             ],
@@ -92,14 +103,12 @@ SizedBox(height: AppPadding.p10,),
   }
 }
 
-
-
 class HomeContent extends StatelessWidget {
-  const HomeContent({Key? key, required this.object, required this.icon}) : super(key: key);
+  const HomeContent({Key? key, required this.object, required this.icon})
+      : super(key: key);
 
   final String object;
   final String icon;
-
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +119,9 @@ class HomeContent extends StatelessWidget {
           icon,
           color: ColorManager.primary,
         ),
-        SizedBox(width: AppPadding.p4,),
+        SizedBox(
+          width: AppPadding.p4,
+        ),
         Text(
           object,
           style: AppTextStyles.homeContentTextStyle(context),

@@ -74,6 +74,27 @@
   "popularEndedTextRow": "عرض الكل",
 
 
+  "priceHome": "جنيه مصري/شهر",
+  "bedHome": "سرير",
+  "bathroomHome": "حمام",
+  "wifiHome": "واي فاي",
+  "nearByHome": "المنازل القريبه",
+
+
+  "publishHomeAppBarTextRow": "قائمة جديدة ",
+  "addPhotos": "اضف الصور ",
+  "addPhotosDescription": "الصور : 0/10 . اختر الصورة الرئيسية لبطاقة بياناتك أولاً.",
+  "title": "العنوان",
+  "price": "السعر",
+  "category": "الفئة",
+  "condition":"الحالة",
+  "description": "الوصف",
+  "location": "الموقع",
+  "publish": "نشر",
+
+  "addItem": "إضافة المنزل إلى قائمة المفضلة",
+  "removeItem": "إزالة المنزل من القائمة المفضلة",
+
   "notificationsScreenTitle": "الأشعارات",
   "notificationsScreenUnread": "غير مقروء",
   "notificationsScreenAll": "الكل",

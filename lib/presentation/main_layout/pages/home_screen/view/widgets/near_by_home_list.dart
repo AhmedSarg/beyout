@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'near_by_home_item.dart';
+
 class NearByHomeList extends StatelessWidget {
   const NearByHomeList({super.key});
 
@@ -13,16 +15,16 @@ class NearByHomeList extends StatelessWidget {
       itemCount: 10,
       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 700,
-        mainAxisExtent: 200,
+        mainAxisExtent: 150,
         mainAxisSpacing: 8,
         crossAxisSpacing: 8,
 
       ),
       itemBuilder: (context, index) {
 
-        return Padding(
-          padding: const EdgeInsets.all( 10.0),
-          child: Container(color: Colors.red,),
+        return const Padding(
+          padding: EdgeInsets.all( 10.0),
+          child: NearByHomeItem(),
         );
       },
     );

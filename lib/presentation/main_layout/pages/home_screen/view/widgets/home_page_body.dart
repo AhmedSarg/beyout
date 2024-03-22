@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:temp_house/presentation/main_layout/pages/home_screen/view/widgets/popular_home_widget.dart';
 import 'package:temp_house/presentation/main_layout/pages/home_screen/view/widgets/popular_row.dart';
+import 'package:temp_house/presentation/resources/routes_manager.dart';
 
 import '../../../../../common/widget/main_seach_field.dart';
 import '../../../../../resources/assets_manager.dart';
 import '../../../../../resources/color_manager.dart';
 import '../../../../../resources/strings_manager.dart';
+import '../../../../../resources/text_styles.dart';
 import '../../../../../resources/values_manager.dart';
 import 'home_page_app_bar.dart';
 
@@ -22,34 +24,50 @@ class HomePageBody extends StatelessWidget {
           const SizedBox(
             height: AppSize.s16,
           ),
-
           const HomePageAppBar(),
           const SizedBox(
             height: AppSize.s20,
           ),
+          InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, Routes.searchScreenRoute);
+            },
+            child: Container(
+              height: AppSize.s50,
+              margin: EdgeInsets.symmetric(horizontal: AppMargin.m40),
+              decoration: BoxDecoration(
+                  color: ColorManager.offwhite.withOpacity(.12),
+                  borderRadius: BorderRadius.circular(16)
+              ),
+              child: Row(
+                children: [
+                  const SizedBox(width: AppSize.s10,),
+                  const Icon(Icons.search,color: ColorManager.white,),
+                  const SizedBox(width: AppSize.s5,),
 
-          MainSearch(
-            hintText: AppStrings.searchTextHint.tr(),
-            leadingIcon: Icons.search_rounded,
-            trailingIcon: Icons.tune,
+                  Text(AppStrings.searchTextHint.tr(),style: AppTextStyles.searchHintTextStyle(context),),
+                  const Spacer(),
+                  const Icon(Icons.tune,color: ColorManager.white),
+                  const SizedBox(width: AppSize.s10,)
+
+                ],
+              ),
+
+            ),
           ),
           const SizedBox(
             height: AppSize.s20,
           ),
-
           PopularRow(
             startedText: AppStrings.popularStartedTextRow.tr(),
             endedText: AppStrings.popularEndedTextRow.tr(),
-            RowStartedcolor: ColorManager.white,
-            RowEndedcolor: ColorManager.tertiary.withOpacity(.4),
+            rowStartedcolor: ColorManager.white,
+            rowEndedcolor: ColorManager.tertiary.withOpacity(.4), routeName: Routes.allPopularHomesRoute,
+
           ),
-          // const SizedBox(
-          //   height: AppSize.s250,
-          // ),
           const SizedBox(
             height: AppSize.s20,
           ),
-
           const PopularHomeWidget()
         ],
       ),

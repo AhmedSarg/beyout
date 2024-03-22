@@ -97,8 +97,28 @@ class AppStrings {
 
   static const popularStartedTextRow = "popularStartedTextRow";
   static const popularEndedTextRow = "popularEndedTextRow";
+  static const priceHome = "priceHome";
+  static const bedHome = "bedHome";
+  static const bathroomHome = "bathroomHome";
+  static const wifiHome = "wifiHome";
+  static const nearByHome = "nearByHome";
 
 
+  //Snackbar
+  static const addItem = "addItem";
+  static const removeItem = "removeItem";
+
+// publish home post
+  static const publishHomeAppBarTextRow = "publishHomeAppBarTextRow";
+  static const addPhotos  = "Add Photos ";
+  static const addPhotosDescription = "addPhotosDescription";
+  static const title = "title";
+  static const price = "price";
+  static const category = "category";
+  static const condition = "condition";
+  static const description = "description";
+  static const location = "location";
+  static const publish = "publish";
 
   ///notifications screen
   static const notificationsScreenTitle = "notificationsScreenTitle";

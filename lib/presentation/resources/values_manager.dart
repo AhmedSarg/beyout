@@ -118,3 +118,16 @@ class AppSize {
 
   static const double infinity = double.infinity;
 }
+
+class AppDuration{
+  static const int m1200 = 1200;
+  static const int s3 = 3;
+  static const int s4 = 4;
+  static const int s5 = 5;
+  static const int s6 = 6;
+  static const int s7 = 7;
+  static const int s8 = 8;
+  static const int s9 = 9;
+  static const int s10 = 10;
+
+}
