@@ -108,7 +108,7 @@ class _MainTextFieldState extends State<ShareTextField> {
             enabledBorder: const OutlineInputBorder(
                 borderSide: BorderSide(
                     color: ColorManager.grey, style: BorderStyle.solid)),
-            focusedBorder: OutlineInputBorder(
+            focusedBorder: const OutlineInputBorder(
                 borderSide: BorderSide(
                     color: ColorManager.grey, style: BorderStyle.solid)),
             errorStyle: const TextStyle(

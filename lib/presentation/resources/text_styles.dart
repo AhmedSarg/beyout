@@ -322,6 +322,16 @@ class AppTextStyles {
         fontSize: FontSize.f15,
       );
 
+  static TextStyle unSelectedsearchTabTextStyle(BuildContext context) => getMediumStyle(
+    fontFamily: AppLanguages.getPrimaryFont(context),
+    color: ColorManager.white,
+    fontSize: FontSize.f16,
+  );
+  static TextStyle selectedSearchTabTextStyle(BuildContext context) => getMediumStyle(
+    fontFamily: AppLanguages.getPrimaryFont(context),
+    color: ColorManager.primary,
+    fontSize: FontSize.f18,
+  );
 
   ///Notifications Screen Text Styles
 

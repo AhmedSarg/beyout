@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart'; // Import flutter_svg package
 import 'package:temp_house/presentation/resources/color_manager.dart';
 import 'package:temp_house/presentation/resources/values_manager.dart';
+import 'package:temp_house/presentation/search_screen/view/widgets/search_taps.dart';
 import '../../resources/assets_manager.dart';
 import '../../resources/strings_manager.dart';
 import 'package:temp_house/presentation/common/widget/main_seach_field.dart';
@@ -48,18 +49,68 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget _buildTrailingIcon() {
     if (_showClearIcon) {
       return IconButton(
-        icon: Icon(Icons.clear),
+        icon: const Icon(Icons.clear),
         onPressed: clearSearchField,
       );
     } else {
       return IconButton(
         icon: SvgPicture.asset(
           SVGAssets.googleMaps,
-          width: 24,
-          height: 24,
+          width: AppSize.s30,
+          height: AppSize.s30,
         ),
         onPressed: () {},
       );
+    }
+  }
+
+  Widget _buildSearchTaps() {
+    if (_showClearIcon) {
+      return Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(AppStrings.lastText.tr(),
+                  style: AppTextStyles.searchScreenTextStyle(context)),
+              InkWell(
+                  onTap: () {
+                    setState(() {
+                      searchedWords.clear();
+                    });
+                  },
+                  child: Text(AppStrings.clearText.tr(),
+                      style:
+                      AppTextStyles.searchScreenClearTextStyle(context))),
+            ],
+          ),
+          Container(
+            height: 50,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: searchedWords.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  margin: EdgeInsets.symmetric(horizontal: 8),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(AppSize.s16),
+                    border: Border.all(color: ColorManager.grey),
+                  ),
+                  padding: const EdgeInsets.all(AppPadding.p8),
+                  child: Text(
+                    searchedWords[index],
+                    style: AppTextStyles.searchHintTextStyle(context),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      );
+
+    } else {
+      return  SearchTaps()
+      ;
     }
   }
 
@@ -85,43 +136,9 @@ class _SearchScreenState extends State<SearchScreen> {
         padding: const EdgeInsets.symmetric(horizontal: AppPadding.p10),
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(AppStrings.lastText.tr(),
-                    style: AppTextStyles.searchScreenTextStyle(context)),
-                InkWell(
-                    onTap: () {
-                      setState(() {
-                        searchedWords.clear();
-                      });
-                    },
-                    child: Text(AppStrings.clearText.tr(),
-                        style:
-                        AppTextStyles.searchScreenClearTextStyle(context))),
-              ],
-            ),
-            Container(
-              height: 50,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: searchedWords.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    margin: EdgeInsets.symmetric(horizontal: 8),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(AppSize.s16),
-                      border: Border.all(color: ColorManager.grey),
-                    ),
-                    padding: const EdgeInsets.all(AppPadding.p8),
-                    child: Text(
-                      searchedWords[index],
-                      style: AppTextStyles.searchHintTextStyle(context),
-                    ),
-                  );
-                },
-              ),
-            ),
+
+            _buildSearchTaps()
+
           ],
         ),
       ),
