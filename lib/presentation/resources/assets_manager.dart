@@ -27,6 +27,7 @@ class SVGAssets {
   static const String bathRoom = "${_basePath}Group.svg";
   static const String bed = "${_basePath}fi-ss-bed.svg";
   static const String wifi = "${_basePath}fi-sr-wifi-alt.svg";
+  static const String googleMaps = "${_basePath}Group 98.svg";
 }
 
 class LottieAssets {

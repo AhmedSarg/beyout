@@ -70,6 +70,8 @@
   "registerScreenFacebook": "أنشاء الحساب بفيسبوك",
 
   "searchTextHint": "ابحث عن منزلك...",
+  "clearText": "مسح الكل",
+  "lastText": "عمليات البحث الأخير",
   "popularStartedTextRow": "المنازل المشهورة",
   "popularEndedTextRow": "عرض الكل",
 
@@ -91,6 +93,8 @@
   "description": "الوصف",
   "location": "الموقع",
   "publish": "نشر",
+  "addphotos": "إضاف الصور",
+
 
   "addItem": "إضافة المنزل إلى قائمة المفضلة",
   "removeItem": "إزالة المنزل من القائمة المفضلة",

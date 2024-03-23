@@ -307,6 +307,21 @@ class AppTextStyles {
     color: ColorManager.black,
     fontSize: FontSize.f16,
   );
+// search screen
+
+  static TextStyle searchScreenTextStyle(BuildContext context) =>
+      getMediumStyle(
+        fontFamily: AppLanguages.getSecondaryFont(context),
+        color: ColorManager.white,
+        fontSize: FontSize.f20,
+      );
+  static TextStyle searchScreenClearTextStyle(BuildContext context) =>
+      getMediumStyle(
+        fontFamily: AppLanguages.getSecondaryFont(context),
+        color: ColorManager.tertiary,
+        fontSize: FontSize.f15,
+      );
+
 
   ///Notifications Screen Text Styles
 

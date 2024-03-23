@@ -1,31 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:temp_house/presentation/resources/color_manager.dart';
-import 'package:temp_house/presentation/resources/values_manager.dart';
 
+import '../../resources/color_manager.dart';
 import '../../resources/text_styles.dart';
 
 class MainSearch extends StatelessWidget {
-  const MainSearch({super.key, required this.hintText, required this.leadingIcon, required this.trailingIcon});
-final String hintText;
+  const MainSearch({
+    Key? key,
+    required this.hintText,
+    required this.leadingIcon,
+    required this.trailingIcon,
+    this.controller,
+    this.onSubmit,
+  }) : super(key: key);
+
+  final String hintText;
   final IconData leadingIcon;
-  final IconData trailingIcon;
+  final Widget trailingIcon;
+  final TextEditingController? controller;
+  final Function? onSubmit;
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: AppMargin.m36),
       decoration: BoxDecoration(
         color: ColorManager.offwhite.withOpacity(.12),
-            borderRadius: BorderRadius.circular(16)
+        borderRadius: BorderRadius.circular(16),
       ),
-      child:  TextField(
-
+      child: TextField(
+        controller: controller,
         cursorColor: ColorManager.white,
-
+        onSubmitted: (value) {
+          if (onSubmit != null) {
+            onSubmit!(value);
+          }
+        },
         style: AppTextStyles.searchTextStyle(context),
-        decoration:  InputDecoration(
+        decoration: InputDecoration(
           prefixIcon: Icon(leadingIcon),
           prefixIconColor: ColorManager.offwhite.withOpacity(.86),
-          suffixIcon: Icon(trailingIcon),
+          suffixIcon: trailingIcon,
           suffixIconColor: ColorManager.offwhite.withOpacity(.86),
           hintText: hintText,
           hintStyle: AppTextStyles.searchHintTextStyle(context),

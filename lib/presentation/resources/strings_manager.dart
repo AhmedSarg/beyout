@@ -94,6 +94,8 @@ class AppStrings {
 
   ///home screen
   static const searchTextHint = "searchTextHint";
+  static const lastText= "lastText";
+  static const clearText = "clearText";
 
   static const popularStartedTextRow = "popularStartedTextRow";
   static const popularEndedTextRow = "popularEndedTextRow";
@@ -119,6 +121,10 @@ class AppStrings {
   static const description = "description";
   static const location = "location";
   static const publish = "publish";
+  static const addphotos = "addphotos";
+
+
+
 
   ///notifications screen
   static const notificationsScreenTitle = "notificationsScreenTitle";
