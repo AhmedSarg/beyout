@@ -66,9 +66,9 @@ class _SearchTapsState extends State<SearchTaps> {
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.black.withOpacity(0.2), // Shadow color
-                                spreadRadius: 2,  // Spread radius
-                                blurRadius: 4,    // Blur radius
-                                offset: Offset(0, 2), // Offset from the container
+                                spreadRadius: 2,
+                                blurRadius: 3,
+                                offset: const Offset(0, 3),
                               ),
                             ],
                             color: currentIndex == index
@@ -87,13 +87,13 @@ class _SearchTapsState extends State<SearchTaps> {
 
                     ),
                     Visibility(
+                      visible: currentIndex == index,
                       child: Container(
                         width: 5,
                         height: 5,
                         decoration: BoxDecoration(
                             shape: BoxShape.circle, color: ColorManager.tertiary.withOpacity(.6)),
                       ),
-                      visible: currentIndex == index,
                     )
                   ],
                 );
@@ -111,7 +111,7 @@ class _SearchTapsState extends State<SearchTaps> {
       context: context,
       builder: (BuildContext context) {
         return Container(
-          height: 200,
+
           child: Center(
             child: Text('This is the bottom sheet for $item'),
           ),
