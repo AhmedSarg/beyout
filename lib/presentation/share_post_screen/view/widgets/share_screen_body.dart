@@ -68,7 +68,7 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
             const ImagePickerField(),
             Padding(
               padding: EdgeInsets.symmetric(vertical: AppPadding.p10),
-              child: ShareTextField(
+              child: searchTextField(
                 controller: widget.viewModel.getTitleController,
                 focusNode: titleFocusNode,
                 nextFocus: priceFocusNode,
@@ -80,7 +80,7 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
             ),
             Padding(
               padding: EdgeInsets.symmetric(vertical: AppPadding.p10),
-              child: ShareTextField(
+              child: searchTextField(
                 controller: widget.viewModel.getPriceController,
                 focusNode: priceFocusNode,
                 nextFocus: categoryFocusNode,
@@ -92,7 +92,7 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
-              child: ShareTextField(
+              child: searchTextField(
                 controller: widget.viewModel.getCategoryController,
                 focusNode: categoryFocusNode,
                 nextFocus: condationFocusNode,
@@ -109,15 +109,14 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
                     onSelect: (v) {
                       widget.viewModel.getCategoryController.text = v;
                     },
-                    title: AppStrings.registerScreenMartialStatusLabel.tr(),
-                    items: categoryList,
+                    items: categoryList, title: '',
                   );
                 },
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
-              child: ShareTextField(
+              child: searchTextField(
                 controller: widget.viewModel.getConditionController,
                 focusNode: condationFocusNode,
                 nextFocus: descriptionFocusNode,
@@ -134,15 +133,14 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
                     onSelect: (v) {
                       widget.viewModel.getConditionController.text = v;
                     },
-                    title: AppStrings.registerScreenMartialStatusLabel.tr(),
-                    items: CondationList,
+                    items: CondationList, title: '',
                   );
                 },
               ),
             ),
             Padding(
               padding: EdgeInsets.symmetric(vertical: AppPadding.p10),
-              child: ShareTextField(
+              child: searchTextField(
                 controller: widget.viewModel.getPriceController,
                 focusNode: descriptionFocusNode,
 
@@ -158,7 +156,7 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
             ),
             Padding(
               padding: EdgeInsets.symmetric(vertical: AppPadding.p10),
-              child: ShareTextField(
+              child: searchTextField(
                 controller: widget.viewModel.getLocationController,
                 focusNode: locationFocusNode,
                 nextFocus: locationFocusNode,

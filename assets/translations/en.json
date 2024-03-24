@@ -86,7 +86,12 @@
   "removeItem": "remove home from favourite list",
   "addphotos": "Add Photos",
 
-
+  "priceRange": "Price Range (EGP)",
+  "coin": "EGP",
+  "minNum": "No Min .",
+  "maxNum": "No Max .",
+  "clear": "Clear",
+  "confirm": "Confirm",
 
 
   "publishHomeAppBarTextRow": "New listing ",
@@ -99,6 +104,13 @@
   "description": "Description",
   "location": "Location",
   "publish": "Publish",
+
+
+  "tapBarSearchAll": "All",
+  "tapBarSearchPrice": "Price",
+  "tapBarSearchLatest": "Latest",
+  "tapBarSearchPopular": "Most popular",
+  "tapBarSearchCheapest": "Cheapest",
 
 
 

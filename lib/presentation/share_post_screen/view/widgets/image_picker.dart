@@ -28,7 +28,7 @@ class ImagePickerField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
+      height: AppSize.s100,
       width: double.infinity,
       decoration: BoxDecoration(
         border: Border.all(width: 1, color: Colors.grey),
@@ -72,7 +72,7 @@ class ImagePickerField extends StatelessWidget {
               color: Colors.grey,
             ),
           ),
-           Text(AppStrings.clearText.tr(),style: AppTextStyles.sharePostTextStyle(context),)
+           Text(AppStrings.addPhotos.tr(),style: AppTextStyles.sharePostTextStyle(context),)
         ],
       ),
     );

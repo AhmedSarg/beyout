@@ -84,7 +84,6 @@
 
 
   "publishHomeAppBarTextRow": "قائمة جديدة ",
-  "addPhotos": "اضف الصور ",
   "addPhotosDescription": "الصور : 0/10 . اختر الصورة الرئيسية لبطاقة بياناتك أولاً.",
   "title": "العنوان",
   "price": "السعر",
@@ -93,8 +92,20 @@
   "description": "الوصف",
   "location": "الموقع",
   "publish": "نشر",
-  "addphotos": "إضاف الصور",
+  "addPhotos": "إضف الصور",
 
+  "tapBarSearchAll": "الكل",
+  "tapBarSearchPrice": "السعر",
+  "tapBarSearchLatest": "الأحدث",
+  "tapBarSearchPopular": "الأكثر شعبية",
+  "tapBarSearchCheapest": "الأرخص",
+
+  "priceRange": "نطاق السعر (جنيه مصري)",
+  "coin": "جنيه مصري",
+  "minNum": "No Min .",
+  "maxNum": "No Max .",
+  "clear": "مسح",
+  "confirm": "تأكد",
 
   "addItem": "إضافة المنزل إلى قائمة المفضلة",
   "removeItem": "إزالة المنزل من القائمة المفضلة",

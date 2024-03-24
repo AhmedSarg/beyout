@@ -64,7 +64,7 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
   }
 
   List<Widget> tabs = [
-    const HomePage(),
+     HomePage(),
     const UnderConstruction(),
     const NotificationsScreen(),
     const UnderConstruction()

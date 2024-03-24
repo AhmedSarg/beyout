@@ -112,7 +112,7 @@ class AppStrings {
 
 // publish home post
   static const publishHomeAppBarTextRow = "publishHomeAppBarTextRow";
-  static const addPhotos  = "Add Photos ";
+  static const addPhotos  = "addPhotos";
   static const addPhotosDescription = "addPhotosDescription";
   static const title = "title";
   static const price = "price";
@@ -121,9 +121,21 @@ class AppStrings {
   static const description = "description";
   static const location = "location";
   static const publish = "publish";
-  static const addphotos = "addphotos";
 
+// search
 
+  static const priceRange = "priceRange";
+  static const coin = "coin";
+  static const minNum = "minNum";
+  static const maxNum = "maxNum";
+  static const clear = "clear";
+  static const confirm = "confirm";
+
+  static const tapBarSearchAll = "tapBarSearchAll";
+  static const tapBarSearchPrice = "tapBarSearchPrice";
+  static const tapBarSearchLatest = "tapBarSearchLatest";
+  static const tapBarSearchPopular = "tapBarSearchPopular";
+  static const tapBarSearchCheapest = "tapBarSearchCheapest";
 
 
   ///notifications screen

@@ -333,6 +333,23 @@ class AppTextStyles {
     fontSize: FontSize.f18,
   );
 
+  static TextStyle modalBottomSheetBottonTextStyle(BuildContext context,Color color) => getMediumStyle(
+    fontFamily: AppLanguages.getPrimaryFont(context),
+    color: color,
+    fontSize: FontSize.f18,
+  );
+  static TextStyle modalBottomSheetPriceTextStyle(BuildContext context,) => getMediumStyle(
+    fontFamily: AppLanguages.getPrimaryFont(context),
+    color: ColorManager.black,
+    fontSize: FontSize.f18,
+  );
+  static TextStyle modalBottomSheetPriceTitleTextStyle(BuildContext context,) => getMediumStyle(
+    fontFamily: AppLanguages.getPrimaryFont(context),
+    color: ColorManager.black,
+    fontSize: FontSize.f24,
+  );
+
+
   ///Notifications Screen Text Styles
 
   static TextStyle notificationsScreenTitleTextStyle(BuildContext context) =>

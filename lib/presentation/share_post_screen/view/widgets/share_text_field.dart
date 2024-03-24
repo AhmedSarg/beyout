@@ -5,8 +5,8 @@ import '../../../resources/color_manager.dart';
 import '../../../resources/text_styles.dart';
 import '../../../resources/values_manager.dart';
 
-class ShareTextField extends StatefulWidget {
-  const ShareTextField({
+class searchTextField extends StatefulWidget {
+  const searchTextField({
     super.key,
     required this.controller,
     required this.focusNode,
@@ -43,10 +43,10 @@ class ShareTextField extends StatefulWidget {
   final String? Function(String?)? validation;
   final void Function()? onTap;
   @override
-  State<ShareTextField> createState() => _MainTextFieldState();
+  State<searchTextField> createState() => _MainTextFieldState();
 }
 
-class _MainTextFieldState extends State<ShareTextField> {
+class _MainTextFieldState extends State<searchTextField> {
   late bool hidden = widget.isObscured;
   String? errorText;
 
