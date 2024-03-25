@@ -9,72 +9,95 @@ import '../../../resources/values_manager.dart';
 class ImagePickerField extends StatelessWidget {
   const ImagePickerField({super.key});
 
-  Future<void> _getImageFromGallery(BuildContext context) async {
+  Future<void> _getImagesFromGallery(BuildContext context) async {
     final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
+    final pickedFiles = await picker.pickMultiImage();
+    if (pickedFiles != null && pickedFiles.isNotEmpty) {
+
+      for (var pickedFile in pickedFiles) {
+
+      }
     }
     Navigator.of(context).pop();
   }
-
-  Future<void> _getImageFromCamera(BuildContext context) async {
+  Future<void> _getImagesFromCamera(BuildContext context) async {
     final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: ImageSource.camera);
-    if (pickedFile != null) {
+    List<XFile>? pickedFiles = [];
+
+    while (true) {
+      final pickedFile = await picker.pickImage(source: ImageSource.camera);
+      if (pickedFile == null) break;
+      pickedFiles.add(pickedFile);
     }
+
+    if (pickedFiles.isNotEmpty) {
+      for (var pickedFile in pickedFiles) {
+      }
+    }
+
     Navigator.of(context).pop();
   }
-
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: AppSize.s100,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        border: Border.all(width: 1, color: Colors.grey),
-        borderRadius: BorderRadius.circular(AppSize.s8),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          IconButton(
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
+    return Stack(
+      clipBehavior: Clip.none,
 
-                    content: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        IconButton(
-                          icon: const Icon(Icons.photo_library),
-                          onPressed: () {
-                            _getImageFromGallery(context);
-                          },
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.camera_alt),
-                          onPressed: () {
-                            _getImageFromCamera(context);
-                          },
-                        ),
-                      ],
-                    ),
+      alignment: Alignment.bottomLeft,
+      children: [
+        Container(
+          height: AppSize.s120,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            border: Border.all(width: 1, color: Colors.grey),
+            borderRadius: BorderRadius.circular(AppSize.s8),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
 
+                        content: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.photo_library),
+                              onPressed: () {
+                                _getImagesFromGallery(context);
+                              },
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.camera_alt),
+                              onPressed: () {
+                                _getImagesFromCamera(context);
+                              },
+                            ),
+                          ],
+                        ),
+
+                      );
+                    },
                   );
                 },
-              );
-            },
-            icon: const Icon(
-              Icons.add_photo_alternate,
-              size: AppSize.s50,
-              color: Colors.grey,
-            ),
+                icon: const Icon(
+                  Icons.add_photo_alternate,
+                  size: AppSize.s50,
+                  color: Colors.grey,
+                ),
+              ),
+               Text(AppStrings.addPhotos.tr(),style: AppTextStyles.sharePostTextStyle(context),)
+            ],
           ),
-           Text(AppStrings.addPhotos.tr(),style: AppTextStyles.sharePostTextStyle(context),)
-        ],
-      ),
+        ),
+        Positioned(
+
+            bottom: -15,
+            child: Text(AppStrings.addPhotosDescription.tr(),style: AppTextStyles.addImagesDescriptionTextStyle(context)))
+      ],
     );
   }
 }

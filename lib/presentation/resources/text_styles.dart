@@ -302,6 +302,11 @@ class AppTextStyles {
     color: ColorManager.offwhite.withOpacity(.6),
     fontSize: FontSize.f16,
   );
+  static TextStyle addImagesDescriptionTextStyle(BuildContext context) => getMediumStyle(
+    fontFamily: AppLanguages.getPrimaryFont(context),
+    color: ColorManager.offwhite.withOpacity(.6),
+    fontSize: FontSize.f10,
+  );
   static TextStyle sharePostBtnTextStyle(BuildContext context) => getMediumStyle(
     fontFamily: AppLanguages.getPrimaryFont(context),
     color: ColorManager.black,

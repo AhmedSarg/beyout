@@ -65,7 +65,10 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
         ),
         child: Column(
           children: [
-            const ImagePickerField(),
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical:  AppPadding.p10),
+              child: ImagePickerField(),
+            ),
             Padding(
               padding: EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: searchTextField(

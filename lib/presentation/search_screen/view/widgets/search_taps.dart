@@ -30,7 +30,7 @@ class _SearchTapsState extends State<SearchTaps> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(AppMargin.m5),
+      margin: const EdgeInsets.all(AppMargin.m5),
       width: double.infinity,
       child: Column(
         children: [
