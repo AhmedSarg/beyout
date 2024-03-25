@@ -354,6 +354,24 @@ class AppTextStyles {
     fontSize: FontSize.f24,
   );
 
+///feedback dialog
+
+  static TextStyle feedBackHeaderTextStyle(BuildContext context) => getSemiBoldStyle(
+    fontFamily: AppLanguages.getPrimaryFont(context),
+    color: ColorManager.black,
+    fontSize: FontSize.f24,
+  );
+  static TextStyle feedBackSubHeadTextStyle(BuildContext context) => getMediumStyle(
+    fontFamily: AppLanguages.getPrimaryFont(context),
+    color: ColorManager.grey.withOpacity(.8),
+    fontSize: FontSize.f14,
+  );
+
+  static TextStyle feedBackBtnTextStyle(BuildContext context) => getBoldStyle(
+    fontFamily: AppLanguages.getPrimaryFont(context),
+    color: ColorManager.offwhite,
+    fontSize: FontSize.f19,
+  );
 
   ///Notifications Screen Text Styles
 

@@ -9,8 +9,8 @@ import '../../resources/values_manager.dart';
 class MainTextField extends StatefulWidget {
   const MainTextField({
     super.key,
-    required this.controller,
-    required this.focusNode,
+     this.controller,
+     this.focusNode,
     this.nextFocus,
     this.label,
     required this.hint,
@@ -26,8 +26,8 @@ class MainTextField extends StatefulWidget {
     this.onTap,
   });
 
-  final TextEditingController controller;
-  final FocusNode focusNode;
+  final TextEditingController? controller;
+  final FocusNode? focusNode;
   final FocusNode? nextFocus;
   final bool isObscured;
   final String? label;
@@ -86,7 +86,7 @@ class _MainTextFieldState extends State<MainTextField> {
             cursorColor: widget.cursorColor,
             onTap: widget.onTap,
             onEditingComplete: () {
-              widget.focusNode.unfocus();
+              widget.focusNode?.unfocus();
               if (widget.nextFocus != null) {
                 FocusScope.of(context).requestFocus(widget.nextFocus);
               }

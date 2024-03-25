@@ -16,6 +16,7 @@ class ColorManager {
   static const Color cobaltBlue  = Color(0xff000AFF);
   static const Color cobaltRed  = Color(0xff843B62);
   static const Color cobaltPink  = Color(0xffD8A2BF);
+  static const Color movi  = Color(0xff7F56D9);
 
   static const Color black = Color(0xff000000);
   static const Color white = Color(0xFFFFFFFF);

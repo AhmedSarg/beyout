@@ -75,6 +75,14 @@
   "popularStartedTextRow": "Popular Homes",
   "popularEndedTextRow": "see all",
 
+  "optionsMenuAddAddToFavorite": "Add to favorite",
+  "optionsMenuFeedback": "Send feedback",
+
+  "feedBackHeader": "Home feedback",
+  "feedBackSubHead": "Please rate your experience below",
+  "feedBackStarRate": "stars",
+  "feedBackTextHint": "My feedback!!",
+  "feedBackBotton": "Submit feedback",
 
 
   "priceHome": "EGP/Month",

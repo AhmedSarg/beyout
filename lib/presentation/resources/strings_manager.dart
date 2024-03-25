@@ -138,6 +138,7 @@ class AppStrings {
   static const tapBarSearchCheapest = "tapBarSearchCheapest";
 
 
+
   ///notifications screen
   static const notificationsScreenTitle = "notificationsScreenTitle";
   static const notificationsScreenUnread = "notificationsScreenUnread";
@@ -151,6 +152,15 @@ class AppStrings {
   ///options menu
   static const optionsMenuMarkAllRead = "optionsMenuMarkAllRead";
   static const optionsMenuRemoveAll = "optionsMenuRemoveAll";
+  static const optionsMenuAddAddToFavorite = "optionsMenuAddAddToFavorite";
+  static const optionsMenuFeedback = "optionsMenuFeedback";
+
+///feed back
+  static const feedBackHeader = "feedBackHeader";
+  static const feedBackSubHead = "feedBackSubHead";
+  static const feedBackStarRate = "feedBackStarRate";
+  static const feedBackTextHint = "feedBackTextHint";
+  static const feedBackBotton = "feedBackBotton";
 
   ///chat screen
   static const chatScreenInputHint = "chatScreenInputHint";

@@ -22,8 +22,9 @@ class OptionMenuItem {
 class OptionMenu extends StatelessWidget {
   const OptionMenu({
     super.key,
-    required this.items,
+    required this.items, required this.mainIcon,
   });
+  final IconData mainIcon;
 
   final List<OptionMenuItem> items;
 
@@ -63,7 +64,7 @@ class OptionMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton(
-      icon: const Icon(Icons.more_horiz_outlined),
+      icon:  Icon(mainIcon),
       color: ColorManager.offwhite,
       iconColor: ColorManager.white,
       offset: const Offset(-AppSize.s50, AppSize.s0),

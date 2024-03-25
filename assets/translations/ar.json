@@ -82,6 +82,14 @@
   "wifiHome": "واي فاي",
   "nearByHome": "المنازل القريبه",
 
+  "optionsMenuAddAddToFavorite": "الإضافة إلى المفضلة",
+  "optionsMenuFeedback": "إرسال ملاحظاتك",
+
+  "feedBackHeader": "ملاحظات رئيسية",
+  "feedBackSubHead": "يُرجى تقييم تجربتك في الأسفل",
+  "feedBackStarRate": "نجمة",
+  "feedBackTextHint": "ملاحظاتي!!!",
+  "feedBackBotton": "إرسال ملاحظاتك",
 
   "publishHomeAppBarTextRow": "قائمة جديدة ",
   "addPhotosDescription": "الصور : 0/10 . اختر الصورة الرئيسية لبطاقة بياناتك أولاً.",

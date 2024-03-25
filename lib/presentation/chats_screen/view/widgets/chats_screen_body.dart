@@ -39,7 +39,7 @@ class ChatsScreenBody extends StatelessWidget {
                     icon: SvgPicture.asset(SVGAssets.delete),
                     onPressed: () {},
                   ),
-                ],
+                ], mainIcon: Icons.more_horiz_outlined,
               ),
             ],
           ),

@@ -1,13 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../../../../../domain/models/enums.dart';
 import '../../../../../common/data_intent/data_intent.dart';
+import '../../../../../common/widget/options_menu.dart';
 import '../../../../../resources/assets_manager.dart';
 import '../../../../../resources/color_manager.dart';
 import '../../../../../resources/strings_manager.dart';
 import '../../../../../resources/text_styles.dart';
 import '../../../../../resources/values_manager.dart';
+import 'feed_back.dart';
 
 class HomeImageWidget extends StatefulWidget {
   const HomeImageWidget({super.key});
@@ -76,7 +79,34 @@ class _HomeImageWidgetState extends State<HomeImageWidget> {
                             : ColorManager.white,
                         size: 30,
                       )
-                    : IconButton(onPressed: () {}, icon: const Icon(Icons.menu_sharp,size: AppSize.s28,color: ColorManager.white,)),
+                    : OptionMenu(
+                        items: [
+                          OptionMenuItem(
+                            text: AppStrings.optionsMenuAddAddToFavorite.tr(),
+                            icon: isFavourite
+                                ? SvgPicture.asset(SVGAssets.favouraiteFill)
+                                : SvgPicture.asset(SVGAssets.favouraiteLight),
+                            onPressed: () {
+                              setState(() {
+                                isFavourite = !isFavourite;
+                              });
+                            },
+                          ),
+                          OptionMenuItem(
+                            text: AppStrings.optionsMenuFeedback.tr(),
+                            icon: SvgPicture.asset(SVGAssets.feedBack),
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return RatingDialog();
+                                },
+                              );
+                            },
+                          ),
+                        ],
+                        mainIcon: Icons.menu,
+                      ),
               )
             ],
           ),
