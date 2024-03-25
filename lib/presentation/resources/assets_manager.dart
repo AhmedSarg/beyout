@@ -28,6 +28,8 @@ class SVGAssets {
   static const String bed = "${_basePath}fi-ss-bed.svg";
   static const String wifi = "${_basePath}fi-sr-wifi-alt.svg";
   static const String googleMaps = "${_basePath}Group 98.svg";
+  static const String markAsRead = "${_basePath}Done_round.svg";
+  static const String delete = "${_basePath}Trash.svg";
 }
 
 class LottieAssets {

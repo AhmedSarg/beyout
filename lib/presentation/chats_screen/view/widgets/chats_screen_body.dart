@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:temp_house/presentation/resources/assets_manager.dart';
 
 import '../../../common/widget/options_menu.dart';
 import '../../../resources/strings_manager.dart';
@@ -23,10 +25,22 @@ class ChatsScreenBody extends StatelessWidget {
             children: [
               Text(
                 AppStrings.chatsScreenUnread.tr(),
-                style: AppTextStyles.chatsScreenSectionHeaderTextStyle(
-                    context),
+                style: AppTextStyles.chatsScreenSectionHeaderTextStyle(context),
               ),
-              OptionMenu(),
+              OptionMenu(
+                items: [
+                  OptionMenuItem(
+                    text: AppStrings.optionsMenuMarkAllRead.tr(),
+                    icon: SvgPicture.asset(SVGAssets.markAsRead),
+                    onPressed: () {},
+                  ),
+                  OptionMenuItem(
+                    text: AppStrings.optionsMenuRemoveAll.tr(),
+                    icon: SvgPicture.asset(SVGAssets.delete),
+                    onPressed: () {},
+                  ),
+                ],
+              ),
             ],
           ),
         ),
@@ -47,8 +61,7 @@ class ChatsScreenBody extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
           child: Text(
             AppStrings.chatsScreenAll.tr(),
-            style:
-            AppTextStyles.chatsScreenSectionHeaderTextStyle(context),
+            style: AppTextStyles.chatsScreenSectionHeaderTextStyle(context),
           ),
         ),
         const SizedBox(height: AppSize.s20),
