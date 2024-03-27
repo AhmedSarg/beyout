@@ -476,4 +476,50 @@ class AppTextStyles {
     fontSize: FontSize.f16,
   );
 
+
+
+  ///profile screen
+
+  static TextStyle profileinfoNameTextStyle(BuildContext context) => getMediumStyle(
+    fontFamily: AppLanguages.getPrimaryFont(context),
+    color: ColorManager.offwhite,
+    fontSize: FontSize.f20,
+  );
+  static TextStyle profileinfoEmailTextStyle(BuildContext context) => getMediumStyle(
+    fontFamily: AppLanguages.getPrimaryFont(context),
+    color: ColorManager.offwhite.withOpacity(.6),
+    fontSize: FontSize.f12,
+  );
+
+  static TextStyle profileSettingTextStyle() => getBoldStyle(
+    color: ColorManager.primary,
+    fontSize: FontSize.f24,
+  );
+  static TextStyle profileSettingInfoTextStyle() => getSemiBoldStyle(
+    color: ColorManager.black,
+    fontSize: FontSize.f20,
+  );
+  static TextStyle profileSettingInfoDetailsTextStyle() => getMediumStyle(
+    color: ColorManager.grey,
+    fontSize: FontSize.f18,
+  );
+
+  static TextStyle profileSettingAppBarTextStyle() => getSemiBoldStyle(
+    color: ColorManager.white,
+    fontSize: FontSize.f22,
+  );
+  static TextStyle profileSettingHeadQAppBarTextStyle() => getSemiBoldStyle(
+    color: ColorManager.black,
+    fontSize: FontSize.f24,
+  );
+  static TextStyle profileSettingSubHeadQAppBarTextStyle() => getSemiBoldStyle(
+    color: ColorManager.grey,
+    fontSize: FontSize.f18,
+  );
+  static TextStyle profileSettingBtnTextStyle() => getBoldStyle(
+    color: ColorManager.white,
+    fontSize: FontSize.f22,
+  );
+
+
 }

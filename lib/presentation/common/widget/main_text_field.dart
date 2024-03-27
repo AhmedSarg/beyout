@@ -23,7 +23,7 @@ class MainTextField extends StatefulWidget {
     this.cursorColor = ColorManager.white,
     this.readOnly = false,
     this.validation,
-    this.onTap,
+    this.onTap, this.maxLines,
   });
 
   final TextEditingController? controller;
@@ -39,6 +39,7 @@ class MainTextField extends StatefulWidget {
   final TextStyle? labelTextStyle;
   final Color cursorColor;
   final bool readOnly;
+  final int? maxLines;
   final String? Function(String?)? validation;
   final void Function()? onTap;
 
@@ -75,6 +76,7 @@ class _MainTextFieldState extends State<MainTextField> {
           ),
           clipBehavior: Clip.antiAliasWithSaveLayer,
           child: TextFormField(
+            maxLines: widget.maxLines,
             controller: widget.controller,
             focusNode: widget.focusNode,
             readOnly: widget.readOnly,

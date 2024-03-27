@@ -118,6 +118,15 @@
   "addItem": "إضافة المنزل إلى قائمة المفضلة",
   "removeItem": "إزالة المنزل من القائمة المفضلة",
 
+  "profileAppBar": "حسابي",
+  "profileSetting": "الإعدادات",
+  "profileLanguage": "اللغة ",
+  "profileLanguageEnglish": "English",
+  "profileLanguageArabic": "العربية",
+  "profileCountry": "الدولة",
+  "profileMeasurement": "نظام القياس ",
+  "profilePropertyFinder": "الباحث عن العقارات",
+
   "notificationsScreenTitle": "الأشعارات",
   "notificationsScreenUnread": "غير مقروء",
   "notificationsScreenAll": "الكل",

@@ -13,6 +13,7 @@ class RatingDialog extends StatefulWidget {
 }
 
 class _RatingDialogState extends State<RatingDialog> {
+
   int _rating = 0;
   late TextEditingController _feedbackController;
 

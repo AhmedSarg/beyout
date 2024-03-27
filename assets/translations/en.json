@@ -120,6 +120,14 @@
   "tapBarSearchPopular": "Most popular",
   "tapBarSearchCheapest": "Cheapest",
 
+  "profileAppBar": "My Account",
+  "profileSetting": "Settings",
+  "profileLanguage": "Language ",
+  "profileLanguageEnglish": "English",
+  "profileLanguageArabic": "العربية",
+  "profileCountry": "Country",
+  "profileMeasurement": "Measurement System",
+  "profilePropertyFinder": "Property Finder",
 
 
   "notificationsScreenTitle": "Notifications",

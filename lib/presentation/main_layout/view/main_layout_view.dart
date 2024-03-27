@@ -6,6 +6,7 @@ import '../../resources/text_styles.dart';
 import '../../under_construction_screen/view/under_construction_view.dart';
 import '../pages/home_screen/view/home_page.dart';
 import '../pages/notifications_screen/view/notifications_view.dart';
+import '../pages/profile_screen/view/ProfilePage.dart';
 
 class MainLayoutScreen extends StatefulWidget {
   const MainLayoutScreen({super.key});
@@ -67,6 +68,6 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
      HomePage(),
     const UnderConstruction(),
     const NotificationsScreen(),
-    const UnderConstruction()
+    const ProfilePage()
   ];
 }

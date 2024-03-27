@@ -104,6 +104,15 @@ class AppStrings {
   static const bathroomHome = "bathroomHome";
   static const wifiHome = "wifiHome";
   static const nearByHome = "nearByHome";
+/// profile screen
+  static const profileAppBar = "profileAppBar";
+  static const profileSetting = "profileSetting";
+  static const profileLanguage = "profileLanguage";
+  static const profileLanguageEnglish = "profileLanguageEnglish";
+  static const profileLanguageArabic = "profileLanguageArabic";
+  static const profileCountry = "profileCountry";
+  static const profileMeasurement = "profileMeasurement";
+  static const profilePropertyFinder = "profilePropertyFinder";
 
 
   //Snackbar

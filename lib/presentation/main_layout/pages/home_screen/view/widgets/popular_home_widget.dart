@@ -37,7 +37,7 @@ class PopularHomeWidget extends StatelessWidget {
                 rowEndedcolor: ColorManager.blue, routeName: Routes.allNearByHomesRoute,
 
               ),
-              NearByHomeList(),
+              const NearByHomeList(),
             ],
           )),
       const HomeSlider()

@@ -5,11 +5,13 @@ import '../../resources/color_manager.dart';
 import '../../resources/values_manager.dart';
 
 AppBar buildMainAppBar(BuildContext context,
-    Widget? title,) {
+    Widget? title,  ) {
   return AppBar(
+    automaticallyImplyLeading: false,
+
     toolbarHeight: AppSize.s80,
     backgroundColor: ColorManager.transparent,
-    centerTitle: false,
+    centerTitle: true,
     title: title,
     scrolledUnderElevation: AppSize.s0,
     bottom: PreferredSize(

@@ -7,6 +7,8 @@ import '../chat_screen/view/chat_view.dart';
 import '../chats_screen/view/chats_view.dart';
 import '../login_screen/view/login_view.dart';
 import '../main_layout/pages/notifications_screen/view/notifications_view.dart';
+import '../main_layout/pages/profile_screen/view/about_screen.dart';
+import '../main_layout/pages/profile_screen/view/need_help_screen.dart';
 import '../main_layout/view/main_layout_view.dart';
 import '../onboarding_screen/view/onboarding_view.dart';
 import '../register_screen/view/register_view.dart';
@@ -31,6 +33,8 @@ class Routes {
   static const String allPopularHomesRoute = "/allPopularHome";
   static const String allNearByHomesRoute = "/allNearByHomesHome";
   static const String searchScreenRoute = "/searchScreen";
+  static const String aboutScreenRoute = "/aboutScreen";
+  static const String needHelpScreenRoute = "/needHelpScreen";
 }
 
 class RouteGenerator {
@@ -64,6 +68,10 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const AllNearByHome());
       case Routes.searchScreenRoute:
         return MaterialPageRoute(builder: (_) => const SearchScreen());
+      case Routes.aboutScreenRoute:
+        return MaterialPageRoute(builder: (_) =>  AboutScreen());
+      case Routes.needHelpScreenRoute:
+        return MaterialPageRoute(builder: (_) =>  NeedHelpScreen());
       default:
         return unDefinedRoute();
     }
