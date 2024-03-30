@@ -97,6 +97,12 @@ class AppStrings {
   static const lastText= "lastText";
   static const clearText = "clearText";
 
+  ///home details
+  static const homeDetailsDescription = "homeDetailsDescription";
+  static const homeDetailsRating = "homeDetailsRating";
+  static const homeDetailsAddToCard = "homeDetailsAddToCard";
+
+
   static const popularStartedTextRow = "popularStartedTextRow";
   static const popularEndedTextRow = "popularEndedTextRow";
   static const priceHome = "priceHome";
@@ -113,6 +119,7 @@ class AppStrings {
   static const profileCountry = "profileCountry";
   static const profileMeasurement = "profileMeasurement";
   static const profilePropertyFinder = "profilePropertyFinder";
+  static const profileAbout = "profileAbout";
 
 
   //Snackbar
@@ -147,6 +154,12 @@ class AppStrings {
   static const tapBarSearchCheapest = "tapBarSearchCheapest";
 
 
+  static const personalInfoTitle = "personalInfoTitle";
+  static const personalInfoSubTitleInformation = "personalInfoSubTitleInformation";
+  static const personalInfoSubTitleInformationFirstHint = "personalInfoSubTitleInformationFirstHint";
+  static const personalInfoSubTitleInformationSecondHint = "personalInfoSubTitleInformationSecondHint";
+  static const personalInfoSubTitleContact = "personalInfoSubTitleContact";
+  static const personalInfoSubTitleContactHint = "personalInfoSubTitleContactHint";
 
   ///notifications screen
   static const notificationsScreenTitle = "notificationsScreenTitle";
@@ -173,6 +186,23 @@ class AppStrings {
 
   ///chat screen
   static const chatScreenInputHint = "chatScreenInputHint";
+
+  static const rateUsScreenName = "rateUsScreenName";
+  static const needHelpScreenName = "needHelpScreenName";
+  static const paymentDetailsScreen = "paymentDetailsScreen";
+
+
+  // about app screen
+  static const aboutAppItem = "aboutAppItem";
+  static const aboutAppName = "aboutAppName";
+  static const aboutAppVersion = "aboutAppVersion";
+  static const aboutAppDescription = "aboutAppDescription";
+  static const aboutAppDescriptionDetails = "aboutAppDescriptionDetails";
+  static const aboutDev = "aboutDev";
+  static const aboutDevNames = "aboutDevNames";
+  static const aboutContact = "aboutContact";
+  static const aboutContactEmail = "aboutContactEmail";
+  static const aboutContactWebSite = "aboutContactWebSite";
 
   ///error handler
   static const String badRequestError = "badRequestError";

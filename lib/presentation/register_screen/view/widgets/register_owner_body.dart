@@ -29,11 +29,20 @@ class RegisterOwnerBody extends StatelessWidget {
   final FocusNode phoneNumberFocusNode = FocusNode();
   final FocusNode genderFocusNode = FocusNode();
   final FocusNode ageFocusNode = FocusNode();
+  final FocusNode martialStatusFocusNode = FocusNode();
 
   final genderList = [
     AppStrings.registerScreenGenderMale.tr(),
     AppStrings.registerScreenGenderFemale.tr(),
   ];
+  final martialStatusList = [
+    AppStrings.registerScreenMartialStatusSingle.tr(),
+    AppStrings.registerScreenMartialStatusMarried.tr(),
+    AppStrings.registerScreenMartialStatusSeperated.tr(),
+    AppStrings.registerScreenMartialStatusDivorced.tr(),
+    AppStrings.registerScreenMartialStatusWidowed.tr(),
+  ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +58,8 @@ class RegisterOwnerBody extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: MainTextField(
+                maxLines: 1,
+
                 controller: viewModel.getUsernameController,
                 focusNode: usernameFocusNode,
                 nextFocus: emailFocusNode,
@@ -62,6 +73,8 @@ class RegisterOwnerBody extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: MainTextField(
+                maxLines: 1,
+
                 controller: viewModel.getEmailController,
                 focusNode: emailFocusNode,
                 nextFocus: passwordFocusNode,
@@ -75,6 +88,8 @@ class RegisterOwnerBody extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: MainTextField(
+                maxLines: 1,
+
                 controller: viewModel.getPasswordController,
                 focusNode: passwordFocusNode,
                 nextFocus: phoneNumberFocusNode,
@@ -89,6 +104,8 @@ class RegisterOwnerBody extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: MainTextField(
+                maxLines: 1,
+
                 controller: viewModel.getPhoneNumberController,
                 focusNode: phoneNumberFocusNode,
                 nextFocus: genderFocusNode,
@@ -102,6 +119,8 @@ class RegisterOwnerBody extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: MainTextField(
+                maxLines: 1,
+
                 controller: viewModel.getGenderController,
                 focusNode: genderFocusNode,
                 nextFocus: ageFocusNode,
@@ -126,6 +145,8 @@ class RegisterOwnerBody extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: MainTextField(
+                maxLines: 1,
+
                 controller: viewModel.getAgeController,
                 focusNode: ageFocusNode,
                 label: AppStrings.registerScreenAgeLabel.tr(),
@@ -135,6 +156,32 @@ class RegisterOwnerBody extends StatelessWidget {
                 textInputType: TextInputType.phone,
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
+              child: MainTextField(
+                maxLines: 1,
+
+                controller: viewModel.getMartialStatusController,
+                focusNode: martialStatusFocusNode,
+                label: AppStrings.registerScreenMartialStatusLabel.tr(),
+                isObscured: false,
+                readOnly: true,
+                validation: AppValidators.validateMartialStatus,
+                hint: AppStrings.registerScreenMartialStatusHint.tr(),
+                textInputType: TextInputType.text,
+                onTap: () {
+                  showRegisterDialog(
+                    context,
+                    onSelect: (v) {
+                      viewModel.getMartialStatusController.text = v;
+                    },
+                    title: AppStrings.registerScreenMartialStatusLabel.tr(),
+                    items: martialStatusList,
+                  );
+                },
+              ),
+            ),
+
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p30),
               child: MainButton(

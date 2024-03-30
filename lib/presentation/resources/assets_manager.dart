@@ -33,6 +33,8 @@ class SVGAssets {
   static const String feedBack = "${_basePath}fluent_person-feedback-20-regular.svg";
   static const String favouraiteFill = "${_basePath}Favorite_fill.svg";
   static const String favouraiteLight = "${_basePath}Favorite_light.svg";
+  static const String location = "${_basePath}COMPAS.svg";
+  static const String card = "${_basePath}solar_card-bold.svg";
 }
 
 class LottieAssets {

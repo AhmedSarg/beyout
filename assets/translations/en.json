@@ -85,6 +85,8 @@
   "feedBackBotton": "Submit feedback",
 
 
+  "homeDetailsDescription": "Description",
+  "homeDetailsRating": "Rating",
   "priceHome": "EGP/Month",
   "bedHome": "bed",
   "bathroomHome": "bathroom",
@@ -128,6 +130,30 @@
   "profileCountry": "Country",
   "profileMeasurement": "Measurement System",
   "profilePropertyFinder": "Property Finder",
+  "profileAbout": "About",
+  "personalInfoTitle": "personal Info",
+  "personalInfoSubTitleInformation": "Infomation",
+  "personalInfoSubTitleInformationFirstHint": "First Name",
+  "personalInfoSubTitleInformationSecondHint": "Second Name",
+  "personalInfoSubTitleContact": "Contact",
+  "personalInfoSubTitleContactHint": "Email",
+
+  "paymentDetailsScreen" : "Payment Details",
+
+
+  "rateUsScreenName" : "Rate Us",
+  "needHelpScreenName": "Need Help ?",
+
+  "aboutAppName": "Temp House",
+  "aboutAppVersion": "Versoin 1.0.0",
+  "aboutAppDescription": "Description",
+  "aboutAppDescriptionDetails" : "Stress-free rental starts here! Find your perfect place, apply online & manage everything - all with Temp House.",
+  "aboutDev" : "Develpers",
+  "aboutDevNames" : "developer 1\ndeveloper 2",
+  "aboutContact" : "Contact",
+  "aboutContactEmail" : "developer@gmail.com",
+  "aboutContactWebSite" :"www.website.com",
+
 
 
   "notificationsScreenTitle": "Notifications",

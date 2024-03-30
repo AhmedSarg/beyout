@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart'; // Import flutter_svg package
 import 'package:temp_house/presentation/resources/color_manager.dart';
+import 'package:temp_house/presentation/resources/routes_manager.dart';
 import 'package:temp_house/presentation/resources/values_manager.dart';
 import 'package:temp_house/presentation/search_screen/view/widgets/search_taps.dart';
 import '../../resources/assets_manager.dart';
@@ -59,7 +60,9 @@ class _SearchScreenState extends State<SearchScreen> {
           width: AppSize.s30,
           height: AppSize.s30,
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, Routes.googleMapScreenRoute);
+        },
       );
     }
   }
@@ -85,13 +88,13 @@ class _SearchScreenState extends State<SearchScreen> {
             ],
           ),
           Container(
-            height: 50,
+            height: AppSize.s50,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: searchedWords.length,
               itemBuilder: (context, index) {
                 return Container(
-                  margin: EdgeInsets.symmetric(horizontal: 8),
+                  margin: const EdgeInsets.symmetric(horizontal: AppMargin.m8),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(AppSize.s16),
                     border: Border.all(color: ColorManager.grey),

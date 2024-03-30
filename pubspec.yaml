@@ -52,11 +52,11 @@ dependencies:
   gsheets:
   animated_splash_screen:
   flutter_svg:
-  carousel_slider: ^4.2.1
-  image_picker: ^1.0.7
-  country_flags: ^2.2.0
-  country_picker: ^2.0.25
-
+  carousel_slider:
+  image_picker:
+  country_flags:
+  country_picker:
+  google_maps_flutter:
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -1,4 +1,3 @@
-
 // //Home Screen
 // class NewsItemModel {
 //   final int id;
@@ -21,3 +20,13 @@
 //     required this.news,
 //   });
 // }
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+class PlaceModel {
+  final int id;
+  final String name;
+  final LatLng latLng;
+
+  PlaceModel(this.id, this.name, this.latLng);
+}
+

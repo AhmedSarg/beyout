@@ -2,14 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:temp_house/presentation/main_layout/pages/home_screen/view/all_nearby_home.dart';
 import 'package:temp_house/presentation/main_layout/pages/home_screen/view/all_popular_home.dart';
+import 'package:temp_house/presentation/main_layout/pages/profile_screen/view/personal_info_screen.dart';
 import 'package:temp_house/presentation/search_screen/view/search_screen.dart';
 import '../chat_screen/view/chat_view.dart';
 import '../chats_screen/view/chats_view.dart';
+import '../home_details_screen/view/home_details.dart';
 import '../login_screen/view/login_view.dart';
 import '../main_layout/pages/notifications_screen/view/notifications_view.dart';
 import '../main_layout/pages/profile_screen/view/about_screen.dart';
 import '../main_layout/pages/profile_screen/view/need_help_screen.dart';
+import '../main_layout/pages/profile_screen/view/payment_screen.dart';
+import '../main_layout/pages/profile_screen/view/widgets/payment_screen_details.dart';
 import '../main_layout/view/main_layout_view.dart';
+import '../map_screen/view/map_screen.dart';
 import '../onboarding_screen/view/onboarding_view.dart';
 import '../register_screen/view/register_view.dart';
 import '../selection_screen/selection_view.dart';
@@ -27,6 +32,7 @@ class Routes {
   static const String registerRoute = "/register";
   static const String notificationsRoute = "/notifications";
   static const String mainLayoutRoute = "/mainLayout";
+  static const String homeDetailsRoute = "/homeDetails";
   static const String chatsRoute = "/chats";
   static const String chatRoute = "/chat";
   static const String publishHomePostRoute = "/PublishHomePost";
@@ -35,6 +41,10 @@ class Routes {
   static const String searchScreenRoute = "/searchScreen";
   static const String aboutScreenRoute = "/aboutScreen";
   static const String needHelpScreenRoute = "/needHelpScreen";
+  static const String googleMapScreenRoute = "/googleMapScreen";
+  static const String paymentScreenRoute = "/paymentScreen";
+  static const String paymentScreenDetailsRoute = "/paymentScreenDetails";
+  static const String personalInfoRoute = "/personalInfo";
 }
 
 class RouteGenerator {
@@ -72,6 +82,16 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) =>  AboutScreen());
       case Routes.needHelpScreenRoute:
         return MaterialPageRoute(builder: (_) =>  NeedHelpScreen());
+      case Routes.homeDetailsRoute:
+        return MaterialPageRoute(builder: (_) =>  HomeDetails());
+       case Routes.googleMapScreenRoute:
+         return MaterialPageRoute(builder: (_) => GoogleMapScreen());
+      // case Routes.paymentScreenRoute:
+        // return MaterialPageRoute(builder: (_) => PaymentScreen());
+        case Routes.paymentScreenDetailsRoute:
+      return MaterialPageRoute(builder: (_) => PaymentScreenDetails());
+      case Routes.personalInfoRoute:
+        return MaterialPageRoute(builder: (_) => PersonalInfoScreen());
       default:
         return unDefinedRoute();
     }

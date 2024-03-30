@@ -20,7 +20,7 @@ class LanguageSelectionModal {
   Widget _buildLanguageSelectionModal(BuildContext context, Function(String) onSelect) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(AppPadding.p22),
+      padding: const EdgeInsets.all(AppPadding.p22),
       height: MediaQuery.of(context).size.height * 0.3,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,6 +42,7 @@ class LanguageSelectionModal {
                   onTap: () {
                     onSelect(AppStrings.profileLanguageEnglish.tr());
                     AppLanguages.toggleLocal(context);
+
                     Navigator.pop(context);
                   },
                   child: Text(AppStrings.profileLanguageEnglish.tr(),style: AppTextStyles.profileSettingInfoTextStyle()),

@@ -516,9 +516,76 @@ class AppTextStyles {
     color: ColorManager.grey,
     fontSize: FontSize.f18,
   );
+
+  static TextStyle profileInfoTitle(BuildContext context) =>
+      getBoldStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
+        color: ColorManager.white,
+        fontSize: FontSize.f24,
+      );
+  static TextStyle profileInfoSubTitle(BuildContext context) =>
+      getSemiBoldStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
+        color: ColorManager.white,
+        fontSize: FontSize.f22,
+      );
+
+
   static TextStyle profileSettingBtnTextStyle() => getBoldStyle(
     color: ColorManager.white,
     fontSize: FontSize.f22,
+  );
+  static TextStyle personalInfoBtn(BuildContext context) => getBoldStyle(
+    fontFamily: AppLanguages.getPrimaryFont(context),
+    color: ColorManager.primary,
+    fontSize: FontSize.f24,
+  );
+
+  static TextStyle aboutAppNameTextStyle() => getBoldStyle(
+    color: ColorManager.black,
+    fontSize: FontSize.f30,
+  );
+  static TextStyle aboutAppVersionTextStyle() => getSemiBoldStyle(
+    color: ColorManager.grey.withOpacity(.8),
+    fontSize: FontSize.f15,
+  );
+  static TextStyle aboutAppDescriptionTextStyle() => getSemiBoldStyle(
+    color: ColorManager.black,
+    fontSize: FontSize.f24,
+  );
+  static TextStyle aboutAppDescriptionDetailsTextStyle() => getSemiBoldStyle(
+    color: ColorManager.black.withOpacity(.7),
+    fontSize: FontSize.f18,
+  );
+  static TextStyle aboutAppDevTextStyle() => getSemiBoldStyle(
+    color: ColorManager.black,
+    fontSize: FontSize.f24,
+  );
+  static TextStyle aboutAppDevNameTextStyle() => getSemiBoldStyle(
+    color: ColorManager.black.withOpacity(.7),
+    fontSize: FontSize.f18,
+  );
+  static TextStyle aboutAppContantTextStyle() => getSemiBoldStyle(
+    color: ColorManager.black,
+    fontSize: FontSize.f24,
+  );
+  static TextStyle aboutAppContantDetailsTextStyle() => getSemiBoldStyle(
+    color: ColorManager.black.withOpacity(.7),
+    fontSize: FontSize.f18,
+  );
+
+  static TextStyle PaymentTextStyle() => getSemiBoldStyle(
+    color: ColorManager.white,
+    fontSize: FontSize.f20,
+  );
+  static TextStyle PaymentAppBarTextStyle() => getBoldStyle(
+    color: ColorManager.white,
+    fontSize: FontSize.f24,
+  );
+  static TextStyle PaymentBtnTextStyle(BuildContext context) => getBoldStyle(
+    fontFamily: AppLanguages.getPrimaryFont(context),
+    color: ColorManager.black,
+    fontSize: FontSize.f20,
   );
 
 

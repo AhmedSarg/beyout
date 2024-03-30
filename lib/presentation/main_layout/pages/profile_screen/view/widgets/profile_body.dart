@@ -61,15 +61,20 @@ class _ProfileBodyState extends State<ProfileBody> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: AppPadding.p20),
-              child: ProfileImage(),
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, Routes.personalInfoRoute);
+              },
+              child: const Padding(
+                padding: EdgeInsets.symmetric(vertical: AppPadding.p20),
+                child: ProfileImage(),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: AppPadding.p32),
               child: Text(
-                AppStrings.profileSetting.tr()
-                  ,style: AppTextStyles.profileSettingTextStyle(),
+                AppStrings.profileSetting.tr(),
+                style: AppTextStyles.profileSettingTextStyle(),
               ),
             ),
             ModelSheetItem(
@@ -88,46 +93,49 @@ class _ProfileBodyState extends State<ProfileBody> {
               title: AppStrings.profileMeasurement.tr(),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: AppPadding.p30,right:AppPadding.p40 ),
+              padding: const EdgeInsets.only(
+                  left: AppPadding.p30, right: AppPadding.p40),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-              Text('Payment Details ',style: AppTextStyles.profileSettingInfoTextStyle())  ,
+                  Text(AppStrings.paymentDetailsScreen.tr(),
+                      style: AppTextStyles.profileSettingInfoTextStyle()),
                   const Icon(Icons.arrow_forward_ios)
                 ],
               ),
             ),
-
-
-
             const Divider(color: ColorManager.grey),
-             Padding(
-               padding: const EdgeInsets.symmetric(horizontal: AppPadding.p32),
-              child: Text(
-                  AppStrings.profilePropertyFinder.tr()
-                  ,style: AppTextStyles.profileSettingTextStyle()
-              ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppPadding.p32),
+              child: Text(AppStrings.profilePropertyFinder.tr(),
+                  style: AppTextStyles.profileSettingTextStyle()),
             ),
-            AppSettingItem(text: 'About',onTap: () {
-Navigator.pushNamed(context, Routes.aboutScreenRoute);
-            },),
-            AppSettingItem(text: 'Rate Us ',onTap: () {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return RatingDialog();
-                },
-              );
-            },),
-            AppSettingItem(text: 'Need Help ? ',onTap: () {
-              Navigator.pushNamed(context, Routes.needHelpScreenRoute);
-            },),
+            AppSettingItem(
+              text: AppStrings.profileAbout.tr(),
+              onTap: () {
+                Navigator.pushNamed(context, Routes.aboutScreenRoute);
+              },
+            ),
+            AppSettingItem(
+              text: AppStrings.rateUsScreenName.tr(),
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return RatingDialog();
+                  },
+                );
+              },
+            ),
+            AppSettingItem(
+              text: AppStrings.needHelpScreenName.tr(),
+              onTap: () {
+                Navigator.pushNamed(context, Routes.needHelpScreenRoute);
+              },
+            ),
           ],
         ),
       ),
     );
   }
 }
-
-
-

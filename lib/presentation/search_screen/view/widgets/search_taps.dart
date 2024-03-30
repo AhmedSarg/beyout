@@ -130,13 +130,13 @@ class _SearchTapsState extends State<SearchTaps> {
           builder: (BuildContext context, StateSetter setState) {
             void _decreaseMinValue() {
               setState(() {
-                _minValue = (_minValue - _step).clamp(0.0, _maxValue - _step);
+                _minValue = AppConstants.minRange;
               });
             }
 
             void _increaseMaxValue() {
               setState(() {
-                _maxValue = (_maxValue + _step).clamp(_minValue + _step, AppConstants.maxRange);
+                _maxValue = AppConstants.maxRange;
               });
             }
 
@@ -156,7 +156,7 @@ class _SearchTapsState extends State<SearchTaps> {
                           borderRadius: BorderRadius.circular(AppPadding.p16)),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: AppSize.s20,
                   ),
                   Text(
@@ -164,10 +164,10 @@ class _SearchTapsState extends State<SearchTaps> {
                     style: AppTextStyles.modalBottomSheetPriceTitleTextStyle(
                         context),
                   ),
-                  Divider(
+                  const Divider(
                     color: ColorManager.grey,
                   ),
-                  SizedBox(height: AppSize.s20),
+                  const SizedBox(height: AppSize.s20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[

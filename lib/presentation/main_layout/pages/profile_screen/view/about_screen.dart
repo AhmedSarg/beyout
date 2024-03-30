@@ -1,6 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:temp_house/presentation/resources/color_manager.dart';
+import 'package:temp_house/presentation/resources/strings_manager.dart';
 import 'package:temp_house/presentation/resources/text_styles.dart';
+import 'package:temp_house/presentation/resources/values_manager.dart';
 
 class AboutScreen extends StatelessWidget {
   @override
@@ -8,73 +11,58 @@ class AboutScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorManager.offwhite,
       appBar: AppBar(
-        title: Text('About',style: AppTextStyles.profileSettingAppBarTextStyle(),),
+        // title: Text(AppStrings.aboutAppItem,style: AppTextStyles.profileSettingAppBarTextStyle(),),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Center(
+            const Center(
               child: CircleAvatar(
                 radius: 50,
-                child: Icon(Icons.ac_unit_rounded),
+                child: Icon(Icons.home),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: AppSize.s10),
             Text(
-              'Your App Name',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
+              AppStrings.aboutAppName.tr(),
+              style: AppTextStyles.aboutAppNameTextStyle(),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: AppSize.s10),
             Text(
-              'Version 1.0.0', // Replace with your app version
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey,
-              ),
+              AppStrings.aboutAppVersion.tr(), // Replace with your app version
+              style: AppTextStyles.aboutAppVersionTextStyle(),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: AppSize.s20),
             Text(
-              'Description:',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              AppStrings.aboutAppDescription.tr(),
+              style: AppTextStyles.aboutAppDescriptionTextStyle(),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: AppSize.s10),
             Text(
-              'Your app description goes here. Describe what your app does and its main features.',
-              style: TextStyle(fontSize: 16),
+              AppStrings.aboutAppDescriptionDetails.tr(),
+              style: AppTextStyles.aboutAppDescriptionDetailsTextStyle(),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: AppSize.s20),
             Text(
-              'Developer:',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              AppStrings.aboutDev.tr(),
+              style: AppTextStyles.aboutAppDevTextStyle(),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: AppSize.s10),
             Text(
-              'Your Name or Company Name', // Replace with your name or company name
-              style: TextStyle(fontSize: 16),
+              AppStrings.aboutDevNames.tr(), // Replace with your name or company name
+              style: AppTextStyles.aboutAppDevNameTextStyle(),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: AppSize.s20),
             Text(
-              'Contact:',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              AppStrings.aboutContact.tr(),
+              style: AppTextStyles.aboutAppContantTextStyle(),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: AppSize.s10),
             Text(
-              'Email: your@email.com\nWebsite: www.yourwebsite.com', // Replace with your contact information
-              style: TextStyle(fontSize: 16),
+              '${AppStrings.aboutContactEmail.tr()}\n ${AppStrings.aboutContactWebSite.tr()}', // Replace with your contact information
+              style: AppTextStyles.aboutAppContantDetailsTextStyle(),
             ),
           ],
         ),

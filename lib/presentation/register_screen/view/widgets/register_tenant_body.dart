@@ -60,6 +60,8 @@ class RegisterTenantBody extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: MainTextField(
+                maxLines: 1,
+
                 controller: viewModel.getUsernameController,
                 focusNode: usernameFocusNode,
                 nextFocus: emailFocusNode,
@@ -73,6 +75,8 @@ class RegisterTenantBody extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: MainTextField(
+                maxLines: 1,
+
                 controller: viewModel.getEmailController,
                 focusNode: emailFocusNode,
                 nextFocus: passwordFocusNode,
@@ -86,6 +90,8 @@ class RegisterTenantBody extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: MainTextField(
+                maxLines: 1,
+
                 controller: viewModel.getPasswordController,
                 focusNode: passwordFocusNode,
                 nextFocus: phoneNumberFocusNode,
@@ -100,6 +106,8 @@ class RegisterTenantBody extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: MainTextField(
+                maxLines: 1,
+
                 controller: viewModel.getPhoneNumberController,
                 focusNode: phoneNumberFocusNode,
                 nextFocus: genderFocusNode,
@@ -113,6 +121,8 @@ class RegisterTenantBody extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: MainTextField(
+                maxLines: 1,
+
                 controller: viewModel.getGenderController,
                 focusNode: genderFocusNode,
                 nextFocus: jobFocusNode,
@@ -137,6 +147,8 @@ class RegisterTenantBody extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: MainTextField(
+                maxLines: 1,
+
                 controller: viewModel.getJobController,
                 focusNode: jobFocusNode,
                 nextFocus: salaryFocusNode,
@@ -150,6 +162,8 @@ class RegisterTenantBody extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: MainTextField(
+                maxLines: 1,
+
                 controller: viewModel.getSalaryController,
                 focusNode: salaryFocusNode,
                 nextFocus: ageFocusNode,
@@ -163,6 +177,8 @@ class RegisterTenantBody extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: MainTextField(
+                maxLines: 1,
+
                 controller: viewModel.getAgeController,
                 focusNode: ageFocusNode,
                 nextFocus: martialStatusFocusNode,
@@ -176,6 +192,8 @@ class RegisterTenantBody extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: MainTextField(
+                maxLines: 1,
+
                 controller: viewModel.getMartialStatusController,
                 focusNode: martialStatusFocusNode,
                 label: AppStrings.registerScreenMartialStatusLabel.tr(),

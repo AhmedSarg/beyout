@@ -4,6 +4,7 @@ import 'package:temp_house/presentation/common/widget/main-divider.dart';
 import 'package:temp_house/presentation/main_layout/pages/home_screen/view/widgets/home_listView_iItem.dart';
 import 'package:temp_house/presentation/main_layout/pages/home_screen/view/widgets/near_by_home_item.dart';
 import 'package:temp_house/presentation/resources/color_manager.dart';
+import 'package:temp_house/presentation/resources/routes_manager.dart';
 import 'package:temp_house/presentation/resources/values_manager.dart';
 
 import '../../../../common/widget/main_app_bar.dart';
@@ -21,10 +22,15 @@ class AllNearByHome extends StatelessWidget {
       body: ListView.builder(
         itemCount: 10,
         itemBuilder: (context, index) {
-          return const Padding(
-            padding: EdgeInsets.all(AppPadding.p8),
-            child: NearByHomeItem(
+          return GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, Routes.homeDetailsRoute);
+            },
+            child: const Padding(
+              padding: EdgeInsets.all(AppPadding.p8),
+              child: NearByHomeItem(
 
+              ),
             ),
           );
         },

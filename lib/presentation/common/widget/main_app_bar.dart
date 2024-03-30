@@ -5,9 +5,8 @@ import '../../resources/color_manager.dart';
 import '../../resources/values_manager.dart';
 
 AppBar buildMainAppBar(BuildContext context,
-    Widget? title,  ) {
+    Widget? title,   ) {
   return AppBar(
-    automaticallyImplyLeading: false,
 
     toolbarHeight: AppSize.s80,
     backgroundColor: ColorManager.transparent,
@@ -21,16 +20,16 @@ AppBar buildMainAppBar(BuildContext context,
         height: AppSize.s1_4,
       ),
     ),
-    actions: title is Text
-        ? [
-      IconButton(
-        icon: const Icon(Icons.language_rounded),
-        onPressed: () {
-          AppLanguages.toggleLocal(context);
-        },
-      ),
-    ]
-        : null,
+    // actions: title is Text
+    //     ? [
+    //   IconButton(
+    //     icon: const Icon(Icons.language_rounded),
+    //     onPressed: () {
+    //       AppLanguages.toggleLocal(context);
+    //     },
+    //   ),
+    // ]
+    //     : null,
     elevation: AppSize.s0,
     shadowColor: const Color.fromRGBO(0, 0, 0, 0.25),
   );
