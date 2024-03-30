@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../resources/color_manager.dart';
 
-class FavouritePage extends StatelessWidget {
-  const FavouritePage({super.key});
+class FavouriteScreen extends StatelessWidget {
+  const FavouriteScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

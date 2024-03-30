@@ -7,8 +7,8 @@ import '../../../../common/widget/main_app_bar.dart';
 import '../../../../resources/text_styles.dart';
 
 
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

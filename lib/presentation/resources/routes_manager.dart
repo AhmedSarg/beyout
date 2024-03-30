@@ -83,15 +83,15 @@ class RouteGenerator {
       case Routes.needHelpScreenRoute:
         return MaterialPageRoute(builder: (_) =>  NeedHelpScreen());
       case Routes.homeDetailsRoute:
-        return MaterialPageRoute(builder: (_) =>  HomeDetails());
-       case Routes.googleMapScreenRoute:
-         return MaterialPageRoute(builder: (_) => GoogleMapScreen());
-      // case Routes.paymentScreenRoute:
-        // return MaterialPageRoute(builder: (_) => PaymentScreen());
-        case Routes.paymentScreenDetailsRoute:
-      return MaterialPageRoute(builder: (_) => PaymentScreenDetails());
+        return MaterialPageRoute(builder: (_) =>  const HomeDetails());
+      case Routes.googleMapScreenRoute:
+        return MaterialPageRoute(builder: (_) => const GoogleMapScreen());
+    // case Routes.paymentScreenRoute:
+    // return MaterialPageRoute(builder: (_) => PaymentScreen());
+      case Routes.paymentScreenDetailsRoute:
+        return MaterialPageRoute(builder: (_) => const PaymentScreenDetails());
       case Routes.personalInfoRoute:
-        return MaterialPageRoute(builder: (_) => PersonalInfoScreen());
+        return MaterialPageRoute(builder: (_) => const PersonalInfoScreen());
       default:
         return unDefinedRoute();
     }

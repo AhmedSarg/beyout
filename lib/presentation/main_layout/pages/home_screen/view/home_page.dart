@@ -6,8 +6,8 @@ import '../../../../../domain/models/enums.dart';
 import '../../../../common/data_intent/data_intent.dart';
 import 'widgets/home_page_body.dart';
 
-class HomePage extends StatelessWidget {
-   HomePage({super.key});
+class HomeScreen extends StatelessWidget {
+   HomeScreen({super.key});
 
   UserRole? userRole = DataIntent.getUserRole();
 
