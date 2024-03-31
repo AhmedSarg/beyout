@@ -92,16 +92,21 @@ class _ProfileBodyState extends State<ProfileBody> {
               onTap: () => _showMeasurementSelectionModal(context),
               title: AppStrings.profileMeasurement.tr(),
             ),
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: AppPadding.p30, right: AppPadding.p40),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(AppStrings.paymentDetailsScreen.tr(),
-                      style: AppTextStyles.profileSettingInfoTextStyle()),
-                  const Icon(Icons.arrow_forward_ios)
-                ],
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, Routes.paymentScreenRoute);
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    left: AppPadding.p30, right: AppPadding.p40),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(AppStrings.paymentScreenTitle.tr(),
+                        style: AppTextStyles.profileSettingInfoTextStyle()),
+                    const Icon(Icons.arrow_forward_ios)
+                  ],
+                ),
               ),
             ),
             const Divider(color: ColorManager.grey),

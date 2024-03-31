@@ -12,10 +12,10 @@ import '../main_layout/pages/notifications_screen/view/notifications_view.dart';
 import '../main_layout/pages/profile_screen/view/about_screen.dart';
 import '../main_layout/pages/profile_screen/view/need_help_screen.dart';
 import '../main_layout/pages/profile_screen/view/payment_screen.dart';
-import '../main_layout/pages/profile_screen/view/widgets/payment_screen_details.dart';
 import '../main_layout/view/main_layout_view.dart';
 import '../map_screen/view/map_screen.dart';
 import '../onboarding_screen/view/onboarding_view.dart';
+import '../payment_details/view/payment_details.dart';
 import '../register_screen/view/register_view.dart';
 import '../selection_screen/selection_view.dart';
 import '../share_post_screen/view/share_post_screen.dart';
@@ -86,8 +86,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) =>  const HomeDetails());
       case Routes.googleMapScreenRoute:
         return MaterialPageRoute(builder: (_) => const GoogleMapScreen());
-    // case Routes.paymentScreenRoute:
-    // return MaterialPageRoute(builder: (_) => PaymentScreen());
+      case Routes.paymentScreenRoute:
+      return MaterialPageRoute(builder: (_) => const PaymentScreen());
       case Routes.paymentScreenDetailsRoute:
         return MaterialPageRoute(builder: (_) => const PaymentScreenDetails());
       case Routes.personalInfoRoute:

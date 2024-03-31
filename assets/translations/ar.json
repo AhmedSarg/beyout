@@ -118,6 +118,9 @@
   "addItem": "إضافة المنزل إلى قائمة المفضلة",
   "removeItem": "إزالة المنزل من القائمة المفضلة",
 
+  "favouraiteScreenTitle": "قائمة المفضلين",
+
+
   "profileAppBar": "حسابي",
   "profileSetting": "الإعدادات",
   "profileLanguage": "اللغة ",
@@ -127,6 +130,7 @@
   "profileMeasurement": "نظام القياس ",
   "profilePropertyFinder": "الباحث عن العقارات",
   "profileAbout": "حول التطبيق",
+  "personalInfoBtn": "حفظ",
 
   "personalInfoTitle": "المعلومات الشخصيه",
   "personalInfoSubTitleInformation": "المعلومات",
@@ -136,7 +140,6 @@
   "personalInfoSubTitleContactHint": "البريد إلكتروني",
   "rateUsScreenName" : "تقييمنا",
   "needHelpScreenName": "تحتاج إلى مساعدة ؟",
-  "paymentDetailsScreen" : "تفاصيل الدفع",
   "aboutAppItem" : "حول التطبيق",
 
   "homeDetailsDescription": "الوصف",
@@ -169,6 +172,18 @@
 
   "optionsMenuMarkAllRead": "حدد الكل كمقروء",
   "optionsMenuRemoveAll": "أزالة الكل",
+
+
+  "paymentScreenTitle" : "تفاصيل الدفع",
+  "paymentDetailsScreenTitle" : "إضافة بطاقة جديدة",
+
+  "paymentNoCard" : "لا يوجد بطاقة",
+  "paymentCardholder" : "اسم حامل البطاقة *",
+  "paymentCardNumber" : "رقم البطاقة*",
+  "paymentExpiration" : "تاريخ انتهاء الصلاحية* ",
+  "paymentsaveCardBtn" : "حفظ البطاقة",
+  "paymentAddCardBtn" : "أضف البطاقة",
+
 
   "badRequestError": "طلب خاطئ",
   "noContent": "لا يوجد محتوي",

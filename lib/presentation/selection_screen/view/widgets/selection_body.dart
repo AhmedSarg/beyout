@@ -44,7 +44,7 @@ class SelectionBody extends StatelessWidget {
           MainButton(
             onTap: () {
               DataIntent.pushUserRole(UserRole.tenant);
-              Navigator.pushReplacementNamed(context, Routes.loginRoute);
+              Navigator.pushNamed(context, Routes.loginRoute);
             },
             text: AppStrings.selectionScreenTenant.tr(),
             textStyle: AppTextStyles.selectionOptionTextStyle(context),

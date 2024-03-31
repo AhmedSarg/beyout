@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:temp_house/presentation/main_layout/pages/favourite_screen/view/favourite_page.dart';
 import 'package:temp_house/presentation/resources/strings_manager.dart';
 
 import '../../resources/text_styles.dart';
@@ -66,7 +67,7 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
 
   List<Widget> tabs = [
      HomeScreen(),
-    const UnderConstruction(),
+    const FavouriteScreen(),
     const NotificationsScreen(),
     const ProfileScreen()
   ];

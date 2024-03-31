@@ -10,7 +10,7 @@ class searchTextField extends StatefulWidget {
     super.key,
     required this.controller,
     required this.focusNode,
-    this.nextFocus,
+    required this.nextFocus,
     this.label,
     required this.hint,
     this.isObscured = false,
@@ -28,7 +28,7 @@ class searchTextField extends StatefulWidget {
 
   final TextEditingController controller;
   final FocusNode focusNode;
-  final FocusNode? nextFocus;
+  final FocusNode nextFocus;
   final bool isObscured;
   final String? label;
   final String hint;
@@ -53,9 +53,9 @@ class _MainTextFieldState extends State<searchTextField> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextFormField(
+
           controller: widget.controller,
           focusNode: widget.focusNode,
           readOnly: widget.readOnly,
@@ -64,10 +64,11 @@ class _MainTextFieldState extends State<searchTextField> {
           obscureText: hidden,
           keyboardType: widget.textInputType,
           obscuringCharacter: '*',
+
           cursorColor: widget.cursorColor,
           onTap: widget.onTap,
           onEditingComplete: () {
-            widget.focusNode.unfocus();
+            widget.focusNode?.unfocus();
             if (widget.nextFocus != null) {
               FocusScope.of(context).requestFocus(widget.nextFocus);
             }
@@ -90,13 +91,13 @@ class _MainTextFieldState extends State<searchTextField> {
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.all(AppPadding.p12),
             hintText: widget.hint,
-            prefixIcon: IconButton(onPressed: (){
+             prefixIcon: IconButton(onPressed: (){
 
-            },icon: Icon(
-              widget.prefixIcon,
-              color: Colors.white,
-              size: 30,
-            ),),
+             },icon: Icon(
+               widget.prefixIcon,
+               color: Colors.white,
+               size: 30,
+             ),),
             suffixIcon: Icon(
               widget.surffixIcon,
               color: Colors.white,

@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:temp_house/presentation/resources/color_manager.dart';
 import 'package:temp_house/presentation/share_post_screen/view/widgets/share_text_field.dart';
 
 import '../../../common/validators/validators.dart';
@@ -157,17 +158,29 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
             Divider(
               color: Colors.grey,
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: AppPadding.p10),
-              child: searchTextField(
-                controller: widget.viewModel.getLocationController,
-                focusNode: locationFocusNode,
-                nextFocus: locationFocusNode,
-                prefixIcon: Icons.location_on,
-                isObscured: false,
-                validation: AppValidators.validateEmail,
-                hint: AppStrings.location.tr(),
-                textInputType: TextInputType.text,
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, Routes.googleMapScreenRoute);
+
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
+                child: Container(
+                  padding: const EdgeInsets.only(left: AppPadding.p5),
+                  height: 52,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: ColorManager.grey),
+                    borderRadius: BorderRadius.circular(AppSize.s8)
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(Icons.location_on_rounded,size: AppSize.s35,color: ColorManager.grey,),
+                      SizedBox(width: AppSize.s5,),
+                      Text(AppStrings.location.tr(),style:AppTextStyles.sharePostTextStyle(context) ,)
+
+                    ],
+                  ),
+                )
               ),
             ),
             Padding(

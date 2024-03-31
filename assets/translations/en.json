@@ -122,6 +122,9 @@
   "tapBarSearchPopular": "Most popular",
   "tapBarSearchCheapest": "Cheapest",
 
+  "favouraiteScreenTitle": "Favourite List",
+
+
   "profileAppBar": "My Account",
   "profileSetting": "Settings",
   "profileLanguage": "Language ",
@@ -137,8 +140,17 @@
   "personalInfoSubTitleInformationSecondHint": "Second Name",
   "personalInfoSubTitleContact": "Contact",
   "personalInfoSubTitleContactHint": "Email",
+  "personalInfoBtn": "Save",
 
-  "paymentDetailsScreen" : "Payment Details",
+  "paymentScreenTitle" : "Payment Details",
+  "paymentDetailsScreenTitle" : "Add New Card",
+  "paymentNoCard" : "No Card",
+  "paymentCardholder" : "Cardholder’s name *",
+  "paymentCardNumber" : "Card number *",
+  "paymentExpiration" : "Expiration date * ",
+
+  "paymentsaveCardBtn" : "Save Card",
+  "paymentAddCardBtn" : "Add Card",
 
 
   "rateUsScreenName" : "Rate Us",

@@ -160,11 +160,16 @@ class AppStrings {
   static const personalInfoSubTitleInformationSecondHint = "personalInfoSubTitleInformationSecondHint";
   static const personalInfoSubTitleContact = "personalInfoSubTitleContact";
   static const personalInfoSubTitleContactHint = "personalInfoSubTitleContactHint";
+  static const personalInfoBtn = "personalInfoBtn";
 
   ///notifications screen
   static const notificationsScreenTitle = "notificationsScreenTitle";
   static const notificationsScreenUnread = "notificationsScreenUnread";
   static const notificationsScreenAll = "notificationsScreenAll";
+
+
+  /// favourite screen
+  static const favouraiteScreenTitle = "favouraiteScreenTitle";
 
   ///chats screen
   static const chatsScreenTitle = "chatsScreenTitle";
@@ -203,6 +208,17 @@ class AppStrings {
   static const aboutContact = "aboutContact";
   static const aboutContactEmail = "aboutContactEmail";
   static const aboutContactWebSite = "aboutContactWebSite";
+
+  ///payment screen
+  static const paymentScreenTitle = "paymentScreenTitle";
+  static const paymentDetailsScreenTitle = "paymentDetailsScreenTitle";
+  static const paymentNoCard = "paymentDetailsScreenTitle";
+  static const paymentCardholder = "paymentCardholder";
+  static const paymentCardNumber = "paymentCardNumber";
+  static const paymentExpiration = "paymentExpiration";
+
+  static const paymentsaveCardBtn = "paymentsaveCardBtn";
+  static const paymentAddCardBtn = "paymentAddCardBtn";
 
   ///error handler
   static const String badRequestError = "badRequestError";

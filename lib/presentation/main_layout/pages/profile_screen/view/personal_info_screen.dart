@@ -80,7 +80,7 @@ class PersonalInfoScreen extends StatelessWidget {
           ),
 SizedBox(height: AppSize.s30,),
           Center(
-            child: MainButton(backgroundColor: ColorManager.offwhite,text: 'save', textStyle: AppTextStyles.personalInfoBtn(context), onTap: () {  },),
+            child: MainButton(backgroundColor: ColorManager.offwhite,text: AppStrings.personalInfoBtn.tr(), textStyle: AppTextStyles.personalInfoBtn(context), onTap: () {  },),
           )
         ],
       ),

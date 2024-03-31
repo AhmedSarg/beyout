@@ -446,6 +446,14 @@ class AppTextStyles {
     color: ColorManager.offwhite.withOpacity(.6),
     fontSize: FontSize.f12,
   );
+/// favourite screen
+
+  static TextStyle favouriteScreenTitleTextStyle(BuildContext context) =>
+      getBoldStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
+        color: ColorManager.white,
+        fontSize: FontSize.f24,
+      );
 
   ///Options Menu
 
@@ -578,15 +586,21 @@ class AppTextStyles {
     color: ColorManager.white,
     fontSize: FontSize.f20,
   );
-  static TextStyle PaymentAppBarTextStyle() => getBoldStyle(
+  static TextStyle paymentAppBarTextStyle() => getBoldStyle(
     color: ColorManager.white,
     fontSize: FontSize.f24,
   );
-  static TextStyle PaymentBtnTextStyle(BuildContext context) => getBoldStyle(
+  static TextStyle paymentBtnTextStyle(BuildContext context) => getBoldStyle(
     fontFamily: AppLanguages.getPrimaryFont(context),
     color: ColorManager.black,
-    fontSize: FontSize.f20,
+    fontSize: FontSize.f22,
   );
 
+  static TextStyle paymentNoCardTextStyle(BuildContext context) =>
+      getBoldStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
+        color: ColorManager.white,
+        fontSize: FontSize.f24,
+      );
 
 }

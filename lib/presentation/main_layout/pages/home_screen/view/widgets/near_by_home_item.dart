@@ -32,7 +32,7 @@ class _NearByHomeItemState extends State<NearByHomeItem> {
               width: 150,
               fit: BoxFit.cover,
             ),
-
+SizedBox(width: AppSize.s5,),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
