@@ -1,11 +1,8 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:temp_house/presentation/common/widget/main_button.dart';
-import 'package:temp_house/presentation/resources/color_manager.dart';
-import 'package:temp_house/presentation/resources/strings_manager.dart';
-import 'package:temp_house/presentation/resources/text_styles.dart';
-import 'package:temp_house/presentation/resources/values_manager.dart';
 
+import '../../../resources/color_manager.dart';
+import '../../../resources/text_styles.dart';
+import '../../../resources/values_manager.dart';
 import 'home_details_images.dart';
 
 class HomeDetailsBody extends StatefulWidget {
@@ -27,7 +24,7 @@ class _HomeDetailsBodyState extends State<HomeDetailsBody> {
           height: MediaQuery.of(context).size.height * 0.40,
           child: const HomeDetailsImages(),
         ),
-        Divider(
+        const Divider(
           color: ColorManager.white,
         ),
         Padding(
@@ -37,57 +34,47 @@ class _HomeDetailsBodyState extends State<HomeDetailsBody> {
             children: [
               Text(
                 'Product Name',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
+                style: AppTextStyles.homeDetailsNameTextStyle(),
+              ),
+              const SizedBox(height: AppSize.s10),
+              RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                        text: 'Description:',
+                        style: AppTextStyles.homeDetailsDescriptionTextStyle()
+                    ),
+                    TextSpan(
+                        text: '  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.:',
+                        style: AppTextStyles.homeDetailsDescriptionContantTextStyle()
+
+                    ),
+                  ],
                 ),
               ),
-              SizedBox(height: AppSize.s10),
-              Text(
-                'Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                style: TextStyle(
-                  fontSize: 16,
-                ),
-              ),
+
               const SizedBox(height: AppSize.s30),
 
               Row(
                 children: [
                   Text(
-                    'Rating: ',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+                      'Rating: ',
+                      style: AppTextStyles.homeDetailsDescriptionTextStyle()
                   ),
                   const SizedBox(width: AppSize.s10),
                   // Star rating system
                   Row(
                     children: List.generate(5, (index) {
-                      return IconButton(
-                        onPressed: () {
-                          setState(() {
-                            _rating = index + 1;
-                          });
-                        },
-                        icon: Icon(
-                          index < _rating.floor()
-                              ? Icons.star
-                              : Icons.star_border,
-                          color: Colors.amber,
-                        ),
+                      return Icon(
+                        Icons.star_rounded,
+                        color: index < _rating.floor() ? Colors.orange.withOpacity(.7) : Colors.grey.withOpacity(.7),
+                        size: AppSize.s35,
                       );
                     }),
                   ),
                 ],
               ),
-              SizedBox(height: AppSize.s20),
 
-            Center(
-              child: MainButton(backgroundColor: ColorManager.primary,text: 'Add To Card', textStyle: AppTextStyles.feedBackBtnTextStyle(context), onTap: () {
-
-              },),
-            )
             ],
           ),
         ),

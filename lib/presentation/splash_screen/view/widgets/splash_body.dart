@@ -30,9 +30,9 @@ class _SplashScreenBodyState extends State<SplashScreenBody>
 
     _controller.forward();
 
-    // Future.delayed(const Duration(seconds: 3), () {
-    //   Navigator.pushReplacementNamed(context, Routes.onboardingRoute);
-    // });
+    Future.delayed(const Duration(seconds: 3), () {
+      Navigator.pushReplacementNamed(context, Routes.onboardingRoute);
+    });
   }
 
   @override

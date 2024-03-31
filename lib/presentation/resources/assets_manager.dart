@@ -5,6 +5,7 @@ class ImageAssets {
   static const String onboardingImage2 = "${imagePath}onBording2.png";
   static const String personImage = "${imagePath}Ellipse 57.png";
   static const String homeItem = "${imagePath}Rectangle 42.png";
+  static const String call = "${imagePath}call.gif";
 }
 
 class IconsAssets {
@@ -43,5 +44,6 @@ class LottieAssets {
   static const String _basePath = "assets/lotties/";
 
   static const String success = "${_basePath}success.json";
+  static const String call = "${_basePath}viber.json";
   static const String underConstruction = "${_basePath}under_construction.json";
 }

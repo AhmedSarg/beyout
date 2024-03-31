@@ -279,7 +279,19 @@ class AppTextStyles {
     fontSize: FontSize.f16,
   );
 
-
+///home screen
+  static TextStyle homeDetailsNameTextStyle() => getExtraBoldStyle(
+    color: ColorManager.black,
+    fontSize: FontSize.f30,
+  );
+  static TextStyle homeDetailsDescriptionTextStyle() => getBoldStyle(
+    color: ColorManager.black,
+    fontSize: FontSize.f22,
+  );
+  static TextStyle homeDetailsDescriptionContantTextStyle() => getRegularStyle(
+    color: ColorManager.black,
+    fontSize: FontSize.f18,
+  );
 
   //# near by home
   static TextStyle nearHomeNameTextStyle(BuildContext context) => getSemiBoldStyle(
