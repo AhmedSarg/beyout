@@ -384,6 +384,28 @@ class AppTextStyles {
     color: ColorManager.offwhite,
     fontSize: FontSize.f19,
   );
+//// google map
+  static TextStyle googleMapHomeTitleTextStyle() => getBoldStyle(
+    color: ColorManager.black,
+    fontSize: FontSize.f24,
+  );
+  static TextStyle googleMapHomeTitleDescriptionTextStyle() => getRegularStyle(
+    color: ColorManager.black,
+    fontSize: FontSize.f22,
+  );
+  static TextStyle googleMapHomeDetailsTitleTextStyle() => getSemiBoldStyle(
+    color: ColorManager.black,
+    fontSize: FontSize.f22,
+  );
+  static TextStyle googleMapHomeDetailsSubTitleTextStyle() => getSemiBoldStyle(
+    color: ColorManager.grey.withOpacity(.5),
+    fontSize: FontSize.f16,
+  );
+  static TextStyle googleMapHomeDetailsSubTitleContantTextStyle() => getRegularStyle(
+    color: ColorManager.black,
+    fontSize: FontSize.f22,
+  );
+
 
   ///Notifications Screen Text Styles
 
