@@ -13,7 +13,7 @@ class ChatsScreen extends StatelessWidget {
 
   void signOut(BuildContext context) {
     _authServices.signOut();
-    Navigator.pop(context); // Close drawer after sign-out
+    Navigator.pop(context);
   }
 
   @override
@@ -26,7 +26,7 @@ class ChatsScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               IconButton(
-                onPressed: () => signOut(context), // Pass context to signOut
+                onPressed: () => signOut(context),
                 icon: Icon(Icons.menu),
               ),
             ],
@@ -54,10 +54,7 @@ class ChatsScreen extends StatelessWidget {
           return Center(child: Text('No users found.'));
         }
 
-        // Get current user UID
         final currentUserUID = _authServices.getCurrentUser()!.uid;
-
-        // Filter out the current user's data
         final filteredUsers = snapshot.data!.where((user) => user['uid'] != currentUserUID).toList();
 
         return ListView.builder(

@@ -21,7 +21,7 @@ class ChatServices {
     final Timestamp timestamp = Timestamp.now();
 
     Message newMessage = Message(
-        currentUserID, currentUserEmail, receiverId, message, timestamp);
+        currentUserID, currentUserEmail, receiverId, message, timestamp, false); // Set seen to false
     List<String> ids = [currentUserID, receiverId];
     ids.sort();
     String chatRoomID = ids.join('_');
@@ -41,6 +41,14 @@ class ChatServices {
         .doc(chatRoomID)
         .collection('messages')
         .orderBy('timestamp', descending: false)
-        .snapshots();
+        .snapshots()
+        .map((snapshot) {
+      snapshot.docs.forEach((doc) {
+        if (doc['receiverID'] == userID) {
+          doc.reference.update({'seen': true});
+        }
+      });
+      return snapshot;
+    });
   }
 }
