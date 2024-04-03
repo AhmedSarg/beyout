@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:temp_house/presentation/chats_screen/add_users.dart';
+import 'package:temp_house/presentation/chats_screen/auth_gate.dart';
+import 'package:temp_house/presentation/chats_screen/login.dart';
 import 'package:temp_house/presentation/main_layout/pages/home_screen/view/all_nearby_home.dart';
 import 'package:temp_house/presentation/main_layout/pages/home_screen/view/all_popular_home.dart';
 import 'package:temp_house/presentation/main_layout/pages/profile_screen/view/personal_info_screen.dart';
 import 'package:temp_house/presentation/search_screen/view/search_screen.dart';
 import '../chat_screen/view/chat_view.dart';
+import '../chats_screen/register.dart';
 import '../chats_screen/view/chats_view.dart';
 import '../home_details_screen/view/home_details.dart';
 import '../login_screen/view/login_view.dart';
@@ -45,6 +49,12 @@ class Routes {
   static const String paymentScreenRoute = "/paymentScreen";
   static const String paymentScreenDetailsRoute = "/paymentScreenDetails";
   static const String personalInfoRoute = "/personalInfo";
+  static const String addUsersRoute = "/addUsers";
+
+
+  static const String LoginRoute = "/Login";
+  static const String RegisterRoute = "/Register";
+  static const String authRoute = "/auth";
 }
 
 class RouteGenerator {
@@ -65,11 +75,11 @@ class RouteGenerator {
       case Routes.mainLayoutRoute:
         return MaterialPageRoute(builder: (_) => const MainLayoutScreen());
       case Routes.chatsRoute:
-        return MaterialPageRoute(builder: (_) => const ChatsScreen());
+        return MaterialPageRoute(builder: (_) =>  ChatsScreen());
       case Routes.notificationsRoute:
         return MaterialPageRoute(builder: (_) => const NotificationsScreen());
       case Routes.chatRoute:
-        return MaterialPageRoute(builder: (_) => const ChatScreen());
+        return MaterialPageRoute(builder: (_) =>  ChatScreen( receiveEmail: '', receiveID: '',));
       case Routes.publishHomePostRoute:
         return MaterialPageRoute(builder: (_) => const SharePostScreen());
       case Routes.allPopularHomesRoute:
@@ -92,6 +102,21 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const PaymentScreenDetails());
       case Routes.personalInfoRoute:
         return MaterialPageRoute(builder: (_) => const PersonalInfoScreen());
+      case Routes.addUsersRoute:
+        return MaterialPageRoute(builder: (_) =>  AddUserScreen());
+
+
+        ////
+      case Routes.LoginRoute:
+        return MaterialPageRoute(builder: (_) =>  LoginScreenTest());
+      case Routes.RegisterRoute:
+        return MaterialPageRoute(builder: (_) =>  RegiesterScreenTest());
+      case Routes.authRoute:
+        return MaterialPageRoute(builder: (_) =>  AuthGate());
+
+    ////
+
+
       default:
         return unDefinedRoute();
     }

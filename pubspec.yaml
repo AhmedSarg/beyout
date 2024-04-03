@@ -57,6 +57,9 @@ dependencies:
   country_flags:
   country_picker:
   google_maps_flutter:
+  firebase_core: ^2.27.0
+  cloud_firestore: ^4.15.8
+  firebase_auth: ^4.17.8
 dev_dependencies:
   flutter_test:
     sdk: flutter

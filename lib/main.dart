@@ -1,9 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'app/app.dart';
 import 'app/sl.dart';
+import 'firebase_options.dart';
 import 'main_test.dart';
 import 'presentation/base/bloc_observer.dart';
 import 'presentation/resources/langauge_manager.dart';
@@ -14,7 +16,9 @@ void main() async {
   engine = WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   Bloc.observer = MyBlocObserver();
-
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   // await (await SharedPreferences.getInstance()).clear();
 
   await initAppModule();
