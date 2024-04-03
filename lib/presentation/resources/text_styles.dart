@@ -480,6 +480,13 @@ class AppTextStyles {
     color: ColorManager.offwhite.withOpacity(.6),
     fontSize: FontSize.f12,
   );
+
+  static TextStyle chatTextFieldHintTextStyle(BuildContext context) => getLightStyle(
+    fontFamily: AppLanguages.getPrimaryFont(context),
+    color: ColorManager.offwhite.withOpacity(.6),
+    fontSize: FontSize.f20,
+  );
+
 /// favourite screen
 
   static TextStyle favouriteScreenTitleTextStyle(BuildContext context) =>
