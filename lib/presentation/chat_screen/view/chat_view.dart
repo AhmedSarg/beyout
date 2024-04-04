@@ -2,8 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
+import 'package:temp_house/presentation/chat_screen/view/widgets/no_message_screen.dart';
 import 'package:temp_house/presentation/chats_screen/auth_services.dart';
 import 'package:temp_house/presentation/chat_screen/chat_service/chat_services.dart';
+import 'package:temp_house/presentation/common/widget/main_circle_processIndicator.dart';
 import 'package:temp_house/presentation/resources/color_manager.dart';
 import 'package:temp_house/presentation/resources/strings_manager.dart';
 import 'package:temp_house/presentation/resources/text_styles.dart';
@@ -15,7 +17,9 @@ class ChatScreen extends StatefulWidget {
   final String receiveEmail;
   final String receiveID;
 
-  const ChatScreen({Key? key, required this.receiveEmail, required this.receiveID}) : super(key: key);
+  const ChatScreen(
+      {Key? key, required this.receiveEmail, required this.receiveID})
+      : super(key: key);
 
   @override
   _ChatScreenState createState() => _ChatScreenState();
@@ -31,8 +35,10 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       appBar: buildMainAppBar(
           context,
-          Text(widget.receiveEmail,style: AppTextStyles.paymentAppBarTextStyle(),)
-      ),
+          Text(
+            widget.receiveEmail,
+            style: AppTextStyles.paymentAppBarTextStyle(),
+          )),
       body: Column(
         children: [
           Expanded(
@@ -46,58 +52,69 @@ class _ChatScreenState extends State<ChatScreen> {
 
   Widget _buildMessageList() {
     String currentUserID = _authServices.getCurrentUser()!.uid;
-    ScrollController _scrollController = ScrollController(); // Create a ScrollController
+    ScrollController _scrollController = ScrollController();
 
-    return Column( // Use Column instead of Flexible or Expanded
+    return Column(
       children: [
-        Expanded( // Wrap ListView.builder with Expanded to occupy remaining space
+        Expanded(
           child: StreamBuilder<QuerySnapshot>(
             stream: _chatServices.getMessages(currentUserID, widget.receiveID),
             builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator(color: ColorManager.grey,));
+                return MainCicleProcessIndicator();
               }
               if (snapshot.hasError) {
                 return Center(child: Text('Error: ${snapshot.error}'));
               }
               if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                return Center(child: Text('No messages yet.'));
+                return  NoContent(content: AppStrings.chatNoMessages.tr(),);
               }
               WidgetsBinding.instance!.addPostFrameCallback((_) {
-                _scrollController.jumpTo(_scrollController.position.maxScrollExtent); // Scroll to the end after the frame is built
+                _scrollController
+                    .jumpTo(_scrollController.position.maxScrollExtent);
               });
               return ListView.builder(
-                controller: _scrollController, // Assign the ScrollController to the ListView
+                controller: _scrollController,
                 itemCount: snapshot.data!.docs.length,
                 itemBuilder: (context, index) {
-                  final message = snapshot.data!.docs[index].data() as Map<String, dynamic>;
+                  final message =
+                      snapshot.data!.docs[index].data() as Map<String, dynamic>;
                   final isCurrentUser = message['senderID'] == currentUserID;
                   final messageText = message['message'];
-                  final seen = message['seen'] ?? false; // Add null check here
+                  final seen = message['seen'] ?? false;
                   return Padding(
-                    padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: AppPadding.p4, horizontal: AppPadding.p8),
                     child: Align(
-                      alignment: isCurrentUser ? Alignment.centerRight : Alignment.centerLeft,
+                      alignment: isCurrentUser
+                          ? Alignment.centerRight
+                          : Alignment.centerLeft,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: isCurrentUser ? Colors.blue[100] : Colors.grey[300],
+                          color: isCurrentUser
+                              ? ColorManager.lightBlue
+                              : ColorManager.lightGrey,
                           borderRadius: BorderRadius.circular(AppSize.s8),
                         ),
-                        padding: EdgeInsets.all(AppSize.s12),
+                        padding: const EdgeInsets.all(AppSize.s12),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               messageText,
-                              style: TextStyle(color: Colors.black),
+                              style:
+                                  AppTextStyles.chatMessageTextStyle(context),
                             ),
                             const SizedBox(height: AppSize.s5),
                             Text(
                               _formatTimestamp(message['timestamp']),
-                              style: TextStyle(fontSize: 12, color: Colors.grey),
+                              style:
+                                  AppTextStyles.chatTimpTimeTextStyle(context),
                             ),
                             if (isCurrentUser && seen)
-                              Icon(Icons.done_all, color: Colors.blue, size: 16), // Display seen icon
+                              const Icon(Icons.done_all,
+                                  color: ColorManager.blue,
+                                  size: AppSize.s20),
                           ],
                         ),
                       ),
@@ -113,38 +130,44 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   Widget _buildMessageInput() {
-
-    return Row(
+    return Column(
       children: [
-        Expanded(
-          child: Container(
-            margin: EdgeInsets.symmetric(horizontal:  AppMargin.m16,vertical: AppMargin.m20),
-            padding: EdgeInsets.symmetric(horizontal: AppPadding.p12),
-            height: 50,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: ColorManager.grey)
-            ),
-            child: TextField(
-
-              controller: _messageController,
-
-              decoration:  InputDecoration.collapsed(
-                  hintText: AppStrings.chatScreenInputHint.tr(),
-                  hintStyle: AppTextStyles.chatTextFieldHintTextStyle(context)
+        const Divider(color: ColorManager.offwhite,),
+        Row(
+          children: [
+            Expanded(
+              child: Container(
+                margin: const EdgeInsets.symmetric(
+                    horizontal: AppMargin.m16, vertical: AppMargin.m20),
+                padding: const EdgeInsets.symmetric(horizontal: AppPadding.p12),
+                height: AppSize.s50,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(AppSize.s20),
+                    border: Border.all(color: ColorManager.grey)),
+                child: TextField(
+                  cursorColor: ColorManager.offwhite,
+                  style: AppTextStyles.chatNoMessageTextStyle(context),
+                  controller: _messageController,
+                  decoration: InputDecoration.collapsed(
+                      hintText: AppStrings.chatScreenInputHint.tr(),
+                      hintStyle: AppTextStyles.chatTextFieldHintTextStyle(context)),
+                ),
               ),
             ),
-          ),
-        ),
-        IconButton(
-          onPressed: () => _sendMessage(),
-          icon: const Icon(Icons.send,size: AppSize.s40,),
-          color: ColorManager.white,
-
+            IconButton(
+              onPressed: () => _sendMessage(),
+              icon: const Icon(
+                Icons.send,
+                size: AppSize.s40,
+              ),
+              color: ColorManager.white,
+            ),
+          ],
         ),
       ],
     );
   }
+
   String _formatTimestamp(dynamic timestamp) {
     DateTime dateTime = (timestamp as Timestamp).toDate();
     return DateFormat('MMM d, h:mm a').format(dateTime);

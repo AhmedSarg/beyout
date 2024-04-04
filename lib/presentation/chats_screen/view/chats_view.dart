@@ -1,7 +1,13 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:temp_house/presentation/chat_screen/view/widgets/no_message_screen.dart';
 import 'package:temp_house/presentation/chats_screen/view/widgets/user_tile.dart';
+import 'package:temp_house/presentation/common/widget/main_circle_processIndicator.dart';
+import 'package:temp_house/presentation/resources/strings_manager.dart';
 import '../../chat_screen/chat_service/chat_services.dart';
 import '../../chat_screen/view/chat_view.dart';
+import '../../common/widget/main_app_bar.dart';
+import '../../resources/text_styles.dart';
 import '../auth_services.dart';
 
 
@@ -33,9 +39,12 @@ class ChatsScreen extends StatelessWidget {
           ),
         ),
       ),
-      appBar: AppBar(
-        title: Text('Chats'),
-      ),
+      appBar: buildMainAppBar(
+          context,
+          Text(
+            AppStrings.chatsScreenTitle.tr(),
+            style: AppTextStyles.chatsScreenTitleTextStyle(context),
+          )),
       body: _buildUserList(),
     );
   }
@@ -45,13 +54,13 @@ class ChatsScreen extends StatelessWidget {
       stream: _chatServices.getUserStream(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return const MainCicleProcessIndicator();
         }
         if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
         }
         if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return Center(child: Text('No users found.'));
+          return  NoContent(content: AppStrings.chatNoUsers.tr(),);
         }
 
         final currentUserUID = _authServices.getCurrentUser()!.uid;

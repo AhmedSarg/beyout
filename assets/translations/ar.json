@@ -76,6 +76,11 @@
   "popularEndedTextRow": "عرض الكل",
 
 
+  "chatNoMessages": "لا توجد رسائل",
+  "chatNoUsers": "لم يتم العثور على أي مستخدمين.",
+  "chatMessageFieldHint": "اكتب رسالتك...",
+
+
   "priceHome": "جنيه مصري/شهر",
   "bedHome": "سرير",
   "bathroomHome": "حمام",

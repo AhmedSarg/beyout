@@ -84,6 +84,11 @@
   "feedBackTextHint": "My feedback!!",
   "feedBackBotton": "Submit feedback",
 
+  "chatNoMessages": "No Message",
+  "chatNoUsers": "No users found.",
+  "chatMessageFieldHint": "Type your message...",
+
+
 
   "homeDetailsDescription": "Description",
   "homeDetailsRating": "Rating",

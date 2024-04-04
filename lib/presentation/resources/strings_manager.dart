@@ -175,6 +175,9 @@ class AppStrings {
   static const chatsScreenTitle = "chatsScreenTitle";
   static const chatsScreenUnread = "chatsScreenUnread";
   static const chatsScreenAll = "chatsScreenAll";
+  static const chatScreenInputHint = "chatScreenInputHint";
+  static const chatNoMessages = "chatNoMessages";
+  static const chatNoUsers = "chatNoMessages";
 
   ///options menu
   static const optionsMenuMarkAllRead = "optionsMenuMarkAllRead";
@@ -189,8 +192,7 @@ class AppStrings {
   static const feedBackTextHint = "feedBackTextHint";
   static const feedBackBotton = "feedBackBotton";
 
-  ///chat screen
-  static const chatScreenInputHint = "chatScreenInputHint";
+
 
   static const rateUsScreenName = "rateUsScreenName";
   static const needHelpScreenName = "needHelpScreenName";

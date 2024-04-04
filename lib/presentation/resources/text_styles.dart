@@ -481,12 +481,31 @@ class AppTextStyles {
     fontSize: FontSize.f12,
   );
 
+  static TextStyle chatSendMessageTextStyle(BuildContext context) => getLightStyle(
+    fontFamily: AppLanguages.getPrimaryFont(context),
+    color: ColorManager.white,
+    fontSize: FontSize.f18,
+  );
+  static TextStyle chatMessageTextStyle(BuildContext context) => getLightStyle(
+    fontFamily: AppLanguages.getPrimaryFont(context),
+    color: ColorManager.black.withOpacity(.7),
+    fontSize: FontSize.f18,
+  );
+  static TextStyle chatNoMessageTextStyle(BuildContext context) => getLightStyle(
+    fontFamily: AppLanguages.getPrimaryFont(context),
+    color: ColorManager.offwhite,
+    fontSize: FontSize.f24,
+  );
   static TextStyle chatTextFieldHintTextStyle(BuildContext context) => getLightStyle(
     fontFamily: AppLanguages.getPrimaryFont(context),
     color: ColorManager.offwhite.withOpacity(.6),
     fontSize: FontSize.f20,
   );
-
+  static TextStyle chatTimpTimeTextStyle(BuildContext context) => getExtraBoldStyle(
+    fontFamily: AppLanguages.getPrimaryFont(context),
+    color: ColorManager.grey.withOpacity(.6),
+    fontSize: FontSize.f12,
+  );
 /// favourite screen
 
   static TextStyle favouriteScreenTitleTextStyle(BuildContext context) =>
