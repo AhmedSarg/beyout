@@ -45,13 +45,11 @@ class ChatServices {
         .collection('messages')
         .add(messageData);
 
-    // Update sender's last message
     await _firestore.collection("Users").doc(currentUserID).update({
       'lastMessage': content,
       'lastMessageTime': timestamp,
     });
 
-    // Update receiver's last message
     await _firestore.collection("Users").doc(receiverId).update({
       'lastMessage': content,
       'lastMessageTime': timestamp,

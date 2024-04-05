@@ -45,18 +45,16 @@ class _ChatScreenState extends State<ChatScreen> {
         context,
         Row(
           children: [
-
-            const CircleAvatar(
-                radius: AppSize.s20,
-                child: Icon(Icons.person)),
-            const SizedBox(width: AppSize.s5,),
+            const CircleAvatar(radius: AppSize.s20, child: Icon(Icons.person)),
+            const SizedBox(
+              width: AppSize.s5,
+            ),
             Expanded(
               child: Text(
                 widget.receiveEmail,
                 style: AppTextStyles.chatScreenUsreNameTextStyle(context),
               ),
             ),
-
           ],
         ),
       ),
@@ -95,7 +93,7 @@ class _ChatScreenState extends State<ChatScreen> {
           itemCount: snapshot.data!.docs.length,
           itemBuilder: (context, index) {
             final message =
-            snapshot.data!.docs[index].data() as Map<String, dynamic>;
+                snapshot.data!.docs[index].data() as Map<String, dynamic>;
             final isCurrentUser = message['senderID'] == currentUserID;
             final messageType = message['type'];
             final messageContent = message['content'];
@@ -135,7 +133,10 @@ class _ChatScreenState extends State<ChatScreen> {
                   body: SizedBox(
                     width: double.infinity,
                     height: double.infinity,
-                    child: Image.network(messageContent,fit: BoxFit.cover,),
+                    child: Image.network(
+                      messageContent,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ));
@@ -144,7 +145,9 @@ class _ChatScreenState extends State<ChatScreen> {
           child: Container(
             decoration: BoxDecoration(
               color: messageType == 'text'
-                  ? (isCurrentUser ? ColorManager.lightBlue : ColorManager.lightGrey)
+                  ? (isCurrentUser
+                      ? ColorManager.lightBlue
+                      : ColorManager.lightGrey)
                   : (isCurrentUser ? Colors.transparent : Colors.transparent),
               borderRadius: BorderRadius.circular(AppSize.s8),
             ),
@@ -162,13 +165,12 @@ class _ChatScreenState extends State<ChatScreen> {
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(AppSize.s8),
-                        child:                      Image.network(
+                        child: Image.network(
                           messageContent,
                           width: MediaQuery.of(context).size.width * 0.7,
                           height: MediaQuery.of(context).size.height * 0.5,
                           fit: BoxFit.cover,
                         ),
-
                       ),
                       const SizedBox(height: AppSize.s5),
                     ],
@@ -218,17 +220,20 @@ class _ChatScreenState extends State<ChatScreen> {
                         controller: _messageController,
                         decoration: InputDecoration.collapsed(
                           hintText: AppStrings.chatScreenInputHint.tr(),
-                          hintStyle: AppTextStyles.chatTextFieldHintTextStyle(context),
+                          hintStyle:
+                              AppTextStyles.chatTextFieldHintTextStyle(context),
                         ),
                       ),
                     ),
                     IconButton(
                       onPressed: _getImagesFromGallery,
-                      icon: Icon(Icons.image, size: AppSize.s30, color: ColorManager.white),
+                      icon: const Icon(Icons.image,
+                          size: AppSize.s30, color: ColorManager.white),
                     ),
                     IconButton(
                       onPressed: _getImagesFromCamera,
-                      icon: Icon(Icons.camera_alt, size: AppSize.s30, color: ColorManager.white),
+                      icon: const Icon(Icons.camera_alt,
+                          size: AppSize.s30, color: ColorManager.white),
                     ),
                   ],
                 ),
@@ -302,19 +307,21 @@ class _ChatScreenState extends State<ChatScreen> {
         timestamp,
       );
     } else {
-      // Handle null current user
     }
   }
 
   Future<String> _uploadImageToStorage(File imageFile) async {
     try {
-      Reference ref = FirebaseStorage.instance.ref().child('chat_images/${DateTime.now().millisecondsSinceEpoch}');
+      Reference ref = FirebaseStorage.instance
+          .ref()
+          .child('chat_images/${DateTime.now().millisecondsSinceEpoch}');
       UploadTask uploadTask = ref.putFile(imageFile);
       TaskSnapshot snapshot = await uploadTask.whenComplete(() => null);
       String downloadURL = await snapshot.ref.getDownloadURL();
       return downloadURL;
     } catch (e) {
-      print('Error uploading image:________________________________________ $e');
+      print(
+          'Error uploading image:________________________________________ $e');
       return '';
     }
   }
