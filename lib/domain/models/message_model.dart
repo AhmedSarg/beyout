@@ -1,12 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 class Message {
   final String senderID;
   final String senderEmail;
   final String receiverID;
-  final String content; // Changed from 'message' to 'content'
+  final String content;
   final Timestamp timestamp;
-  final String type; // Added type field
+  final String type;
   bool seen;
 
   Message(this.senderID, this.senderEmail, this.receiverID, this.content, this.timestamp, this.type, this.seen); // Updated constructor to include 'type'
@@ -18,7 +19,7 @@ class Message {
       'receiverID': receiverID,
       'content': content,
       'timestamp': timestamp,
-      'type': type, // Added 'type' to map
+      'type': type,
       'seen': seen,
     };
   }

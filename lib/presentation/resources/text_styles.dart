@@ -454,6 +454,21 @@ class AppTextStyles {
     color: ColorManager.lightGrey,
     fontSize: FontSize.f24,
   );
+  static TextStyle chatsScreenUserNameTitleTextStyle(BuildContext context) => getSemiBoldStyle(
+    fontFamily: AppLanguages.getPrimaryFont(context),
+    color: ColorManager.lightGrey,
+    fontSize: FontSize.f22,
+  );
+  static TextStyle chatsScreenLastMessageTextStyle(BuildContext context) => getSemiBoldStyle(
+    fontFamily: AppLanguages.getPrimaryFont(context),
+    color: ColorManager.grey,
+    fontSize: FontSize.f18,
+  );
+  static TextStyle chatsScreenLastMessageDateTextStyle(BuildContext context) => getBoldStyle(
+    fontFamily: AppLanguages.getPrimaryFont(context),
+    color: ColorManager.grey,
+    fontSize: FontSize.f12,
+  );
 
   static TextStyle chatsScreenSectionHeaderTextStyle(
       BuildContext context) =>
