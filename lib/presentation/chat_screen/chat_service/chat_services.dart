@@ -81,7 +81,11 @@ class ChatServices {
   }
 
   String formatTimestamp(dynamic timestamp) {
-    DateTime dateTime = (timestamp as Timestamp).toDate();
-    return DateFormat('MMM d, h:mm a').format(dateTime);
+    if (timestamp is Timestamp) {
+      DateTime dateTime = timestamp.toDate();
+      return DateFormat('MMM d, h:mm a').format(dateTime);
+    } else {
+      return '';
+    }
   }
 }

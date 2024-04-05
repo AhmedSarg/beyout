@@ -26,7 +26,7 @@ class UserTile extends StatelessWidget {
         onTap: onTap,
         child: ListTile(
           onTap: onTap,
-          trailing: Text(lastMessageTime,style: AppTextStyles.chatsScreenLastMessageDateTextStyle(context),),
+          trailing: Text(lastMessageTime,style: AppTextStyles.chatsScreenLastMessageDateTextStyle(context),overflow: TextOverflow.ellipsis,),
           title: Text(text,style: AppTextStyles.chatsScreenUserNameTitleTextStyle(context),),
           subtitle: Text(lastMessage,style: AppTextStyles.chatsScreenLastMessageTextStyle(context),),
           leading: const CircleAvatar(
