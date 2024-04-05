@@ -77,7 +77,7 @@ class _ChatScreenState extends State<ChatScreen> {
       stream: _chatServices.getMessages(currentUserID, widget.receiveID),
       builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return MainCicleProcessIndicator();
+          return const MainCicleProcessIndicator();
         }
         if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
@@ -130,13 +130,25 @@ class _ChatScreenState extends State<ChatScreen> {
             if (messageType == 'image') {
               Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => Scaffold(
-                  body: SizedBox(
-                    width: double.infinity,
-                    height: double.infinity,
-                    child: Image.network(
-                      messageContent,
-                      fit: BoxFit.cover,
-                    ),
+                  body: Stack(
+                    alignment: Alignment.topLeft,
+                    children: [
+                      SizedBox(
+                        width: double.infinity,
+                        height: double.infinity,
+                        child: Image.network(
+                          messageContent,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                        Positioned(
+                           top: AppSize.s30,
+                           left: AppSize.s20,
+                           child: IconButton(onPressed: () {
+                             Navigator.pop(context);
+                           }, icon: const Icon(Icons.arrow_back_outlined,size: AppSize.s35,color: ColorManager.white,))),
+
+                    ],
                   ),
                 ),
               ));
