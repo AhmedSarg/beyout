@@ -4,8 +4,11 @@ import 'package:easy_localization/easy_localization.dart';
 class ChatServices {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  Stream<List<Map<String, dynamic>>> getUserStream() {
-    return _firestore.collection("Users").snapshots().map((snapshot) {
+  Stream<List<Map<String, dynamic>>> getUserStreamOrdered() {
+    return _firestore.collection("Users")
+        .orderBy('lastMessageTime', descending: true) // Order by lastMessageTime
+        .snapshots()
+        .map((snapshot) {
       return snapshot.docs.map((doc) {
         final user = doc.data();
         return {

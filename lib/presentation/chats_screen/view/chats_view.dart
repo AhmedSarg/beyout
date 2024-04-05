@@ -52,7 +52,7 @@ class ChatsScreen extends StatelessWidget {
 
   Widget _buildUserList() {
     return StreamBuilder<List<Map<String, dynamic>>>(
-      stream: _chatServices.getUserStream(),
+      stream: _chatServices.getUserStreamOrdered(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const MainCicleProcessIndicator();
