@@ -537,6 +537,11 @@ class AppTextStyles {
     color: color,
     fontSize: FontSize.f16,
   );
+  static TextStyle chatScreenUsreNameTextStyle(BuildContext context) => getSemiBoldStyle(
+    fontFamily: AppLanguages.getPrimaryFont(context),
+    color: ColorManager.white,
+    fontSize: FontSize.f22,
+  );
 
   static TextStyle chatScreenInputTextStyle(BuildContext context) => getRegularStyle(
     fontFamily: AppLanguages.getPrimaryFont(context),

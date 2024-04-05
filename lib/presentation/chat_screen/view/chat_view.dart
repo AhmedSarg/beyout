@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -44,18 +45,18 @@ class _ChatScreenState extends State<ChatScreen> {
         context,
         Row(
           children: [
+
+            const CircleAvatar(
+                radius: AppSize.s20,
+                child: Icon(Icons.person)),
+            const SizedBox(width: AppSize.s5,),
             Expanded(
               child: Text(
                 widget.receiveEmail,
-                style: AppTextStyles.paymentAppBarTextStyle(),
+                style: AppTextStyles.chatScreenUsreNameTextStyle(context),
               ),
             ),
-            IconButton(
-              icon: Icon(Icons.close),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
+
           ],
         ),
       ),
@@ -126,43 +127,64 @@ class _ChatScreenState extends State<ChatScreen> {
       ),
       child: Align(
         alignment: isCurrentUser ? Alignment.centerRight : Alignment.centerLeft,
-        child: Container(
-          decoration: BoxDecoration(
-            color: isCurrentUser ? ColorManager.lightBlue : ColorManager.lightGrey,
-            borderRadius: BorderRadius.circular(AppSize.s8),
-          ),
-          padding: const EdgeInsets.all(AppSize.s12),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (messageType == 'text')
+        child: GestureDetector(
+          onTap: () {
+            if (messageType == 'image') {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => Scaffold(
+                  body: SizedBox(
+                    width: double.infinity,
+                    height: double.infinity,
+                    child: Image.network(messageContent,fit: BoxFit.cover,),
+                  ),
+                ),
+              ));
+            }
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              color: messageType == 'text'
+                  ? (isCurrentUser ? ColorManager.lightBlue : ColorManager.lightGrey)
+                  : (isCurrentUser ? Colors.transparent : Colors.transparent),
+              borderRadius: BorderRadius.circular(AppSize.s8),
+            ),
+            padding: const EdgeInsets.all(AppSize.s12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (messageType == 'text')
+                  Text(
+                    messageContent,
+                    style: AppTextStyles.chatMessageTextStyle(context),
+                  ),
+                if (messageType == 'image')
+                  Column(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(AppSize.s8),
+                        child:                      Image.network(
+                          messageContent,
+                          width: MediaQuery.of(context).size.width * 0.7,
+                          height: MediaQuery.of(context).size.height * 0.5,
+                          fit: BoxFit.cover,
+                        ),
+
+                      ),
+                      const SizedBox(height: AppSize.s5),
+                    ],
+                  ),
                 Text(
-                  messageContent,
-                  style: AppTextStyles.chatMessageTextStyle(context),
+                  _formatTimestamp(timestamp),
+                  style: AppTextStyles.chatTimpTimeTextStyle(context),
                 ),
-              if (messageType == 'image')
-                Column(
-                  children: [
-                    Image.network(
-                      messageContent,
-                      width: 200,
-                      height: 200,
-                      fit: BoxFit.cover,
-                    ),
-                    const SizedBox(height: AppSize.s5),
-                  ],
-                ),
-              Text(
-                _formatTimestamp(timestamp),
-                style: AppTextStyles.chatTimpTimeTextStyle(context),
-              ),
-              if (isCurrentUser && seen)
-                Icon(
-                  Icons.done_all,
-                  color: ColorManager.blue,
-                  size: AppSize.s20,
-                ),
-            ],
+                if (isCurrentUser && seen)
+                  const Icon(
+                    Icons.done_all,
+                    color: ColorManager.blue,
+                    size: AppSize.s20,
+                  ),
+              ],
+            ),
           ),
         ),
       ),
