@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../../../domain/models/message_model.dart';
 
 class ChatServices {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -15,21 +14,33 @@ class ChatServices {
     });
   }
 
-  Future<void> sendMessage(String receiverId, String message) async {
-    final String currentUserID = _firebaseAuth.currentUser!.uid;
-    final String currentUserEmail = _firebaseAuth.currentUser!.email!;
-    final Timestamp timestamp = Timestamp.now();
+  Future<void> sendMessage(
+      String receiverId,
+      String content,
+      String type,
+      String currentUserID,
+      String currentUserEmail,
+      Timestamp timestamp,
+      ) async {
+    Map<String, dynamic> messageData = {
+      'senderID': currentUserID,
+      'senderEmail': currentUserEmail,
+      'receiverID': receiverId,
+      'content': content,
+      'timestamp': timestamp,
+      'type': type,
+      'seen': false,
+    };
 
-    Message newMessage = Message(
-        currentUserID, currentUserEmail, receiverId, message, timestamp, false); // Set seen to false
     List<String> ids = [currentUserID, receiverId];
     ids.sort();
     String chatRoomID = ids.join('_');
+
     await _firestore
         .collection("chat_rooms")
         .doc(chatRoomID)
         .collection('messages')
-        .add(newMessage.toMap());
+        .add(messageData);
   }
 
   Stream<QuerySnapshot> getMessages(String userID, String otherUserID) {
