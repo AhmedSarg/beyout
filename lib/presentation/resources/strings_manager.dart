@@ -178,6 +178,7 @@ class AppStrings {
   static const chatScreenInputHint = "chatScreenInputHint";
   static const chatNoMessages = "chatNoMessages";
   static const chatNoUsers = "chatNoMessages";
+  static const chatSendImage = "chatSendImage";
 
   ///options menu
   static const optionsMenuMarkAllRead = "optionsMenuMarkAllRead";

@@ -6,11 +6,11 @@ class Message {
   final String senderEmail;
   final String receiverID;
   final String content;
-  // final Timestamp timestamp;
+  final Timestamp timestamp;
   final String type;
   bool seen;
 
-  Message(this.senderID, this.senderEmail, this.receiverID, this.content, this.type, this.seen); // Updated constructor to include 'type'
+  Message(this.senderID, this.senderEmail, this.receiverID, this.content, this.type, this.seen, this.timestamp); // Updated constructor to include 'type'
 
   Map<String, dynamic> toMap() {
     return {
@@ -18,7 +18,7 @@ class Message {
       'senderEmail': senderEmail,
       'receiverID': receiverID,
       'content': content,
-      // 'timestamp': timestamp,
+      'timestamp': timestamp,
       'type': type,
       'seen': seen,
     };

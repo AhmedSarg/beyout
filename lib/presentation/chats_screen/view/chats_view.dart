@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:temp_house/app/constants.dart';
 import 'package:temp_house/presentation/resources/text_styles.dart';
 import 'package:temp_house/presentation/resources/values_manager.dart';
 import 'package:temp_house/presentation/chat_screen/chat_service/chat_services.dart';
@@ -33,7 +35,7 @@ class ChatsScreen extends StatelessWidget {
             children: [
               IconButton(
                 onPressed: () => signOut(context),
-                icon: Icon(Icons.menu),
+                icon: const Icon(Icons.menu),
               ),
             ],
           ),
@@ -51,7 +53,7 @@ class ChatsScreen extends StatelessWidget {
   }
 
   Widget _buildUserList() {
-    return StreamBuilder<List<Map<String, dynamic>>>(
+    return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
       stream: _chatServices.getUserStreamOrdered(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -60,45 +62,53 @@ class ChatsScreen extends StatelessWidget {
         if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
         }
-        if (!snapshot.hasData || snapshot.data!.isEmpty) {
+        if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
           return NoContent(content: AppStrings.chatNoUsers.tr());
         }
 
         final currentUserUID = _authServices.getCurrentUser()!.uid;
-        final filteredUsers =
-        snapshot.data!.where((user) => user['uid'] != currentUserUID).toList();
+        final filteredUsers = snapshot.data!.docs;
 
         return ListView.builder(
           itemCount: filteredUsers.length,
           itemBuilder: (context, index) {
-            final userData = filteredUsers[index];
-            return _buildUserListItem(userData, context);
+            final userData = filteredUsers[index].data();
+            return _buildUserListItem(
+                userData, context, filteredUsers[index].id);
           },
         );
       },
     );
   }
 
-  Widget _buildUserListItem(Map<String, dynamic> userData, BuildContext context) {
-    if (userData["email"] != _authServices.getCurrentUser()!.email) {
-      return UserTile(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) {
-              return ChatScreen(
-                receiveID: userData["uid"],
-                receiveEmail: userData["email"],
-              );
-            }),
-          );
-        },
-        text: userData["email"],
-        lastMessage: userData["lastMessage"],
-        lastMessageTime: _chatServices.formatTimestamp(userData["lastMessageTime"]),
-      );
-    } else {
-      return Container();
-    }
+  Widget _buildUserListItem(
+      Map<String, dynamic> userData, BuildContext context, String id) {
+    // if (userData["email"] != _authServices.getCurrentUser()!.email) {
+    // String lastMessage = userData["lastMessage"];
+    // String text = lastMessage.contains(Constants.show_sendimage) ? AppStrings.chatSendImage.tr() : userData["lastMessage"];
+
+    userData["participants_names"].remove('abdalla');
+    userData["participants_ids"].remove('HlAmEDaLZuV0aVnxMD1gs6Ziq2W2');
+    return UserTile(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) {
+            return ChatScreen(
+              receiveID: userData["participants_ids"].first,
+              receiveEmail: userData["participants_names"].first, chatID: id,
+            );
+          }),
+        );
+      },
+      text: userData["participants_names"].first,
+      // lastMessage: text,
+      lastMessageTime:
+          _chatServices.formatTimestamp(userData["last_message_time"]),
+      lastMessage: userData['last_message'],
+    );
+    // } else {
+    //   return Container();
+    // }
   }
 }

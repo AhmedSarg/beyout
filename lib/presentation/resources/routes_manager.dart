@@ -79,7 +79,7 @@ class RouteGenerator {
       case Routes.notificationsRoute:
         return MaterialPageRoute(builder: (_) => const NotificationsScreen());
       case Routes.chatRoute:
-        return MaterialPageRoute(builder: (_) =>  ChatScreen( receiveEmail: '', receiveID: '',));
+        return MaterialPageRoute(builder: (_) =>  ChatScreen( receiveEmail: '', receiveID: '', chatID: '',));
       case Routes.publishHomePostRoute:
         return MaterialPageRoute(builder: (_) => const SharePostScreen());
       case Routes.allPopularHomesRoute:

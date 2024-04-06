@@ -22,11 +22,12 @@ import 'widgets/no_message_screen.dart';
 class ChatScreen extends StatefulWidget {
   final String receiveEmail;
   final String receiveID;
+  final String chatID ;
 
   const ChatScreen({
     Key? key,
     required this.receiveEmail,
-    required this.receiveID,
+    required this.receiveID, required this.chatID,
   }) : super(key: key);
 
   @override
@@ -37,7 +38,6 @@ class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _messageController = TextEditingController();
   final AuthServices _authServices = AuthServices();
   final ChatServices _chatServices = ChatServices();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,7 +74,7 @@ class _ChatScreenState extends State<ChatScreen> {
     ScrollController _scrollController = ScrollController();
 
     return StreamBuilder<QuerySnapshot>(
-      stream: _chatServices.getMessages(currentUserID, widget.receiveID),
+      stream: _chatServices.getChatMessages(widget.chatID, ),
       builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const MainCicleProcessIndicator();
@@ -90,11 +90,15 @@ class _ChatScreenState extends State<ChatScreen> {
         });
         return ListView.builder(
           controller: _scrollController,
+
           itemCount: snapshot.data!.docs.length,
           itemBuilder: (context, index) {
+
             final message =
-                snapshot.data!.docs[index].data() as Map<String, dynamic>;
-            final isCurrentUser = message['senderID'] == currentUserID;
+            snapshot.data!.docs[index].data() as Map<String, dynamic>;
+            print(message);
+            print('_________________');
+            final isCurrentUser = widget.receiveID != 'HlAmEDaLZuV0aVnxMD1gs6Ziq2W2';
             final messageType = message['type'];
             final messageContent = message['content'];
             final seen = message['seen'] ?? false;
@@ -141,12 +145,12 @@ class _ChatScreenState extends State<ChatScreen> {
                           fit: BoxFit.cover,
                         ),
                       ),
-                        Positioned(
-                           top: AppSize.s30,
-                           left: AppSize.s20,
-                           child: IconButton(onPressed: () {
-                             Navigator.pop(context);
-                           }, icon: const Icon(Icons.arrow_back_outlined,size: AppSize.s35,color: ColorManager.white,))),
+                      Positioned(
+                          top: AppSize.s30,
+                          left: AppSize.s20,
+                          child: IconButton(onPressed: () {
+                            Navigator.pop(context);
+                          }, icon: const Icon(Icons.arrow_back_outlined,size: AppSize.s35,color: ColorManager.white,))),
 
                     ],
                   ),
@@ -158,8 +162,8 @@ class _ChatScreenState extends State<ChatScreen> {
             decoration: BoxDecoration(
               color: messageType == 'text'
                   ? (isCurrentUser
-                      ? ColorManager.lightBlue
-                      : ColorManager.lightGrey)
+                  ? ColorManager.lightBlue
+                  : ColorManager.lightGrey)
                   : (isCurrentUser ? Colors.transparent : Colors.transparent),
               borderRadius: BorderRadius.circular(AppSize.s8),
             ),
@@ -233,7 +237,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         decoration: InputDecoration.collapsed(
                           hintText: AppStrings.chatScreenInputHint.tr(),
                           hintStyle:
-                              AppTextStyles.chatTextFieldHintTextStyle(context),
+                          AppTextStyles.chatTextFieldHintTextStyle(context),
                         ),
                       ),
                     ),
@@ -270,15 +274,13 @@ class _ChatScreenState extends State<ChatScreen> {
   void _sendMessage() async {
     String message = _messageController.text.trim();
     if (message.isNotEmpty) {
-      String currentUserID = _authServices.getCurrentUser()!.uid;
-      String currentUserEmail = _authServices.getCurrentUser()!.email!;
+
       Timestamp timestamp = Timestamp.now();
       await _chatServices.sendMessage(
-        widget.receiveID,
+        widget.chatID,
         message,
         'text',
-        currentUserID,
-        currentUserEmail,
+
         timestamp,
       );
       _messageController.clear();
@@ -314,8 +316,7 @@ class _ChatScreenState extends State<ChatScreen> {
         widget.receiveID,
         imageURL,
         'image',
-        currentUserID,
-        currentUserEmail,
+
         timestamp,
       );
     } else {

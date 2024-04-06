@@ -457,7 +457,7 @@ class AppTextStyles {
   static TextStyle chatsScreenUserNameTitleTextStyle(BuildContext context) => getSemiBoldStyle(
     fontFamily: AppLanguages.getPrimaryFont(context),
     color: ColorManager.lightGrey,
-    fontSize: FontSize.f22,
+    fontSize: FontSize.f20,
   );
   static TextStyle chatsScreenLastMessageTextStyle(BuildContext context) => getSemiBoldStyle(
     fontFamily: AppLanguages.getPrimaryFont(context),
