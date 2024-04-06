@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:temp_house/presentation/common/data_intent/data_intent.dart';
 
 class ChatServices {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -23,9 +24,10 @@ class ChatServices {
   Stream<QuerySnapshot<Map<String, dynamic>>> getUserStreamOrdered() {
     return _firestore
         .collection("chat_rooms")
-        .where('participants_names', arrayContains: 'abdalla')
+        .where('participants_names', arrayContains: DataIntent.getUser().name)
         .snapshots();
   }
+
   Stream<QuerySnapshot<Map<String, dynamic>>> getChatMessages(String id) {
     return _firestore
         .collection("chat_rooms")
@@ -34,44 +36,38 @@ class ChatServices {
         .orderBy('timestamp', descending: false)
         .snapshots()
         .map((snapshot) {
-      snapshot.docs.forEach((doc) {
-
+      for (var doc in snapshot.docs) {
+        if (doc.data()['senderID'] != DataIntent.getUser().uid) {
           doc.reference.update({'seen': true});
-
-
-
-      });
+        }
+      }
       return snapshot;
     });
-
-
   }
+
   Future<void> sendMessage(
-      String chatRoomID,
-
-      String content,
-      String type,
-
+    String chatRoomID,
+    String content,
+    String type,
     Timestamp timestamp,
   ) async {
     Map<String, dynamic> messageData = {
-      'senderID':'HlAmEDaLZuV0aVnxMD1gs6Ziq2W2',
+      'senderID': DataIntent.getUser().uid,
       'content': content,
       'timestamp': timestamp,
       'type': type,
       'seen': false,
     };
 
-
-
-
-
     await _firestore
         .collection("chat_rooms")
         .doc(chatRoomID)
         .collection('messages')
         .add(messageData);
-
+    await _firestore.collection("chat_rooms").doc(chatRoomID).update({
+      'last_message': content,
+      'last_message_time': timestamp,
+    });
   }
 
   // Stream<QuerySnapshot> getMessages(String chatID) {

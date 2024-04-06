@@ -1,15 +1,11 @@
 import 'dart:io';
-
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
 
-import '../../chats_screen/auth_services.dart';
+import '../../common/data_intent/data_intent.dart';
 import '../../common/widget/main_app_bar.dart';
 import '../../common/widget/main_circle_processIndicator.dart';
 import '../../resources/color_manager.dart';
@@ -22,22 +18,23 @@ import 'widgets/no_message_screen.dart';
 class ChatScreen extends StatefulWidget {
   final String receiveEmail;
   final String receiveID;
-  final String chatID ;
+  final String chatID;
 
   const ChatScreen({
     Key? key,
     required this.receiveEmail,
-    required this.receiveID, required this.chatID,
+    required this.receiveID,
+    required this.chatID,
   }) : super(key: key);
 
   @override
-  _ChatScreenState createState() => _ChatScreenState();
+  State<ChatScreen> createState() => _ChatScreenState();
 }
 
 class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _messageController = TextEditingController();
-  final AuthServices _authServices = AuthServices();
   final ChatServices _chatServices = ChatServices();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,11 +67,12 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   Widget _buildMessageList() {
-    String currentUserID = _authServices.getCurrentUser()?.uid ?? '';
     ScrollController _scrollController = ScrollController();
 
     return StreamBuilder<QuerySnapshot>(
-      stream: _chatServices.getChatMessages(widget.chatID, ),
+      stream: _chatServices.getChatMessages(
+        widget.chatID,
+      ),
       builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const MainCicleProcessIndicator();
@@ -85,20 +83,16 @@ class _ChatScreenState extends State<ChatScreen> {
         if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
           return NoContent(content: AppStrings.chatNoMessages.tr());
         }
-        WidgetsBinding.instance!.addPostFrameCallback((_) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
           _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
         });
         return ListView.builder(
           controller: _scrollController,
-
           itemCount: snapshot.data!.docs.length,
           itemBuilder: (context, index) {
-
             final message =
-            snapshot.data!.docs[index].data() as Map<String, dynamic>;
-            print(message);
-            print('_________________');
-            final isCurrentUser = widget.receiveID != 'HlAmEDaLZuV0aVnxMD1gs6Ziq2W2';
+                snapshot.data!.docs[index].data() as Map<String, dynamic>;
+            final isCurrentUser = message['senderID'] == DataIntent.getUser().uid;
             final messageType = message['type'];
             final messageContent = message['content'];
             final seen = message['seen'] ?? false;
@@ -148,10 +142,15 @@ class _ChatScreenState extends State<ChatScreen> {
                       Positioned(
                           top: AppSize.s30,
                           left: AppSize.s20,
-                          child: IconButton(onPressed: () {
-                            Navigator.pop(context);
-                          }, icon: const Icon(Icons.arrow_back_outlined,size: AppSize.s35,color: ColorManager.white,))),
-
+                          child: IconButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              icon: const Icon(
+                                Icons.arrow_back_outlined,
+                                size: AppSize.s35,
+                                color: ColorManager.white,
+                              ))),
                     ],
                   ),
                 ),
@@ -162,8 +161,8 @@ class _ChatScreenState extends State<ChatScreen> {
             decoration: BoxDecoration(
               color: messageType == 'text'
                   ? (isCurrentUser
-                  ? ColorManager.lightBlue
-                  : ColorManager.lightGrey)
+                      ? ColorManager.lightBlue
+                      : ColorManager.lightGrey)
                   : (isCurrentUser ? Colors.transparent : Colors.transparent),
               borderRadius: BorderRadius.circular(AppSize.s8),
             ),
@@ -237,7 +236,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         decoration: InputDecoration.collapsed(
                           hintText: AppStrings.chatScreenInputHint.tr(),
                           hintStyle:
-                          AppTextStyles.chatTextFieldHintTextStyle(context),
+                              AppTextStyles.chatTextFieldHintTextStyle(context),
                         ),
                       ),
                     ),
@@ -274,13 +273,11 @@ class _ChatScreenState extends State<ChatScreen> {
   void _sendMessage() async {
     String message = _messageController.text.trim();
     if (message.isNotEmpty) {
-
       Timestamp timestamp = Timestamp.now();
       await _chatServices.sendMessage(
         widget.chatID,
         message,
         'text',
-
         timestamp,
       );
       _messageController.clear();
@@ -304,23 +301,15 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   Future<void> _sendImageMessage(File imageFile) async {
-    final currentUser = _authServices.getCurrentUser();
-    if (currentUser != null) {
-      final String currentUserID = currentUser.uid;
-      final String currentUserEmail = currentUser.email!;
-      final Timestamp timestamp = Timestamp.now();
+    final Timestamp timestamp = Timestamp.now();
+    String imageURL = await _uploadImageToStorage(imageFile);
 
-      String imageURL = await _uploadImageToStorage(imageFile);
-
-      await _chatServices.sendMessage(
-        widget.receiveID,
-        imageURL,
-        'image',
-
-        timestamp,
-      );
-    } else {
-    }
+    await _chatServices.sendMessage(
+      widget.receiveID,
+      imageURL,
+      'image',
+      timestamp,
+    );
   }
 
   Future<String> _uploadImageToStorage(File imageFile) async {

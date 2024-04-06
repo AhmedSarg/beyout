@@ -10,17 +10,16 @@ import 'package:temp_house/presentation/chats_screen/view/widgets/user_tile.dart
 import 'package:temp_house/presentation/common/widget/main_circle_processIndicator.dart';
 import 'package:temp_house/presentation/resources/strings_manager.dart';
 import '../../chat_screen/view/widgets/no_message_screen.dart';
+import '../../common/data_intent/data_intent.dart';
 import '../../common/widget/main_app_bar.dart';
-import '../auth_services.dart';
 
 class ChatsScreen extends StatelessWidget {
   ChatsScreen({Key? key}) : super(key: key);
 
   final ChatServices _chatServices = ChatServices();
-  final AuthServices _authServices = AuthServices();
 
   void signOut(BuildContext context) {
-    _authServices.signOut();
+    // _authServices.signOut();
     Navigator.pop(context);
   }
 
@@ -65,8 +64,6 @@ class ChatsScreen extends StatelessWidget {
         if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
           return NoContent(content: AppStrings.chatNoUsers.tr());
         }
-
-        final currentUserUID = _authServices.getCurrentUser()!.uid;
         final filteredUsers = snapshot.data!.docs;
 
         return ListView.builder(
@@ -87,8 +84,8 @@ class ChatsScreen extends StatelessWidget {
     // String lastMessage = userData["lastMessage"];
     // String text = lastMessage.contains(Constants.show_sendimage) ? AppStrings.chatSendImage.tr() : userData["lastMessage"];
 
-    userData["participants_names"].remove('abdalla');
-    userData["participants_ids"].remove('HlAmEDaLZuV0aVnxMD1gs6Ziq2W2');
+    userData["participants_names"].remove(DataIntent.getUser().name);
+    userData["participants_ids"].remove(DataIntent.getUser().uid);
     return UserTile(
       onTap: () {
         Navigator.push(

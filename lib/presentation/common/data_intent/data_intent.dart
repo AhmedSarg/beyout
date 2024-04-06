@@ -1,4 +1,5 @@
 import '../../../domain/models/enums.dart';
+import '../../../domain/models/user_model.dart';
 
 class DataIntent {
   DataIntent._();
@@ -22,6 +23,16 @@ class DataIntent {
   static UserRole? getUserRole() {
     return _userRole;
   }
+
+  static late User _user;
+
+  static void pushUser(User role) => _user = role;
+
+  static User getUser() {
+    return _user;
+  }
+
+
 
 //-----------------------------------
 }

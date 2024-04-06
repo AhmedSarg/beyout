@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:temp_house/presentation/chats_screen/add_users.dart';
-import 'package:temp_house/presentation/chats_screen/auth_gate.dart';
 import 'package:temp_house/presentation/chats_screen/login.dart';
 import 'package:temp_house/presentation/main_layout/pages/home_screen/view/all_nearby_home.dart';
 import 'package:temp_house/presentation/main_layout/pages/home_screen/view/all_popular_home.dart';
@@ -51,7 +49,6 @@ class Routes {
   static const String personalInfoRoute = "/personalInfo";
   static const String addUsersRoute = "/addUsers";
 
-
   static const String LoginRoute = "/Login";
   static const String RegisterRoute = "/Register";
   static const String authRoute = "/auth";
@@ -75,11 +72,17 @@ class RouteGenerator {
       case Routes.mainLayoutRoute:
         return MaterialPageRoute(builder: (_) => const MainLayoutScreen());
       case Routes.chatsRoute:
-        return MaterialPageRoute(builder: (_) =>  ChatsScreen());
+        return MaterialPageRoute(builder: (_) => ChatsScreen());
       case Routes.notificationsRoute:
         return MaterialPageRoute(builder: (_) => const NotificationsScreen());
       case Routes.chatRoute:
-        return MaterialPageRoute(builder: (_) =>  ChatScreen( receiveEmail: '', receiveID: '', chatID: '',));
+        return MaterialPageRoute(
+          builder: (_) => const ChatScreen(
+            receiveEmail: '',
+            receiveID: '',
+            chatID: '',
+          ),
+        );
       case Routes.publishHomePostRoute:
         return MaterialPageRoute(builder: (_) => const SharePostScreen());
       case Routes.allPopularHomesRoute:
@@ -89,33 +92,27 @@ class RouteGenerator {
       case Routes.searchScreenRoute:
         return MaterialPageRoute(builder: (_) => const SearchScreen());
       case Routes.aboutScreenRoute:
-        return MaterialPageRoute(builder: (_) =>  AboutScreen());
+        return MaterialPageRoute(builder: (_) => AboutScreen());
       case Routes.needHelpScreenRoute:
-        return MaterialPageRoute(builder: (_) =>  NeedHelpScreen());
+        return MaterialPageRoute(builder: (_) => NeedHelpScreen());
       case Routes.homeDetailsRoute:
-        return MaterialPageRoute(builder: (_) =>  const HomeDetails());
+        return MaterialPageRoute(builder: (_) => const HomeDetails());
       case Routes.googleMapScreenRoute:
         return MaterialPageRoute(builder: (_) => const GoogleMapScreen());
       case Routes.paymentScreenRoute:
-      return MaterialPageRoute(builder: (_) => const PaymentScreen());
+        return MaterialPageRoute(builder: (_) => const PaymentScreen());
       case Routes.paymentScreenDetailsRoute:
         return MaterialPageRoute(builder: (_) => const PaymentScreenDetails());
       case Routes.personalInfoRoute:
         return MaterialPageRoute(builder: (_) => const PersonalInfoScreen());
-      case Routes.addUsersRoute:
-        return MaterialPageRoute(builder: (_) =>  AddUserScreen());
 
+      ///
+      // case Routes.LoginRoute:
+      //   return MaterialPageRoute(builder: (_) => LoginScreenTest());
+      // case Routes.RegisterRoute:
+      //   return MaterialPageRoute(builder: (_) => RegiesterScreenTest());
 
-        ////
-      case Routes.LoginRoute:
-        return MaterialPageRoute(builder: (_) =>  LoginScreenTest());
-      case Routes.RegisterRoute:
-        return MaterialPageRoute(builder: (_) =>  RegiesterScreenTest());
-      case Routes.authRoute:
-        return MaterialPageRoute(builder: (_) =>  AuthGate());
-
-    ////
-
+      ////
 
       default:
         return unDefinedRoute();

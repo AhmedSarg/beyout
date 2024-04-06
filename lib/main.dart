@@ -3,6 +3,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:temp_house/domain/models/user_model.dart';
+import 'package:temp_house/presentation/common/data_intent/data_intent.dart';
 import 'app/app.dart';
 import 'app/sl.dart';
 import 'firebase_options.dart';
@@ -28,6 +30,22 @@ void main() async {
   // if (kDebugMode) {
   //   test();
   // }
+
+  // DataIntent.pushUser(
+  //   User(
+  //     uid: 'HlAmEDaLZuV0aVnxMD1gs6Ziq2W2',
+  //     email: 'abdalla1@gmail.com',
+  //     name: 'Abdalla',
+  //   ),
+  // );
+
+  DataIntent.pushUser(
+    User(
+      uid: 'aF0hYQAmonRY7DX5RbgqaAyanZs2',
+      email: 'xsarg22@gmail.com',
+      name: 'Ahmed',
+    ),
+  );
 
   runApp(
     EasyLocalization(
