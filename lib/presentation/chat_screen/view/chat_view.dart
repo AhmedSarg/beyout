@@ -305,7 +305,7 @@ class _ChatScreenState extends State<ChatScreen> {
     String imageURL = await _uploadImageToStorage(imageFile);
 
     await _chatServices.sendMessage(
-      widget.receiveID,
+      DataIntent.getUser().uid,
       imageURL,
       'image',
       timestamp,
@@ -317,8 +317,8 @@ class _ChatScreenState extends State<ChatScreen> {
       Reference ref = FirebaseStorage.instance
           .ref()
           .child('chat_images/${DateTime.now().millisecondsSinceEpoch}');
-      UploadTask uploadTask = ref.putFile(imageFile);
-      TaskSnapshot snapshot = await uploadTask.whenComplete(() => null);
+      TaskSnapshot uploadTask = await ref.putFile(imageFile, SettableMetadata(contentType: 'image/jpeg'),);
+      // TaskSnapshot snapshot = await uploadTask.whenComplete(() => null);
       String downloadURL = await snapshot.ref.getDownloadURL();
       return downloadURL;
     } catch (e) {
