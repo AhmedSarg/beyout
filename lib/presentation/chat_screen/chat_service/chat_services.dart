@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:temp_house/presentation/common/data_intent/data_intent.dart';
 
+import '../../../app/constants.dart';
+
 class ChatServices {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
@@ -65,8 +67,9 @@ class ChatServices {
         .doc(chatRoomID)
         .collection('messages')
         .add(messageData);
+    String lastSeenMessageMapping = content.contains(Constants.show_sendimage) ? 'Image 📷' : content;
     await _firestore.collection("chat_rooms").doc(chatRoomID).update({
-      'last_message': content,
+      'last_message': lastSeenMessageMapping,
       'last_message_time': timestamp,
     });
   }

@@ -34,6 +34,16 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _messageController = TextEditingController();
   final ChatServices _chatServices = ChatServices();
+  ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +77,6 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   Widget _buildMessageList() {
-    ScrollController _scrollController = ScrollController();
 
     return StreamBuilder<QuerySnapshot>(
       stream: _chatServices.getChatMessages(
@@ -86,13 +95,15 @@ class _ChatScreenState extends State<ChatScreen> {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
         });
+
         return ListView.builder(
           controller: _scrollController,
           itemCount: snapshot.data!.docs.length,
           itemBuilder: (context, index) {
             final message =
                 snapshot.data!.docs[index].data() as Map<String, dynamic>;
-            final isCurrentUser = message['senderID'] == DataIntent.getUser().uid;
+            final isCurrentUser =
+                message['senderID'] == DataIntent.getUser().uid;
             final messageType = message['type'];
             final messageContent = message['content'];
             final seen = message['seen'] ?? false;
@@ -317,7 +328,10 @@ class _ChatScreenState extends State<ChatScreen> {
       Reference ref = FirebaseStorage.instance
           .ref()
           .child('chat_images/${DateTime.now().millisecondsSinceEpoch}');
-      TaskSnapshot uploadTask = await ref.putFile(imageFile, SettableMetadata(contentType: 'image/jpeg'),);
+      TaskSnapshot uploadTask = await ref.putFile(
+        imageFile,
+        SettableMetadata(contentType: 'image/jpeg'),
+      );
       // TaskSnapshot snapshot = await uploadTask.whenComplete(() => null);
       String downloadURL = await uploadTask.ref.getDownloadURL();
       return downloadURL;
