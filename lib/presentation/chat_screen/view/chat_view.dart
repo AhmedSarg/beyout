@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -34,11 +35,10 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _messageController = TextEditingController();
   final ChatServices _chatServices = ChatServices();
-  ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
@@ -77,7 +77,6 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   Widget _buildMessageList() {
-
     return StreamBuilder<QuerySnapshot>(
       stream: _chatServices.getChatMessages(
         widget.chatID,
@@ -92,10 +91,15 @@ class _ChatScreenState extends State<ChatScreen> {
         if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
           return NoContent(content: AppStrings.chatNoMessages.tr());
         }
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
-        });
-
+        WidgetsBinding.instance.addPostFrameCallback(
+          (_) {
+            _scrollController.animateTo(
+              _scrollController.position.maxScrollExtent,
+              duration: const Duration(milliseconds: 200),
+              curve: Curves.easeInOut,
+            );
+          },
+        );
         return ListView.builder(
           controller: _scrollController,
           itemCount: snapshot.data!.docs.length,
@@ -137,35 +141,39 @@ class _ChatScreenState extends State<ChatScreen> {
         child: GestureDetector(
           onTap: () {
             if (messageType == 'image') {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => Scaffold(
-                  body: Stack(
-                    alignment: Alignment.topLeft,
-                    children: [
-                      SizedBox(
-                        width: double.infinity,
-                        height: double.infinity,
-                        child: Image.network(
-                          messageContent,
-                          fit: BoxFit.cover,
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => Scaffold(
+                    body: Stack(
+                      alignment: Alignment.topLeft,
+                      children: [
+                        SizedBox(
+                          width: double.infinity,
+                          height: double.infinity,
+                          child: Image.network(
+                            messageContent,
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                      ),
-                      Positioned(
+                        Positioned(
                           top: AppSize.s30,
                           left: AppSize.s20,
                           child: IconButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              icon: const Icon(
-                                Icons.arrow_back_outlined,
-                                size: AppSize.s35,
-                                color: ColorManager.white,
-                              ))),
-                    ],
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            icon: const Icon(
+                              Icons.arrow_back_outlined,
+                              size: AppSize.s35,
+                              color: ColorManager.white,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ));
+              );
             }
           },
           child: Container(
@@ -285,7 +293,7 @@ class _ChatScreenState extends State<ChatScreen> {
     String message = _messageController.text.trim();
     if (message.isNotEmpty) {
       Timestamp timestamp = Timestamp.now();
-      await _chatServices.sendMessage(
+      _chatServices.sendMessage(
         widget.chatID,
         message,
         'text',
@@ -299,8 +307,7 @@ class _ChatScreenState extends State<ChatScreen> {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
-      print(pickedFile.path);
-      await _sendImageMessage(File(pickedFile.path));
+      _sendImageMessage(File(pickedFile.path));
     }
   }
 
@@ -308,14 +315,14 @@ class _ChatScreenState extends State<ChatScreen> {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.camera);
     if (pickedFile != null) {
-      await _sendImageMessage(File(pickedFile.path));
+      _sendImageMessage(File(pickedFile.path));
     }
   }
 
   Future<void> _sendImageMessage(File imageFile) async {
     final Timestamp timestamp = Timestamp.now();
     String imageURL = await _uploadImageToStorage(imageFile);
-    await _chatServices.sendMessage(
+    _chatServices.sendMessage(
       widget.chatID,
       imageURL,
       'image',
@@ -332,12 +339,13 @@ class _ChatScreenState extends State<ChatScreen> {
         imageFile,
         SettableMetadata(contentType: 'image/jpeg'),
       );
-      // TaskSnapshot snapshot = await uploadTask.whenComplete(() => null);
       String downloadURL = await uploadTask.ref.getDownloadURL();
       return downloadURL;
     } catch (e) {
-      print(
-          'Error uploading image:________________________________________ $e');
+      if (kDebugMode) {
+        print(
+            'Error uploading image:________________________________________ $e');
+      }
       return '';
     }
   }
