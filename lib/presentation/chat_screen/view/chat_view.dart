@@ -288,6 +288,7 @@ class _ChatScreenState extends State<ChatScreen> {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
+      print(pickedFile.path);
       await _sendImageMessage(File(pickedFile.path));
     }
   }
@@ -303,9 +304,8 @@ class _ChatScreenState extends State<ChatScreen> {
   Future<void> _sendImageMessage(File imageFile) async {
     final Timestamp timestamp = Timestamp.now();
     String imageURL = await _uploadImageToStorage(imageFile);
-
     await _chatServices.sendMessage(
-      DataIntent.getUser().uid,
+      widget.chatID,
       imageURL,
       'image',
       timestamp,
@@ -319,7 +319,7 @@ class _ChatScreenState extends State<ChatScreen> {
           .child('chat_images/${DateTime.now().millisecondsSinceEpoch}');
       TaskSnapshot uploadTask = await ref.putFile(imageFile, SettableMetadata(contentType: 'image/jpeg'),);
       // TaskSnapshot snapshot = await uploadTask.whenComplete(() => null);
-      String downloadURL = await snapshot.ref.getDownloadURL();
+      String downloadURL = await uploadTask.ref.getDownloadURL();
       return downloadURL;
     } catch (e) {
       print(

@@ -58,7 +58,8 @@ class ChatServices {
       'type': type,
       'seen': false,
     };
-
+    print(content);
+    print(messageData);
     await _firestore
         .collection("chat_rooms")
         .doc(chatRoomID)
