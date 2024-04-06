@@ -4,12 +4,11 @@ import 'package:temp_house/presentation/resources/langauge_manager.dart';
 import '../../resources/color_manager.dart';
 import '../../resources/values_manager.dart';
 
-AppBar buildMainAppBar(BuildContext context,
-    Widget? title,   ) {
+AppBar buildMainAppBar(BuildContext context, Widget? title,
+    [Color color = ColorManager.transparent]) {
   return AppBar(
-
     toolbarHeight: AppSize.s80,
-    backgroundColor: ColorManager.transparent,
+    backgroundColor: color,
     centerTitle: true,
     title: title,
     scrolledUnderElevation: AppSize.s0,

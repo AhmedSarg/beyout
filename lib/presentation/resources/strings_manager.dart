@@ -110,6 +110,7 @@ class AppStrings {
   static const bathroomHome = "bathroomHome";
   static const wifiHome = "wifiHome";
   static const nearByHome = "nearByHome";
+  static const allNearbyTitle = "allNearbyTitle";
 /// profile screen
   static const profileAppBar = "profileAppBar";
   static const profileSetting = "profileSetting";

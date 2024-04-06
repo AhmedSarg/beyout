@@ -37,22 +37,30 @@ class HomePageBody extends StatelessWidget {
               margin: const EdgeInsets.symmetric(horizontal: AppMargin.m40),
               decoration: BoxDecoration(
                   color: ColorManager.offwhite.withOpacity(.12),
-                  borderRadius: BorderRadius.circular(16)
-              ),
+                  borderRadius: BorderRadius.circular(16)),
               child: Row(
                 children: [
-                  const SizedBox(width: AppSize.s10,),
-                  const Icon(Icons.search,color: ColorManager.white,),
-                  const SizedBox(width: AppSize.s5,),
-
-                  Text(AppStrings.searchTextHint.tr(),style: AppTextStyles.searchHintTextStyle(context),),
+                  const SizedBox(
+                    width: AppSize.s10,
+                  ),
+                  const Icon(
+                    Icons.search,
+                    color: ColorManager.white,
+                  ),
+                  const SizedBox(
+                    width: AppSize.s5,
+                  ),
+                  Text(
+                    AppStrings.searchTextHint.tr(),
+                    style: AppTextStyles.searchHintTextStyle(context),
+                  ),
                   const Spacer(),
-                  const Icon(Icons.tune,color: ColorManager.white),
-                  const SizedBox(width: AppSize.s10,)
-
+                  const Icon(Icons.tune, color: ColorManager.white),
+                  const SizedBox(
+                    width: AppSize.s10,
+                  )
                 ],
               ),
-
             ),
           ),
           const SizedBox(
@@ -62,8 +70,8 @@ class HomePageBody extends StatelessWidget {
             startedText: AppStrings.popularStartedTextRow.tr(),
             endedText: AppStrings.popularEndedTextRow.tr(),
             rowStartedcolor: ColorManager.white,
-            rowEndedcolor: ColorManager.tertiary.withOpacity(.4), routeName: Routes.allPopularHomesRoute,
-
+            rowEndedcolor: ColorManager.tertiary.withOpacity(.4),
+            routeName: Routes.allPopularHomesRoute,
           ),
           const SizedBox(
             height: AppSize.s20,

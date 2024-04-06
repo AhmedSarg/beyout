@@ -14,8 +14,9 @@ class PopularHomeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
-      Container(
+    return Stack(
+      children: [
+        Container(
           margin: const EdgeInsets.only(top: AppMargin.m150),
           decoration: const BoxDecoration(
             color: ColorManager.offwhite,
@@ -24,8 +25,8 @@ class PopularHomeWidget extends StatelessWidget {
               topLeft: Radius.circular(AppSize.s50),
             ),
           ),
-          padding: const EdgeInsets.symmetric( vertical:  AppPadding.p20),
-          child:  Column(
+          padding: const EdgeInsets.symmetric(vertical: AppPadding.p20),
+          child: Column(
             children: [
               const SizedBox(
                 height: AppSize.s200,
@@ -34,17 +35,15 @@ class PopularHomeWidget extends StatelessWidget {
                 startedText: AppStrings.nearByHome.tr(),
                 endedText: AppStrings.popularEndedTextRow.tr(),
                 rowStartedcolor: ColorManager.primary,
-                rowEndedcolor: ColorManager.blue, routeName: Routes.allNearByHomesRoute,
-
+                rowEndedcolor: ColorManager.blue,
+                routeName: Routes.allNearByHomesRoute,
               ),
-              GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, Routes.homeDetailsRoute);
-                  },
-                  child: const NearByHomeList()),
+              const NearByHomeList(),
             ],
-          )),
-      const HomeSlider()
-    ]);
+          ),
+        ),
+        const HomeSlider()
+      ],
+    );
   }
 }

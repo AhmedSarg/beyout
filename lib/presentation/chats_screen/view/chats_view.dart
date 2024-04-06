@@ -68,7 +68,8 @@ class ChatsScreen extends StatelessWidget {
           MaterialPageRoute(builder: (context) {
             return ChatScreen(
               receiveID: userData["participants_ids"].first,
-              receiveEmail: userData["participants_names"].first, chatID: id,
+              receiveEmail: userData["participants_names"].first,
+              chatID: id,
             );
           }),
         );

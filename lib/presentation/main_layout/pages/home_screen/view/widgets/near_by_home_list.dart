@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:temp_house/presentation/common/widget/main-divider.dart';
+import 'package:temp_house/presentation/resources/values_manager.dart';
 
 import 'near_by_home_item.dart';
 
@@ -7,24 +9,17 @@ class NearByHomeList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      physics: const NeverScrollableScrollPhysics(),
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+    return ListView.separated(
       shrinkWrap: true,
-      scrollDirection: Axis.vertical,
+      physics: const NeverScrollableScrollPhysics(),
       itemCount: 10,
-      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: 700,
-        mainAxisExtent: 150,
-        mainAxisSpacing: 8,
-        crossAxisSpacing: 8,
-
-      ),
       itemBuilder: (context, index) {
-
-        return const Padding(
-          padding: EdgeInsets.all( 10.0),
-          child: NearByHomeItem(),
+        return const NearByHomeItem();
+      },
+      separatorBuilder: (context, index) {
+        return const SizedBox(
+          height: AppSize.s20,
+          child: MainDivider(),
         );
       },
     );
