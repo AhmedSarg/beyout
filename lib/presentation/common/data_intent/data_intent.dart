@@ -1,5 +1,5 @@
+import '../../../domain/models/domain.dart';
 import '../../../domain/models/enums.dart';
-import '../../../domain/models/user_model.dart';
 
 class DataIntent {
   DataIntent._();

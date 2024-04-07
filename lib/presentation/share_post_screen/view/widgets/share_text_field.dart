@@ -5,8 +5,8 @@ import '../../../resources/color_manager.dart';
 import '../../../resources/text_styles.dart';
 import '../../../resources/values_manager.dart';
 
-class searchTextField extends StatefulWidget {
-  const searchTextField({
+class SearchTextField extends StatefulWidget {
+  const SearchTextField({
     super.key,
     required this.controller,
     required this.focusNode,
@@ -23,7 +23,7 @@ class searchTextField extends StatefulWidget {
     this.readOnly = false,
     this.validation,
     this.onTap,
-    this.surffixIcon,
+    this.surffixIcon, this.surffixIconFunc,
   });
 
   final TextEditingController controller;
@@ -35,6 +35,8 @@ class searchTextField extends StatefulWidget {
   final TextInputType textInputType;
   final IconData? prefixIcon;
   final IconData? surffixIcon;
+  final void Function()? surffixIconFunc;
+
   final Color? backgroundColor;
   final TextStyle? hintTextStyle;
   final TextStyle? labelTextStyle;
@@ -43,16 +45,17 @@ class searchTextField extends StatefulWidget {
   final String? Function(String?)? validation;
   final void Function()? onTap;
   @override
-  State<searchTextField> createState() => _MainTextFieldState();
+  State<SearchTextField> createState() => _MainTextFieldState();
 }
 
-class _MainTextFieldState extends State<searchTextField> {
+class _MainTextFieldState extends State<SearchTextField> {
   late bool hidden = widget.isObscured;
   String? errorText;
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextFormField(
 
@@ -91,9 +94,7 @@ class _MainTextFieldState extends State<searchTextField> {
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.all(AppPadding.p12),
             hintText: widget.hint,
-             prefixIcon: IconButton(onPressed: (){
-
-             },icon: Icon(
+             prefixIcon: IconButton(onPressed: widget.surffixIconFunc ,icon: Icon(
                widget.prefixIcon,
                color: Colors.white,
                size: 30,

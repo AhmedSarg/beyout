@@ -16,6 +16,7 @@ import '../main_layout/pages/profile_screen/view/need_help_screen.dart';
 import '../main_layout/pages/profile_screen/view/payment_screen.dart';
 import '../main_layout/view/main_layout_view.dart';
 import '../map_screen/view/map_screen.dart';
+import '../map_screen/view/map_screen_share.dart';
 import '../onboarding_screen/view/onboarding_view.dart';
 import '../payment_details/view/payment_details.dart';
 import '../register_screen/view/register_view.dart';
@@ -48,6 +49,7 @@ class Routes {
   static const String paymentScreenDetailsRoute = "/paymentScreenDetails";
   static const String personalInfoRoute = "/personalInfo";
   static const String addUsersRoute = "/addUsers";
+  static const String googleMapScreenShareRoute = "/googleMapScreenShare";
 
   static const String LoginRoute = "/Login";
   static const String RegisterRoute = "/Register";
@@ -99,6 +101,9 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const HomeDetails());
       case Routes.googleMapScreenRoute:
         return MaterialPageRoute(builder: (_) => const GoogleMapScreen());
+      case Routes.googleMapScreenShareRoute:
+        return MaterialPageRoute(builder: (_) => const GoogleMapScreenShare());
+
       case Routes.paymentScreenRoute:
         return MaterialPageRoute(builder: (_) => const PaymentScreen());
       case Routes.paymentScreenDetailsRoute:

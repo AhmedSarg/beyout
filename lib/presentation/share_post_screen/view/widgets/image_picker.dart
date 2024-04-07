@@ -1,14 +1,20 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:temp_house/presentation/share_post_screen/view/widgets/share_text_field.dart';
 
 import '../../../resources/strings_manager.dart';
 import '../../../resources/text_styles.dart';
 import '../../../resources/values_manager.dart';
 
-class ImagePickerField extends StatelessWidget {
-  const ImagePickerField({super.key});
+class ImagePickerField extends StatefulWidget {
+   ImagePickerField({super.key,});
 
+  @override
+  State<ImagePickerField> createState() => _ImagePickerFieldState();
+}
+
+class _ImagePickerFieldState extends State<ImagePickerField> {
   Future<void> _getImagesFromGallery(BuildContext context) async {
     final picker = ImagePicker();
     final pickedFiles = await picker.pickMultiImage();
@@ -20,6 +26,7 @@ class ImagePickerField extends StatelessWidget {
     }
     Navigator.of(context).pop();
   }
+
   Future<void> _getImagesFromCamera(BuildContext context) async {
     final picker = ImagePicker();
     List<XFile>? pickedFiles = [];
@@ -37,6 +44,7 @@ class ImagePickerField extends StatelessWidget {
 
     Navigator.of(context).pop();
   }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -54,41 +62,42 @@ class ImagePickerField extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              IconButton(
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
+               IconButton(
+                 onPressed: () {
+                   showDialog(
+                     context: context,
+                     builder: (BuildContext context) {
+                       return AlertDialog(
 
-                        content: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            IconButton(
-                              icon: const Icon(Icons.photo_library),
-                              onPressed: () {
-                                _getImagesFromGallery(context);
-                              },
-                            ),
-                            IconButton(
-                              icon: const Icon(Icons.camera_alt),
-                              onPressed: () {
-                                _getImagesFromCamera(context);
-                              },
-                            ),
-                          ],
-                        ),
+                         content: Row(
+                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                           children: [
+                             IconButton(
+                               icon: const Icon(Icons.photo_library),
+                               onPressed: () {
+                                 _getImagesFromGallery(context);
+                               },
+                             ),
+                             IconButton(
+                               icon: const Icon(Icons.camera_alt),
+                               onPressed: () {
+                                 _getImagesFromCamera(context);
+                               },
+                             ),
+                           ],
+                         ),
 
-                      );
-                    },
-                  );
-                },
-                icon: const Icon(
-                  Icons.add_photo_alternate,
-                  size: AppSize.s50,
-                  color: Colors.grey,
-                ),
-              ),
+                       );
+                     },
+                   );
+                 },
+                 icon: const Icon(
+                   Icons.add_photo_alternate,
+                   size: AppSize.s50,
+                   color: Colors.grey,
+                 ),
+               ),
+
                Text(AppStrings.addPhotos.tr(),style: AppTextStyles.sharePostTextStyle(context),)
             ],
           ),

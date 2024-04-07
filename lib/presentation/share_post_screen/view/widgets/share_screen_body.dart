@@ -53,7 +53,6 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
     '3000',
     '4000',
     '5000',
-
   ];
   @override
   Widget build(BuildContext context) {
@@ -66,13 +65,13 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
         ),
         child: Column(
           children: [
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical:  AppPadding.p10),
+             Padding(
+              padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: ImagePickerField(),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: AppPadding.p10),
-              child: searchTextField(
+              padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
+              child: SearchTextField(
                 controller: widget.viewModel.getTitleController,
                 focusNode: titleFocusNode,
                 nextFocus: priceFocusNode,
@@ -83,8 +82,8 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: AppPadding.p10),
-              child: searchTextField(
+              padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
+              child: SearchTextField(
                 controller: widget.viewModel.getPriceController,
                 focusNode: priceFocusNode,
                 nextFocus: categoryFocusNode,
@@ -96,14 +95,13 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
-              child: searchTextField(
+              child: SearchTextField(
                 controller: widget.viewModel.getCategoryController,
                 focusNode: categoryFocusNode,
                 nextFocus: condationFocusNode,
                 isObscured: false,
                 readOnly: true,
                 surffixIcon: Icons.arrow_drop_down,
-
                 validation: AppValidators.validateMartialStatus,
                 hint: AppStrings.category.tr(),
                 textInputType: TextInputType.text,
@@ -113,21 +111,21 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
                     onSelect: (v) {
                       widget.viewModel.getCategoryController.text = v;
                     },
-                    items: categoryList, title: '',
+                    items: categoryList,
+                    title: '',
                   );
                 },
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
-              child: searchTextField(
+              child: SearchTextField(
                 controller: widget.viewModel.getConditionController,
                 focusNode: condationFocusNode,
                 nextFocus: descriptionFocusNode,
                 isObscured: false,
                 readOnly: true,
                 surffixIcon: Icons.arrow_drop_down,
-
                 validation: AppValidators.validateMartialStatus,
                 hint: AppStrings.condition.tr(),
                 textInputType: TextInputType.text,
@@ -137,17 +135,17 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
                     onSelect: (v) {
                       widget.viewModel.getConditionController.text = v;
                     },
-                    items: CondationList, title: '',
+                    items: CondationList,
+                    title: '',
                   );
                 },
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: AppPadding.p10),
-              child: searchTextField(
+              padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
+              child: SearchTextField(
                 controller: widget.viewModel.getPriceController,
                 focusNode: descriptionFocusNode,
-
                 nextFocus: locationFocusNode,
                 isObscured: false,
                 validation: AppValidators.validateEmail,
@@ -155,34 +153,53 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
                 textInputType: TextInputType.text,
               ),
             ),
-            Divider(
+            const Divider(
               color: Colors.grey,
             ),
-            GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, Routes.googleMapScreenRoute);
+            // GestureDetector(
+            //   onTap: () {
+            //     Navigator.pushNamed(context, Routes.googleMapScreenRoute);
+            //
+            //   },
+            //   child: Padding(
+            //     padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
+            //     child: Container(
+            //       padding: const EdgeInsets.only(left: AppPadding.p5),
+            //       height: 52,
+            //       decoration: BoxDecoration(
+            //         border: Border.all(color: ColorManager.grey),
+            //         borderRadius: BorderRadius.circular(AppSize.s8)
+            //       ),
+            //       child: Row(
+            //         children: [
+            //           const Icon(Icons.location_on_rounded,size: AppSize.s35,color: ColorManager.grey,),
+            //           const SizedBox(width: AppSize.s5,),
+            //           Text(AppStrings.location.tr(),style:AppTextStyles.sharePostTextStyle(context) ,)
+            //
+            //         ],
+            //       ),
+            //     )
+            //   ),
+            // ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
+              child: SearchTextField(
+                controller: widget.viewModel.getLocationController,
+                focusNode: locationFocusNode,
+                readOnly: true,
+                prefixIcon: Icons.location_on_rounded,
+                surffixIconFunc: () {
+                  Navigator.pushNamed(context, Routes.googleMapScreenShareRoute);
 
-              },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
-                child: Container(
-                  padding: const EdgeInsets.only(left: AppPadding.p5),
-                  height: 52,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: ColorManager.grey),
-                    borderRadius: BorderRadius.circular(AppSize.s8)
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(Icons.location_on_rounded,size: AppSize.s35,color: ColorManager.grey,),
-                      SizedBox(width: AppSize.s5,),
-                      Text(AppStrings.location.tr(),style:AppTextStyles.sharePostTextStyle(context) ,)
-
-                    ],
-                  ),
-                )
+                },
+                nextFocus: locationFocusNode,
+                isObscured: false,
+                validation: AppValidators.validateEmail,
+                hint: AppStrings.location.tr(),
+                textInputType: TextInputType.text,
               ),
             ),
+
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p30),
               child: MainButton(

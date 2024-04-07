@@ -40,7 +40,7 @@ class PaymentDetailsBody extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: AppPadding.p20, vertical: AppPadding.p8),
-                  child: searchTextField(
+                  child: SearchTextField(
                     textInputType: TextInputType.name,
                     controller: viewModel.getCardholderController,
                     focusNode: cardholderFocusNode,
@@ -59,7 +59,7 @@ class PaymentDetailsBody extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: AppPadding.p20, vertical: AppPadding.p8),
-                  child: searchTextField(
+                  child: SearchTextField(
                     textInputType: TextInputType.phone,
                     controller: viewModel.getCardNamberController,
                     focusNode: cardNumberFocusNode,
@@ -79,7 +79,7 @@ class PaymentDetailsBody extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: AppPadding.p20, vertical: AppPadding.p8),
-                  child: searchTextField(
+                  child: SearchTextField(
                     controller: viewModel.getExpirationController,
                     focusNode: expirationFocusNode,
                     hint: 'MM / YY',
