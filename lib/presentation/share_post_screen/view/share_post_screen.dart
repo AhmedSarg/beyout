@@ -35,7 +35,7 @@ class SharePostScreen extends StatelessWidget {
             return baseBuilder(
               context,
               state,
-               SharePostScreenBody(viewModel: ShareViewModel(),),
+               SharePostScreenBody(viewModel: ShareViewModel(), ),
             );
           },
         ),

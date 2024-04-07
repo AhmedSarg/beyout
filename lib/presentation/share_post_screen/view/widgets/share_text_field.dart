@@ -8,7 +8,7 @@ import '../../../resources/values_manager.dart';
 class SearchTextField extends StatefulWidget {
   const SearchTextField({
     super.key,
-    required this.controller,
+     this.controller,
     required this.focusNode,
     required this.nextFocus,
     this.label,
@@ -23,15 +23,16 @@ class SearchTextField extends StatefulWidget {
     this.readOnly = false,
     this.validation,
     this.onTap,
-    this.surffixIcon, this.surffixIconFunc,
+    this.surffixIcon, this.surffixIconFunc,  this.initialValue,
   });
 
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final FocusNode focusNode;
   final FocusNode nextFocus;
   final bool isObscured;
   final String? label;
   final String hint;
+  final String? initialValue;
   final TextInputType textInputType;
   final IconData? prefixIcon;
   final IconData? surffixIcon;
@@ -58,7 +59,7 @@ class _MainTextFieldState extends State<SearchTextField> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextFormField(
-
+initialValue: widget.initialValue,
           controller: widget.controller,
           focusNode: widget.focusNode,
           readOnly: widget.readOnly,

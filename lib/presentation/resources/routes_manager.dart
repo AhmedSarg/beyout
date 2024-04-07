@@ -111,13 +111,13 @@ class RouteGenerator {
       case Routes.personalInfoRoute:
         return MaterialPageRoute(builder: (_) => const PersonalInfoScreen());
 
-      ///
-      // case Routes.LoginRoute:
-      //   return MaterialPageRoute(builder: (_) => LoginScreenTest());
-      // case Routes.RegisterRoute:
-      //   return MaterialPageRoute(builder: (_) => RegiesterScreenTest());
+    ///
+    // case Routes.LoginRoute:
+    //   return MaterialPageRoute(builder: (_) => LoginScreenTest());
+    // case Routes.RegisterRoute:
+    //   return MaterialPageRoute(builder: (_) => RegiesterScreenTest());
 
-      ////
+    ////
 
       default:
         return unDefinedRoute();

@@ -31,7 +31,6 @@ class _GoogleMapScreenState extends State<GoogleMapScreenShare> {
     try {
       LocationPermission permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        // User denied permission
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
@@ -48,7 +47,6 @@ class _GoogleMapScreenState extends State<GoogleMapScreenShare> {
           ),
         );
       } else if (permission == LocationPermission.deniedForever) {
-        // User denied permission permanently, take them to app settings
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
@@ -63,7 +61,6 @@ class _GoogleMapScreenState extends State<GoogleMapScreenShare> {
               ),
               TextButton(
                 onPressed: () {
-                  // Open app settings
                   Geolocator.openAppSettings();
                 },
                 child: Text('App Settings'),
@@ -72,7 +69,6 @@ class _GoogleMapScreenState extends State<GoogleMapScreenShare> {
           ),
         );
       } else {
-        // Permission granted, fetch user location
         Position position = await Geolocator.getCurrentPosition(
             desiredAccuracy: LocationAccuracy.high);
         setState(() {
@@ -92,6 +88,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreenShare> {
         return cityName;
       }
     } catch (e) {
+      print('_________________________________________');
       print('Error getting city name: $e');
     }
     return 'Unknown';
