@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:geocoding/geocoding.dart';
 
 class GoogleMapScreenShare extends StatefulWidget {
   const GoogleMapScreenShare({Key? key}) : super(key: key);
@@ -83,6 +84,35 @@ class _GoogleMapScreenState extends State<GoogleMapScreenShare> {
     }
   }
 
+  Future<String> _getNearestCity(LatLng position) async {
+    try {
+      List<Placemark> placemarks = await placemarkFromCoordinates(position.latitude, position.longitude);
+      if (placemarks.isNotEmpty) {
+        String cityName = placemarks.first.locality ?? 'Unknown';
+        return cityName;
+      }
+    } catch (e) {
+      print('Error getting city name: $e');
+    }
+    return 'Unknown';
+  }
+
+  void _onMapTap(LatLng tappedPoint) async {
+    String cityName = await _getNearestCity(tappedPoint);
+    setState(() {
+      markers.clear();
+      markers.add(
+        Marker(
+          markerId: MarkerId(tappedPoint.toString()),
+          position: tappedPoint,
+          infoWindow: InfoWindow(
+            title: cityName,
+          ),
+        ),
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,12 +123,13 @@ class _GoogleMapScreenState extends State<GoogleMapScreenShare> {
             GoogleMap(
               compassEnabled: true,
               fortyFiveDegreeImageryEnabled: true,
-               buildingsEnabled: true,
-            scrollGesturesEnabled: true,
+              buildingsEnabled: true,
+              scrollGesturesEnabled: true,
               myLocationEnabled: true,
               zoomControlsEnabled: false,
               markers: markers,
               mapType: MapType.normal,
+              onTap: _onMapTap,
               onMapCreated: (controller) {
                 googleMapController = controller;
               },
