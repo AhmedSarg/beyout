@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:temp_house/presentation/common/widget/main_button.dart';
 import 'package:temp_house/presentation/resources/color_manager.dart';
@@ -43,20 +44,22 @@ class _RatingDialogState extends State<RatingDialog> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           const SizedBox(height: AppSize.s10),
-          Row(
-            children: [
-              RatingStars(
-                onRatingChanged: (rating) {
-                  setState(() {
-                    _rating = rating;
-                  });
-                },
-              ),
-              Text(
-                '$_rating/5 ${AppStrings.feedBackStarRate.tr()}',
-                style: AppTextStyles.feedBackSubHeadTextStyle(context),
-              ), // Display current star rating
-            ],
+          FittedBox(
+            child: Row(
+              children: [
+                RatingStars(
+                  onRatingChanged: (rating) {
+                    setState(() {
+                      _rating = rating;
+                    });
+                  },
+                ),
+                Text(
+                  '$_rating/5 ${AppStrings.feedBackStarRate.tr()}',
+                  style: AppTextStyles.feedBackSubHeadTextStyle(context),
+                ), // Display current star rating
+              ],
+            ),
           ),
           const SizedBox(height: AppSize.s20),
           FeedbackText(controller: _feedbackController),
