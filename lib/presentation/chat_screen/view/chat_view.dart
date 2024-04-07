@@ -35,14 +35,12 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _messageController = TextEditingController();
   final ChatServices _chatServices = ChatServices();
-  final ScrollController _scrollController = ScrollController();
+  late final ScrollController _scrollController;
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
-    });
+    _scrollController = ScrollController();
   }
 
   @override
@@ -91,21 +89,15 @@ class _ChatScreenState extends State<ChatScreen> {
         if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
           return NoContent(content: AppStrings.chatNoMessages.tr());
         }
-        WidgetsBinding.instance.addPostFrameCallback(
-          (_) {
-            _scrollController.animateTo(
-              _scrollController.position.maxScrollExtent,
-              duration: const Duration(milliseconds: 200),
-              curve: Curves.easeInOut,
-            );
-          },
-        );
+        WidgetsBinding.instance!.addPostFrameCallback((_) {
+          _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+        });
         return ListView.builder(
           controller: _scrollController,
           itemCount: snapshot.data!.docs.length,
           itemBuilder: (context, index) {
             final message =
-                snapshot.data!.docs[index].data() as Map<String, dynamic>;
+            snapshot.data!.docs[index].data() as Map<String, dynamic>;
             final isCurrentUser =
                 message['senderID'] == DataIntent.getUser().uid;
             final messageType = message['type'];
@@ -180,8 +172,8 @@ class _ChatScreenState extends State<ChatScreen> {
             decoration: BoxDecoration(
               color: messageType == 'text'
                   ? (isCurrentUser
-                      ? ColorManager.lightBlue
-                      : ColorManager.lightGrey)
+                  ? ColorManager.lightBlue
+                  : ColorManager.lightGrey)
                   : (isCurrentUser ? Colors.transparent : Colors.transparent),
               borderRadius: BorderRadius.circular(AppSize.s8),
             ),
@@ -255,7 +247,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         decoration: InputDecoration.collapsed(
                           hintText: AppStrings.chatScreenInputHint.tr(),
                           hintStyle:
-                              AppTextStyles.chatTextFieldHintTextStyle(context),
+                          AppTextStyles.chatTextFieldHintTextStyle(context),
                         ),
                       ),
                     ),
@@ -300,6 +292,14 @@ class _ChatScreenState extends State<ChatScreen> {
         timestamp,
       );
       _messageController.clear();
+
+      WidgetsBinding.instance!.addPostFrameCallback((_) {
+        _scrollController.animateTo(
+          _scrollController.position.maxScrollExtent,
+          duration: Duration(milliseconds: 300),
+          curve: Curves.easeOut,
+        );
+      });
     }
   }
 
