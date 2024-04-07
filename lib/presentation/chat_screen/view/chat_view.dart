@@ -5,8 +5,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:temp_house/presentation/chat_screen/view/widgets/message_input.dart';
-import 'package:temp_house/presentation/common/widget/cached_image.dart';
 
 import '../../common/data_intent/data_intent.dart';
 import '../../common/widget/main_app_bar.dart';
@@ -70,12 +68,7 @@ class _ChatScreenState extends State<ChatScreen> {
           Expanded(
             child: _buildMessageList(),
           ),
-          MessageInput(
-            controller: _messageController,
-            getImagesFromCamera:_getImagesFromCamera ,
-            getImagesFromGallery: _getImagesFromGallery,
-            sendMessage: _sendMessage,
-          ),
+          _buildMessageInput(),
         ],
       ),
     );
@@ -198,10 +191,11 @@ class _ChatScreenState extends State<ChatScreen> {
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(AppSize.s8),
-                        child: CachedImage(imageUrl: messageContent,
-
+                        child: Image.network(
+                          messageContent,
                           width: MediaQuery.of(context).size.width * 0.7,
                           height: MediaQuery.of(context).size.height * 0.5,
+                          fit: BoxFit.cover,
                         ),
                       ),
                       const SizedBox(height: AppSize.s5),
@@ -212,14 +206,11 @@ class _ChatScreenState extends State<ChatScreen> {
                   style: AppTextStyles.chatTimpTimeTextStyle(context),
                 ),
                 if (isCurrentUser && seen)
-                   const Icon(
+                  const Icon(
                     Icons.done_all,
                     color: ColorManager.blue,
                     size: AppSize.s20,
                   ),
-                 // else
-                 //   Icon(Icons.done_all,color: ColorManager.blue,size: AppSize.s20,)
-
               ],
             ),
           ),
@@ -228,6 +219,62 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
+  Widget _buildMessageInput() {
+    return Column(
+      children: [
+        const Divider(color: ColorManager.offwhite),
+        Row(
+          children: [
+            Expanded(
+              child: Container(
+                margin: const EdgeInsets.symmetric(
+                  horizontal: AppMargin.m16,
+                  vertical: AppMargin.m20,
+                ),
+                padding: const EdgeInsets.symmetric(horizontal: AppPadding.p12),
+                height: AppSize.s50,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(AppSize.s20),
+                  border: Border.all(color: ColorManager.grey),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        cursorColor: ColorManager.offwhite,
+                        style: AppTextStyles.chatNoMessageTextStyle(context),
+                        controller: _messageController,
+                        decoration: InputDecoration.collapsed(
+                          hintText: AppStrings.chatScreenInputHint.tr(),
+                          hintStyle:
+                          AppTextStyles.chatTextFieldHintTextStyle(context),
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: _getImagesFromGallery,
+                      icon: const Icon(Icons.image,
+                          size: AppSize.s30, color: ColorManager.white),
+                    ),
+                    IconButton(
+                      onPressed: _getImagesFromCamera,
+                      icon: const Icon(Icons.camera_alt,
+                          size: AppSize.s30, color: ColorManager.white),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            IconButton(
+              onPressed: _sendMessage,
+              icon: const Icon(Icons.send, size: AppSize.s30),
+              color: ColorManager.white,
+            ),
+          ],
+        ),
+      ],
+    );
+  }
 
   String _formatTimestamp(dynamic timestamp) {
     DateTime dateTime = (timestamp as Timestamp).toDate();
