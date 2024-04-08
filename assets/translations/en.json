@@ -92,10 +92,27 @@
 
 
   "homeDetailsDescription": "Description",
+  "NoHomesAvailable": "No homes available Currently",
   "homeDetailsRating": "Rating",
-  "priceHome": "EGP/Month",
+  "priceHome": "EGP/",
   "bedHome": "bed",
   "bathroomHome": "bathroom",
+  "numberOfbeds": "Number Of Bed",
+  "numberOfbathroom": "Number Of Bedrooms",
+  "wifiServices": "Amenities (Wifi)",
+  "warningProces": "Warning",
+  "errorProces": "Error",
+  "succesProces": "Success",
+
+  "conditionBad"     : "Bad",
+  "conditionGood"    : "Good",
+  "conditionVeryGood": "VeryGood",
+  "categoryDaily"  : "Daily",
+  "categoryMonthly": "Montly",
+  "categoryYearly" : "Yearly",
+  "wifiServicesNo": "No",
+  "wifiServicesYes": "Yes",
+
   "wifiHome": "wifi",
   "nearByHome": "Nearby Homes",
   "allNearbyTitle": "All Nearby Homes",
@@ -121,7 +138,6 @@
   "description": "Description",
   "location": "Location",
   "publish": "Publish",
-
 
   "tapBarSearchAll": "All",
   "tapBarSearchPrice": "Price",

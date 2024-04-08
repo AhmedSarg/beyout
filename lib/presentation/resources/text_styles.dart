@@ -293,6 +293,13 @@ class AppTextStyles {
     fontSize: FontSize.f18,
   );
 
+  static TextStyle NoHomeToDisplayTextStyle(BuildContext context) => getBoldStyle(
+    fontFamily: AppLanguages.getSecondaryFont(context),
+
+    color: ColorManager.black,
+    fontSize: FontSize.f30,
+  );
+
   //# near by home
   static TextStyle nearHomeNameTextStyle(BuildContext context) => getSemiBoldStyle(
     fontFamily: AppLanguages.getSecondaryFont(context),

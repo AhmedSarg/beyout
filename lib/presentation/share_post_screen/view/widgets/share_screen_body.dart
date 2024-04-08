@@ -1,8 +1,11 @@
 import 'dart:io';
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:temp_house/presentation/common/widget/main_dialog.dart';
 import 'package:temp_house/presentation/resources/color_manager.dart';
 import 'package:temp_house/presentation/share_post_screen/home_services/home_services.dart';
 import 'package:temp_house/presentation/share_post_screen/view/widgets/share_text_field.dart';
@@ -30,7 +33,7 @@ class SharePostScreenBody extends StatefulWidget {
 }
 
 class _SharePostScreenBodyState extends State<SharePostScreenBody> {
-  final HomeServices _homeServices =HomeServices();
+  final HomeServices _homeServices = HomeServices();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final FocusNode titleFocusNode = FocusNode();
@@ -44,22 +47,32 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
   final FocusNode condationFocusNode = FocusNode();
 
   final FocusNode descriptionFocusNode = FocusNode();
-  List<String> _images = [];
+  final FocusNode bedFocusNode = FocusNode();
+  final FocusNode wifiFocusNode = FocusNode();
+  final FocusNode bathroomFocusNode = FocusNode();
+  final List<String> _images = [];
 
   final categoryList = [
-    '1000',
-    '2000',
-    '3000',
-    '4000',
-    '5000',
+    AppStrings.categoryDaily.tr(),
+    AppStrings.categoryMonthly.tr(),
+    AppStrings.categoryYearly.tr(),
+  ];
+  final wifiServices = [
+    AppStrings.wifiServicesNo.tr(),
+    AppStrings.wifiServicesYes.tr(),
   ];
   final CondationList = [
-    '1000',
-    '2000',
-    '3000',
-    '4000',
-    '5000',
+    AppStrings.conditionBad.tr(),
+    AppStrings.conditionGood.tr(),
+    AppStrings.conditionVeryGood.tr(),
   ];
+  int flage =0;
+  void _updateFlag() {
+    setState(() {
+      flage = _images.isNotEmpty ? 1 : 0;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -75,9 +88,12 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: ImagePickerField(
                 onImagePicked: (image) {
-                  setState(() {
-                    _images.add(image);
-                  });
+                  if (image != null) {
+                    setState(() {
+                      _images.add(image);
+                    });
+                    _updateFlag(); // Update the flag value
+                  }
                 },
               ),
             ),
@@ -103,7 +119,6 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
                 validation: AppValidators.validatePrice,
                 hint: AppStrings.price.tr(),
                 textInputType: TextInputType.number,
-
               ),
             ),
             Padding(
@@ -125,7 +140,7 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
                       widget.viewModel.getCategoryController.text = v;
                     },
                     items: categoryList,
-                    title: '',
+                    title: AppStrings.category.tr(),
                   );
                 },
               ),
@@ -135,7 +150,7 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
               child: SearchTextField(
                 controller: widget.viewModel.getConditionController,
                 focusNode: condationFocusNode,
-                nextFocus: descriptionFocusNode,
+                nextFocus: wifiFocusNode,
                 isObscured: false,
                 readOnly: true,
                 surffixIcon: Icons.arrow_drop_down,
@@ -149,9 +164,68 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
                       widget.viewModel.getConditionController.text = v;
                     },
                     items: CondationList,
-                    title: '',
+                    title: AppStrings.condition.tr(),
                   );
                 },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
+              child: SearchTextField(
+                controller: widget.viewModel.getWifiController,
+                focusNode: wifiFocusNode,
+                nextFocus: bedFocusNode,
+                isObscured: false,
+                readOnly: true,
+
+                surffixIcon: Icons.arrow_drop_down,
+                validation: AppValidators.validateMartialStatus,
+                hint: AppStrings.wifiServices.tr(),
+                textInputType: TextInputType.text,
+                onTap: () {
+                  showRegisterDialog(
+                    context,
+                    onSelect: (v) {
+                      widget.viewModel.getWifiController.text = v;
+                    },
+                    items: wifiServices,
+                    title: AppStrings.wifiServices.tr(),
+                  );
+                },
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
+              child: SearchTextField(
+                controller: widget.viewModel.getBedController,
+                focusNode: bedFocusNode,
+                nextFocus: bathroomFocusNode,
+                inputFormatters: [
+                  LengthLimitingTextInputFormatter(2),
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
+
+                isObscured: false,
+                validation: AppValidators.validateMartialStatus,
+                hint: AppStrings.numberOfbeds.tr(),
+                textInputType: TextInputType.number,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
+              child: SearchTextField(
+                controller: widget.viewModel.getBathRoomController,
+                focusNode: bathroomFocusNode,
+                nextFocus: descriptionFocusNode,
+                inputFormatters: [
+                  LengthLimitingTextInputFormatter(2),
+                FilteringTextInputFormatter.digitsOnly,
+                ],
+                isObscured: false,
+                validation: AppValidators.validateMartialStatus,
+                hint: AppStrings.numberOfbathroom.tr(),
+                textInputType: TextInputType.number,
               ),
             ),
             Padding(
@@ -166,10 +240,10 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
                 textInputType: TextInputType.text,
               ),
             ),
+
             const Divider(
               color: Colors.grey,
             ),
-
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: SearchTextField(
@@ -178,8 +252,8 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
                 // readOnly: true,
                 prefixIcon: Icons.location_on_rounded,
                 surffixIconFunc: () {
-                  Navigator.pushNamed(context, Routes.googleMapScreenShareRoute);
-
+                  Navigator.pushNamed(
+                      context, Routes.googleMapScreenShareRoute);
                 },
                 nextFocus: locationFocusNode,
                 isObscured: false,
@@ -188,14 +262,12 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
                 textInputType: TextInputType.text,
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p30),
               child: MainButton(
-                text: AppStrings.publish.tr(),
-                textStyle: AppTextStyles.sharePostBtnTextStyle(context),
-                onTap: publish
-              ),
+                  text: AppStrings.publish.tr(),
+                  textStyle: AppTextStyles.sharePostBtnTextStyle(context),
+                  onTap: publish),
             ),
           ],
         ),
@@ -203,9 +275,8 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
     );
   }
 
-
   void publish() {
-    if (_formKey.currentState!.validate()) {
+    if (_formKey.currentState!.validate() && flage == 1) {
       List<File> imageFiles = _images.map((path) => File(path)).toList();
 
       _homeServices.saveDataToFirestore(
@@ -213,17 +284,25 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
         price: num.parse(widget.viewModel.getPriceController.text),
         category: widget.viewModel.getCategoryController.text,
         condition: widget.viewModel.getConditionController.text,
+        wifiServices: widget.viewModel.getWifiController.text,
+        numberOfBed: widget.viewModel.getBedController.text,
+        numberOfBedrooms: widget.viewModel.getBathRoomController.text,
         description: widget.viewModel.getDescriptionController.text,
         location: widget.viewModel.getLocationController.text,
         images: imageFiles,
       );
+      MainDialog.showSuccess(context,AppStrings.succesProces.tr(),() {
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          Routes.mainLayoutRoute,
+          ModalRoute.withName('/'),
+        );
 
-      Navigator.pushNamedAndRemoveUntil(
-        context,
-        Routes.mainLayoutRoute,
-        ModalRoute.withName('/'),
-      );
+      },);
+
+    } else {
+
+      MainDialog.showError(context,AppStrings.warningProces.tr(),);
     }
   }
-
 }

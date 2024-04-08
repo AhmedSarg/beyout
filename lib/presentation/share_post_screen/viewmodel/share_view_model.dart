@@ -5,7 +5,6 @@ import '../../base/base_cubit.dart';
 
 class ShareViewModel extends BaseCubit
     implements SearchTenantViewModelInput, SearchTenantViewModelOutput {
-
   static ShareViewModel get(context) => BlocProvider.of(context);
 
   final TextEditingController _titleController = TextEditingController();
@@ -14,10 +13,9 @@ class ShareViewModel extends BaseCubit
   final TextEditingController _categoryController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
-  final TextEditingController _salaryController = TextEditingController();
-  final TextEditingController _ageController = TextEditingController();
-  final TextEditingController _martialStatusController =
-  TextEditingController();
+  final TextEditingController _bedController = TextEditingController();
+  final TextEditingController _wifiController = TextEditingController();
+  final TextEditingController _bathroomController = TextEditingController();
 
   @override
   void start() {}
@@ -35,17 +33,22 @@ class ShareViewModel extends BaseCubit
   TextEditingController get getLocationController => _locationController;
 
   @override
-  TextEditingController get getPriceController =>  _priceController;
+  TextEditingController get getPriceController => _priceController;
 
   @override
-  TextEditingController get getTitleController =>  _titleController;
+  TextEditingController get getTitleController => _titleController;
 
-
+  @override
+  TextEditingController get getBedController => _bedController;
+  @override
+  TextEditingController get getWifiController => _wifiController;
+  @override
+  TextEditingController get getBathRoomController => _bathroomController;
 }
 
 abstract class SearchTenantViewModelInput {}
 
-abstract class  SearchTenantViewModelOutput {
+abstract class SearchTenantViewModelOutput {
   TextEditingController get getTitleController;
 
   TextEditingController get getPriceController;
@@ -57,6 +60,7 @@ abstract class  SearchTenantViewModelOutput {
   TextEditingController get getDescriptionController;
 
   TextEditingController get getLocationController;
-
-
+  TextEditingController get getBedController;
+  TextEditingController get getWifiController;
+  TextEditingController get getBathRoomController;
 }

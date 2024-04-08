@@ -91,6 +91,7 @@ class AppStrings {
   static const homeNavBarFavourite = "homeNavBarFavourite";
   static const homeNavBarNotifications = "homeNavBarNotifications";
   static const homeNavBarProfile = "homeNavBarProfile";
+  static const NoHomesAvailable = "NoHomesAvailable";
 
   ///home screen
   static const searchTextHint = "searchTextHint";
@@ -134,10 +135,29 @@ class AppStrings {
   static const title = "title";
   static const price = "price";
   static const category = "category";
+  static const numberOfbeds = "numberOfbeds";
+  static const wifiServices = "wifiServices";
+  static const numberOfbathroom = "numberOfbathroom";
   static const condition = "condition";
   static const description = "description";
   static const location = "location";
   static const publish = "publish";
+
+
+  static const categoryDaily = "categoryDaily";
+  static const categoryMonthly= "categoryMonthly";
+  static const categoryYearly = "categoryYearly";
+
+  static const conditionBad = "conditionBad";
+  static const conditionGood= "conditionGood";
+  static const conditionVeryGood = "conditionVeryGood";
+
+  static const wifiServicesNo= "wifiServicesNo";
+  static const wifiServicesYes = "wifiServicesYes";
+
+  static const warningProces = "warning";
+  static const errorProces = "errorProces";
+  static const succesProces = "succesProces";
 
 // search
 

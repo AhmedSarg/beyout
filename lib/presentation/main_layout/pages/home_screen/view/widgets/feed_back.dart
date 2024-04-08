@@ -102,6 +102,8 @@ class _RatingStarsState extends State<RatingStars> {
   void _setRating(int rating) {
     setState(() {
       _rating = rating;
+      print('_____________________________________________________');
+      print(_rating);
     });
     widget.onRatingChanged(rating);
   }

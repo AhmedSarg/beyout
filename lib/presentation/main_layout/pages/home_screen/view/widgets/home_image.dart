@@ -14,10 +14,11 @@ import '../../../../../resources/values_manager.dart';
 import 'feed_back.dart';
 
 class HomeImageWidget extends StatefulWidget {
-  const HomeImageWidget({super.key, required this.price, required this.imageUrl});
+  const HomeImageWidget({super.key, required this.price, required this.imageUrl, required this.Date});
 
   final String price;
   final String imageUrl;
+  final String Date;
 
   @override
   State<HomeImageWidget> createState() => _HomeImageWidgetState();
@@ -45,10 +46,10 @@ class _HomeImageWidgetState extends State<HomeImageWidget> {
                       borderRadius: BorderRadius.circular(16)),
                   child: Padding(
                     padding: const EdgeInsets.all(AppPadding.p8),
-                    child: Text('${widget.price} ${AppStrings.priceHome.tr()}',
+                    child: Text('${widget.price} ${AppStrings.priceHome.tr()}${widget.Date} ',
                         style: AppTextStyles.homeItemPriceTextStyle(context)),
                   )),
-              Spacer(),
+              const Spacer(),
               InkWell(
                 onTap: () {
                   var snackBar = SnackBar(

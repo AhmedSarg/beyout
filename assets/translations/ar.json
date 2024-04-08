@@ -82,7 +82,7 @@
   "chatSendImage": "صورة\uD83D\uDCF7",
 
 
-  "priceHome": "جنيه مصري/شهر",
+  "priceHome": "جنيه مصري/",
   "bedHome": "سرير",
   "bathroomHome": "حمام",
   "wifiHome": "واي فاي",
@@ -96,6 +96,7 @@
   "feedBackStarRate": "نجمة",
   "feedBackTextHint": "ملاحظاتي!!!",
   "feedBackBotton": "إرسال ملاحظاتك",
+  "NoHomesAvailable": "لا توجد منازل متاحة حاليًا",
 
   "publishHomeAppBarTextRow": "قائمة جديدة ",
   "addPhotosDescription": "الصور : 0/10 . اختر الصورة الرئيسية لبطاقة بياناتك أولاً.",
@@ -104,9 +105,24 @@
   "category": "الفئة",
   "condition":"الحالة",
   "description": "الوصف",
+  "numberOfbeds": "عدد السرير",
+  "numberOfbathroom": "عدد غرف النوم",
   "location": "الموقع",
   "publish": "نشر",
   "addPhotos": "إضف الصور",
+
+  "conditionBad"     : "سيئ",
+  "conditionGood"    : "جيد",
+  "conditionVeryGood": "جيد للغاية",
+  "categoryDaily"  : "يومياً",
+  "categoryMonthly": "شهرياً",
+  "categoryYearly" : "سنويًا",
+  "wifiServicesNo": "لا يوجد",
+  "wifiServicesYes": "يوجد",
+  "wifiServices": "وسائل الراحة (واي فاي)",
+  "warningProces": "تحذير",
+  "errorProces": "خطأ في النشر",
+  "succesProces": "عملية ناجحة",
 
   "tapBarSearchAll": "الكل",
   "tapBarSearchPrice": "السعر",

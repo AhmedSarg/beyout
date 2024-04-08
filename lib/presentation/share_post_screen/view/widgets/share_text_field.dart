@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../resources/color_manager.dart';
 import '../../../resources/text_styles.dart';
 import '../../../resources/values_manager.dart';
 
 class SearchTextField extends StatefulWidget {
-  const SearchTextField({
+   SearchTextField({
     super.key,
      this.controller,
     required this.focusNode,
@@ -23,7 +24,7 @@ class SearchTextField extends StatefulWidget {
     this.readOnly = false,
     this.validation,
     this.onTap,
-    this.surffixIcon, this.surffixIconFunc,  this.initialValue,
+    this.surffixIcon, this.surffixIconFunc,  this.initialValue,this.inputFormatters
   });
 
   final TextEditingController? controller;
@@ -37,7 +38,7 @@ class SearchTextField extends StatefulWidget {
   final IconData? prefixIcon;
   final IconData? surffixIcon;
   final void Function()? surffixIconFunc;
-
+  List<TextInputFormatter>? inputFormatters;
   final Color? backgroundColor;
   final TextStyle? hintTextStyle;
   final TextStyle? labelTextStyle;
@@ -60,6 +61,7 @@ class _MainTextFieldState extends State<SearchTextField> {
       children: [
         TextFormField(
 initialValue: widget.initialValue,
+          inputFormatters: widget.inputFormatters,
           controller: widget.controller,
           focusNode: widget.focusNode,
           readOnly: widget.readOnly,
