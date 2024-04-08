@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:temp_house/presentation/resources/color_manager.dart';
+import 'package:temp_house/presentation/share_post_screen/home_services/home_services.dart';
 import 'package:temp_house/presentation/share_post_screen/view/widgets/share_text_field.dart';
 
 import '../../../common/validators/validators.dart';
@@ -27,6 +30,7 @@ class SharePostScreenBody extends StatefulWidget {
 }
 
 class _SharePostScreenBodyState extends State<SharePostScreenBody> {
+  final HomeServices _homeServices =HomeServices();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final FocusNode titleFocusNode = FocusNode();
@@ -40,6 +44,8 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
   final FocusNode condationFocusNode = FocusNode();
 
   final FocusNode descriptionFocusNode = FocusNode();
+  List<String> _images = [];
+
   final categoryList = [
     '1000',
     '2000',
@@ -67,7 +73,13 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
-              child: ImagePickerField(),
+              child: ImagePickerField(
+                onImagePicked: (image) {
+                  setState(() {
+                    _images.add(image);
+                  });
+                },
+              ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
@@ -75,10 +87,10 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
                 controller: widget.viewModel.getTitleController,
                 focusNode: titleFocusNode,
                 nextFocus: priceFocusNode,
-                validation: AppValidators.validateUsername,
+                validation: AppValidators.validateText,
                 isObscured: false,
                 hint: AppStrings.title.tr(),
-                textInputType: TextInputType.text,
+                textInputType: TextInputType.name,
               ),
             ),
             Padding(
@@ -88,9 +100,10 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
                 focusNode: priceFocusNode,
                 nextFocus: categoryFocusNode,
                 isObscured: false,
-                validation: AppValidators.validateEmail,
+                validation: AppValidators.validatePrice,
                 hint: AppStrings.price.tr(),
                 textInputType: TextInputType.number,
+
               ),
             ),
             Padding(
@@ -144,11 +157,11 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: SearchTextField(
-                controller: widget.viewModel.getPriceController,
+                controller: widget.viewModel.getDescriptionController,
                 focusNode: descriptionFocusNode,
                 nextFocus: locationFocusNode,
                 isObscured: false,
-                validation: AppValidators.validateEmail,
+                validation: AppValidators.validateText,
                 hint: AppStrings.description.tr(),
                 textInputType: TextInputType.text,
               ),
@@ -156,37 +169,13 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
             const Divider(
               color: Colors.grey,
             ),
-            // GestureDetector(
-            //   onTap: () {
-            //     Navigator.pushNamed(context, Routes.googleMapScreenRoute);
-            //
-            //   },
-            //   child: Padding(
-            //     padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
-            //     child: Container(
-            //       padding: const EdgeInsets.only(left: AppPadding.p5),
-            //       height: 52,
-            //       decoration: BoxDecoration(
-            //         border: Border.all(color: ColorManager.grey),
-            //         borderRadius: BorderRadius.circular(AppSize.s8)
-            //       ),
-            //       child: Row(
-            //         children: [
-            //           const Icon(Icons.location_on_rounded,size: AppSize.s35,color: ColorManager.grey,),
-            //           const SizedBox(width: AppSize.s5,),
-            //           Text(AppStrings.location.tr(),style:AppTextStyles.sharePostTextStyle(context) ,)
-            //
-            //         ],
-            //       ),
-            //     )
-            //   ),
-            // ),
+
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: SearchTextField(
                 controller: widget.viewModel.getLocationController,
                 focusNode: locationFocusNode,
-                readOnly: true,
+                // readOnly: true,
                 prefixIcon: Icons.location_on_rounded,
                 surffixIconFunc: () {
                   Navigator.pushNamed(context, Routes.googleMapScreenShareRoute);
@@ -194,7 +183,7 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
                 },
                 nextFocus: locationFocusNode,
                 isObscured: false,
-                validation: AppValidators.validateEmail,
+                validation: AppValidators.validateText,
                 hint: AppStrings.location.tr(),
                 textInputType: TextInputType.text,
               ),
@@ -205,15 +194,7 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
               child: MainButton(
                 text: AppStrings.publish.tr(),
                 textStyle: AppTextStyles.sharePostBtnTextStyle(context),
-                onTap: () {
-                  if (_formKey.currentState!.validate()) {
-                    Navigator.pushNamedAndRemoveUntil(
-                      context,
-                      Routes.mainLayoutRoute,
-                      ModalRoute.withName('/'),
-                    );
-                  }
-                },
+                onTap: publish
               ),
             ),
           ],
@@ -221,4 +202,28 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
       ),
     );
   }
+
+
+  void publish() {
+    if (_formKey.currentState!.validate()) {
+      List<File> imageFiles = _images.map((path) => File(path)).toList();
+
+      _homeServices.saveDataToFirestore(
+        title: widget.viewModel.getTitleController.text,
+        price: num.parse(widget.viewModel.getPriceController.text),
+        category: widget.viewModel.getCategoryController.text,
+        condition: widget.viewModel.getConditionController.text,
+        description: widget.viewModel.getDescriptionController.text,
+        location: widget.viewModel.getLocationController.text,
+        images: imageFiles,
+      );
+
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        Routes.mainLayoutRoute,
+        ModalRoute.withName('/'),
+      );
+    }
+  }
+
 }

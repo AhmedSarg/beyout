@@ -24,10 +24,10 @@ class _HomeDetailsBodyState extends State<HomeDetailsImages> {
         Center(
           child: CarouselSlider(
             items: [
-              HomeImageWidget(),
-              HomeImageWidget(),
-              HomeImageWidget(),
-              HomeImageWidget(),
+              HomeImageWidget(price: '', imageUrl: '',),
+              HomeImageWidget(price: '', imageUrl: '',),
+              HomeImageWidget(price: '', imageUrl: '',),
+              HomeImageWidget(price: '', imageUrl: '',),
 
             ],
             options: CarouselOptions(

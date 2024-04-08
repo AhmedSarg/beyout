@@ -296,7 +296,7 @@ class _ChatScreenState extends State<ChatScreen> {
       WidgetsBinding.instance!.addPostFrameCallback((_) {
         _scrollController.animateTo(
           _scrollController.position.maxScrollExtent,
-          duration: Duration(milliseconds: 300),
+          duration: const Duration(milliseconds: 300),
           curve: Curves.easeOut,
         );
       });

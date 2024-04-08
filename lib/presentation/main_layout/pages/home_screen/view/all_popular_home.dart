@@ -25,7 +25,7 @@ class AllPopularHome extends StatelessWidget {
         itemBuilder: (context, index) {
           return const buildCarouselItem(
             color: Colors.white,
-            text: '',
+            text: '', title: '', price: 0, location: '', imageUrl: '',
           );
         },
         separatorBuilder: (BuildContext context, int index) {

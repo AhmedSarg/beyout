@@ -220,5 +220,7 @@
   "validationsNumbersMustEqual11Digit": "يرجي كتابة 11 رقما",
   "validationsPasswordSpecifications": "- يجب أن يتكون من 8 احرف او اكتر\n- يجب أن يحتوي علي حروف و أرقام",
   "validationsEnterTheSamePassword": "يرجي كتابة نفس كلمة المرور",
-  "validationsUsername": "استعمل حروف و أرقام فقط"
+  "validationsUsername": "استعمل حروف و أرقام فقط",
+  "validationsTitle": "ادخل عنوان مناسب"
+
 }

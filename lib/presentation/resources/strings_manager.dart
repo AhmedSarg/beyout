@@ -251,6 +251,7 @@ class AppStrings {
   static const validationsValidEmail = "validationsValidEmail";
   static const validationsNumbersOnly = "validationsNumbersOnly";
   static const validationsUsername = "validationsUsername";
+  static const validationsTitle = "validationsTitle";
   static const validationsNumbersMustEqual14Digit =
       "validationsNumbersMustEqual14Digit";
   static const validationsNumbersMustEqual11Digit =

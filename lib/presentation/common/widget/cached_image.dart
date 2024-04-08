@@ -21,13 +21,13 @@ class CachedImage extends StatelessWidget {
   Widget build(BuildContext context) {
     String fallback;
     BoxFit fit;
-    fallback = ImageAssets.personImage; ///change this
+    // fallback = ImageAssets.personImage; ///change this
     fit = BoxFit.cover;
     return CachedNetworkImage(
       imageUrl: imageUrl,
-      width: width,
-      height: height,
-      fit: fit,
+      width: double.infinity,
+      height: double.infinity,
+      fit: BoxFit.cover,
       progressIndicatorBuilder: (context, url, downloadProgress) => Center(
         child: CircularProgressIndicator(
           value: downloadProgress.progress,
@@ -36,12 +36,7 @@ class CachedImage extends StatelessWidget {
           strokeCap: StrokeCap.round,
         ),
       ),
-      errorWidget: (context, url, error) => Image.asset(
-        fallback,
-        fit: fit,
-        height: height,
-        width: width,
-      ),
+      errorWidget: (context, url, error) => Icon(Icons.error_outline,color: Colors.red,),
     );
   }
 }

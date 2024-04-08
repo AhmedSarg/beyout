@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:temp_house/presentation/common/widget/cached_image.dart';
 
 import '../../../../../../domain/models/enums.dart';
 import '../../../../../common/data_intent/data_intent.dart';
@@ -13,7 +14,10 @@ import '../../../../../resources/values_manager.dart';
 import 'feed_back.dart';
 
 class HomeImageWidget extends StatefulWidget {
-  const HomeImageWidget({super.key});
+  const HomeImageWidget({super.key, required this.price, required this.imageUrl});
+
+  final String price;
+  final String imageUrl;
 
   @override
   State<HomeImageWidget> createState() => _HomeImageWidgetState();
@@ -29,11 +33,7 @@ class _HomeImageWidgetState extends State<HomeImageWidget> {
     return Stack(
       children: [
         Center(
-            child: Image.asset(
-          ImageAssets.homeItem,
-          fit: BoxFit.fitWidth,
-          width: double.infinity,
-        )),
+            child: CachedImage(imageUrl: widget.imageUrl,)),
         Padding(
           padding: const EdgeInsets.symmetric(
               vertical: AppPadding.p5, horizontal: AppPadding.p5),
@@ -45,7 +45,7 @@ class _HomeImageWidgetState extends State<HomeImageWidget> {
                       borderRadius: BorderRadius.circular(16)),
                   child: Padding(
                     padding: const EdgeInsets.all(AppPadding.p8),
-                    child: Text('8000 ${AppStrings.priceHome.tr()}',
+                    child: Text('${widget.price} ${AppStrings.priceHome.tr()}',
                         style: AppTextStyles.homeItemPriceTextStyle(context)),
                   )),
               Spacer(),

@@ -11,9 +11,13 @@ import '../../../../../resources/strings_manager.dart';
 import '../../../../../resources/text_styles.dart';
 
 class buildCarouselItem extends StatelessWidget {
-  const buildCarouselItem({super.key, required this.color, required this.text});
+  const buildCarouselItem({super.key, required this.color, required this.text, required this.title, required this.price, required this.location, required this.imageUrl});
   final Color color;
+  final num price;
   final String text;
+  final String title;
+  final String location;
+  final String imageUrl;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -42,13 +46,15 @@ class buildCarouselItem extends StatelessWidget {
                 horizontal: AppPadding.p8, vertical: AppPadding.p12),
             child: Column(
               children: [
-                HomeImageWidget(),
                 SizedBox(
+                    height: MediaQuery.of(context).size.height*.20,
+                    child: HomeImageWidget(price: price.toString(), imageUrl: imageUrl,)),
+                const SizedBox(
                   height: AppPadding.p5,
                 ),
                 Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.star,
                       color: Colors.orange,
                     ),
@@ -63,7 +69,7 @@ class buildCarouselItem extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    Text('Lerissa Galian Home',
+                    Text(title,
                         style: AppTextStyles.homeNameTextStyle(context)),
                   ],
                 ),
@@ -77,7 +83,7 @@ class buildCarouselItem extends StatelessWidget {
                       color: ColorManager.primary,
                     ),
                     Expanded(
-                      child: Text('11/ B, Perera lane, Colombo 06',
+                      child: Text(location,
                           overflow: TextOverflow.ellipsis,
                           style: AppTextStyles.homeAddressTextStyle(context)),
                     ),
