@@ -131,7 +131,8 @@ class AppStrings {
 // publish home post
   static const publishHomeAppBarTextRow = "publishHomeAppBarTextRow";
   static const addPhotos  = "addPhotos";
-  static const addPhotosDescription = "addPhotosDescription";
+  static const addPhotosDescription1 = "addPhotosDescription1";
+  static const addPhotosDescription2 = "addPhotosDescription2";
   static const title = "title";
   static const price = "price";
   static const category = "category";

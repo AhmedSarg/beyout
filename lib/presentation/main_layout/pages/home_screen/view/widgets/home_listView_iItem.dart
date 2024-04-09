@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:temp_house/presentation/resources/assets_manager.dart';
@@ -18,7 +19,10 @@ class BuildCarouselItem extends StatelessWidget {
     required this.imageUrl,
     required this.numnerofBeds,
     required this.wifiServices,
-    required this.numnerofbathroom, required this.date, required this.rate, required this.feedBack,
+    required this.numnerofbathroom,
+    required this.date,
+    required this.rate,
+    required this.feedBack,
   }) : super(key: key);
 
   final Color color;
@@ -68,8 +72,12 @@ class BuildCarouselItem extends StatelessWidget {
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.20,
                   child: HomeImageWidget(
-                    price: price.toString(),
-                    imageUrl: imageUrl, Date: date,
+                    price: NumberFormat.compactCurrency(
+                            locale: 'en',
+                            symbol: '',
+                            decimalDigits: 2).format(price),
+                    imageUrl: imageUrl,
+                    Date: date,
                   ),
                 ),
                 const SizedBox(height: AppPadding.p5),
@@ -111,25 +119,29 @@ class BuildCarouselItem extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: AppPadding.p10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    HomeContent(
-                      object:' ${AppStrings.bedHome.tr()} ',
-                      icon: SVGAssets.bed,
-                      number: numnerofBeds,
-                    ),
-                    HomeContent(
-                      object:' ${ AppStrings.wifiHome.tr()} ',
-                      icon: wifiServices == AppStrings.wifiServicesYes.tr() ? SVGAssets.wifi : Icons.wifi_off_outlined,
-                      number: '',
-                    ),
-                    HomeContent(
-                      object: ' ${AppStrings.bathroomHome.tr()} ',
-                      icon: SVGAssets.bathRoom,
-                      number: numnerofbathroom,
-                    ),
-                  ],
+                FittedBox(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      HomeContent(
+                        object: ' ${AppStrings.bedHome.tr()} ',
+                        icon: SVGAssets.bed,
+                        number: numnerofBeds,
+                      ),
+                      HomeContent(
+                        object: ' ${AppStrings.wifiHome.tr()} ',
+                        icon: wifiServices == AppStrings.wifiServicesYes.tr()
+                            ? SVGAssets.wifi
+                            : Icons.wifi_off_outlined,
+                        number: '',
+                      ),
+                      HomeContent(
+                        object: ' ${AppStrings.bathroomHome.tr()} ',
+                        icon: SVGAssets.bathRoom,
+                        number: numnerofbathroom,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -164,7 +176,6 @@ class HomeContent extends StatelessWidget {
           )
         else if (icon is IconData)
           Icon(
-
             icon,
             color: ColorManager.primary,
           ),
@@ -174,7 +185,6 @@ class HomeContent extends StatelessWidget {
         ),
         Text(
           overflow: TextOverflow.ellipsis,
-
           object,
           style: AppTextStyles.homeContentTextStyle(context),
         ),

@@ -11,7 +11,7 @@ class AppTextStyles {
   static TextStyle baseStatesMessageTextStyle(BuildContext context) =>
       getBoldStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
-        color: ColorManager.primary,
+        color: ColorManager.white,
         fontSize: FontSize.f22,
       );
 

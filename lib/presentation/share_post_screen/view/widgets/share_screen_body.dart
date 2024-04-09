@@ -1,20 +1,11 @@
 import 'dart:io';
-
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:temp_house/presentation/common/widget/main_dialog.dart';
-import 'package:temp_house/presentation/resources/color_manager.dart';
-import 'package:temp_house/presentation/share_post_screen/home_services/home_services.dart';
 import 'package:temp_house/presentation/share_post_screen/view/widgets/share_text_field.dart';
 
 import '../../../common/validators/validators.dart';
 import '../../../common/widget/main_button.dart';
-import '../../../common/widget/main_text_field.dart';
 import '../../../common/widget/register_field_dialog.dart';
 import '../../../resources/routes_manager.dart';
 import '../../../resources/strings_manager.dart';
@@ -23,82 +14,63 @@ import '../../../resources/values_manager.dart';
 import '../../viewmodel/share_view_model.dart';
 import 'image_picker.dart';
 
-class SharePostScreenBody extends StatefulWidget {
-  SharePostScreenBody({
+class SharePostScreenBody extends StatelessWidget {
+  const SharePostScreenBody({
     super.key,
     required this.viewModel,
+    required this.formKey,
+    required this.titleFocusNode,
+    required this.priceFocusNode,
+    required this.locationFocusNode,
+    required this.categoryFocusNode,
+    required this.conditionFocusNode,
+    required this.descriptionFocusNode,
+    required this.bedFocusNode,
+    required this.wifiFocusNode,
+    required this.bathroomFocusNode,
   });
+
   final ShareViewModel viewModel;
 
-  @override
-  State<SharePostScreenBody> createState() => _SharePostScreenBodyState();
-}
+  final GlobalKey<FormState> formKey;
 
-class _SharePostScreenBodyState extends State<SharePostScreenBody> {
-  late Position _currentPosition;
+  final FocusNode titleFocusNode;
 
-  @override
-  void initState() {
-    _getCurrentLocation();
-    super.initState();
-  }
+  final FocusNode priceFocusNode;
 
-  void _getCurrentLocation() async {
-    try {
-      Position position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high);
-      setState(() {
-        _currentPosition = position;
-      });
-    } catch (e) {
-      print("Error getting location: $e");
-    }
-  }
+  final FocusNode locationFocusNode;
 
-  final HomeServices _homeServices = HomeServices();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final FocusNode categoryFocusNode;
 
-  final FocusNode titleFocusNode = FocusNode();
+  final FocusNode conditionFocusNode;
 
-  final FocusNode priceFocusNode = FocusNode();
+  final FocusNode descriptionFocusNode;
 
-  final FocusNode locationFocusNode = FocusNode();
+  final FocusNode bedFocusNode;
 
-  final FocusNode categoryFocusNode = FocusNode();
+  final FocusNode wifiFocusNode;
 
-  final FocusNode condationFocusNode = FocusNode();
+  final FocusNode bathroomFocusNode;
 
-  final FocusNode descriptionFocusNode = FocusNode();
-  final FocusNode bedFocusNode = FocusNode();
-  final FocusNode wifiFocusNode = FocusNode();
-  final FocusNode bathroomFocusNode = FocusNode();
-  final List<String> _images = [];
-
-  final categoryList = [
+  static final categoryList = [
     AppStrings.categoryDaily.tr(),
     AppStrings.categoryMonthly.tr(),
     AppStrings.categoryYearly.tr(),
   ];
-  final wifiServices = [
+  static final wifiServices = [
     AppStrings.wifiServicesNo.tr(),
     AppStrings.wifiServicesYes.tr(),
   ];
-  final CondationList = [
+  static final conditionList = [
     AppStrings.conditionBad.tr(),
     AppStrings.conditionGood.tr(),
     AppStrings.conditionVeryGood.tr(),
   ];
-  int flage = 0;
-  void _updateFlag() {
-    setState(() {
-      flage = _images.isNotEmpty ? 1 : 0;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: _formKey,
+      key: formKey,
       child: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(
           horizontal: AppPadding.p20,
@@ -108,22 +80,29 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
-              child: ImagePickerField(
-                onImagePicked: (image) {
-                  if (image != null) {
-                    setState(() {
-                      _images.add(image);
-
-                    });
-                    _updateFlag(); // Update the flag value
-                  }
-                },
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ImagePickerField(
+                    viewModel: viewModel,
+                    onImagePicked: (image) {
+                      if (viewModel.getImages.length <= 10) {
+                        viewModel.addImage = File(image);
+                      }
+                    },
+                  ),
+                  const SizedBox(height: AppSize.s5),
+                  Text(
+                    '${AppStrings.addPhotosDescription1.tr()} ${viewModel.getImages.length}${AppStrings.addPhotosDescription2.tr()}',
+                    style: AppTextStyles.addImagesDescriptionTextStyle(context),
+                  ),
+                ],
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: SearchTextField(
-                controller: widget.viewModel.getTitleController,
+                controller: viewModel.getTitleController,
                 focusNode: titleFocusNode,
                 nextFocus: priceFocusNode,
                 validation: AppValidators.validateText,
@@ -135,7 +114,7 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: SearchTextField(
-                controller: widget.viewModel.getPriceController,
+                controller: viewModel.getPriceController,
                 focusNode: priceFocusNode,
                 nextFocus: categoryFocusNode,
                 isObscured: false,
@@ -147,9 +126,9 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: SearchTextField(
-                controller: widget.viewModel.getCategoryController,
+                controller: viewModel.getCategoryController,
                 focusNode: categoryFocusNode,
-                nextFocus: condationFocusNode,
+                nextFocus: conditionFocusNode,
                 isObscured: false,
                 readOnly: true,
                 surffixIcon: Icons.arrow_drop_down,
@@ -160,7 +139,7 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
                   showRegisterDialog(
                     context,
                     onSelect: (v) {
-                      widget.viewModel.getCategoryController.text = v;
+                      viewModel.getCategoryController.text = v;
                     },
                     items: categoryList,
                     title: AppStrings.category.tr(),
@@ -171,8 +150,8 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: SearchTextField(
-                controller: widget.viewModel.getConditionController,
-                focusNode: condationFocusNode,
+                controller: viewModel.getConditionController,
+                focusNode: conditionFocusNode,
                 nextFocus: wifiFocusNode,
                 isObscured: false,
                 readOnly: true,
@@ -184,9 +163,9 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
                   showRegisterDialog(
                     context,
                     onSelect: (v) {
-                      widget.viewModel.getConditionController.text = v;
+                      viewModel.getConditionController.text = v;
                     },
-                    items: CondationList,
+                    items: conditionList,
                     title: AppStrings.condition.tr(),
                   );
                 },
@@ -195,7 +174,7 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: SearchTextField(
-                controller: widget.viewModel.getWifiController,
+                controller: viewModel.getWifiController,
                 focusNode: wifiFocusNode,
                 nextFocus: bedFocusNode,
                 isObscured: false,
@@ -208,7 +187,7 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
                   showRegisterDialog(
                     context,
                     onSelect: (v) {
-                      widget.viewModel.getWifiController.text = v;
+                      viewModel.getWifiController.text = v;
                     },
                     items: wifiServices,
                     title: AppStrings.wifiServices.tr(),
@@ -219,7 +198,7 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: SearchTextField(
-                controller: widget.viewModel.getBedController,
+                controller: viewModel.getBedController,
                 focusNode: bedFocusNode,
                 nextFocus: bathroomFocusNode,
                 inputFormatters: [
@@ -235,7 +214,7 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: SearchTextField(
-                controller: widget.viewModel.getBathRoomController,
+                controller: viewModel.getBathRoomController,
                 focusNode: bathroomFocusNode,
                 nextFocus: descriptionFocusNode,
                 inputFormatters: [
@@ -251,7 +230,7 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: SearchTextField(
-                controller: widget.viewModel.getDescriptionController,
+                controller: viewModel.getDescriptionController,
                 focusNode: descriptionFocusNode,
                 nextFocus: locationFocusNode,
                 isObscured: false,
@@ -266,7 +245,7 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: SearchTextField(
-                controller: widget.viewModel.getLocationController,
+                controller: viewModel.getLocationController,
                 focusNode: locationFocusNode,
                 // readOnly: true,
                 prefixIcon: Icons.location_on_rounded,
@@ -284,9 +263,10 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p30),
               child: MainButton(
-                  text: AppStrings.publish.tr(),
-                  textStyle: AppTextStyles.sharePostBtnTextStyle(context),
-                  onTap: publish),
+                text: AppStrings.publish.tr(),
+                textStyle: AppTextStyles.sharePostBtnTextStyle(context),
+                onTap: publish,
+              ),
             ),
           ],
         ),
@@ -295,39 +275,26 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
   }
 
   void publish() {
-    if (_formKey.currentState!.validate() && flage == 1) {
-      List<File> imageFiles = _images.map((path) => File(path)).toList();
-
-      _homeServices.saveDataToFirestore(
-        title: widget.viewModel.getTitleController.text,
-        price: num.parse(widget.viewModel.getPriceController.text),
-        category: widget.viewModel.getCategoryController.text,
-        condition: widget.viewModel.getConditionController.text,
-        wifiServices: widget.viewModel.getWifiController.text,
-        numberOfBed: widget.viewModel.getBedController.text,
-        numberOfBedrooms: widget.viewModel.getBathRoomController.text,
-        description: widget.viewModel.getDescriptionController.text,
-        location: widget.viewModel.getLocationController.text,
-        images: imageFiles,
-        latitude: _currentPosition.latitude,
-        longitude: _currentPosition.longitude,
-      );
-      MainDialog.showSuccess(
-        context,
-        AppStrings.succesProces.tr(),
-        () {
-          Navigator.pushNamedAndRemoveUntil(
-            context,
-            Routes.mainLayoutRoute,
-            ModalRoute.withName('/'),
-          );
-        },
-      );
-    } else {
-      MainDialog.showError(
-        context,
-        AppStrings.warningProces.tr(),
-      );
+    print(viewModel.getImages.length);
+    if (formKey.currentState!.validate()) {
+      viewModel.sharePost();
     }
+    //   MainDialog.showSuccess(
+    //     context,
+    //     AppStrings.succesProces.tr(),
+    //     () {
+    //       Navigator.pushNamedAndRemoveUntil(
+    //         context,
+    //         Routes.mainLayoutRoute,
+    //         ModalRoute.withName('/'),
+    //       );
+    //     },
+    //   );
+    // } else {
+    //   MainDialog.showError(
+    //     context,
+    //     AppStrings.warningProces.tr(),
+    //   );
+    // }
   }
 }
