@@ -15,12 +15,16 @@ import '../../../../../resources/values_manager.dart';
 import 'feed_back.dart';
 
 class HomeImageWidget extends StatefulWidget {
-  const HomeImageWidget({super.key, required this.price, required this.imageUrl, required this.Date,  });
+  const HomeImageWidget({
+    super.key,
+    required this.price,
+    required this.imageUrl,
+    required this.Date,
+  });
 
   final String price;
   final String imageUrl;
   final String Date;
-
 
   @override
   State<HomeImageWidget> createState() => _HomeImageWidgetState();
@@ -31,12 +35,22 @@ class _HomeImageWidgetState extends State<HomeImageWidget> {
   bool isFavMessage = false;
 
   UserRole? userRole = DataIntent.getUserRole();
+
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Center(
-            child: CachedImage(imageUrl: widget.imageUrl,)),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(AppSize.s10),
+            ),
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            child: CachedImage(
+              imageUrl: widget.imageUrl,
+            ),
+          ),
+        ),
         Padding(
           padding: const EdgeInsets.symmetric(
               vertical: AppPadding.p5, horizontal: AppPadding.p5),
@@ -48,7 +62,8 @@ class _HomeImageWidgetState extends State<HomeImageWidget> {
                       borderRadius: BorderRadius.circular(16)),
                   child: Padding(
                     padding: const EdgeInsets.all(AppPadding.p8),
-                    child: Text('${widget.price} ${AppStrings.priceHome.tr()}${widget.Date} ',
+                    child: Text(
+                        '${widget.price} ${AppStrings.priceHome.tr()}${widget.Date} ',
                         style: AppTextStyles.homeItemPriceTextStyle(context)),
                   )),
               const Spacer(),
@@ -82,34 +97,45 @@ class _HomeImageWidgetState extends State<HomeImageWidget> {
                             : ColorManager.white,
                         size: 30,
                       )
-                    : OptionMenu(
-                        items: [
-                          OptionMenuItem(
-                            text: AppStrings.optionsMenuAddAddToFavorite.tr(),
-                            icon: isFavourite
-                                ? SvgPicture.asset(SVGAssets.favouraiteFill)
-                                : SvgPicture.asset(SVGAssets.favouraiteLight),
-                            onPressed: () {
-                              setState(() {
-                                isFavourite = !isFavourite;
-                              });
-                            },
-                          ),
-                          OptionMenuItem(
-                            text: AppStrings.optionsMenuFeedback.tr(),
-                            icon: SvgPicture.asset(SVGAssets.feedBack),
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-
-                                  return  RatingDialog();
+                    : Container(
+                        width: AppSize.s34,
+                        height: AppSize.s34,
+                        decoration: BoxDecoration(
+                          color: ColorManager.black.withOpacity(.55),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                          child: OptionMenu(
+                            items: [
+                              OptionMenuItem(
+                                text:
+                                    AppStrings.optionsMenuAddAddToFavorite.tr(),
+                                icon: isFavourite
+                                    ? SvgPicture.asset(SVGAssets.favouraiteFill)
+                                    : SvgPicture.asset(
+                                        SVGAssets.favouraiteLight),
+                                onPressed: () {
+                                  setState(() {
+                                    isFavourite = !isFavourite;
+                                  });
                                 },
-                              );
-                            },
+                              ),
+                              OptionMenuItem(
+                                text: AppStrings.optionsMenuFeedback.tr(),
+                                icon: SvgPicture.asset(SVGAssets.feedBack),
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return RatingDialog();
+                                    },
+                                  );
+                                },
+                              ),
+                            ],
+                            mainIcon: Icons.menu,
                           ),
-                        ],
-                        mainIcon: Icons.menu,
+                        ),
                       ),
               )
             ],

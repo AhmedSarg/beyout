@@ -1,11 +1,20 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:temp_house/domain/usecase/share_post_usecase.dart';
+import 'package:temp_house/presentation/base/base_states.dart';
 
 import '../../base/base_cubit.dart';
 
 class ShareViewModel extends BaseCubit
     implements SearchTenantViewModelInput, SearchTenantViewModelOutput {
   static ShareViewModel get(context) => BlocProvider.of(context);
+
+  final SharePostUseCase _sharePostUseCase;
+
+  ShareViewModel(this._sharePostUseCase);
 
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
@@ -16,6 +25,8 @@ class ShareViewModel extends BaseCubit
   final TextEditingController _bedController = TextEditingController();
   final TextEditingController _wifiController = TextEditingController();
   final TextEditingController _bathroomController = TextEditingController();
+  final List<File> _images = [];
+  late LatLng _coordinates;
 
   @override
   void start() {}
@@ -40,13 +51,67 @@ class ShareViewModel extends BaseCubit
 
   @override
   TextEditingController get getBedController => _bedController;
+
   @override
   TextEditingController get getWifiController => _wifiController;
+
   @override
   TextEditingController get getBathRoomController => _bathroomController;
+
+  @override
+  List<File> get getImages => _images;
+
+  @override
+  LatLng get getCoordinates => _coordinates;
+
+  @override
+  set setCoordinates(LatLng coordinates) {
+    _coordinates = coordinates;
+  }
+
+  @override
+  set addImage(File image) {
+    if (_images.length <= 10) {
+      _images.add(image);
+    }
+    emit(ContentState());
+  }
+
+  Future<void> sharePost() async {
+    emit(LoadingState(displayType: DisplayType.popUpDialog));
+    await _sharePostUseCase(
+      SharePostUseCaseInput(
+        title: _titleController.text.trim(),
+        price: num.parse(_priceController.text.trim()),
+        category: _categoryController.text.trim(),
+        description: _descriptionController.text.trim(),
+        location: _locationController.text.trim(),
+        numberOfBeds: int.parse(_bedController.text.trim()),
+        numberOfBathrooms: int.parse(_bathroomController.text.trim()),
+        wifi: _wifiController.text.trim() == 'Yes' ? true : false,
+        condition: _conditionController.text.trim(),
+        images: _images,
+        coordinates: const LatLng(0, 0),
+      ),
+    ).then(
+      (value) {
+        value.fold(
+          (l) {
+            emit(ErrorState(failure: l, displayType: DisplayType.popUpDialog));
+          },
+          (r) {
+            emit(SuccessState('Home Posted Successfully'));
+          },
+        );
+      },
+    );
+  }
 }
 
-abstract class SearchTenantViewModelInput {}
+abstract class SearchTenantViewModelInput {
+  set setCoordinates(LatLng coordinates);
+  set addImage(File image);
+}
 
 abstract class SearchTenantViewModelOutput {
   TextEditingController get getTitleController;
@@ -60,7 +125,14 @@ abstract class SearchTenantViewModelOutput {
   TextEditingController get getDescriptionController;
 
   TextEditingController get getLocationController;
+
   TextEditingController get getBedController;
+
   TextEditingController get getWifiController;
+
   TextEditingController get getBathRoomController;
+
+  List<File> get getImages;
+
+  LatLng get getCoordinates;
 }

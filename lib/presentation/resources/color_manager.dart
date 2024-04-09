@@ -11,7 +11,7 @@ class ColorManager {
   static const Color lightGrey = Color(0xfff5f5f5);
   static const Color darkGrey = Color(0xff00162E);
   static const Color offwhite = Color(0xffFBFFFD);
-  static  Color lightblue = Color.fromRGBO(0, 0, 0, .33);
+  static  Color lightblue = const Color.fromRGBO(0, 0, 0, .33);
   static const Color orange = Colors.orange;
   static const Color cobaltBlue  = Color(0xff000AFF);
   static const Color cobaltRed  = Color(0xff843B62);

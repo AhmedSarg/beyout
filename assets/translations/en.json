@@ -130,7 +130,8 @@
 
   "publishHomeAppBarTextRow": "New listing ",
   "addPhotos": "Add Photos ",
-  "addPhotosDescription": "Photos : 0/10 . Choose your listing’s main photo first.",
+  "addPhotosDescription1": "Photos :",
+  "addPhotosDescription2": "/10 . Choose your listing’s main photo first.",
   "title": "Title",
   "price": "Price",
   "category": "Category",

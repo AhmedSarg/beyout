@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:temp_house/app/sl.dart';
 import 'package:temp_house/presentation/chats_screen/login.dart';
 import 'package:temp_house/presentation/main_layout/pages/home_screen/view/all_nearby_home.dart';
 import 'package:temp_house/presentation/main_layout/pages/home_screen/view/all_popular_home.dart';
@@ -86,6 +87,7 @@ class RouteGenerator {
           ),
         );
       case Routes.publishHomePostRoute:
+        initSharePost();
         return MaterialPageRoute(builder: (_) => const SharePostScreen());
       case Routes.allPopularHomesRoute:
         return MaterialPageRoute(builder: (_) => const AllPopularHome());

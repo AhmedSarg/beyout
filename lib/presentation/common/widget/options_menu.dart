@@ -64,7 +64,7 @@ class OptionMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton(
-      icon:  Icon(mainIcon),
+      icon:  Icon(mainIcon, size: AppSize.s18,),
       color: ColorManager.offwhite,
       iconColor: ColorManager.white,
       offset: const Offset(-AppSize.s50, AppSize.s0),

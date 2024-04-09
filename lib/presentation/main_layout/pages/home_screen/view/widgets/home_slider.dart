@@ -16,7 +16,7 @@ class HomeSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection('Home').snapshots(),
+      stream: FirebaseFirestore.instance.collection('Homes').snapshots(),
       builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const MainCicleProcessIndicator();
@@ -52,9 +52,9 @@ class HomeSlider extends StatelessWidget {
             price: data['price'],
             location: data['location'],
             imageUrl: firstImage,
-            numnerofBeds: data['number_of_bed'],
-            wifiServices: data['wifi_services'],
-            numnerofbathroom: data['number_of_bedroomd'],
+            numnerofBeds: data['number_of_beds'].toString(),
+            wifiServices: data['wifi'] == true ? 'Yes' : 'No',
+            numnerofbathroom: data['number_of_bathrooms'].toString(),
             date: data['category'],
             rate: 2,
             feedBack: feedbackString,
@@ -72,8 +72,8 @@ class HomeSlider extends StatelessWidget {
             autoPlayInterval: const Duration(seconds: 10),
             autoPlayAnimationDuration: const Duration(milliseconds: 1200),
             autoPlayCurve: Curves.fastOutSlowIn,
-            viewportFraction: 0.70,
-            pageSnapping: false,
+            viewportFraction: 0.7,
+            pageSnapping: true,
             scrollDirection: Axis.horizontal,
             initialPage: 0,
           ),
