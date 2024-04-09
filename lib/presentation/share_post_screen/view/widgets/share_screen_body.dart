@@ -113,6 +113,7 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
                   if (image != null) {
                     setState(() {
                       _images.add(image);
+
                     });
                     _updateFlag(); // Update the flag value
                   }
