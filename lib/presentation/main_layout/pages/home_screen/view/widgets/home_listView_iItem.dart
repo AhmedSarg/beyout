@@ -18,7 +18,7 @@ class BuildCarouselItem extends StatelessWidget {
     required this.imageUrl,
     required this.numnerofBeds,
     required this.wifiServices,
-    required this.numnerofbathroom, required this.date,
+    required this.numnerofbathroom, required this.date, required this.rate, required this.feedBack,
   }) : super(key: key);
 
   final Color color;
@@ -30,6 +30,8 @@ class BuildCarouselItem extends StatelessWidget {
   final String wifiServices;
   final String numnerofbathroom;
   final String date;
+  final int rate;
+  final String feedBack;
 
   @override
   Widget build(BuildContext context) {

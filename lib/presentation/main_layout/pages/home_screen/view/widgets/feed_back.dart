@@ -1,12 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:temp_house/presentation/common/widget/main_button.dart';
-import 'package:temp_house/presentation/resources/color_manager.dart';
-import 'package:temp_house/presentation/resources/text_styles.dart';
 import 'package:temp_house/presentation/resources/values_manager.dart';
+import 'package:temp_house/presentation/share_post_screen/home_services/home_services.dart';
 
+import '../../../../../common/widget/main_button.dart';
+import '../../../../../resources/color_manager.dart';
 import '../../../../../resources/strings_manager.dart';
+import '../../../../../resources/text_styles.dart';
 
 class RatingDialog extends StatefulWidget {
   @override
@@ -14,7 +14,7 @@ class RatingDialog extends StatefulWidget {
 }
 
 class _RatingDialogState extends State<RatingDialog> {
-
+  HomeServices _homeServices = HomeServices();
   int _rating = 0;
   late TextEditingController _feedbackController;
 
@@ -72,6 +72,10 @@ class _RatingDialogState extends State<RatingDialog> {
             text: AppStrings.feedBackBotton.tr(),
             textStyle: AppTextStyles.feedBackBtnTextStyle(context),
             onTap: () {
+              // _homeServices.saveUsersFeedBackToFirestore(feedBack: [_feedbackController.text]);
+              print('_____________________');
+              print(_feedbackController.text);
+
               Navigator.pop(context);
             },
           ),
@@ -136,6 +140,8 @@ class FeedbackText extends StatefulWidget {
 
 class _FeedbackTextState extends State<FeedbackText> {
   final int maxCharacters = 150;
+  HomeServices _homeServices = HomeServices();
+  String feedBack = '';
 
   @override
   Widget build(BuildContext context) {
@@ -148,11 +154,16 @@ class _FeedbackTextState extends State<FeedbackText> {
           decoration: InputDecoration(
             hintText: AppStrings.feedBackTextHint.tr(),
             border: OutlineInputBorder(),
-            errorText: widget.controller.text.length > maxCharacters
+            errorText: widget.controller.text != null && widget.controller.text.length > maxCharacters
                 ? 'Feedback exceeds $maxCharacters characters'
                 : null,
           ),
           maxLines: 3,
+onFieldSubmitted: (value) {
+  _homeServices.saveUsersFeedBackToFirestore(homeId: '7m9hVubc2p7WA05HJIF4', feedback: value);
+  print('__________________________');
+  print(value);
+},
         ),
         const SizedBox(height: AppPadding.p10),
       ],

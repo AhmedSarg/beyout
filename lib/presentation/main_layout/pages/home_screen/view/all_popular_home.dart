@@ -44,7 +44,7 @@ class AllPopularHome extends StatelessWidget {
               imageUrl: firstImage,
               numnerofBeds: data['number_of_bed'],
               wifiServices: data['wifi_services'],
-              numnerofbathroom: data['number_of_bedroomd'], date: data['category'],
+              numnerofbathroom: data['number_of_bedroomd'], date: data['category'], rate: 3, feedBack: data['category'],
             );
           }).toList();
 

@@ -22,11 +22,12 @@ class HomeSlider extends StatelessWidget {
           return const MainCicleProcessIndicator();
         }
         if (snapshot.hasError) {
-          return Center(
-              child: Text('Error: ${snapshot.error}'));
+          return Center(child: Text('Error: ${snapshot.error}'));
         }
         if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-           NoHomesAvailable(text: AppStrings.NoHomesAvailable.tr(),);
+          NoHomesAvailable(
+            text: AppStrings.NoHomesAvailable.tr(),
+          );
         }
 
         final items = snapshot.data!.docs.map((DocumentSnapshot document) {
@@ -34,6 +35,16 @@ class HomeSlider extends StatelessWidget {
               document.data() as Map<String, dynamic>;
           List<dynamic> images = data['images'] ?? [];
           String firstImage = images.isNotEmpty ? images[0] : '';
+
+          String feedbackString = '';
+          if (data['feedBack'] is List<dynamic>) {
+            List<dynamic> feedbackList = data['feedBack'];
+            if (feedbackList.isNotEmpty) {
+              feedbackString = feedbackList.join(', ');
+            }
+          } else if (data['feedBack'] is String) {
+            feedbackString = data['feedBack'];
+          }
 
           return BuildCarouselItem(
             color: ColorManager.offwhite,
@@ -43,7 +54,10 @@ class HomeSlider extends StatelessWidget {
             imageUrl: firstImage,
             numnerofBeds: data['number_of_bed'],
             wifiServices: data['wifi_services'],
-            numnerofbathroom: data['number_of_bedroomd'], date: data['category'],
+            numnerofbathroom: data['number_of_bedroomd'],
+            date: data['category'],
+            rate: 2,
+            feedBack: feedbackString,
           );
         }).toList();
 

@@ -1,13 +1,14 @@
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'dart:io';
+
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class HomeServices {
   final _firestore = FirebaseFirestore.instance;
   final _storage = FirebaseStorage.instance;
 
-  Future<void> saveDataToFirestore({
+  Future<String> saveDataToFirestore({
     required String title,
     required num price,
     required String category,
@@ -18,11 +19,13 @@ class HomeServices {
     required String description,
     required String location,
     required List<File> images,
+    required double latitude,
+    required double longitude,
   }) async {
     try {
       List<String> imageUrls = await _uploadImages(images);
 
-      await _firestore.collection('Home').add({
+      DocumentReference docRef = await _firestore.collection('Home').add({
         'title': title,
         'price': price,
         'category': category,
@@ -33,11 +36,31 @@ class HomeServices {
         'description': description,
         'location': location,
         'images': imageUrls,
+        'latitude': latitude,
+        'longitude': longitude,
       });
 
       print("Data added successfully!");
+      return docRef.id;
     } catch (error) {
       print("Failed to add data: $error");
+      return '';
+    }
+  }
+
+
+  Future<void> saveUsersFeedBackToFirestore({
+    required String homeId,
+    required String feedback,
+  }) async {
+    try {
+      await _firestore.collection('Home').doc(homeId).update({
+        'feedback': FieldValue.arrayUnion([feedback]),
+      });
+
+      print("Feedback added successfully!");
+    } catch (error) {
+      print("Failed to add feedback: $error");
     }
   }
 

@@ -4,6 +4,8 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:temp_house/presentation/common/widget/main_dialog.dart';
 import 'package:temp_house/presentation/resources/color_manager.dart';
@@ -33,6 +35,26 @@ class SharePostScreenBody extends StatefulWidget {
 }
 
 class _SharePostScreenBodyState extends State<SharePostScreenBody> {
+  late Position _currentPosition;
+
+  @override
+  void initState() {
+    _getCurrentLocation();
+    super.initState();
+  }
+
+  void _getCurrentLocation() async {
+    try {
+      Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+      setState(() {
+        _currentPosition = position;
+      });
+    } catch (e) {
+      print("Error getting location: $e");
+    }
+  }
+
   final HomeServices _homeServices = HomeServices();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -66,7 +88,7 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
     AppStrings.conditionGood.tr(),
     AppStrings.conditionVeryGood.tr(),
   ];
-  int flage =0;
+  int flage = 0;
   void _updateFlag() {
     setState(() {
       flage = _images.isNotEmpty ? 1 : 0;
@@ -177,7 +199,6 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
                 nextFocus: bedFocusNode,
                 isObscured: false,
                 readOnly: true,
-
                 surffixIcon: Icons.arrow_drop_down,
                 validation: AppValidators.validateMartialStatus,
                 hint: AppStrings.wifiServices.tr(),
@@ -194,7 +215,6 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
                 },
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: SearchTextField(
@@ -205,7 +225,6 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
                   LengthLimitingTextInputFormatter(2),
                   FilteringTextInputFormatter.digitsOnly,
                 ],
-
                 isObscured: false,
                 validation: AppValidators.validateMartialStatus,
                 hint: AppStrings.numberOfbeds.tr(),
@@ -220,7 +239,7 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
                 nextFocus: descriptionFocusNode,
                 inputFormatters: [
                   LengthLimitingTextInputFormatter(2),
-                FilteringTextInputFormatter.digitsOnly,
+                  FilteringTextInputFormatter.digitsOnly,
                 ],
                 isObscured: false,
                 validation: AppValidators.validateMartialStatus,
@@ -240,7 +259,6 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
                 textInputType: TextInputType.text,
               ),
             ),
-
             const Divider(
               color: Colors.grey,
             ),
@@ -290,19 +308,25 @@ class _SharePostScreenBodyState extends State<SharePostScreenBody> {
         description: widget.viewModel.getDescriptionController.text,
         location: widget.viewModel.getLocationController.text,
         images: imageFiles,
+        latitude: _currentPosition.latitude,
+        longitude: _currentPosition.longitude,
       );
-      MainDialog.showSuccess(context,AppStrings.succesProces.tr(),() {
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          Routes.mainLayoutRoute,
-          ModalRoute.withName('/'),
-        );
-
-      },);
-
+      MainDialog.showSuccess(
+        context,
+        AppStrings.succesProces.tr(),
+        () {
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            Routes.mainLayoutRoute,
+            ModalRoute.withName('/'),
+          );
+        },
+      );
     } else {
-
-      MainDialog.showError(context,AppStrings.warningProces.tr(),);
+      MainDialog.showError(
+        context,
+        AppStrings.warningProces.tr(),
+      );
     }
   }
 }

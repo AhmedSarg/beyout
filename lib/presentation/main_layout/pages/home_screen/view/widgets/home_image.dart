@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:temp_house/presentation/common/widget/cached_image.dart';
+import 'package:temp_house/presentation/share_post_screen/home_services/home_services.dart';
 
 import '../../../../../../domain/models/enums.dart';
 import '../../../../../common/data_intent/data_intent.dart';
@@ -14,11 +15,12 @@ import '../../../../../resources/values_manager.dart';
 import 'feed_back.dart';
 
 class HomeImageWidget extends StatefulWidget {
-  const HomeImageWidget({super.key, required this.price, required this.imageUrl, required this.Date});
+  const HomeImageWidget({super.key, required this.price, required this.imageUrl, required this.Date,  });
 
   final String price;
   final String imageUrl;
   final String Date;
+
 
   @override
   State<HomeImageWidget> createState() => _HomeImageWidgetState();
@@ -100,7 +102,8 @@ class _HomeImageWidgetState extends State<HomeImageWidget> {
                               showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
-                                  return RatingDialog();
+
+                                  return  RatingDialog();
                                 },
                               );
                             },
