@@ -77,7 +77,7 @@ class BuildCarouselItem extends StatelessWidget {
                             symbol: '',
                             decimalDigits: 2).format(price),
                     imageUrl: imageUrl,
-                    Date: date,
+                    date: date,
                   ),
                 ),
                 const SizedBox(height: AppPadding.p5),

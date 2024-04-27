@@ -30,7 +30,7 @@ class _ImagePickerFieldState extends State<ImagePickerField> {
       for (var pickedFile in pickedFiles) {
         if (widget.viewModel.getImages.length < 10) {
           widget.onImagePicked(
-            pickedFile.path); // Invoke the callback with the image path
+            pickedFile.path);
         }
       }
     }

@@ -3,9 +3,32 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:temp_house/domain/models/enums.dart';
 
 abstract class RemoteDataSource {
-  Future<String> saveDataToFirestore({
+  Future<void> registerTenantToDataBase({
+    required String uuid,
+    required String username,
+    required String email,
+    required String phoneNumber,
+    required Gender gender,
+    required String? job,
+    required num? salary,
+    required num age,
+    required String martialStatus
+  });
+
+  Future<void> registerOwnerToDataBase({
+    required String uuid,
+    required String username,
+    required String email,
+    required String phoneNumber,
+    required Gender gender,
+    required num age,
+    required String martialStatus
+  });
+
+  Future<String> saveHomesToDateBase({
     required String title,
     required num price,
     required String category,
@@ -30,8 +53,10 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
   RemoteDataSourceImpl(this._firestore, this._firebaseStorage);
 
+
+
   @override
-  Future<String> saveDataToFirestore({
+  Future<String> saveHomesToDateBase({
     required String title,
     required num price,
     required String category,
@@ -59,6 +84,56 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   }
 
   @override
+  Future<String> registerTenantToDataBase(
+      {required String uuid,
+        required String username,
+        required String email,
+        required String phoneNumber,
+        required Gender gender,
+        required String? job,
+        required num? salary,
+        required num age,
+        required String martialStatus}) async {
+    DocumentReference docRef = await _firestore.collection('users').add({
+      'uuid': uuid,
+      'username': username,
+      'email': email,
+      'phoneNumber': phoneNumber,
+      'gender': gender,
+      'job': job,
+      'salary': salary,
+      'age': age,
+      'martialStatus': martialStatus,
+      'userType': 'tenant',
+    });
+    return docRef.id;
+  }
+
+
+  @override
+  Future<String> registerOwnerToDataBase(
+      {required String uuid,
+        required String username,
+        required String email,
+        required String phoneNumber,
+        required Gender gender,
+        required num age,
+        required String martialStatus}) async {
+    DocumentReference docRef = await _firestore.collection('users').add({
+      'uuid': uuid,
+      'username': username,
+      'email': email,
+      'phoneNumber': phoneNumber,
+      'gender': gender,
+
+      'age': age,
+      'martialStatus': martialStatus,
+      'userType': 'tenant',
+    });
+    return docRef.id;
+  }
+
+  @override
   Future<void> uploadImages(List<File> images, String homeId) async {
     List<String> imageUrls = [];
     for (File image in images) {
@@ -77,5 +152,17 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         .collection('Homes')
         .doc(homeId)
         .update({'images': imageUrls});
+  }
+
+  Future<void> addToFavorites(String userId, String homeId) async {
+    await _firestore.collection('Favorites').doc(userId).set({
+      homeId: true,
+    }, SetOptions(merge: true));
+  }
+
+  Future<void> removeFromFavorites(String userId, String homeId) async {
+    await _firestore.collection('Favorites').doc(userId).update({
+      homeId: FieldValue.delete(),
+    });
   }
 }

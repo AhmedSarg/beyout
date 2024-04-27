@@ -2,9 +2,25 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:temp_house/data/network/failure.dart';
+
+import '../../data/network/failure.dart';
+import '../models/enums.dart';
 
 abstract class Repository {
+
+  // Future<Either<Failure, void>> register({
+  //   required String username,
+  //   required String email,
+  //   required String password,
+  //   required String phoneNumber,
+  //   required String gender,
+  //   required String age,
+  //   required String maritalStatus,
+  //   required DateTime? createdAt,
+  //   required RegisterType registerType,
+  // });
+
+
   Future<Either<Failure, void>> sharePost({
     required String title,
     required num price,
@@ -18,4 +34,19 @@ abstract class Repository {
     required List<File> images,
     required LatLng coordinates,
   });
+
+  Future<Either<Failure, void>> register({
+    required String uuid,
+    required String username,
+    required String email,
+    required String phoneNumber,
+    required Gender gender,
+    required String? job,
+    required num? salary,
+    required num age,
+    required String martialStatus,
+    required RegisterType registerType,
+  });
+
+
 }

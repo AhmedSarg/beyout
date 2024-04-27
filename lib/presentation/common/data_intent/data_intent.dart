@@ -4,6 +4,13 @@ import '../../../domain/models/enums.dart';
 class DataIntent {
   DataIntent._();
 
+  static UserType _selection = UserType.none;
+
+  static void setSelection(UserType item) => _selection = item;
+
+  static UserType getSelection() {
+    return _selection;
+  }
   //------------------------------------
   //News Item
   // static NewsItemModel? _newsItemModel;

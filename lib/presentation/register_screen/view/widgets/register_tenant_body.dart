@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../common/validators/validators.dart';
 import '../../../common/widget/main_button.dart';
@@ -221,6 +223,17 @@ class RegisterTenantBody extends StatelessWidget {
                 textStyle: AppTextStyles.authButtonTextStyle(context),
                 onTap: () {
                   if (_formKey.currentState!.validate()) {
+                    // Call function to add user to Firestore
+                    addUserToFirestore(
+                      viewModel.getUsernameController.text,
+                      viewModel.getEmailController.text,
+                      viewModel.getPhoneNumberController.text,
+                      viewModel.getGenderController.text,
+                      viewModel.getJobController.text,
+                      double.parse(viewModel.getSalaryController.text),
+                      int.parse(viewModel.getAgeController.text),
+                      viewModel.getMartialStatusController.text,
+                    );
                     Navigator.pushNamedAndRemoveUntil(
                       context,
                       Routes.mainLayoutRoute,
@@ -249,4 +262,26 @@ class RegisterTenantBody extends StatelessWidget {
       ),
     );
   }
-}
+  Future<void> addUserToFirestore(String username, String email, String phoneNumber, String gender, String job, double salary, int age, String martialStatus) async {
+    try {
+      FirebaseFirestore firestore = FirebaseFirestore.instance;
+      CollectionReference users = firestore.collection('users');
+
+      String uid = const Uuid().v4();
+
+      await users.doc(uid).set({
+        'uid':uid,
+        'username': username,
+        'email': email,
+        'phoneNumber': phoneNumber,
+        'gender': gender,
+        'job': job,
+        'salary': salary,
+        'age': age,
+        'martialStatus': martialStatus,
+        'userType': 'tenant',
+      });
+    } catch (e) {
+      print('Error adding user to Firestore: $e');
+    }
+  }}

@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:uuid/uuid.dart';
 
+import '../../domain/models/enums.dart';
 import '../../domain/repository/repository.dart';
 import '../data_source/remote_data_source.dart';
 import '../network/error_handler.dart';
@@ -14,6 +16,8 @@ class RepositoryImpl implements Repository {
   // final LocalDataSource _localDataSource;
   // final CacheDataSource _cacheDataSource;
   final NetworkInfo _networkInfo;
+  // final Uuid _uuidGenerator = const Uuid();
+  final Uuid _uuidGenerator = const Uuid();
 
   RepositoryImpl(
     this._remoteDataSource,
@@ -21,6 +25,56 @@ class RepositoryImpl implements Repository {
     this._networkInfo,
     // this._cacheDataSource,
   );
+
+  // @override
+  // Future<Either<Failure, void>> register({
+  //   required String username,
+  //   required String email,
+  //   required String password,
+  //   required String phoneNumber,
+  //   required String gender,
+  //   required String age,
+  //   required String maritalStatus,
+  //   required DateTime createdAt,
+  //   required RegisterType registerType,
+  // }) async {
+  //   try {
+  //     if (await _networkInfo.isConnected) {
+  //       // String uuid = _uuidGenerator.v1();
+  //
+  //       if (registerType == RegisterType.owner) {
+  //         await _remoteDataSource.registerOwnerToDataBase(
+  //           uuid: uuid,
+  //           createdAt: DateTime.now(),
+  //           username: username,
+  //           email: email,
+  //           password: password,
+  //           phoneNumber: phoneNumber,
+  //           gender: gender,
+  //           age: age,
+  //           maritalStatus: maritalStatus,
+  //         );
+  //       } else {
+  //         await _remoteDataSource.registerTenantToDataBase(
+  //           uuid: uuid,
+  //           createdAt: DateTime.now(),
+  //           username: username,
+  //           email: email,
+  //           password: password,
+  //           phoneNumber: phoneNumber,
+  //           gender: gender,
+  //           age: age,
+  //           maritalStatus: maritalStatus,
+  //         );
+  //       }
+  //       return const Right(null);
+  //     } else {
+  //       return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+  //     }
+  //   } catch (e) {
+  //     return Left(ErrorHandler.handle(e).failure);
+  //   }
+  // }
 
   @override
   Future<Either<Failure, void>> sharePost({
@@ -38,7 +92,7 @@ class RepositoryImpl implements Repository {
   }) async {
     try {
       if (await _networkInfo.isConnected) {
-        String homeId = await _remoteDataSource.saveDataToFirestore(
+        String homeId = await _remoteDataSource.saveHomesToDateBase(
           title: title,
           price: price,
           category: category,
@@ -52,8 +106,51 @@ class RepositoryImpl implements Repository {
         );
         await _remoteDataSource.uploadImages(images, homeId);
         return const Right(null);
+      } else {
+        return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
       }
-      else {
+    } catch (e) {
+      return Left(ErrorHandler.handle(e).failure);
+    }
+  }
+
+
+
+  @override
+  Future<Either<Failure, void>> register({
+    required String uuid,
+    required String username,
+    required String email,
+    required String phoneNumber,
+    required Gender gender,
+    required String? job,
+    required num? salary,
+    required num age,
+    required String martialStatus,
+    required RegisterType registerType,
+  }) async {
+    try {
+      if (await _networkInfo.isConnected) {
+        String uuid = _uuidGenerator.v1();
+        if (registerType == RegisterType.tenant) {
+          await _remoteDataSource.registerTenantToDataBase(
+            uuid: uuid,
+
+            phoneNumber: phoneNumber,
+            email: email, username: username, gender: gender, job: job, salary: salary, age: age, martialStatus: martialStatus,
+
+          );
+        } else {
+          await _remoteDataSource.registerOwnerToDataBase(
+            uuid: uuid,
+
+            phoneNumber: phoneNumber,
+            email: email, username: username, gender: gender, age: age, martialStatus: martialStatus,
+
+          );
+        }
+        return const Right(null);
+      } else {
         return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
       }
     } catch (e) {

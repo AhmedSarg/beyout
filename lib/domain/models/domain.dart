@@ -58,10 +58,3 @@ class User {
 }
 
 
-class Home {
-  final String title;
-  final int price;
-  final String location;
-
-  Home({required this.title, required this.price, required this.location});
-}

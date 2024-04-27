@@ -19,12 +19,12 @@ class HomeImageWidget extends StatefulWidget {
     super.key,
     required this.price,
     required this.imageUrl,
-    required this.Date,
+    required this.date,
   });
 
   final String price;
   final String imageUrl;
-  final String Date;
+  final String date;
 
   @override
   State<HomeImageWidget> createState() => _HomeImageWidgetState();
@@ -63,7 +63,7 @@ class _HomeImageWidgetState extends State<HomeImageWidget> {
                   child: Padding(
                     padding: const EdgeInsets.all(AppPadding.p8),
                     child: Text(
-                        '${widget.price} ${AppStrings.priceHome.tr()}${widget.Date} ',
+                        '${widget.price} ${AppStrings.priceHome.tr()}${widget.date} ',
                         style: AppTextStyles.homeItemPriceTextStyle(context)),
                   )),
               const Spacer(),

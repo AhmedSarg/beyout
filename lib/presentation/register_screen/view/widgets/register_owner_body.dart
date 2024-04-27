@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../common/validators/validators.dart';
 import '../../../common/widget/main_button.dart';
@@ -43,7 +45,6 @@ class RegisterOwnerBody extends StatelessWidget {
     AppStrings.registerScreenMartialStatusWidowed.tr(),
   ];
 
-
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -59,7 +60,6 @@ class RegisterOwnerBody extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: MainTextField(
                 maxLines: 1,
-
                 controller: viewModel.getUsernameController,
                 focusNode: usernameFocusNode,
                 nextFocus: emailFocusNode,
@@ -74,7 +74,6 @@ class RegisterOwnerBody extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: MainTextField(
                 maxLines: 1,
-
                 controller: viewModel.getEmailController,
                 focusNode: emailFocusNode,
                 nextFocus: passwordFocusNode,
@@ -89,7 +88,6 @@ class RegisterOwnerBody extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: MainTextField(
                 maxLines: 1,
-
                 controller: viewModel.getPasswordController,
                 focusNode: passwordFocusNode,
                 nextFocus: phoneNumberFocusNode,
@@ -105,7 +103,6 @@ class RegisterOwnerBody extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: MainTextField(
                 maxLines: 1,
-
                 controller: viewModel.getPhoneNumberController,
                 focusNode: phoneNumberFocusNode,
                 nextFocus: genderFocusNode,
@@ -120,7 +117,6 @@ class RegisterOwnerBody extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: MainTextField(
                 maxLines: 1,
-
                 controller: viewModel.getGenderController,
                 focusNode: genderFocusNode,
                 nextFocus: ageFocusNode,
@@ -146,7 +142,6 @@ class RegisterOwnerBody extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: MainTextField(
                 maxLines: 1,
-
                 controller: viewModel.getAgeController,
                 focusNode: ageFocusNode,
                 label: AppStrings.registerScreenAgeLabel.tr(),
@@ -160,7 +155,6 @@ class RegisterOwnerBody extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: MainTextField(
                 maxLines: 1,
-
                 controller: viewModel.getMartialStatusController,
                 focusNode: martialStatusFocusNode,
                 label: AppStrings.registerScreenMartialStatusLabel.tr(),
@@ -181,22 +175,29 @@ class RegisterOwnerBody extends StatelessWidget {
                 },
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p30),
               child: MainButton(
-                text: AppStrings.registerScreenButton.tr(),
-                textStyle: AppTextStyles.authButtonTextStyle(context),
-                onTap: () {
-                  if (_formKey.currentState!.validate()) {
-                    Navigator.pushNamedAndRemoveUntil(
-                      context,
-                      Routes.mainLayoutRoute,
-                      ModalRoute.withName('/'),
-                    );
-                  }
-                },
-              ),
+                  text: AppStrings.registerScreenButton.tr(),
+                  textStyle: AppTextStyles.authButtonTextStyle(context),
+                  onTap: () {
+                    if (_formKey.currentState!.validate()) {
+                      addUserToFirestore(
+                        viewModel.getUsernameController.text,
+                        viewModel.getEmailController.text,
+                        viewModel.getPhoneNumberController.text,
+                        viewModel.getGenderController.text,
+                        int.parse(viewModel.getAgeController.text),
+                        viewModel.getMartialStatusController.text,
+                      );
+                      // Navigate to main layout
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        Routes.mainLayoutRoute,
+                        ModalRoute.withName('/'),
+                      );
+                    }
+                  }),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
@@ -216,5 +217,33 @@ class RegisterOwnerBody extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> addUserToFirestore(
+      String username,
+      String email,
+      String phoneNumber,
+      String gender,
+      int age,
+      String martialStatus) async {
+    try {
+      FirebaseFirestore firestore = FirebaseFirestore.instance;
+      CollectionReference users = firestore.collection('users');
+
+      String uid = const Uuid().v4();
+
+      await users.doc(uid).set({
+        'uid': uid,
+        'username': username,
+        'email': email,
+        'phoneNumber': phoneNumber,
+        'gender': gender,
+        'age': age,
+        'martialStatus': martialStatus,
+        'userType': 'owner',
+      });
+    } catch (e) {
+      print('Error adding user to Firestore: $e');
+    }
   }
 }
