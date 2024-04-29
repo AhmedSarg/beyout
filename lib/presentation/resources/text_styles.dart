@@ -281,15 +281,15 @@ class AppTextStyles {
 
 ///home screen
   static TextStyle homeDetailsNameTextStyle() => getExtraBoldStyle(
-    color: ColorManager.black,
+    color: ColorManager.white,
     fontSize: FontSize.f30,
   );
   static TextStyle homeDetailsDescriptionTextStyle() => getBoldStyle(
-    color: ColorManager.black,
+    color: ColorManager.white,
     fontSize: FontSize.f22,
   );
   static TextStyle homeDetailsDescriptionContantTextStyle() => getRegularStyle(
-    color: ColorManager.black,
+    color: ColorManager.offwhite.withOpacity(.8),
     fontSize: FontSize.f18,
   );
 
@@ -311,6 +311,11 @@ class AppTextStyles {
     fontFamily: AppLanguages.getSecondaryFont(context),
     color: ColorManager.primary.withOpacity(.5),
     fontSize: FontSize.f14,
+  );
+  static TextStyle smallTitleTextStyle(BuildContext context) => getLightStyle(
+    fontFamily: AppLanguages.getPrimaryFont(context),
+    color: ColorManager.grey,
+    fontSize: FontSize.f20,
   );
 
 

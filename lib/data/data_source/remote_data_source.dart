@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:temp_house/domain/models/enums.dart';
+import 'package:uuid/uuid.dart';
 
 abstract class RemoteDataSource {
   Future<void> registerTenantToDataBase({
@@ -68,7 +69,10 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     required String location,
     required LatLng coordinates,
   }) async {
+    String uuid = const Uuid().v4();
+
     DocumentReference docRef = await _firestore.collection('Homes').add({
+      'uuid': uuid,
       'title': title,
       'price': price,
       'category': category,
@@ -82,7 +86,6 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     });
     return docRef.id;
   }
-
   @override
   Future<String> registerTenantToDataBase(
       {required String uuid,

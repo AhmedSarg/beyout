@@ -1,13 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:temp_house/presentation/common/widget/main-divider.dart';
 import 'package:temp_house/presentation/common/widget/main_circle_processIndicator.dart';
 import 'package:temp_house/presentation/main_layout/pages/home_screen/view/widgets/home_listView_iItem.dart';
 import '../../../../common/widget/main_app_bar.dart';
 import '../../../../resources/color_manager.dart';
 import '../../../../resources/strings_manager.dart';
 import '../../../../resources/text_styles.dart';
+
 
 class AllPopularHome extends StatelessWidget {
   const AllPopularHome({Key? key}) : super(key: key);
@@ -26,7 +26,7 @@ class AllPopularHome extends StatelessWidget {
         stream: FirebaseFirestore.instance.collection('Home').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return MainCicleProcessIndicator();
+            return const MainCicleProcessIndicator();
           }
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
@@ -38,13 +38,17 @@ class AllPopularHome extends StatelessWidget {
 
             return BuildCarouselItem(
               color: ColorManager.offwhite,
+
+              id: data['uuid'],
               title: data['title'],
               price: data['price'],
               location: data['location'],
               imageUrl: firstImage,
               numnerofBeds: data['number_of_bed'],
               wifiServices: data['wifi_services'],
-              numnerofbathroom: data['number_of_bedroomd'], date: data['category'], rate: 3, feedBack: data['category'],
+              numnerofbathroom: data['number_of_bedroomd'],
+              date: data['category'],
+              description: data['description'],
             );
           }).toList();
 

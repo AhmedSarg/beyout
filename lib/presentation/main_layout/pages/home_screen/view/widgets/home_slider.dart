@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:temp_house/presentation/common/widget/main_circle_processIndicator.dart';
 import 'package:temp_house/presentation/resources/color_manager.dart';
 import 'package:temp_house/presentation/resources/strings_manager.dart';
-import 'package:temp_house/presentation/resources/text_styles.dart';
-import 'package:temp_house/presentation/resources/values_manager.dart';
+import '../../../home_details/home_Details.dart';
 import 'home_listView_iItem.dart';
 import 'no_homes_available.dart';
 
@@ -36,28 +35,39 @@ class HomeSlider extends StatelessWidget {
           List<dynamic> images = data['images'] ?? [];
           String firstImage = images.isNotEmpty ? images[0] : '';
 
-          String feedbackString = '';
-          if (data['feedBack'] is List<dynamic>) {
-            List<dynamic> feedbackList = data['feedBack'];
-            if (feedbackList.isNotEmpty) {
-              feedbackString = feedbackList.join(', ');
-            }
-          } else if (data['feedBack'] is String) {
-            feedbackString = data['feedBack'];
-          }
-
-          return BuildCarouselItem(
-            color: ColorManager.offwhite,
-            title: data['title'],
-            price: data['price'],
-            location: data['location'],
-            imageUrl: firstImage,
-            numnerofBeds: data['number_of_beds'].toString(),
-            wifiServices: data['wifi'] == true ? 'Yes' : 'No',
-            numnerofbathroom: data['number_of_bathrooms'].toString(),
-            date: data['category'],
-            rate: 2,
-            feedBack: feedbackString,
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HomeDetailsScreen(
+                    id: document.id,
+                    imageUrls: images.cast<String>(),
+                    title: data['title'],
+                    price: data['price'],
+                    numnerofBeds: data['number_of_beds'].toString(),
+                    wifiServices: data['wifi'] == true ? 'Yes' : 'No',
+                    numnerofbathroom: data['number_of_bathrooms'].toString(),
+                    date: data['category'],
+                    description: data['description'],
+                    location: data['location'],
+                  ),
+                ),
+              );
+            },
+            child: BuildCarouselItem(
+              color: ColorManager.offwhite,
+              title: data['title'],
+              price: data['price'],
+              location: data['location'],
+              imageUrl: firstImage,
+              numnerofBeds: data['number_of_beds'].toString(),
+              wifiServices: data['wifi'] == true ? 'Yes' : 'No',
+              numnerofbathroom: data['number_of_bathrooms'].toString(),
+              date: data['category'],
+              id: data['uuid'],
+              description: data['description'],
+            ),
           );
         }).toList();
 

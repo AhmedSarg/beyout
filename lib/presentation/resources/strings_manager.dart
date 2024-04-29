@@ -100,8 +100,10 @@ class AppStrings {
 
   ///home details
   static const homeDetailsDescription = "homeDetailsDescription";
+  static const homeDetailsPrice = "homeDetailsPrice";
   static const homeDetailsRating = "homeDetailsRating";
   static const homeDetailsAddToCard = "homeDetailsAddToCard";
+  static const homepostedAt = "homepostedAt";
 
 
   static const popularStartedTextRow = "popularStartedTextRow";

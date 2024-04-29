@@ -26,6 +26,7 @@ class SharePostUseCase extends BaseUseCase<SharePostUseCaseInput, void> {
       location: input.location,
       images: input.images,
       coordinates: input.coordinates,
+
     );
   }
 }
@@ -43,7 +44,7 @@ class SharePostUseCaseInput {
   final List<File> images;
   final LatLng coordinates;
 
-  SharePostUseCaseInput({
+  SharePostUseCaseInput( {
     required this.title,
     required this.price,
     required this.category,
