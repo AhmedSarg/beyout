@@ -24,6 +24,7 @@ abstract class Repository {
   Future<Either<Failure, void>> sharePost({
     required String title,
     required num price,
+    required num area,
     required String category,
     required String condition,
     required int numberOfBeds,

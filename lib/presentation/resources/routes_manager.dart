@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:temp_house/app/sl.dart';
-import 'package:temp_house/presentation/chats_screen/login.dart';
 import 'package:temp_house/presentation/main_layout/pages/home_screen/view/all_nearby_home.dart';
 import 'package:temp_house/presentation/main_layout/pages/home_screen/view/all_popular_home.dart';
 import 'package:temp_house/presentation/main_layout/pages/profile_screen/view/personal_info_screen.dart';
 import 'package:temp_house/presentation/search_screen/view/search_screen.dart';
 import '../chat_screen/view/chat_view.dart';
-import '../chats_screen/register.dart';
 import '../chats_screen/view/chats_view.dart';
-import '../home_details_screen/view/home_details.dart';
 import '../login_screen/view/login_view.dart';
 import '../main_layout/pages/notifications_screen/view/notifications_view.dart';
 import '../main_layout/pages/profile_screen/view/about_screen.dart';
@@ -99,8 +96,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => AboutScreen());
       case Routes.needHelpScreenRoute:
         return MaterialPageRoute(builder: (_) => NeedHelpScreen());
-      case Routes.homeDetailsRoute:
-        return MaterialPageRoute(builder: (_) => const HomeDetails());
+
       case Routes.googleMapScreenRoute:
         return MaterialPageRoute(builder: (_) => const GoogleMapScreen());
       case Routes.googleMapScreenShareRoute:

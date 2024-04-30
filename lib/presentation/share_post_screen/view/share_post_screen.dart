@@ -56,7 +56,7 @@ class SharePostScreen extends StatelessWidget {
                 locationFocusNode: FocusNode(),
                 priceFocusNode: FocusNode(),
                 wifiFocusNode: FocusNode(),
-                conditionFocusNode: FocusNode(),
+                conditionFocusNode: FocusNode(), areaFocusNode: FocusNode(),
               ),
             );
           },

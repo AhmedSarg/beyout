@@ -80,6 +80,7 @@ class RepositoryImpl implements Repository {
   Future<Either<Failure, void>> sharePost({
     required String title,
     required num price,
+    required num area,
     required String category,
     required String condition,
     required int numberOfBeds,
@@ -95,6 +96,7 @@ class RepositoryImpl implements Repository {
         String homeId = await _remoteDataSource.saveHomesToDateBase(
           title: title,
           price: price,
+          area: area,
           category: category,
           condition: condition,
           numberOfBeds: numberOfBeds,

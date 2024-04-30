@@ -6,6 +6,7 @@ class ImageAssets {
   static const String personImage = "${imagePath}Ellipse 57.png";
   static const String homeItem = "${imagePath}Rectangle 42.png";
   static const String call = "${imagePath}call.gif";
+  static const String map = "${imagePath}mapscreen.png";
 }
 
 class IconsAssets {

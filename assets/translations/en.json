@@ -88,6 +88,7 @@
   "chatNoUsers": "No users found.",
   "chatMessageFieldHint": "Type your message...",
   "chatSendImage": "\uD83D\uDCF7 Photo",
+  "paymentCash": "Cash",
 
 
 
@@ -135,6 +136,12 @@
   "addPhotosDescription2": "/10 . Choose your listing’s main photo first.",
   "title": "Title",
   "price": "Price",
+  "area": "Area in metres",
+  "meter": "M",
+  "call": "Call",
+  "phoneNumber": "Phone number",
+  "seeLocation": "See location",
+
   "category": "Category",
   "condition": "Condition",
   "description": "Description",

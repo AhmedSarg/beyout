@@ -25,6 +25,7 @@ class ShareViewModel extends BaseCubit
   final TextEditingController _bedController = TextEditingController();
   final TextEditingController _wifiController = TextEditingController();
   final TextEditingController _bathroomController = TextEditingController();
+  final TextEditingController _areaController = TextEditingController();
   final List<File> _images = [];
   late LatLng _coordinates;
 
@@ -57,6 +58,11 @@ class ShareViewModel extends BaseCubit
 
   @override
   TextEditingController get getBathRoomController => _bathroomController;
+
+  @override
+  TextEditingController get getAreaController => _areaController;
+
+
 
   @override
   List<File> get getImages => _images;
@@ -92,6 +98,7 @@ class ShareViewModel extends BaseCubit
         condition: _conditionController.text.trim(),
         images: _images,
         coordinates: const LatLng(0, 0),
+        area: num.parse(_areaController.text.trim()),
       ),
     ).then(
       (value) {
@@ -131,6 +138,9 @@ abstract class SearchTenantViewModelOutput {
   TextEditingController get getWifiController;
 
   TextEditingController get getBathRoomController;
+
+  TextEditingController get getAreaController;
+
 
   List<File> get getImages;
 

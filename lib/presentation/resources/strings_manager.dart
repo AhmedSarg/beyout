@@ -104,11 +104,14 @@ class AppStrings {
   static const homeDetailsRating = "homeDetailsRating";
   static const homeDetailsAddToCard = "homeDetailsAddToCard";
   static const homepostedAt = "homepostedAt";
+  static const call = "call";
+  static const seeLocation = "seeLocation";
 
 
   static const popularStartedTextRow = "popularStartedTextRow";
   static const popularEndedTextRow = "popularEndedTextRow";
   static const priceHome = "priceHome";
+  static const meter = "meter";
   static const bedHome = "bedHome";
   static const bathroomHome = "bathroomHome";
   static const wifiHome = "wifiHome";
@@ -137,12 +140,14 @@ class AppStrings {
   static const addPhotosDescription2 = "addPhotosDescription2";
   static const title = "title";
   static const price = "price";
+  static const area = "area";
   static const category = "category";
   static const numberOfbeds = "numberOfbeds";
   static const wifiServices = "wifiServices";
   static const numberOfbathroom = "numberOfbathroom";
   static const condition = "condition";
   static const description = "description";
+  static const phoneNumber = "phoneNumber";
   static const location = "location";
   static const publish = "publish";
 
@@ -238,6 +243,7 @@ class AppStrings {
 
   ///payment screen
   static const paymentScreenTitle = "paymentScreenTitle";
+  static const paymentCash = "paymentCash";
   static const paymentDetailsScreenTitle = "paymentDetailsScreenTitle";
   static const paymentNoCard = "paymentDetailsScreenTitle";
   static const paymentCardholder = "paymentCardholder";

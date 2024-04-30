@@ -152,11 +152,13 @@ class HomeContent extends StatelessWidget {
     required this.object,
     required this.icon,
     required this.number,
+    this.color,
   }) : super(key: key);
 
   final String object;
   final dynamic icon;
   final String number;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -166,7 +168,8 @@ class HomeContent extends StatelessWidget {
         if (icon is String)
           SvgPicture.asset(
             icon,
-            color: ColorManager.primary,
+            colorFilter: ColorFilter.mode(
+                color ?? ColorManager.primary, BlendMode.dstIn),
           )
         else if (icon is IconData)
           Icon(

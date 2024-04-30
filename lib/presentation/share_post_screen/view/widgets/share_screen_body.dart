@@ -2,11 +2,13 @@ import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:temp_house/presentation/share_post_screen/view/widgets/share_text_field.dart';
 
 import '../../../common/validators/validators.dart';
 import '../../../common/widget/main_button.dart';
 import '../../../common/widget/register_field_dialog.dart';
+import '../../../resources/color_manager.dart';
 import '../../../resources/routes_manager.dart';
 import '../../../resources/strings_manager.dart';
 import '../../../resources/text_styles.dart';
@@ -28,6 +30,7 @@ class SharePostScreenBody extends StatelessWidget {
     required this.bedFocusNode,
     required this.wifiFocusNode,
     required this.bathroomFocusNode,
+    required this.areaFocusNode,
   });
 
   final ShareViewModel viewModel;
@@ -51,6 +54,9 @@ class SharePostScreenBody extends StatelessWidget {
   final FocusNode wifiFocusNode;
 
   final FocusNode bathroomFocusNode;
+
+  final FocusNode areaFocusNode;
+
 
   static final categoryList = [
     AppStrings.categoryDaily.tr(),
@@ -104,11 +110,23 @@ class SharePostScreenBody extends StatelessWidget {
               child: SearchTextField(
                 controller: viewModel.getTitleController,
                 focusNode: titleFocusNode,
-                nextFocus: priceFocusNode,
+                nextFocus: areaFocusNode,
                 validation: AppValidators.validateText,
                 isObscured: false,
                 hint: AppStrings.title.tr(),
                 textInputType: TextInputType.name,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
+              child: SearchTextField(
+                controller: viewModel.getAreaController,
+                focusNode: areaFocusNode,
+                nextFocus: priceFocusNode,
+                isObscured: false,
+                validation: AppValidators.validatePrice,
+                hint: AppStrings.area.tr(),
+                textInputType: TextInputType.number,
               ),
             ),
             Padding(
@@ -230,13 +248,15 @@ class SharePostScreenBody extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: SearchTextField(
+                minLines: 1,
+                maxLines: 10,
                 controller: viewModel.getDescriptionController,
                 focusNode: descriptionFocusNode,
                 nextFocus: locationFocusNode,
                 isObscured: false,
                 validation: AppValidators.validateText,
                 hint: AppStrings.description.tr(),
-                textInputType: TextInputType.text,
+                textInputType: TextInputType.multiline,
               ),
             ),
             const Divider(
@@ -257,7 +277,7 @@ class SharePostScreenBody extends StatelessWidget {
                 isObscured: false,
                 validation: AppValidators.validateText,
                 hint: AppStrings.location.tr(),
-                textInputType: TextInputType.text,
+                textInputType: TextInputType.multiline,
               ),
             ),
             Padding(
@@ -279,22 +299,5 @@ class SharePostScreenBody extends StatelessWidget {
     if (formKey.currentState!.validate()) {
       viewModel.sharePost();
     }
-    //   MainDialog.showSuccess(
-    //     context,
-    //     AppStrings.succesProces.tr(),
-    //     () {
-    //       Navigator.pushNamedAndRemoveUntil(
-    //         context,
-    //         Routes.mainLayoutRoute,
-    //         ModalRoute.withName('/'),
-    //       );
-    //     },
-    //   );
-    // } else {
-    //   MainDialog.showError(
-    //     context,
-    //     AppStrings.warningProces.tr(),
-    //   );
-    // }
   }
 }

@@ -273,6 +273,11 @@ class AppTextStyles {
     color: ColorManager.primary.withOpacity(.5),
     fontSize: FontSize.f16,
   );
+  static TextStyle homegenertalTextStyle(BuildContext context,Color color, double fontSize ) => getSemiBoldStyle(
+    fontFamily: AppLanguages.getSecondaryFont(context),
+    color: color,
+    fontSize: fontSize,
+  );
   static TextStyle homeContentTextStyle(BuildContext context) => getSemiBoldStyle(
     fontFamily: AppLanguages.getPrimaryFont(context),
     color: ColorManager.primary.withOpacity(.5),
@@ -289,7 +294,7 @@ class AppTextStyles {
     fontSize: FontSize.f22,
   );
   static TextStyle homeDetailsDescriptionContantTextStyle() => getRegularStyle(
-    color: ColorManager.offwhite.withOpacity(.8),
+    color: ColorManager.white.withOpacity(.95),
     fontSize: FontSize.f18,
   );
 

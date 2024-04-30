@@ -17,6 +17,7 @@ class SharePostUseCase extends BaseUseCase<SharePostUseCaseInput, void> {
     return _repository.sharePost(
       title: input.title,
       price: input.price,
+      area: input.area,
       category: input.category,
       condition: input.condition,
       numberOfBeds: input.numberOfBeds,
@@ -34,6 +35,7 @@ class SharePostUseCase extends BaseUseCase<SharePostUseCaseInput, void> {
 class SharePostUseCaseInput {
   final String title;
   final num price;
+  final num area;
   final String category;
   final String condition;
   final int numberOfBeds;
@@ -44,9 +46,10 @@ class SharePostUseCaseInput {
   final List<File> images;
   final LatLng coordinates;
 
-  SharePostUseCaseInput( {
+  SharePostUseCaseInput(   {
     required this.title,
     required this.price,
+    required this.area,
     required this.category,
     required this.condition,
     required this.numberOfBeds,

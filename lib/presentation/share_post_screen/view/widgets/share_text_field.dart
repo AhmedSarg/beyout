@@ -24,7 +24,7 @@ class SearchTextField extends StatefulWidget {
     this.readOnly = false,
     this.validation,
     this.onTap,
-    this.surffixIcon, this.surffixIconFunc,  this.initialValue,this.inputFormatters
+    this.surffixIcon, this.surffixIconFunc,  this.initialValue,this.inputFormatters, this.minLines, this.maxLines
   });
 
   final TextEditingController? controller;
@@ -33,6 +33,8 @@ class SearchTextField extends StatefulWidget {
   final bool isObscured;
   final String? label;
   final String hint;
+   final int? minLines ;
+   final int? maxLines ;
   final String? initialValue;
   final TextInputType textInputType;
   final IconData? prefixIcon;
@@ -60,6 +62,8 @@ class _MainTextFieldState extends State<SearchTextField> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextFormField(
+          maxLines: widget.maxLines,
+          minLines: widget.minLines,
 initialValue: widget.initialValue,
           inputFormatters: widget.inputFormatters,
           controller: widget.controller,

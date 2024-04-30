@@ -65,7 +65,8 @@ dependencies:
   geolocator:
   geocoding:
   awesome_dialog:
-  uuid: ^4.4.0
+  uuid:
+  intl_phone_field:
 dev_dependencies:
   flutter_test:
     sdk: flutter

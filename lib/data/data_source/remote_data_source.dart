@@ -32,6 +32,7 @@ abstract class RemoteDataSource {
   Future<String> saveHomesToDateBase({
     required String title,
     required num price,
+    required num area,
     required String category,
     required String condition,
     required int numberOfBeds,
@@ -60,6 +61,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   Future<String> saveHomesToDateBase({
     required String title,
     required num price,
+    required num area,
     required String category,
     required String condition,
     required int numberOfBeds,
@@ -75,6 +77,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       'uuid': uuid,
       'title': title,
       'price': price,
+      'area': area,
       'category': category,
       'condition': condition,
       'number_of_beds': numberOfBeds,
