@@ -280,6 +280,21 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                       ),
                     ),
                     const SizedBox(height: AppSize.s15),
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: '${AppStrings.location.tr()} : ',
+                            style: AppTextStyles.homeDetailsDescriptionTextStyle(),
+                          ),
+                          TextSpan(
+                            text: widget.location,
+                            style: AppTextStyles.homeDetailsDescriptionContantTextStyle(),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: AppSize.s15),
 
                     Center(
                       child: Stack(
@@ -317,7 +332,9 @@ border: Border.all(color: ColorManager.error),
                           )
                         ],
                       ),
-                    )
+                    ),
+
+
                   ],
                 ),
               ),

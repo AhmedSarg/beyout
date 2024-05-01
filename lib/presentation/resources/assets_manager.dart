@@ -7,6 +7,7 @@ class ImageAssets {
   static const String homeItem = "${imagePath}Rectangle 42.png";
   static const String call = "${imagePath}call.gif";
   static const String map = "${imagePath}mapscreen.png";
+  static const String pin = "${imagePath}Pin_duotone_line.png";
 }
 
 class IconsAssets {

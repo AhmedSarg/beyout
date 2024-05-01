@@ -1,10 +1,9 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:temp_house/presentation/common/widget/main_app_bar.dart';
 import 'package:temp_house/presentation/main_layout/pages/home_screen/view/widgets/home_listView_iItem.dart';
-import 'package:temp_house/presentation/main_layout/pages/home_screen/view/widgets/no_homes_available.dart';
+import 'package:temp_house/presentation/resources/font_manager.dart';
 import 'package:temp_house/presentation/resources/strings_manager.dart';
 import 'package:temp_house/presentation/resources/text_styles.dart';
 
@@ -20,15 +19,16 @@ class AllNearByHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
+      backgroundColor: ColorManager.offwhite,
       appBar: buildMainAppBar(
-        context,
-        Text(
-          AppStrings.popularStartedTextRow.tr(),
-          style: AppTextStyles.loginTitleTextStyle(context),
-        ),
-      ),
+          context,
+          Text(
+            AppStrings.popularStartedTextRow.tr(),
+            style: AppTextStyles.homegenertalTextStyle(
+                context, ColorManager.white, FontSize.f24),
+          ),
+          ColorManager.primary),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('Homes').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -38,13 +38,17 @@ class AllNearByHome extends StatelessWidget {
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           }
+          if (snapshot.data == null || snapshot.data!.docs.isEmpty) {
+            return const Text('No data available');
+          }
+
           final items = snapshot.data!.docs.map((DocumentSnapshot document) {
-            final Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
+            final Map<String, dynamic> data =
+                document.data()! as Map<String, dynamic>;
             List<dynamic> images = data['images'] ?? [];
             String firstImage = images.isNotEmpty ? images[0] : '';
 
             return GestureDetector(
-
               onTap: () {
                 Navigator.push(
                   context,
@@ -60,15 +64,14 @@ class AllNearByHome extends StatelessWidget {
                       numnerofbathroom: data['number_of_bathrooms'].toString(),
                       date: data['category'],
                       description: data['description'],
-                      location: data['location'], period: data['category'],
+                      location: data['location'],
+                      period: data['category'],
                     ),
                   ),
                 );
               },
-
-              child: BuildCarouselItem(
+              child: NearByHomeItem(
                 color: ColorManager.offwhite,
-
                 title: data['title'],
                 price: data['price'],
                 location: data['location'],
@@ -84,6 +87,8 @@ class AllNearByHome extends StatelessWidget {
           }).toList();
 
           return ListView.separated(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
             itemCount: items.length,
             itemBuilder: (context, index) {
               return items[index];
@@ -100,7 +105,5 @@ class AllNearByHome extends StatelessWidget {
         },
       ),
     );
-
-
   }
 }

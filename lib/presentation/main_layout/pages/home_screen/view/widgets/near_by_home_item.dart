@@ -61,12 +61,16 @@ class _NearByHomeItemState extends State<NearByHomeItem> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        widget.title,
-                        style: AppTextStyles.nearHomeNameTextStyle(context),
+                      Expanded(
+                        child: Text(
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          widget.title,
+                          style: AppTextStyles.nearHomeNameTextStyle(context),
+                        ),
                       ),
-                      const Spacer(),
                       IconButton(
                           onPressed: () {
                             var snackBar = SnackBar(
@@ -105,6 +109,7 @@ class _NearByHomeItemState extends State<NearByHomeItem> {
                       Expanded(
                         child: Text(
                           widget.location,
+                          maxLines: 1,
                           style: AppTextStyles.nearHomeAddressTextStyle(context),
                           overflow: TextOverflow.ellipsis,
                         ),

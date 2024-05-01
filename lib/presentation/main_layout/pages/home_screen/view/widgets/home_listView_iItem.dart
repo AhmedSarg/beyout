@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:temp_house/presentation/resources/assets_manager.dart';
 import 'package:temp_house/presentation/resources/color_manager.dart';
@@ -76,26 +77,32 @@ class BuildCarouselItem extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: AppPadding.p5),
-              Row(
-                children: [
-                  const Icon(
-                    Icons.star,
-                    color: Colors.orange,
-                  ),
-                  const SizedBox(width: 3),
-                  Text(
-                    '4.4',
-                    style: AppTextStyles.homeItemRateTextStyle(context),
-                  ),
-                  Text(
-                    '(480)',
-                    style: AppTextStyles.homeItemSecondTextStyle(context),
-                  ),
-                ],
+              FittedBox(
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.star,
+                      color: Colors.orange,
+                    ),
+                    const SizedBox(width: 3),
+                    Text(
+                      '4.4',
+                      style: AppTextStyles.homeItemRateTextStyle(context),
+                    ),
+                    Text(
+                      '(480)',
+                      style: AppTextStyles.homeItemSecondTextStyle(context),
+                    ),
+                  ],
+                ),
               ),
-              Text(
-                title,
-                style: AppTextStyles.homeNameTextStyle(context),
+              Expanded(
+                child: Text(
+                  title,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: AppTextStyles.homeNameTextStyle(context),
+                ),
               ),
               const SizedBox(height: AppPadding.p5),
               Row(

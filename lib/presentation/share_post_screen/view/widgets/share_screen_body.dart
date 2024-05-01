@@ -8,6 +8,7 @@ import 'package:temp_house/presentation/share_post_screen/view/widgets/share_tex
 import '../../../common/validators/validators.dart';
 import '../../../common/widget/main_button.dart';
 import '../../../common/widget/register_field_dialog.dart';
+import '../../../map_screen/view/map_screen_share.dart';
 import '../../../resources/color_manager.dart';
 import '../../../resources/routes_manager.dart';
 import '../../../resources/strings_manager.dart';
@@ -270,8 +271,13 @@ class SharePostScreenBody extends StatelessWidget {
                 // readOnly: true,
                 prefixIcon: Icons.location_on_rounded,
                 surffixIconFunc: () {
-                  Navigator.pushNamed(
-                      context, Routes.googleMapScreenShareRoute);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => GoogleMapScreenShare(viewModel: viewModel),
+                    ),
+                  );
+
                 },
                 readOnly: true,
                 nextFocus: locationFocusNode,
