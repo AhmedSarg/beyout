@@ -1,10 +1,14 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:temp_house/presentation/share_post_screen/viewmodel/share_view_model.dart';
 
 class GoogleMapScreenShare extends StatefulWidget {
-  const GoogleMapScreenShare({Key? key}) : super(key: key);
+  final ShareViewModel? viewModel;
+
+  const GoogleMapScreenShare({Key? key,  this.viewModel}) : super(key: key);
 
   @override
   State<GoogleMapScreenShare> createState() => _GoogleMapScreenState();
@@ -29,52 +33,10 @@ class _GoogleMapScreenState extends State<GoogleMapScreenShare> {
 
   Future<void> _getUserLocation() async {
     try {
-      LocationPermission permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text('Location Permission Denied'),
-            content: Text('Please enable location services to use this feature.'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text('OK'),
-              ),
-            ],
-          ),
-        );
-      } else if (permission == LocationPermission.deniedForever) {
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text('Location Permission Denied'),
-            content: Text('Location permission is permanently denied. Please go to app settings to enable it.'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text('Cancel'),
-              ),
-              TextButton(
-                onPressed: () {
-                  Geolocator.openAppSettings();
-                },
-                child: Text('App Settings'),
-              ),
-            ],
-          ),
-        );
-      } else {
-        Position position = await Geolocator.getCurrentPosition(
-            desiredAccuracy: LocationAccuracy.high);
-        setState(() {
-          initialCameraPosition = LatLng(position.latitude, position.longitude);
-        });
-      }
+      Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+      setState(() {
+        initialCameraPosition = LatLng(position.latitude, position.longitude);
+      });
     } catch (e) {
       print('Error getting user location: $e');
     }
@@ -88,7 +50,6 @@ class _GoogleMapScreenState extends State<GoogleMapScreenShare> {
         return cityName;
       }
     } catch (e) {
-      print('_________________________________________');
       print('Error getting city name: $e');
     }
     return 'Unknown';
@@ -96,6 +57,8 @@ class _GoogleMapScreenState extends State<GoogleMapScreenShare> {
 
   void _onMapTap(LatLng tappedPoint) async {
     String cityName = await _getNearestCity(tappedPoint);
+    widget.viewModel?.getLocationController.text = cityName;
+    widget.viewModel?.setCoordinates = tappedPoint;
     setState(() {
       markers.clear();
       markers.add(
@@ -109,6 +72,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreenShare> {
       );
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +96,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreenShare> {
               },
               initialCameraPosition: CameraPosition(
                 target: initialCameraPosition!,
-                zoom: 14.0,
+                zoom: 15.0,
               ),
             ),
         ],

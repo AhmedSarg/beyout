@@ -34,7 +34,7 @@ class HomePageBody extends StatelessWidget {
             },
             child: Container(
               height: AppSize.s50,
-              margin: const EdgeInsets.symmetric(horizontal: AppMargin.m40),
+width: MediaQuery.of(context).size.width*.80,
               decoration: BoxDecoration(
                   color: ColorManager.offwhite.withOpacity(.12),
                   borderRadius: BorderRadius.circular(16)),

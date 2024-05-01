@@ -29,6 +29,7 @@ class ShareViewModel extends BaseCubit
   final List<File> _images = [];
   late LatLng _coordinates;
 
+
   @override
   void start() {}
 

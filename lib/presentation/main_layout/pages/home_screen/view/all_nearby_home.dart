@@ -1,12 +1,18 @@
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:temp_house/presentation/common/widget/main_app_bar.dart';
+import 'package:temp_house/presentation/main_layout/pages/home_screen/view/widgets/home_listView_iItem.dart';
+import 'package:temp_house/presentation/main_layout/pages/home_screen/view/widgets/no_homes_available.dart';
 import 'package:temp_house/presentation/resources/strings_manager.dart';
 import 'package:temp_house/presentation/resources/text_styles.dart';
 
+import '../../../../common/widget/main_circle_processIndicator.dart';
 import '../../../../resources/color_manager.dart';
 import '../../../../resources/routes_manager.dart';
 import '../../../../resources/values_manager.dart';
+import '../../home_details/home_Details.dart';
 import 'widgets/near_by_home_item.dart';
 
 class AllNearByHome extends StatelessWidget {
@@ -14,27 +20,87 @@ class AllNearByHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
-      backgroundColor: ColorManager.offwhite,
       appBar: buildMainAppBar(
         context,
         Text(
-          AppStrings.allNearbyTitle.tr(),
-          style: AppTextStyles.mainAppBarText(context),
+          AppStrings.popularStartedTextRow.tr(),
+          style: AppTextStyles.loginTitleTextStyle(context),
         ),
-        ColorManager.primary,
       ),
-      body: ListView.builder(
-        itemCount: 10,
-        itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(context, Routes.homeDetailsRoute);
+      body: StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance.collection('Homes').snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const MainCicleProcessIndicator();
+          }
+          if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          }
+          final items = snapshot.data!.docs.map((DocumentSnapshot document) {
+            final Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
+            List<dynamic> images = data['images'] ?? [];
+            String firstImage = images.isNotEmpty ? images[0] : '';
+
+            return GestureDetector(
+
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HomeDetailsScreen(
+                      id: document.id,
+                      imageUrls: images.cast<String>(),
+                      title: data['title'],
+                      price: data['price'],
+                      area: data['area'],
+                      numnerofBeds: data['number_of_beds'].toString(),
+                      wifiServices: data['wifi'] == true ? 'Yes' : 'No',
+                      numnerofbathroom: data['number_of_bathrooms'].toString(),
+                      date: data['category'],
+                      description: data['description'],
+                      location: data['location'], period: data['category'],
+                    ),
+                  ),
+                );
+              },
+
+              child: BuildCarouselItem(
+                color: ColorManager.offwhite,
+
+                title: data['title'],
+                price: data['price'],
+                location: data['location'],
+                imageUrl: firstImage,
+                numnerofBeds: data['number_of_beds'].toString(),
+                wifiServices: data['wifi'] == true ? 'Yes' : 'No',
+                numnerofbathroom: data['number_of_bathrooms'].toString(),
+                date: data['category'],
+                id: data['uuid'],
+                description: data['description'],
+              ),
+            );
+          }).toList();
+
+          return ListView.separated(
+            itemCount: items.length,
+            itemBuilder: (context, index) {
+              return items[index];
             },
-            child: const NearByHomeItem(),
+            separatorBuilder: (BuildContext context, int index) {
+              return const Divider(
+                indent: 22,
+                thickness: .5,
+                endIndent: 22,
+                color: Colors.grey,
+              );
+            },
           );
         },
       ),
     );
+
+
   }
 }

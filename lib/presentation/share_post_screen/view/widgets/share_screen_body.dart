@@ -273,6 +273,7 @@ class SharePostScreenBody extends StatelessWidget {
                   Navigator.pushNamed(
                       context, Routes.googleMapScreenShareRoute);
                 },
+                readOnly: true,
                 nextFocus: locationFocusNode,
                 isObscured: false,
                 validation: AppValidators.validateText,

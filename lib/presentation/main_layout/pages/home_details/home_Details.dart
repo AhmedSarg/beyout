@@ -109,9 +109,9 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                   builder: (BuildContext context) {
                     return Container(
                       width: MediaQuery.of(context).size.width,
-                      margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                      margin: const EdgeInsets.symmetric(horizontal:AppMargin.m5),
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10), // Adjust the radius as needed
+                        borderRadius: BorderRadius.circular(AppSize.s12),
                         child: CachedImage(
                           imageUrl: imageUrl,
                         ),

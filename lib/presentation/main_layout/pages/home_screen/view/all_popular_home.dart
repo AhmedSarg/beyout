@@ -7,6 +7,7 @@ import '../../../../common/widget/main_app_bar.dart';
 import '../../../../resources/color_manager.dart';
 import '../../../../resources/strings_manager.dart';
 import '../../../../resources/text_styles.dart';
+import '../../home_details/home_Details.dart';
 
 
 class AllPopularHome extends StatelessWidget {
@@ -23,7 +24,7 @@ class AllPopularHome extends StatelessWidget {
         ),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('Home').snapshots(),
+        stream: FirebaseFirestore.instance.collection('Homes').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const MainCicleProcessIndicator();
@@ -36,19 +37,43 @@ class AllPopularHome extends StatelessWidget {
             List<dynamic> images = data['images'] ?? [];
             String firstImage = images.isNotEmpty ? images[0] : '';
 
-            return BuildCarouselItem(
-              color: ColorManager.offwhite,
+            return GestureDetector(
 
-              id: data['uuid'],
-              title: data['title'],
-              price: data['price'],
-              location: data['location'],
-              imageUrl: firstImage,
-              numnerofBeds: data['number_of_bed'],
-              wifiServices: data['wifi_services'],
-              numnerofbathroom: data['number_of_bedroomd'],
-              date: data['category'],
-              description: data['description'],
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HomeDetailsScreen(
+                      id: document.id,
+                      imageUrls: images.cast<String>(),
+                      title: data['title'],
+                      price: data['price'],
+                      area: data['area'],
+                      numnerofBeds: data['number_of_beds'].toString(),
+                      wifiServices: data['wifi'] == true ? 'Yes' : 'No',
+                      numnerofbathroom: data['number_of_bathrooms'].toString(),
+                      date: data['category'],
+                      description: data['description'],
+                      location: data['location'], period: data['category'],
+                    ),
+                  ),
+                );
+              },
+
+              child: BuildCarouselItem(
+                color: ColorManager.offwhite,
+
+                title: data['title'],
+                price: data['price'],
+                location: data['location'],
+                imageUrl: firstImage,
+                numnerofBeds: data['number_of_beds'].toString(),
+                wifiServices: data['wifi'] == true ? 'Yes' : 'No',
+                numnerofbathroom: data['number_of_bathrooms'].toString(),
+                date: data['category'],
+                id: data['uuid'],
+                description: data['description'],
+              ),
             );
           }).toList();
 

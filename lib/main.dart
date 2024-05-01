@@ -31,22 +31,22 @@ void main() async {
   //   test();
   // }
 
- // DataIntent.pushUser(
- //   User(
- //     uid: 'HlAmEDaLZuV0aVnxMD1gs6Ziq2W2',
- //     email: 'abdalla1@gmail.com',
- //     name: 'Abdalla',
- //   ),
- // );
+  DataIntent.pushUser(
+    User(
+      uid: 'HlAmEDaLZuV0aVnxMD1gs6Ziq2W2',
+      email: 'abdalla1@gmail.com',
+      name: 'Abdalla',
+    ),
+  );
 
-   DataIntent.pushUser(
-     User(
-       uid: 'aF0hYQAmonRY7DX5RbgqaAyanZs2',
-       email: 'xsarg22@gmail.com',
-       name: 'Ahmed',
-     ),
-   );
-
+   // DataIntent.pushUser(
+   //   User(
+   //     uid: 'aF0hYQAmonRY7DX5RbgqaAyanZs2',
+   //     email: 'xsarg22@gmail.com',
+   //     name: 'Ahmed',
+   //   ),
+   // );
+   //
   runApp(
     EasyLocalization(
       supportedLocales: AppLanguages.locals,

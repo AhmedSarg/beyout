@@ -15,21 +15,21 @@ class FavouriteBody extends StatelessWidget {
 
     return ListView.builder(
       itemBuilder: (context, index) {
-        return GestureDetector(
-          onTap: () {
-            Navigator.pushNamed(context, Routes.homeDetailsRoute);
-          },
-          child: NearByHomeItem(
-            // onAddToFavorites: () {
-            //   // Add your logic here for adding to favorites
-            //   viewModel.addToFavorites(userId, homeId); // Pass userId and homeId
-            // },
-            // onRemoveFromFavorites: () {
-            //   // Add your logic here for removing from favorites
-            //   viewModel.removeFromFavorites(userId, homeId); // Pass userId and homeId
-            // },
-          ),
-        );
+        // return GestureDetector(
+        //   onTap: () {
+        //     Navigator.pushNamed(context, Routes.homeDetailsRoute);
+        //   },
+        //   child: NearByHomeItem(
+        //     // onAddToFavorites: () {
+        //     //   // Add your logic here for adding to favorites
+        //     //   viewModel.addToFavorites(userId, homeId); // Pass userId and homeId
+        //     // },
+        //     // onRemoveFromFavorites: () {
+        //     //   // Add your logic here for removing from favorites
+        //     //   viewModel.removeFromFavorites(userId, homeId); // Pass userId and homeId
+        //     // },
+        //   ),
+        // );
       },
       itemCount: 10,
     );
