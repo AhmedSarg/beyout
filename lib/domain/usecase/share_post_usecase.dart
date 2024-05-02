@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -44,7 +45,7 @@ class SharePostUseCaseInput {
   final String description;
   final String location;
   final List<File> images;
-  final LatLng coordinates;
+  final GeoPoint coordinates;
 
   SharePostUseCaseInput(   {
     required this.title,

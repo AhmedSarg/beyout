@@ -1,10 +1,10 @@
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-
 class GoogleMapHomeDetailsScreen extends StatefulWidget {
-  const GoogleMapHomeDetailsScreen({Key? key}) : super(key: key);
+  const GoogleMapHomeDetailsScreen({Key? key, this.coordinates}) : super(key: key);
+  final GeoPoint? coordinates;
 
   @override
   State<GoogleMapHomeDetailsScreen> createState() => _GoogleMapScreenState();
@@ -16,8 +16,17 @@ class _GoogleMapScreenState extends State<GoogleMapHomeDetailsScreen> {
 
   @override
   void initState() {
-    initialCameraPosition = const CameraPosition(
-        zoom: 8, target: LatLng(30.47485747053768, 31.189873388919573));
+    if (widget.coordinates != null) {
+      initialCameraPosition = CameraPosition(
+        target: LatLng(widget.coordinates!.latitude, widget.coordinates!.longitude),
+        zoom: 19,
+      );
+    } else {
+      initialCameraPosition = const CameraPosition(
+        target: LatLng(30.47485747053768, 31.189873388919573),
+        zoom: 8,
+      );
+    }
     super.initState();
   }
 
@@ -45,11 +54,8 @@ class _GoogleMapScreenState extends State<GoogleMapHomeDetailsScreen> {
             },
             initialCameraPosition: initialCameraPosition,
           ),
-
         ],
       ),
     );
   }
-
-
 }

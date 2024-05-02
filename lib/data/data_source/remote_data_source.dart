@@ -40,7 +40,7 @@ abstract class RemoteDataSource {
     required int numberOfBathrooms,
     required String description,
     required String location,
-    required LatLng coordinates,
+    required GeoPoint coordinates,
   });
 
   Future<void> uploadImages(
@@ -69,7 +69,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     required int numberOfBathrooms,
     required String description,
     required String location,
-    required LatLng coordinates,
+    required GeoPoint coordinates,
   }) async {
     String uuid = const Uuid().v4();
 

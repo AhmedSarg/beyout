@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -33,7 +34,7 @@ abstract class Repository {
     required String description,
     required String location,
     required List<File> images,
-    required LatLng coordinates,
+    required GeoPoint coordinates,
   });
 
   Future<Either<Failure, void>> register({

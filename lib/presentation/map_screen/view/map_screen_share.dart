@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 import 'dart:ui' as ui; // Add this import statement
 
+import 'package:cloud_firestore_platform_interface/src/geo_point.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -71,12 +72,14 @@ class _GoogleMapScreenState extends State<GoogleMapScreenShare> {
   Future<Map<String, Object>> _onMapTap(LatLng tappedPoint) async {
     LatLng coordinates = tappedPoint;
 
-    print(
-        'Latitude: ${coordinates.latitude}, Longitude: ${coordinates.longitude}');
+    print('Latitude: ${coordinates.latitude}, Longitude: ${coordinates.longitude}');
 
     String cityName = await _getNearestCity(coordinates);
 
     widget.viewModel?.getLocationController.text = cityName;
+
+    // Convert LatLng to GeoPoint
+    GeoPoint geoPoint = GeoPoint(coordinates.latitude, coordinates.longitude);
 
     Uint8List markerIconBytes = await getBytesFromAsset(ImageAssets.pin, 100);
     BitmapDescriptor icon = BitmapDescriptor.fromBytes(markerIconBytes);
@@ -96,7 +99,11 @@ class _GoogleMapScreenState extends State<GoogleMapScreenShare> {
       );
     });
 
-    return {'city': cityName, 'coordinates': coordinates};
+    // Pass GeoPoint to view model
+    widget.viewModel?.setCoordinates = geoPoint;
+    widget.viewModel?.setCityName = cityName;
+
+    return {'city': cityName, 'coordinates': geoPoint};
   }
 
   Future<Uint8List> getBytesFromAsset(String path, int width) async {
@@ -128,7 +135,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreenShare> {
                   )),
                   onPressed: () {
                     if (selectedLocation != null) {
-                      widget.viewModel?.setCoordinates = selectedLocation!;
+                      widget.viewModel?.setCoordinates = selectedLocation! as GeoPoint;
                       Navigator.pop(context);
                     }
                   },

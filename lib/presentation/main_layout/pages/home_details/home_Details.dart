@@ -11,6 +11,7 @@ import 'package:temp_house/presentation/map_screen/view/home_deatils_inMap.dart'
 import 'package:temp_house/presentation/resources/font_manager.dart';
 import 'package:temp_house/presentation/resources/strings_manager.dart';
 import 'package:temp_house/presentation/resources/values_manager.dart';
+import 'package:temp_house/presentation/share_post_screen/viewmodel/share_view_model.dart';
 import '../../../common/widget/main_app_bar.dart';
 import '../../../resources/assets_manager.dart';
 import '../../../resources/color_manager.dart';
@@ -333,7 +334,7 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => GoogleMapHomeDetailsScreen(),
+                                  builder: (context) => GoogleMapHomeDetailsScreen( coordinates: widget.coardinaties,                                   ),
                                 ),
                               );
                             },

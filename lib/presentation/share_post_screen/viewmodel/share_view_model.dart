@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -28,7 +29,7 @@ class ShareViewModel extends BaseCubit
   final TextEditingController _areaController = TextEditingController();
   final TextEditingController _coordinatesController = TextEditingController();
   final List<File> _images = [];
-  late LatLng _coordinates;
+  late GeoPoint _coordinates;
   late String _cityName;
 
   @override
@@ -71,15 +72,16 @@ class ShareViewModel extends BaseCubit
   List<File> get getImages => _images;
 
   @override
-  LatLng get getCoordinates => _coordinates;
+  GeoPoint get getCoordinates => _coordinates;
 
   @override
   String get getCityName => _cityName;
 
   @override
-  set setCoordinates(LatLng coordinates) {
+  set setCoordinates(GeoPoint coordinates) {
     _coordinates = coordinates;
   }
+
 
   @override
   set setCityName(String cityName) {
@@ -127,7 +129,7 @@ class ShareViewModel extends BaseCubit
 }
 
 abstract class SearchTenantViewModelInput {
-  set setCoordinates(LatLng coordinates);
+  set setCoordinates(GeoPoint coordinates);
   set setCityName(String cityName);
   set addImage(File image);
 }
@@ -157,7 +159,7 @@ abstract class SearchTenantViewModelOutput {
 
   List<File> get getImages;
 
-  LatLng get getCoordinates;
+  GeoPoint get getCoordinates;
 
   String get getCityName;
 }
