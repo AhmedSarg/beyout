@@ -150,6 +150,7 @@ class AppStrings {
   static const phoneNumber = "phoneNumber";
   static const location = "location";
   static const publish = "publish";
+  static const locationSelection = "locationSelection";
 
 
   static const categoryDaily = "categoryDaily";

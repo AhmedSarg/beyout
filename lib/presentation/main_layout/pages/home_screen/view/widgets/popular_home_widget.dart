@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:temp_house/presentation/main_layout/pages/home_screen/view/widgets/popular_row.dart';
 import 'package:temp_house/presentation/resources/routes_manager.dart';
-
 import '../../../../../resources/color_manager.dart';
 import '../../../../../resources/strings_manager.dart';
 import '../../../../../resources/values_manager.dart';

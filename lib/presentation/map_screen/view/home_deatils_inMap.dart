@@ -27,6 +27,12 @@ class _GoogleMapScreenState extends State<GoogleMapHomeDetailsScreen> {
         zoom: 8,
       );
     }
+
+    markers.add(Marker(
+      markerId: const MarkerId('initial_position'),
+      position: initialCameraPosition.target,
+    ));
+
     super.initState();
   }
 

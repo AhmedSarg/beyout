@@ -117,6 +117,7 @@
   "paymentCash": "الدفع نقداً",
   "call": "اتصال",
   "seeLocation": "شاهد الموقع",
+  "locationSelection": "اختر موقع منزلك",
 
   "conditionBad"     : "سيئ",
   "conditionGood"    : "جيد",

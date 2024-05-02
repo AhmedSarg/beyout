@@ -74,6 +74,7 @@ class NearByHomeList extends StatelessWidget {
 
         return ListView.separated(
           scrollDirection: Axis.vertical,
+          shrinkWrap: true,
           itemCount: items.length,
           itemBuilder: (context, index) {
             return items[index];

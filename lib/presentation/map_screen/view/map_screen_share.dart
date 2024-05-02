@@ -2,6 +2,7 @@ import 'dart:typed_data';
 import 'dart:ui' as ui; // Add this import statement
 
 import 'package:cloud_firestore_platform_interface/src/geo_point.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -78,7 +79,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreenShare> {
 
     widget.viewModel?.getLocationController.text = cityName;
 
-    // Convert LatLng to GeoPoint
+    // Create a GeoPoint object using the latitude and longitude values
     GeoPoint geoPoint = GeoPoint(coordinates.latitude, coordinates.longitude);
 
     Uint8List markerIconBytes = await getBytesFromAsset(ImageAssets.pin, 100);
@@ -98,10 +99,6 @@ class _GoogleMapScreenState extends State<GoogleMapScreenShare> {
         ),
       );
     });
-
-    // Pass GeoPoint to view model
-    widget.viewModel?.setCoordinates = geoPoint;
-    widget.viewModel?.setCityName = cityName;
 
     return {'city': cityName, 'coordinates': geoPoint};
   }
@@ -135,12 +132,17 @@ class _GoogleMapScreenState extends State<GoogleMapScreenShare> {
                   )),
                   onPressed: () {
                     if (selectedLocation != null) {
-                      widget.viewModel?.setCoordinates = selectedLocation! as GeoPoint;
+                      GeoPoint geoPoint = GeoPoint(
+                        selectedLocation!.latitude,
+                        selectedLocation!.longitude,
+                      );
+                      widget.viewModel?.setCoordinates = geoPoint;
                       Navigator.pop(context);
                     }
                   },
+
                   child: Text(
-                    'Choices your home location',
+                    AppStrings.locationSelection.tr(),
                     style: AppTextStyles.homegenertalTextStyle(
                         context, ColorManager.white, FontSize.f16),
                   ),
