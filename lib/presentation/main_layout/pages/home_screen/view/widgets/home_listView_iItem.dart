@@ -1,7 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:temp_house/presentation/resources/assets_manager.dart';
 import 'package:temp_house/presentation/resources/color_manager.dart';
@@ -23,7 +22,7 @@ class BuildCarouselItem extends StatelessWidget {
     required this.numnerofbathroom,
     required this.date,
     required this.id,
-    required this.description,
+    required this.description, required this.coardinaties,
   }) : super(key: key);
 
   final Color color;
@@ -37,6 +36,7 @@ class BuildCarouselItem extends StatelessWidget {
   final String numnerofbathroom;
   final String date;
   final String description;
+  final GeoPoint coardinaties;
 
   @override
   Widget build(BuildContext context) {

@@ -26,9 +26,10 @@ class ShareViewModel extends BaseCubit
   final TextEditingController _wifiController = TextEditingController();
   final TextEditingController _bathroomController = TextEditingController();
   final TextEditingController _areaController = TextEditingController();
+  final TextEditingController _coordinatesController = TextEditingController();
   final List<File> _images = [];
   late LatLng _coordinates;
-
+  late String _cityName;
 
   @override
   void start() {}
@@ -63,7 +64,8 @@ class ShareViewModel extends BaseCubit
   @override
   TextEditingController get getAreaController => _areaController;
 
-
+  @override
+  TextEditingController get getCoordinatesController => _coordinatesController;
 
   @override
   List<File> get getImages => _images;
@@ -72,8 +74,16 @@ class ShareViewModel extends BaseCubit
   LatLng get getCoordinates => _coordinates;
 
   @override
+  String get getCityName => _cityName;
+
+  @override
   set setCoordinates(LatLng coordinates) {
     _coordinates = coordinates;
+  }
+
+  @override
+  set setCityName(String cityName) {
+    _cityName = cityName;
   }
 
   @override
@@ -98,16 +108,16 @@ class ShareViewModel extends BaseCubit
         wifi: _wifiController.text.trim() == 'Yes' ? true : false,
         condition: _conditionController.text.trim(),
         images: _images,
-        coordinates: const LatLng(0, 0),
+        coordinates: _coordinates,
         area: num.parse(_areaController.text.trim()),
       ),
     ).then(
-      (value) {
+          (value) {
         value.fold(
-          (l) {
+              (l) {
             emit(ErrorState(failure: l, displayType: DisplayType.popUpDialog));
           },
-          (r) {
+              (r) {
             emit(SuccessState('Home Posted Successfully'));
           },
         );
@@ -118,6 +128,7 @@ class ShareViewModel extends BaseCubit
 
 abstract class SearchTenantViewModelInput {
   set setCoordinates(LatLng coordinates);
+  set setCityName(String cityName);
   set addImage(File image);
 }
 
@@ -142,8 +153,11 @@ abstract class SearchTenantViewModelOutput {
 
   TextEditingController get getAreaController;
 
+  TextEditingController get getCoordinatesController;
 
   List<File> get getImages;
 
   LatLng get getCoordinates;
+
+  String get getCityName;
 }

@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:temp_house/presentation/common/widget/cached_image.dart';
+import 'package:temp_house/presentation/map_screen/view/home_deatils_inMap.dart';
 import 'package:temp_house/presentation/resources/font_manager.dart';
 import 'package:temp_house/presentation/resources/strings_manager.dart';
 import 'package:temp_house/presentation/resources/values_manager.dart';
@@ -28,6 +29,7 @@ class HomeDetailsScreen extends StatefulWidget {
   final String numnerofbathroom;
   final String description;
   final String period;
+  final GeoPoint coardinaties;
 
   const HomeDetailsScreen({
     Key? key,
@@ -39,7 +41,10 @@ class HomeDetailsScreen extends StatefulWidget {
     required this.wifiServices,
     required this.numnerofbathroom,
     required this.id,
-    required this.description, required date, required this.period, required this.area,
+    required this.description,
+    required date,
+    required this.period,
+    required this.area, required this.coardinaties,
   }) : super(key: key);
 
   @override
@@ -52,35 +57,32 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       bottomNavigationBar: SizedBox(
         height: AppSize.s80,
         child: Row(
           children: [
-
             Expanded(
               child: Container(
                 height: AppSize.s50,
-                margin: const EdgeInsets.symmetric(horizontal: AppMargin.m10,vertical: AppMargin.m8),
+                margin: const EdgeInsets.symmetric(
+                    horizontal: AppMargin.m10, vertical: AppMargin.m8),
                 child: ElevatedButton(
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
-                        ColorManager.blue.withOpacity(.7),
-
-                      )
-                  ),
-
+                    ColorManager.blue.withOpacity(.7),
+                  )),
                   onPressed: () {},
-                  child:  SvgPicture.asset(SVGAssets.chat,width: AppSize.s35,)
-                  ,
+                  child: SvgPicture.asset(
+                    SVGAssets.chat,
+                    width: AppSize.s35,
+                  ),
                 ),
               ),
             ),
           ],
         ),
       ),
-
       appBar: buildMainAppBar(
         context,
         Text(
@@ -109,7 +111,8 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                   builder: (BuildContext context) {
                     return Container(
                       width: MediaQuery.of(context).size.width,
-                      margin: const EdgeInsets.symmetric(horizontal:AppMargin.m5),
+                      margin:
+                          const EdgeInsets.symmetric(horizontal: AppMargin.m5),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(AppSize.s12),
                         child: CachedImage(
@@ -147,23 +150,22 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                   "${_currentIndex + 1}/${widget.imageUrls.length}",
                   style: AppTextStyles.smallTitleTextStyle(context),
                 ),
-                const SizedBox(width: AppSize.s16,)
+                const SizedBox(
+                  width: AppSize.s16,
+                )
               ],
             ),
             Container(
               width: double.infinity,
               decoration: BoxDecoration(
-
-                gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                  ColorManager.primary.withOpacity(.1),
-                      ColorManager.blue.withOpacity(.2),
-                      ColorManager.blue.withOpacity(.4),
-
-                ])
-              ),
+                  gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                    ColorManager.primary.withOpacity(.1),
+                    ColorManager.blue.withOpacity(.2),
+                    ColorManager.blue.withOpacity(.4),
+                  ])),
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
@@ -174,27 +176,31 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                         children: [
                           TextSpan(
                             text: '${AppStrings.price.tr()} : ',
-                            style: AppTextStyles.homeDetailsDescriptionTextStyle(),
+                            style:
+                                AppTextStyles.homeDetailsDescriptionTextStyle(),
                           ),
                           TextSpan(
-                            text: '${widget.price} ${AppStrings.priceHome.tr()}${widget.period}',
-                            style: AppTextStyles.homeDetailsDescriptionContantTextStyle(),
+                            text:
+                                '${widget.price} ${AppStrings.priceHome.tr()}${widget.period}',
+                            style: AppTextStyles
+                                .homeDetailsDescriptionContantTextStyle(),
                           ),
                         ],
                       ),
                     ),
                     const SizedBox(height: AppSize.s10),
-
                     RichText(
                       text: TextSpan(
                         children: [
                           TextSpan(
                             text: '${AppStrings.area.tr()} : ',
-                            style: AppTextStyles.homeDetailsDescriptionTextStyle(),
+                            style:
+                                AppTextStyles.homeDetailsDescriptionTextStyle(),
                           ),
                           TextSpan(
                             text: '${widget.area} ${AppStrings.meter.tr()}',
-                            style: AppTextStyles.homeDetailsDescriptionContantTextStyle(),
+                            style: AppTextStyles
+                                .homeDetailsDescriptionContantTextStyle(),
                           ),
                         ],
                       ),
@@ -205,19 +211,18 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                         children: [
                           TextSpan(
                             text: '${AppStrings.paymentScreenTitle.tr()} : ',
-                            style: AppTextStyles.homeDetailsDescriptionTextStyle(),
+                            style:
+                                AppTextStyles.homeDetailsDescriptionTextStyle(),
                           ),
                           TextSpan(
                             text: AppStrings.paymentCash.tr(),
-                            style: AppTextStyles.homeDetailsDescriptionContantTextStyle(),
+                            style: AppTextStyles
+                                .homeDetailsDescriptionContantTextStyle(),
                           ),
                         ],
                       ),
                     ),
-
                     const SizedBox(height: AppSize.s10),
-
-
                     FittedBox(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -227,16 +232,20 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                             icon: SVGAssets.bed,
                             number: widget.numnerofBeds,
                           ),
-                          SizedBox(width: MediaQuery.of(context).size.width*.1,),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * .1,
+                          ),
                           HomeDetailsContent(
                             object: ' ${AppStrings.wifiHome.tr()} ',
-                            icon: widget.wifiServices == AppStrings.wifiServicesYes.tr()
+                            icon: widget.wifiServices ==
+                                    AppStrings.wifiServicesYes.tr()
                                 ? SVGAssets.wifi
                                 : Icons.wifi_off_outlined,
                             number: '',
                           ),
-                          SizedBox(width: MediaQuery.of(context).size.width*.1,),
-
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * .1,
+                          ),
                           HomeDetailsContent(
                             object: ' ${AppStrings.bathroomHome.tr()} ',
                             icon: SVGAssets.bathRoom,
@@ -245,36 +254,40 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                         ],
                       ),
                     ),
-
                     const SizedBox(height: AppSize.s10),
-
                     Row(
                       children: [
-                        Text('${AppStrings.homeDetailsRating.tr()} : ',style:AppTextStyles.homeDetailsDescriptionTextStyle() ,),
+                        Text(
+                          '${AppStrings.homeDetailsRating.tr()} : ',
+                          style:
+                              AppTextStyles.homeDetailsDescriptionTextStyle(),
+                        ),
                         Row(
                           children: List.generate(5, (index) {
                             return Icon(
                               Icons.star_rounded,
-                              color: index < _rating.floor() ? Colors.orange.withOpacity(.7) : Colors.grey.withOpacity(.7),
+                              color: index < _rating.floor()
+                                  ? Colors.orange.withOpacity(.7)
+                                  : Colors.grey.withOpacity(.7),
                               size: AppSize.s35,
                             );
                           }),
                         ),
-
                       ],
                     ),
                     const SizedBox(height: AppSize.s10),
-
                     RichText(
                       text: TextSpan(
                         children: [
                           TextSpan(
                             text: '${AppStrings.description.tr()} : ',
-                            style: AppTextStyles.homeDetailsDescriptionTextStyle(),
+                            style:
+                                AppTextStyles.homeDetailsDescriptionTextStyle(),
                           ),
                           TextSpan(
                             text: widget.description,
-                            style: AppTextStyles.homeDetailsDescriptionContantTextStyle(),
+                            style: AppTextStyles
+                                .homeDetailsDescriptionContantTextStyle(),
                           ),
                         ],
                       ),
@@ -285,17 +298,18 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                         children: [
                           TextSpan(
                             text: '${AppStrings.location.tr()} : ',
-                            style: AppTextStyles.homeDetailsDescriptionTextStyle(),
+                            style:
+                                AppTextStyles.homeDetailsDescriptionTextStyle(),
                           ),
                           TextSpan(
                             text: widget.location,
-                            style: AppTextStyles.homeDetailsDescriptionContantTextStyle(),
+                            style: AppTextStyles
+                                .homeDetailsDescriptionContantTextStyle(),
                           ),
                         ],
                       ),
                     ),
                     const SizedBox(height: AppSize.s15),
-
                     Center(
                       child: Stack(
                         alignment: Alignment.center,
@@ -305,7 +319,6 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                             height: AppSize.s170,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(AppSize.s12),
-
                             ),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(AppSize.s12),
@@ -315,26 +328,46 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                               ),
                             ),
                           ),
-                          Container(
-                            width: MediaQuery.of(context).size.width*.4,
-                            height: AppSize.s50,
-                            decoration: BoxDecoration(
-border: Border.all(color: ColorManager.error),
-                              borderRadius: BorderRadius.circular(AppSize.s12),
-                                color: ColorManager.offwhite
-                            ),
-                            child: Row(
-                              children: [
-                                SvgPicture.asset(SVGAssets.pin,width: AppSize.s30,colorFilter: const ColorFilter.mode(ColorManager.black, BlendMode.modulate ),),
-                                Text(AppStrings.seeLocation.tr(),style: AppTextStyles.homegenertalTextStyle(context,ColorManager.black,FontSize.f18),)
-                              ],
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => GoogleMapHomeDetailsScreen(),
+                                ),
+                              );
+                            },
+
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * .4,
+                              height: AppSize.s50,
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: ColorManager.error),
+                                  borderRadius:
+                                      BorderRadius.circular(AppSize.s12),
+                                  color: ColorManager.offwhite),
+                              child: Row(
+                                children: [
+                                  SvgPicture.asset(
+                                    SVGAssets.pin,
+                                    width: AppSize.s30,
+                                    colorFilter: const ColorFilter.mode(
+                                        ColorManager.black, BlendMode.modulate),
+                                  ),
+                                  Text(
+                                    AppStrings.seeLocation.tr(),
+                                    style: AppTextStyles.homegenertalTextStyle(
+                                        context,
+                                        ColorManager.black,
+                                        FontSize.f18),
+                                  )
+                                ],
+                              ),
                             ),
                           )
                         ],
                       ),
                     ),
-
-
                   ],
                 ),
               ),
@@ -345,7 +378,6 @@ border: Border.all(color: ColorManager.error),
     );
   }
 }
-
 
 class HomeDetailsContent extends StatelessWidget {
   const HomeDetailsContent({
@@ -367,13 +399,16 @@ class HomeDetailsContent extends StatelessWidget {
         if (icon is String)
           SvgPicture.asset(
             icon,
-color: ColorManager.offwhite,          )
+            color: ColorManager.offwhite,
+          )
         else if (icon is IconData)
           Icon(
             icon,
             color: ColorManager.offwhite,
           ),
-        const SizedBox(width: AppSize.s2,),
+        const SizedBox(
+          width: AppSize.s2,
+        ),
         Text(
           number,
           style: AppTextStyles.homeDetailsDescriptionContantTextStyle(),

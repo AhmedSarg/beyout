@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:temp_house/app/extensions.dart';
 import 'package:temp_house/presentation/resources/assets_manager.dart';
 import 'package:temp_house/presentation/resources/values_manager.dart';
@@ -15,18 +17,33 @@ import '../../../../../resources/strings_manager.dart';
 import '../../../../../resources/text_styles.dart';
 
 class NearByHomeItem extends StatefulWidget {
-  const NearByHomeItem({super.key, required this.color, required this.title, required this.id, required this.price, required this.location, required this.imageUrl, required this.numnerofBeds, required this.wifiServices, required this.numnerofbathroom, required this.date, required this.description});
-   final Color  color;
-  final String  title;
+  const NearByHomeItem({
+    super.key,
+    required this.color,
+    required this.title,
+    required this.id,
+    required this.price,
+    required this.location,
+    required this.imageUrl,
+    required this.numnerofBeds,
+    required this.wifiServices,
+    required this.numnerofbathroom,
+    required this.date,
+    required this.description, required this.coardinaties,
+  });
+  final Color color;
+  final String title;
   final String id;
-     final num  price;
-  final String  location;
-  final String  imageUrl;
-  final String  numnerofBeds;
-  final String  wifiServices;
-  final String  numnerofbathroom;
-  final String  date;
-  final String  description;
+  final num price;
+  final String location;
+  final String imageUrl;
+  final String numnerofBeds;
+  final String wifiServices;
+  final String numnerofbathroom;
+  final String date;
+  final String description;
+  final GeoPoint coardinaties;
+
   @override
   State<NearByHomeItem> createState() => _NearByHomeItemState();
 }
@@ -52,8 +69,7 @@ class _NearByHomeItemState extends State<NearByHomeItem> {
                 width: MediaQuery.of(context).size.width * 0.45,
                 height: AppSize.s120,
               ),
-            )
-    ,
+            ),
             const SizedBox(width: AppSize.s10),
             SizedBox(
               width: context.width() - AppSize.s180,
@@ -82,11 +98,12 @@ class _NearByHomeItemState extends State<NearByHomeItem> {
                                 isFavMessage
                                     ? AppStrings.removeItem.tr()
                                     : AppStrings.addItem.tr(),
-                                style:
-                                    AppTextStyles.nearHomeAddressTextStyle(context),
+                                style: AppTextStyles.nearHomeAddressTextStyle(
+                                    context),
                               ),
                             );
-                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
                             setState(() {
                               isFav = !isFav;
                               isFavMessage = !isFavMessage;
@@ -110,7 +127,8 @@ class _NearByHomeItemState extends State<NearByHomeItem> {
                         child: Text(
                           widget.location,
                           maxLines: 1,
-                          style: AppTextStyles.nearHomeAddressTextStyle(context),
+                          style:
+                              AppTextStyles.nearHomeAddressTextStyle(context),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
@@ -140,7 +158,8 @@ class _NearByHomeItemState extends State<NearByHomeItem> {
                           style: AppTextStyles.homeItemRateTextStyle(context)),
                       const SizedBox(width: AppSize.s5),
                       Text('(480)',
-                          style: AppTextStyles.homeItemSecondTextStyle(context)),
+                          style:
+                              AppTextStyles.homeItemSecondTextStyle(context)),
                     ],
                   ),
                 ],

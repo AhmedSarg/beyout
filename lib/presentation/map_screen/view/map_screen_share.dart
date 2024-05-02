@@ -68,22 +68,26 @@ class _GoogleMapScreenState extends State<GoogleMapScreenShare> {
     return 'Unknown';
   }
 
-  void _onMapTap(LatLng tappedPoint) async {
-    String cityName = await _getNearestCity(tappedPoint);
+  Future<Map<String, Object>> _onMapTap(LatLng tappedPoint) async {
+    LatLng coordinates = tappedPoint;
+
+    print(
+        'Latitude: ${coordinates.latitude}, Longitude: ${coordinates.longitude}');
+
+    String cityName = await _getNearestCity(coordinates);
+
     widget.viewModel?.getLocationController.text = cityName;
 
-    Uint8List markerIconBytes =
-    await getBytesFromAsset(ImageAssets.pin, 100);
-
-    BitmapDescriptor icon =
-    BitmapDescriptor.fromBytes(markerIconBytes);
+    Uint8List markerIconBytes = await getBytesFromAsset(ImageAssets.pin, 100);
+    BitmapDescriptor icon = BitmapDescriptor.fromBytes(markerIconBytes);
 
     setState(() {
-      selectedLocation = tappedPoint;
+      selectedLocation = coordinates;
+      markers.clear();
       markers.add(
         Marker(
-          markerId: MarkerId(tappedPoint.toString()),
-          position: tappedPoint,
+          markerId: MarkerId(coordinates.toString()),
+          position: coordinates,
           icon: icon,
           infoWindow: InfoWindow(
             snippet: cityName,
@@ -91,13 +95,18 @@ class _GoogleMapScreenState extends State<GoogleMapScreenShare> {
         ),
       );
     });
+
+    return {'city': cityName, 'coordinates': coordinates};
   }
 
   Future<Uint8List> getBytesFromAsset(String path, int width) async {
     ByteData data = await rootBundle.load(path);
-    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
+        targetWidth: width);
     ui.FrameInfo fi = await codec.getNextFrame();
-    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!
+        .buffer
+        .asUint8List();
   }
 
   @override
@@ -107,36 +116,33 @@ class _GoogleMapScreenState extends State<GoogleMapScreenShare> {
         height: AppSize.s80,
         child: Row(
           children: [
-
             Expanded(
               child: Container(
                 height: AppSize.s50,
-                margin: const EdgeInsets.symmetric(horizontal: AppMargin.m10,vertical: AppMargin.m8),
+                margin: const EdgeInsets.symmetric(
+                    horizontal: AppMargin.m10, vertical: AppMargin.m8),
                 child: ElevatedButton(
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
-                        ColorManager.blue.withOpacity(.7),
-
-                      )
-                  ),
-
+                    ColorManager.blue.withOpacity(.7),
+                  )),
                   onPressed: () {
                     if (selectedLocation != null) {
                       widget.viewModel?.setCoordinates = selectedLocation!;
-                      Navigator.pop(
-                          context);
+                      Navigator.pop(context);
                     }
                   },
-
-                  child:  Text('Choices your home location',style: AppTextStyles.homegenertalTextStyle(context,ColorManager.white,FontSize.f16),)
-                  ,
+                  child: Text(
+                    'Choices your home location',
+                    style: AppTextStyles.homegenertalTextStyle(
+                        context, ColorManager.white, FontSize.f16),
+                  ),
                 ),
               ),
             ),
           ],
         ),
       ),
-
       body: Stack(
         alignment: Alignment.topRight,
         children: [
@@ -152,7 +158,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreenShare> {
               },
               initialCameraPosition: CameraPosition(
                 target: selectedLocation!,
-                zoom: 19.0,
+                zoom: 15.0,
               ),
             ),
         ],

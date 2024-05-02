@@ -14,7 +14,6 @@ class RatingDialog extends StatefulWidget {
 }
 
 class _RatingDialogState extends State<RatingDialog> {
-  HomeServices _homeServices = HomeServices();
   int _rating = 0;
   late TextEditingController _feedbackController;
 
@@ -140,7 +139,6 @@ class FeedbackText extends StatefulWidget {
 
 class _FeedbackTextState extends State<FeedbackText> {
   final int maxCharacters = 150;
-  HomeServices _homeServices = HomeServices();
   String feedBack = '';
 
   @override
@@ -160,7 +158,6 @@ class _FeedbackTextState extends State<FeedbackText> {
           ),
           maxLines: 3,
 onFieldSubmitted: (value) {
-  _homeServices.saveUsersFeedBackToFirestore(homeId: '7m9hVubc2p7WA05HJIF4', feedback: value);
   print('__________________________');
   print(value);
 },
