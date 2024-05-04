@@ -19,8 +19,8 @@ class AppConstants {
   static const double minRange = 0;
   static const double maxPrice = 80000;
   static const double minPrice = 2000;
-  static const double intialMinPrice = 20000;
-  static const double intialMaxPrice = 60000;
+  static const double initialMinPrice = 20000;
+  static const double initialMaxPrice = 60000;
   static const double stepPrice = 1000;
 
 }

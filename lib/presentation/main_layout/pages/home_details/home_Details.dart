@@ -9,6 +9,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:temp_house/presentation/common/widget/cached_image.dart';
 import 'package:temp_house/presentation/map_screen/view/home_deatils_inMap.dart';
 import 'package:temp_house/presentation/resources/font_manager.dart';
+import 'package:temp_house/presentation/resources/routes_manager.dart';
 import 'package:temp_house/presentation/resources/strings_manager.dart';
 import 'package:temp_house/presentation/resources/values_manager.dart';
 import 'package:temp_house/presentation/share_post_screen/viewmodel/share_view_model.dart';
@@ -73,7 +74,8 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                       backgroundColor: MaterialStateProperty.all<Color>(
                     ColorManager.blue.withOpacity(.7),
                   )),
-                  onPressed: () {},
+                  onPressed: () {
+                  },
                   child: SvgPicture.asset(
                     SVGAssets.chat,
                     width: AppSize.s35,

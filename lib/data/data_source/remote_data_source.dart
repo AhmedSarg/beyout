@@ -86,6 +86,8 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       'description': description,
       'location': location,
       'coordinates': GeoPoint(coordinates.latitude, coordinates.longitude),
+      'timestamp': Timestamp.now(),
+
     });
     return docRef.id;
   }
