@@ -7,26 +7,26 @@ import '../../resources/values_manager.dart';
 
 class CachedImage extends StatelessWidget {
   const CachedImage({
-    super.key,
+    Key? key,
     required this.imageUrl,
     this.width,
     this.height,
-  });
+  }) : super(key: key);
 
-  final String imageUrl;
+  final String? imageUrl;
   final double? width;
   final double? height;
 
   @override
   Widget build(BuildContext context) {
-    String fallback;
-    BoxFit fit;
-    // fallback = ImageAssets.personImage; ///change this
-    fit = BoxFit.cover;
+    if (imageUrl == null || imageUrl!.isEmpty) {
+      return const Center(child: Icon(Icons.error_outline,color: ColorManager.error,size: AppSize.s40,),); // Placeholder widget or error message
+    }
+
     return CachedNetworkImage(
-      imageUrl: imageUrl,
-      width:width?? double.infinity,
-      height:height?? double.infinity,
+      imageUrl: imageUrl!,
+      width: width ?? double.infinity,
+      height: height ?? double.infinity,
       fit: BoxFit.cover,
       progressIndicatorBuilder: (context, url, downloadProgress) => Center(
         child: CircularProgressIndicator(
@@ -36,7 +36,7 @@ class CachedImage extends StatelessWidget {
           strokeCap: StrokeCap.round,
         ),
       ),
-      errorWidget: (context, url, error) => Icon(Icons.error_outline,color: Colors.red,),
+      errorWidget: (context, url, error) => Icon(Icons.error_outline, color: Colors.red),
     );
   }
 }

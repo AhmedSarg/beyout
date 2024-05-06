@@ -71,23 +71,40 @@ class NearByHomeList extends StatelessWidget {
             ),
           );
         }).toList();
-
-        return ListView.separated(
-          scrollDirection: Axis.vertical,
+       return GridView.builder(
+          physics: const NeverScrollableScrollPhysics(),
+          // padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
           shrinkWrap: true,
-          itemCount: items.length,
-          itemBuilder: (context, index) {
-            return items[index];
-          },
-          separatorBuilder: (BuildContext context, int index) {
-            return const Divider(
-              indent: 22,
-              thickness: .5,
-              endIndent: 22,
-              color: Colors.grey,
-            );
-          },
-        );
+          scrollDirection: Axis.vertical,
+         itemCount: items.length,
+          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 400,
+            mainAxisExtent: 135,
+            mainAxisSpacing: 8,
+            crossAxisSpacing: 8,
+
+          ),
+         itemBuilder: (context, index) {
+           return items[index];
+         },
+       );
+        // return ListView.separated(
+        //   scrollDirection: Axis.vertical,
+        //   shrinkWrap: true,
+        //
+        //   itemCount: items.length,
+        //   itemBuilder: (context, index) {
+        //     return items[index];
+        //   },
+        //   separatorBuilder: (BuildContext context, int index) {
+        //     return const Divider(
+        //       indent: 22,
+        //       thickness: .5,
+        //       endIndent: 22,
+        //       color: Colors.grey,
+        //     );
+        //   },
+        // );
       },
     );
   }

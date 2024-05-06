@@ -67,6 +67,7 @@ dependencies:
   awesome_dialog:
   uuid:
   intl_phone_field:
+  permission_handler: ^11.3.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

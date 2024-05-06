@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +30,7 @@ class _SearchScreenState extends State<SearchScreen>
   final TextEditingController _searchController = TextEditingController();
   double _minValue = AppConstants.initialMinPrice;
   double _maxValue = AppConstants.initialMaxPrice;
+  late Stream<QuerySnapshot> _searchStream;
 
   @override
   void initState() {
@@ -40,6 +42,8 @@ class _SearchScreenState extends State<SearchScreen>
   void dispose() {
     _searchController.dispose();
     _tabController.dispose();
+    _searchStream = FirebaseFirestore.instance.collection('Homes').snapshots();
+
     super.dispose();
   }
 
@@ -49,21 +53,36 @@ class _SearchScreenState extends State<SearchScreen>
       appBar: AppBar(
         automaticallyImplyLeading: false,
         elevation: 0,
-        title: MainSearch(
-          controller: _searchController,
-          hintText: AppStrings.searchTextHint.tr(),
-          leadingIcon: Icons.search,
-          trailingIcon: IconButton(
-            icon: SvgPicture.asset(
-              SVGAssets.googleMaps,
-              width: AppSize.s30,
-              height: AppSize.s30,
-            ),
-            onPressed: () {
-              Navigator.pushNamed(context, Routes.googleMapScreenRoute);
-            },
-          ),
-        ),
+        toolbarHeight: 10,
+        // title:        MainSearch(
+        //   controller: _searchController,
+        //   hintText: AppStrings.searchTextHint.tr(),
+        //   leadingIcon: Icons.search,
+        //   trailingIcon: IconButton(
+        //     icon: SvgPicture.asset(
+        //       SVGAssets.googleMaps,
+        //       width: AppSize.s30,
+        //       height: AppSize.s30,
+        //     ),
+        //     onPressed: () {
+        //       Navigator.pushNamed(context, Routes.googleMapScreenRoute);
+        //     },
+        //   ),
+        //   onChanged: (value) {
+        //     setState(() {
+        //       if (value.isEmpty) {
+        //         // Show all homes if search query is empty
+        //         _searchStream = FirebaseFirestore.instance.collection('Homes').snapshots();
+        //       } else {
+        //         // Show only search results based on the entered query
+        //         _searchStream = FirebaseFirestore.instance.collection('Homes')
+        //             .where('title', isGreaterThanOrEqualTo: value)
+        //             .snapshots();
+        //       }
+        //     });
+        //   },
+        // ),
+
         bottom: TabBar(
           isScrollable: true,
           indicatorColor: ColorManager.grey,

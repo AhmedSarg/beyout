@@ -100,15 +100,15 @@ class ShareViewModel extends BaseCubit
     emit(LoadingState(displayType: DisplayType.popUpDialog));
     await _sharePostUseCase(
       SharePostUseCaseInput(
-        title: _titleController.text.trim(),
+        title: _titleController.text.trim().toLowerCase(),
         price: num.parse(_priceController.text.trim()),
         category: _categoryController.text.trim(),
-        description: _descriptionController.text.trim(),
-        location: _locationController.text.trim(),
+        description: _descriptionController.text.trim().toLowerCase(),
+        location: _locationController.text.trim().toLowerCase(),
         numberOfBeds: int.parse(_bedController.text.trim()),
         numberOfBathrooms: int.parse(_bathroomController.text.trim()),
         wifi: _wifiController.text.trim() == 'Yes' ? true : false,
-        condition: _conditionController.text.trim(),
+        condition: _conditionController.text.trim().toLowerCase(),
         images: _images,
         coordinates: _coordinates,
         area: num.parse(_areaController.text.trim()),

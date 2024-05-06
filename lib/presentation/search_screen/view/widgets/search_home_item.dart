@@ -63,12 +63,16 @@ class _NearByHomeItemState extends State<SearchHomeItem> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(AppSize.s12),
-              child: CachedImage(
-                imageUrl: widget.imageUrl ?? "",
-                width: MediaQuery.of(context).size.width * 0.45,
-                height: AppSize.s120,
+            Container(
+              width: MediaQuery.of(context).size.width * 0.45,
+
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(AppSize.s12),
+                child: CachedImage(
+                  imageUrl: widget.imageUrl ?? "",
+                  width: MediaQuery.of(context).size.width * 0.45,
+                  height: AppSize.s120,
+                ),
               ),
             ),
             const SizedBox(width: AppSize.s10),

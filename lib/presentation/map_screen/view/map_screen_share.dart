@@ -79,7 +79,6 @@ class _GoogleMapScreenState extends State<GoogleMapScreenShare> {
 
     widget.viewModel?.getLocationController.text = cityName;
 
-    // Create a GeoPoint object using the latitude and longitude values
     GeoPoint geoPoint = GeoPoint(coordinates.latitude, coordinates.longitude);
 
     Uint8List markerIconBytes = await getBytesFromAsset(ImageAssets.pin, 100);

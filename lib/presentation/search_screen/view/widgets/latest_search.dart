@@ -13,7 +13,7 @@ class LeatestSearch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection('Homes').orderBy('timestamp').snapshots(),
+      stream: FirebaseFirestore.instance.collection('Homes').orderBy('timestamp',descending: true).snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const MainCicleProcessIndicator();

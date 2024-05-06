@@ -10,7 +10,7 @@ class MainSearch extends StatelessWidget {
     required this.leadingIcon,
     required this.trailingIcon,
     this.controller,
-    this.onSubmit,
+    this.onSubmit, this.onChanged,
   }) : super(key: key);
 
   final String hintText;
@@ -18,6 +18,7 @@ class MainSearch extends StatelessWidget {
   final Widget trailingIcon;
   final TextEditingController? controller;
   final Function? onSubmit;
+  final void Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +30,7 @@ class MainSearch extends StatelessWidget {
       child: TextField(
         controller: controller,
         cursorColor: ColorManager.white,
+        onChanged: onChanged,
         onSubmitted: (value) {
           if (onSubmit != null) {
             onSubmit!(value);

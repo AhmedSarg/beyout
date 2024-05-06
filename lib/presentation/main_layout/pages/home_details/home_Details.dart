@@ -336,7 +336,7 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => GoogleMapHomeDetailsScreen( coordinates: widget.coardinaties,                                   ),
+                                  builder: (context) => GoogleMapHomeDetailsScreen( coordinates: widget.coardinaties, title: widget.title, address: widget.location, description: widget.description,                                   ),
                                 ),
                               );
                             },

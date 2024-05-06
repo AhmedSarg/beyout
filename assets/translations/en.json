@@ -148,6 +148,7 @@
   "description": "Description",
   "location": "Location",
   "publish": "Publish",
+  "homeDetails": "Home details",
 
   "tapBarSearchAll": "All",
   "tapBarSearchPrice": "Price",

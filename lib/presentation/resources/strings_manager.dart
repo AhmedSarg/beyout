@@ -151,6 +151,7 @@ class AppStrings {
   static const location = "location";
   static const publish = "publish";
   static const locationSelection = "locationSelection";
+  static const String homeDetails = "homeDetails";
 
 
   static const categoryDaily = "categoryDaily";
