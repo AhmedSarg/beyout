@@ -166,17 +166,5 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         .update({'images': imageUrls});
   }
 
-  @override
-  Future<void> addToFavorites(String userId, String homeId) async {
-    await _firestore.collection('Favorites').doc(userId).set({
-      homeId: true,
-    }, SetOptions(merge: true));
-  }
 
-  @override
-  Future<void> removeFromFavorites(String userId, String homeId) async {
-    await _firestore.collection('Favorites').doc(userId).update({
-      homeId: FieldValue.delete(),
-    });
-  }
 }

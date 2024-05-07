@@ -75,7 +75,6 @@ class NearByHomeList extends StatelessWidget {
         }).toList();
        return GridView.builder(
           physics: const NeverScrollableScrollPhysics(),
-          // padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
           shrinkWrap: true,
           scrollDirection: Axis.vertical,
          itemCount: items.length,

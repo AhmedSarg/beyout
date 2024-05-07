@@ -101,7 +101,6 @@ class _NearByHomeItemState extends State<NearByHomeItem> {
   }
 
   void removeFromFavorites(String userId, String homeId) async {
-    // Check if the widget is still mounted before calling setState
     if (!mounted) return;
 
     await FirebaseFirestore.instance
@@ -111,7 +110,6 @@ class _NearByHomeItemState extends State<NearByHomeItem> {
         .doc(homeId)
         .delete();
 
-    // Call setState only if the widget is still mounted
     if (mounted) {
       setState(() {
         isFav = false;
