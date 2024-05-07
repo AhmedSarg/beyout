@@ -57,6 +57,7 @@ class NearByHomeList extends StatelessWidget {
 
             child: NearByHomeItem(
               color: ColorManager.offwhite,
+
               title: data['title'],
               price: data['price'],
               location: data['location'],

@@ -91,87 +91,59 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       'coordinates': GeoPoint(coordinates.latitude, coordinates.longitude),
       'timestamp': Timestamp.now(),
       'name': DataIntent.getUser().name,
-      'userId': DataIntent.getUser().uid,
-      'isFavorite': false,
 
     });
     return docRef.id;
   }
   @override
-  Future<String> registerTenantToDataBase({
-    required String uuid,
-    required String username,
-    required String email,
-    required String phoneNumber,
-    required Gender gender,
-    required String? job,
-    required num? salary,
-    required num age,
-    required String martialStatus,
-    List<String>? favorites,
-  }) async {
-    DocumentReference userDocRef =
-    _firestore.collection('users').doc(uuid); // Reference to user document
-    await userDocRef.set({
+  Future<String> registerTenantToDataBase(
+      {required String uuid,
+        required String username,
+        required String email,
+        required String phoneNumber,
+        required Gender gender,
+        required String? job,
+        required num? salary,
+        required num age,
+        required String martialStatus}) async {
+    DocumentReference docRef = await _firestore.collection('users').add({
       'uuid': uuid,
       'username': username,
       'email': email,
       'phoneNumber': phoneNumber,
-      'gender': gender.toString(), // Store gender as string
+      'gender': gender,
       'job': job,
       'salary': salary,
       'age': age,
       'martialStatus': martialStatus,
       'userType': 'tenant',
     });
-
-    if (favorites != null) {
-      CollectionReference favoritesCollectionRef =
-      userDocRef.collection('favorites');
-      for (String favorite in favorites) {
-        await favoritesCollectionRef.add({'name': favorite});
-      }
-    }
-
-    return uuid;
+    return docRef.id;
   }
 
 
   @override
-  Future<String> registerOwnerToDataBase({
-    required String uuid,
-    required String username,
-    required String email,
-    required String phoneNumber,
-    required Gender gender,
-    required num age,
-    required String martialStatus,
-    List<String>? favorites,
-  }) async {
-    DocumentReference userDocRef =
-    _firestore.collection('users').doc(uuid); // Reference to user document
-    await userDocRef.set({
+  Future<String> registerOwnerToDataBase(
+      {required String uuid,
+        required String username,
+        required String email,
+        required String phoneNumber,
+        required Gender gender,
+        required num age,
+        required String martialStatus}) async {
+    DocumentReference docRef = await _firestore.collection('users').add({
       'uuid': uuid,
       'username': username,
       'email': email,
       'phoneNumber': phoneNumber,
-      'gender': gender.toString(), // Store gender as string
+      'gender': gender,
+
       'age': age,
       'martialStatus': martialStatus,
-      'userType': 'owner',
+      'userType': 'tenant',
     });
-
-    if (favorites != null) {
-      CollectionReference favoritesCollectionRef =
-      userDocRef.collection('favorites');
-      for (String favorite in favorites) {
-        await favoritesCollectionRef.add({'name': favorite});
-      }
-    }
-
-    return uuid; // Return user UUID
+    return docRef.id;
   }
-
 
   @override
   Future<void> uploadImages(List<File> images, String homeId) async {
@@ -194,12 +166,14 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         .update({'images': imageUrls});
   }
 
+  @override
   Future<void> addToFavorites(String userId, String homeId) async {
     await _firestore.collection('Favorites').doc(userId).set({
       homeId: true,
     }, SetOptions(merge: true));
   }
 
+  @override
   Future<void> removeFromFavorites(String userId, String homeId) async {
     await _firestore.collection('Favorites').doc(userId).update({
       homeId: FieldValue.delete(),

@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:temp_house/app/extensions.dart';
+import 'package:temp_house/presentation/common/data_intent/data_intent.dart';
 import 'package:temp_house/presentation/resources/assets_manager.dart';
 import 'package:temp_house/presentation/resources/values_manager.dart';
 
@@ -18,7 +20,7 @@ import '../../../../../resources/text_styles.dart';
 
 class NearByHomeItem extends StatefulWidget {
   const NearByHomeItem({
-    super.key,
+    Key? key,
     required this.color,
     required this.title,
     required this.id,
@@ -29,8 +31,10 @@ class NearByHomeItem extends StatefulWidget {
     required this.wifiServices,
     required this.numnerofbathroom,
     required this.date,
-    required this.description, required this.coardinaties,
-  });
+    required this.description,
+    required this.coardinaties,
+  }) : super(key: key);
+
   final Color color;
   final String title;
   final String id;
@@ -43,7 +47,6 @@ class NearByHomeItem extends StatefulWidget {
   final String date;
   final String description;
   final GeoPoint coardinaties;
-
   @override
   State<NearByHomeItem> createState() => _NearByHomeItemState();
 }
@@ -51,6 +54,41 @@ class NearByHomeItem extends StatefulWidget {
 class _NearByHomeItemState extends State<NearByHomeItem> {
   bool isFav = false;
   bool isFavMessage = false;
+
+  void addToFavorites() async {
+    await FirebaseFirestore.instance.collection('Favorites').doc(DataIntent.getUser().uid).collection('items').doc(widget.id).set({
+      'price': widget.price,
+      'title': widget.title,
+      'homeId': widget.id,
+      'userId': DataIntent.getUser().uid,
+      'location': widget.location,
+      'imageUrl': widget.imageUrl,
+      'numnerofBeds': widget.numnerofBeds,
+      'wifiServices': widget.wifiServices,
+      'numnerofbathroom': widget.numnerofbathroom,
+      'date': widget.date,
+      'description': widget.description,
+      'coardinaties': widget.coardinaties,
+
+    }, SetOptions(merge: true));
+
+    setState(() {
+      isFav = true;
+    });
+  }
+
+  void removeFromFavorites(String userId, String homeId) async {
+    await FirebaseFirestore.instance
+        .collection('Favorites')
+        .doc(userId)
+        .collection('items')
+        .doc(homeId)
+        .delete();
+
+    setState(() {
+      isFav = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +100,7 @@ class _NearByHomeItemState extends State<NearByHomeItem> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
+            SizedBox(
               width: MediaQuery.of(context).size.width * 0.45,
 
               child: ClipRRect(
@@ -92,32 +130,21 @@ class _NearByHomeItemState extends State<NearByHomeItem> {
                         ),
                       ),
                       IconButton(
-                          onPressed: () {
-                            var snackBar = SnackBar(
-                              backgroundColor: ColorManager.offwhite,
-                              closeIconColor: ColorManager.primary,
-                              showCloseIcon: true,
-                              duration: const Duration(seconds: AppDuration.s3),
-                              content: Text(
-                                isFavMessage
-                                    ? AppStrings.removeItem.tr()
-                                    : AppStrings.addItem.tr(),
-                                style: AppTextStyles.nearHomeAddressTextStyle(
-                                    context),
-                              ),
-                            );
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
-                            setState(() {
-                              isFav = !isFav;
-                              isFavMessage = !isFavMessage;
-                            });
-                          },
-                          icon: Icon(
-                            isFav ? Icons.favorite : Icons.favorite_outline,
-                            color: ColorManager.primary,
-                            size: AppSize.s28,
-                          ))
+                        onPressed: () {
+                          setState(() {
+                            if (!isFav) {
+                              addToFavorites();
+                            } else {
+                              removeFromFavorites(DataIntent.getUser().uid, widget.id);
+                            }
+                            isFav = !isFav;
+                          });
+                        },
+                        icon: Icon(
+                          isFav ? Icons.favorite : Icons.favorite_outline,
+                          color: isFav ? Colors.red : null,
+                        ),
+                      )
                     ],
                   ),
                   Row(
@@ -132,7 +159,7 @@ class _NearByHomeItemState extends State<NearByHomeItem> {
                           widget.location,
                           maxLines: 1,
                           style:
-                              AppTextStyles.nearHomeAddressTextStyle(context),
+                          AppTextStyles.nearHomeAddressTextStyle(context),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
@@ -163,7 +190,7 @@ class _NearByHomeItemState extends State<NearByHomeItem> {
                       const SizedBox(width: AppSize.s5),
                       Text('(480)',
                           style:
-                              AppTextStyles.homeItemSecondTextStyle(context)),
+                          AppTextStyles.homeItemSecondTextStyle(context)),
                     ],
                   ),
                 ],

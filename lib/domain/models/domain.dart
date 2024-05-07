@@ -10,16 +10,40 @@ class PlaceModel {
   final String description;
 
   PlaceModel(
-      this.id,
-      this.name,
-      this.latLng,
-      this.phoneNumber,
-      this.addres,
-      this.description,
-      );
+    this.id,
+    this.name,
+    this.latLng,
+    this.phoneNumber,
+    this.addres,
+    this.description,
+  );
 }
 
-
+class Home {
+  final String title;
+  final String homeid;
+  final String userid;
+  final num price;
+  final String location;
+  final String imageUrl;
+  final String numnerofBeds;
+  final String wifiServices;
+  final String numnerofbathroom;
+  final String date;
+  final String description;
+  final GeoPoint coardinaties;
+  Home(
+      this.title,
+      this.price,
+      this.location,
+      this.imageUrl,
+      this.numnerofBeds,
+      this.wifiServices,
+      this.numnerofbathroom,
+      this.date,
+      this.description,
+      this.coardinaties, this.homeid, this.userid);
+}
 
 class Message {
   final String senderID;
@@ -30,7 +54,14 @@ class Message {
   final String type;
   bool seen;
 
-  Message(this.senderID, this.senderEmail, this.receiverID, this.content, this.type, this.seen, this.timestamp); // Updated constructor to include 'type'
+  Message(
+      this.senderID,
+      this.senderEmail,
+      this.receiverID,
+      this.content,
+      this.type,
+      this.seen,
+      this.timestamp); // Updated constructor to include 'type'
 
   Map<String, dynamic> toMap() {
     return {
@@ -56,5 +87,3 @@ class User {
     required this.name,
   });
 }
-
-

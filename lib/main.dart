@@ -34,7 +34,8 @@ void main() async {
 
   DataIntent.pushUser(
     User(
-      uid: '895ffe04-c9f3-41f1-b6e7-ebf085305636',
+      uid: "895ffe04-c9f3-41f1-b6e7-ebf085305636"
+      ,
       email: 'abdalla1@gmail.com',
       name: 'Abdalla',
     ),
@@ -57,6 +58,7 @@ void main() async {
   // );
 
   runApp(
+
     EasyLocalization(
       supportedLocales: AppLanguages.locals,
       path: AppLanguages.translationsPath,
