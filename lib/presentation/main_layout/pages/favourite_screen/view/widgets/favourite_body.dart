@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:temp_house/presentation/common/data_intent/data_intent.dart';
 import 'package:temp_house/presentation/main_layout/pages/home_screen/view/widgets/near_by_home_item.dart';
-import 'package:provider/provider.dart';
 import 'package:temp_house/presentation/resources/color_manager.dart';
 
 class FavouriteBody extends StatelessWidget {

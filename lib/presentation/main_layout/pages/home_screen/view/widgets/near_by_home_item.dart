@@ -55,8 +55,32 @@ class _NearByHomeItemState extends State<NearByHomeItem> {
   bool isFav = false;
   bool isFavMessage = false;
 
+  @override
+  void initState() {
+    super.initState();
+    checkIfFavorite();
+  }
+
+  void checkIfFavorite() async {
+    final docSnapshot = await FirebaseFirestore.instance
+        .collection('Favorites')
+        .doc(DataIntent.getUser().uid)
+        .collection('items')
+        .doc(widget.id)
+        .get();
+
+    setState(() {
+      isFav = docSnapshot.exists;
+    });
+  }
+
   void addToFavorites() async {
-    await FirebaseFirestore.instance.collection('Favorites').doc(DataIntent.getUser().uid).collection('items').doc(widget.id).set({
+    await FirebaseFirestore.instance
+        .collection('Favorites')
+        .doc(DataIntent.getUser().uid)
+        .collection('items')
+        .doc(widget.id)
+        .set({
       'price': widget.price,
       'title': widget.title,
       'homeId': widget.id,
@@ -69,7 +93,6 @@ class _NearByHomeItemState extends State<NearByHomeItem> {
       'date': widget.date,
       'description': widget.description,
       'coardinaties': widget.coardinaties,
-
     }, SetOptions(merge: true));
 
     setState(() {
@@ -78,6 +101,9 @@ class _NearByHomeItemState extends State<NearByHomeItem> {
   }
 
   void removeFromFavorites(String userId, String homeId) async {
+    // Check if the widget is still mounted before calling setState
+    if (!mounted) return;
+
     await FirebaseFirestore.instance
         .collection('Favorites')
         .doc(userId)
@@ -85,9 +111,12 @@ class _NearByHomeItemState extends State<NearByHomeItem> {
         .doc(homeId)
         .delete();
 
-    setState(() {
-      isFav = false;
-    });
+    // Call setState only if the widget is still mounted
+    if (mounted) {
+      setState(() {
+        isFav = false;
+      });
+    }
   }
 
   @override
@@ -139,8 +168,7 @@ class _NearByHomeItemState extends State<NearByHomeItem> {
                             }
                             isFav = !isFav;
                           });
-                        },
-                        icon: Icon(
+                        },                        icon: Icon(
                           isFav ? Icons.favorite : Icons.favorite_outline,
                           color: isFav ? Colors.red : null,
                         ),
