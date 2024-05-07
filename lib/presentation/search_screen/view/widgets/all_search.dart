@@ -53,12 +53,11 @@ class _AllSearchState extends State<AllSearch> {
             onChanged: (value) {
               setState(() {
                 if (value.isEmpty) {
-                  // Show all homes if search query is empty
                   _searchStream = FirebaseFirestore.instance.collection('Homes').snapshots();
                 } else {
-                  // Convert both the search query and field in Firestore to lowercase for case-insensitive search
                   _searchStream = FirebaseFirestore.instance.collection('Homes')
-                      .where('location', isGreaterThanOrEqualTo: value.toLowerCase())
+
+                      .where('description', isGreaterThanOrEqualTo: value.toLowerCase())
                       .snapshots();
                 }
               });
@@ -103,6 +102,7 @@ class _AllSearchState extends State<AllSearch> {
                           description: data['description'],
                           location: data['location'],
                           period: data['category'],
+                          name: data['name'],
                           coardinaties: data['coordinates'],
                         ),
                       ),

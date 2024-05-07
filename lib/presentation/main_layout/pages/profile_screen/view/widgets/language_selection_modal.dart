@@ -1,10 +1,11 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:temp_house/presentation/resources/color_manager.dart';
-import 'package:temp_house/presentation/resources/text_styles.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:easy_localization/easy_localization.dart';
 
+import '../../../../../resources/color_manager.dart';
 import '../../../../../resources/langauge_manager.dart';
 import '../../../../../resources/strings_manager.dart';
+import '../../../../../resources/text_styles.dart';
 import '../../../../../resources/values_manager.dart';
 
 class LanguageSelectionModal {
@@ -26,26 +27,36 @@ class LanguageSelectionModal {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Center(
-            child: Container(height: AppSize.s4,width: AppPadding.p40,
-            decoration: BoxDecoration(
-              color: ColorManager.grey,
-              borderRadius: BorderRadius.circular(AppSize.s20)
-            ),
+            child: Container(
+              height: AppSize.s4,
+              width: AppPadding.p40,
+              decoration: BoxDecoration(
+                color: ColorManager.grey,
+                borderRadius: BorderRadius.circular(AppSize.s20),
+              ),
             ),
           ),
-          Text(AppStrings.profileLanguage.tr(),style: AppTextStyles.profileSettingTextStyle()),
+          Text(
+            AppStrings.profileLanguage.tr(),
+            style: AppTextStyles.profileSettingTextStyle(),
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: AppPadding.p16),
             child: Row(
               children: [
                 GestureDetector(
-                  onTap: () {
-                    onSelect(AppStrings.profileLanguageEnglish.tr());
+                  onTap: () async {
+                    await _saveLanguageSelection(AppStrings.profileLanguageEnglish.tr());
+
                     AppLanguages.toggleLocal(context);
 
+                    onSelect(AppStrings.profileLanguageEnglish.tr());
                     Navigator.pop(context);
                   },
-                  child: Text(AppStrings.profileLanguageEnglish.tr(),style: AppTextStyles.profileSettingInfoTextStyle()),
+                  child: Text(
+                    AppStrings.profileLanguageEnglish.tr(),
+                    style: AppTextStyles.profileSettingInfoTextStyle(),
+                  ),
                 ),
               ],
             ),
@@ -55,12 +66,17 @@ class LanguageSelectionModal {
             child: Row(
               children: [
                 GestureDetector(
-                  onTap: () {
-                    onSelect(AppStrings.profileLanguageArabic.tr());
+                  onTap: () async {
+                    await _saveLanguageSelection(AppStrings.profileLanguageArabic.tr());
                     AppLanguages.toggleLocal(context);
+
+                    onSelect(AppStrings.profileLanguageArabic.tr());
                     Navigator.pop(context);
                   },
-                  child: Text(AppStrings.profileLanguageArabic.tr(),style: AppTextStyles.profileSettingInfoTextStyle(),),
+                  child: Text(
+                    AppStrings.profileLanguageArabic.tr(),
+                    style: AppTextStyles.profileSettingInfoTextStyle(),
+                  ),
                 ),
               ],
             ),
@@ -68,5 +84,10 @@ class LanguageSelectionModal {
         ],
       ),
     );
+  }
+
+  Future<void> _saveLanguageSelection(String selectedLanguage) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('selectedLanguage', selectedLanguage);
   }
 }

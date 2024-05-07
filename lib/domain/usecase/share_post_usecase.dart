@@ -17,6 +17,7 @@ class SharePostUseCase extends BaseUseCase<SharePostUseCaseInput, void> {
   Future<Either<Failure, void>> call(SharePostUseCaseInput input) async {
     return _repository.sharePost(
       title: input.title,
+      name: input.name,
       price: input.price,
       area: input.area,
       category: input.category,
@@ -35,6 +36,7 @@ class SharePostUseCase extends BaseUseCase<SharePostUseCaseInput, void> {
 
 class SharePostUseCaseInput {
   final String title;
+  final String name;
   final num price;
   final num area;
   final String category;
@@ -47,7 +49,8 @@ class SharePostUseCaseInput {
   final List<File> images;
   final GeoPoint coordinates;
 
-  SharePostUseCaseInput(   {
+  SharePostUseCaseInput(    {
+    required this.name,
     required this.title,
     required this.price,
     required this.area,

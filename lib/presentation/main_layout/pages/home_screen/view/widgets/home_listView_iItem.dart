@@ -67,7 +67,7 @@ class BuildCarouselItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.20,
+                height: AppSize.s150,
                 child: HomeImageWidget(
                   price: NumberFormat.compactCurrency(
                           locale: 'en', symbol: '', decimalDigits: 2)

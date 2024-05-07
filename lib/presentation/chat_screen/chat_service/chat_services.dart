@@ -48,11 +48,11 @@ class ChatServices {
   }
 
   Future<void> sendMessage(
-    String chatRoomID,
-    String content,
-    String type,
-    Timestamp timestamp,
-  ) async {
+      String chatRoomID,
+      String content,
+      String type,
+      Timestamp timestamp,
+      ) async {
     Map<String, dynamic> messageData = {
       'senderID': DataIntent.getUser().uid,
       'content': content,
@@ -66,12 +66,8 @@ class ChatServices {
         .doc(chatRoomID)
         .collection('messages')
         .add(messageData);
-    String lastSeenMessageMapping = content.contains(Constants.show_sendimage) ? 'Image 📷' : content;
-    await _firestore.collection("chat_rooms").doc(chatRoomID).update({
-      'last_message': lastSeenMessageMapping,
-      'last_message_time': timestamp,
-    });
   }
+
 
   // Stream<QuerySnapshot> getMessages(String chatID) {
   //   return _firestore

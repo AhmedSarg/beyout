@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:temp_house/domain/models/enums.dart';
+import 'package:temp_house/presentation/common/data_intent/data_intent.dart';
 import 'package:uuid/uuid.dart';
 
 abstract class RemoteDataSource {
@@ -31,6 +32,7 @@ abstract class RemoteDataSource {
 
   Future<String> saveHomesToDateBase({
     required String title,
+    required String name,
     required num price,
     required num area,
     required String category,
@@ -60,6 +62,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   @override
   Future<String> saveHomesToDateBase({
     required String title,
+    required String name,
     required num price,
     required num area,
     required String category,
@@ -87,59 +90,88 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       'location': location,
       'coordinates': GeoPoint(coordinates.latitude, coordinates.longitude),
       'timestamp': Timestamp.now(),
+      'name': DataIntent.getUser().name,
+      'userId': DataIntent.getUser().uid,
+      'isFavorite': false,
 
     });
     return docRef.id;
   }
   @override
-  Future<String> registerTenantToDataBase(
-      {required String uuid,
-        required String username,
-        required String email,
-        required String phoneNumber,
-        required Gender gender,
-        required String? job,
-        required num? salary,
-        required num age,
-        required String martialStatus}) async {
-    DocumentReference docRef = await _firestore.collection('users').add({
+  Future<String> registerTenantToDataBase({
+    required String uuid,
+    required String username,
+    required String email,
+    required String phoneNumber,
+    required Gender gender,
+    required String? job,
+    required num? salary,
+    required num age,
+    required String martialStatus,
+    List<String>? favorites,
+  }) async {
+    DocumentReference userDocRef =
+    _firestore.collection('users').doc(uuid); // Reference to user document
+    await userDocRef.set({
       'uuid': uuid,
       'username': username,
       'email': email,
       'phoneNumber': phoneNumber,
-      'gender': gender,
+      'gender': gender.toString(), // Store gender as string
       'job': job,
       'salary': salary,
       'age': age,
       'martialStatus': martialStatus,
       'userType': 'tenant',
     });
-    return docRef.id;
+
+    if (favorites != null) {
+      CollectionReference favoritesCollectionRef =
+      userDocRef.collection('favorites');
+      for (String favorite in favorites) {
+        await favoritesCollectionRef.add({'name': favorite});
+      }
+    }
+
+    return uuid;
   }
 
 
   @override
-  Future<String> registerOwnerToDataBase(
-      {required String uuid,
-        required String username,
-        required String email,
-        required String phoneNumber,
-        required Gender gender,
-        required num age,
-        required String martialStatus}) async {
-    DocumentReference docRef = await _firestore.collection('users').add({
+  Future<String> registerOwnerToDataBase({
+    required String uuid,
+    required String username,
+    required String email,
+    required String phoneNumber,
+    required Gender gender,
+    required num age,
+    required String martialStatus,
+    List<String>? favorites,
+  }) async {
+    DocumentReference userDocRef =
+    _firestore.collection('users').doc(uuid); // Reference to user document
+    await userDocRef.set({
       'uuid': uuid,
       'username': username,
       'email': email,
       'phoneNumber': phoneNumber,
-      'gender': gender,
-
+      'gender': gender.toString(), // Store gender as string
       'age': age,
       'martialStatus': martialStatus,
-      'userType': 'tenant',
+      'userType': 'owner',
     });
-    return docRef.id;
+
+    if (favorites != null) {
+      CollectionReference favoritesCollectionRef =
+      userDocRef.collection('favorites');
+      for (String favorite in favorites) {
+        await favoritesCollectionRef.add({'name': favorite});
+      }
+    }
+
+    return uuid; // Return user UUID
   }
+
 
   @override
   Future<void> uploadImages(List<File> images, String homeId) async {

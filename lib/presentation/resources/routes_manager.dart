@@ -77,9 +77,9 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const NotificationsScreen());
       case Routes.chatRoute:
         return MaterialPageRoute(
-          builder: (_) => const ChatScreen(
-            receiveEmail: '',
-            receiveID: '',
+          builder: (_) =>  ChatScreen(
+             receiveEmail: '',
+             receiveID: '',
             chatID: '',
           ),
         );

@@ -80,6 +80,7 @@ class RepositoryImpl implements Repository {
   @override
   Future<Either<Failure, void>> sharePost({
     required String title,
+    required String name,
     required num price,
     required num area,
     required String category,
@@ -105,7 +106,7 @@ class RepositoryImpl implements Repository {
           numberOfBathrooms: numberOfBathrooms,
           description: description,
           location: location,
-          coordinates: coordinates,
+          coordinates: coordinates, name: name,
         );
         await _remoteDataSource.uploadImages(images, homeId);
         return const Right(null);

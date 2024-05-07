@@ -44,6 +44,7 @@ class HomeSlider extends StatelessWidget {
                     id: document.id,
                     imageUrls: images.cast<String>(),
                     title: data['title'],
+                    name: data['name'],
                     price: data['price'],
                     area: data['area'],
                     numnerofBeds: data['number_of_beds'].toString(),
@@ -54,6 +55,7 @@ class HomeSlider extends StatelessWidget {
                     location: data['location'],
                     period: data['category'],
                     coardinaties:data['coordinates'],
+
                   ),
                 ),
               );

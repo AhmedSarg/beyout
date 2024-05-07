@@ -54,35 +54,6 @@ class _SearchScreenState extends State<SearchScreen>
         automaticallyImplyLeading: false,
         elevation: 0,
         toolbarHeight: 10,
-        // title:        MainSearch(
-        //   controller: _searchController,
-        //   hintText: AppStrings.searchTextHint.tr(),
-        //   leadingIcon: Icons.search,
-        //   trailingIcon: IconButton(
-        //     icon: SvgPicture.asset(
-        //       SVGAssets.googleMaps,
-        //       width: AppSize.s30,
-        //       height: AppSize.s30,
-        //     ),
-        //     onPressed: () {
-        //       Navigator.pushNamed(context, Routes.googleMapScreenRoute);
-        //     },
-        //   ),
-        //   onChanged: (value) {
-        //     setState(() {
-        //       if (value.isEmpty) {
-        //         // Show all homes if search query is empty
-        //         _searchStream = FirebaseFirestore.instance.collection('Homes').snapshots();
-        //       } else {
-        //         // Show only search results based on the entered query
-        //         _searchStream = FirebaseFirestore.instance.collection('Homes')
-        //             .where('title', isGreaterThanOrEqualTo: value)
-        //             .snapshots();
-        //       }
-        //     });
-        //   },
-        // ),
-
         bottom: TabBar(
           isScrollable: true,
           indicatorColor: ColorManager.grey,
@@ -161,7 +132,7 @@ _tabController.index ==3?
               children: [
                 const AllSearch(),
                 const LeatestSearch(),
-                const AllSearch(),
+                const LeatestSearch(),
                 PriceSearch(
                   minPrice: _minValue,
                   maxPrice: _maxValue,

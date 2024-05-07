@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:temp_house/presentation/common/widget/cached_image.dart';
-import 'package:temp_house/presentation/share_post_screen/home_services/home_services.dart';
 
 import '../../../../../../domain/models/enums.dart';
 import '../../../../../common/data_intent/data_intent.dart';
@@ -55,6 +54,7 @@ class _HomeImageWidgetState extends State<HomeImageWidget> {
           padding: const EdgeInsets.symmetric(
               vertical: AppPadding.p5, horizontal: AppPadding.p5),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
                   decoration: BoxDecoration(
@@ -66,7 +66,7 @@ class _HomeImageWidgetState extends State<HomeImageWidget> {
                         '${widget.price} ${AppStrings.priceHome.tr()}${widget.date} ',
                         style: AppTextStyles.homeItemPriceTextStyle(context)),
                   )),
-              const Spacer(),
+               const Spacer(),
               InkWell(
                 onTap: () {
                   var snackBar = SnackBar(

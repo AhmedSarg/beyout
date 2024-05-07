@@ -67,6 +67,7 @@ class AllNearByHome extends StatelessWidget {
                       location: data['location'],
                       period: data['category'],
                       coardinaties:data['coordinates'],
+                      name: data['name'],
 
                     ),
                   ),

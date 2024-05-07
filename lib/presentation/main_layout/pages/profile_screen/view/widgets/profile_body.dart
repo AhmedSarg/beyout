@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:country_picker/country_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:temp_house/presentation/main_layout/pages/profile_screen/view/widgets/profile_image.dart';
 import 'package:temp_house/presentation/resources/color_manager.dart';
 import 'package:temp_house/presentation/resources/routes_manager.dart';
@@ -26,8 +27,36 @@ class _ProfileBodyState extends State<ProfileBody> {
   String selectedMeasurement = 'Metric (m^2 , Km)';
   String selectedCountry = 'Egypt';
 
+
+  @override
+  void initState() {
+    super.initState();
+    _retrieveLanguageSelection();
+  }
+
+  Future<void> _retrieveLanguageSelection() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      selectedLanguage = prefs.getString('selectedLanguage') ?? 'English';
+    });
+  }
+
+  // void _showLanguageSelectionModal(BuildContext context) {
+  //   LanguageSelectionModal().show(context, (selectedLanguage) {
+  //     _saveLanguageSelection(selectedLanguage);
+  //     setState(() {
+  //       this.selectedLanguage = selectedLanguage;
+  //     });
+  //   });
+  // }
+
+  Future<void> _saveLanguageSelection(String selectedLanguage) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('selectedLanguage', selectedLanguage);
+  }
   void _showLanguageSelectionModal(BuildContext context) {
     LanguageSelectionModal().show(context, (selectedLanguage) {
+      _saveLanguageSelection(selectedLanguage);
       setState(() {
         this.selectedLanguage = selectedLanguage;
       });

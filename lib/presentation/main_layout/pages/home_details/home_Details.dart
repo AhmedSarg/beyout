@@ -6,6 +6,8 @@ import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:temp_house/presentation/chat_screen/chat_service/chat_services.dart';
+import 'package:temp_house/presentation/chat_screen/view/chat_view.dart';
 import 'package:temp_house/presentation/common/widget/cached_image.dart';
 import 'package:temp_house/presentation/map_screen/view/home_deatils_inMap.dart';
 import 'package:temp_house/presentation/resources/font_manager.dart';
@@ -13,6 +15,7 @@ import 'package:temp_house/presentation/resources/routes_manager.dart';
 import 'package:temp_house/presentation/resources/strings_manager.dart';
 import 'package:temp_house/presentation/resources/values_manager.dart';
 import 'package:temp_house/presentation/share_post_screen/viewmodel/share_view_model.dart';
+import '../../../common/data_intent/data_intent.dart';
 import '../../../common/widget/main_app_bar.dart';
 import '../../../resources/assets_manager.dart';
 import '../../../resources/color_manager.dart';
@@ -22,6 +25,7 @@ import '../home_screen/view/widgets/home_listView_iItem.dart';
 class HomeDetailsScreen extends StatefulWidget {
   final String id;
   final String title;
+  final String name;
   final num price;
   final num area;
   final String location;
@@ -46,7 +50,9 @@ class HomeDetailsScreen extends StatefulWidget {
     required this.description,
     required date,
     required this.period,
-    required this.area, required this.coardinaties,
+    required this.area,
+    required this.coardinaties,
+    required this.name,
   }) : super(key: key);
 
   @override
@@ -56,7 +62,7 @@ class HomeDetailsScreen extends StatefulWidget {
 class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
   int _currentIndex = 0;
   double _rating = 4;
-
+ChatServices chatServices = ChatServices();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,7 +81,36 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                     ColorManager.blue.withOpacity(.7),
                   )),
                   onPressed: () {
+
+
+                    if (chatServices.getChatRoomID(DataIntent.getUser().uid, widget.id)==chatServices.getChatRoomID( widget.id,DataIntent.getUser().uid)) {
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ChatScreen(
+                            receiveEmail: widget.name,
+                            receiveID: widget.id,
+                            chatID: chatServices.getChatRoomID(DataIntent.getUser().uid, widget.id),
+                          ),
+                        ),);
+
+                    }else{
+                      String chatID = chatServices.getChatRoomID(DataIntent.getUser().uid, widget.id);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ChatScreen(
+                              receiveEmail: widget.name,
+                              receiveID: widget.id,
+                              chatID: chatID),
+                        ),
+                      );
+
+                    }
+
                   },
+
                   child: SvgPicture.asset(
                     SVGAssets.chat,
                     width: AppSize.s35,
@@ -336,11 +371,16 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => GoogleMapHomeDetailsScreen( coordinates: widget.coardinaties, title: widget.title, address: widget.location, description: widget.description,                                   ),
+                                  builder: (context) =>
+                                      GoogleMapHomeDetailsScreen(
+                                    coordinates: widget.coardinaties,
+                                    title: widget.title,
+                                    address: widget.location,
+                                    description: widget.description,
+                                  ),
                                 ),
                               );
                             },
-
                             child: Container(
                               width: MediaQuery.of(context).size.width * .4,
                               height: AppSize.s50,

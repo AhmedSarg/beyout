@@ -1,15 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:temp_house/presentation/resources/text_styles.dart';
 import 'package:temp_house/presentation/chat_screen/chat_service/chat_services.dart';
 import 'package:temp_house/presentation/chat_screen/view/chat_view.dart';
 import 'package:temp_house/presentation/chats_screen/view/widgets/user_tile.dart';
 import 'package:temp_house/presentation/common/widget/main_circle_processIndicator.dart';
 import 'package:temp_house/presentation/resources/strings_manager.dart';
+
 import '../../chat_screen/view/widgets/no_message_screen.dart';
-import '../../common/data_intent/data_intent.dart';
 import '../../common/widget/main_app_bar.dart';
+import '../../resources/text_styles.dart';
 
 class ChatsScreen extends StatelessWidget {
   ChatsScreen({Key? key}) : super(key: key);
@@ -49,35 +49,31 @@ class ChatsScreen extends StatelessWidget {
           itemCount: filteredUsers.length,
           itemBuilder: (context, index) {
             final userData = filteredUsers[index].data();
-            return _buildUserListItem(
-                userData, context, filteredUsers[index].id);
+            // Here, you should extract necessary user data and pass it to ListTile.
+            // For example, assuming your user data has fields 'userID', 'email', and 'chatID':
+            final userID = userData['userID'];
+            final userEmail = userData['email'];
+            final chatID = userData['chatID'];
+
+            return ListTile(
+              title: Text(userEmail), // Display user's email or name here
+              subtitle: Text('Subtitle'), // Display additional info if needed
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) {
+                    return ChatScreen(
+                      receiveID: userID,
+                      receiveEmail: userEmail,
+                      chatID: chatID,
+                    );
+                  }),
+                );
+              },
+            );
           },
         );
       },
-    );
-  }
-
-  Widget _buildUserListItem(
-      Map<String, dynamic> userData, BuildContext context, String id) {
-    userData["participants_names"].remove(DataIntent.getUser().name);
-    userData["participants_ids"].remove(DataIntent.getUser().uid);
-    return UserTile(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) {
-            return ChatScreen(
-              receiveID: userData["participants_ids"].first,
-              receiveEmail: userData["participants_names"].first,
-              chatID: id,
-            );
-          }),
-        );
-      },
-      text: userData["participants_names"].first,
-      lastMessageTime:
-          _chatServices.formatTimestamp(userData["last_message_time"]),
-      lastMessage: userData['last_message'],
     );
   }
 }
