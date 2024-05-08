@@ -150,21 +150,26 @@ class _ProfileBodyState extends State<ProfileBody> {
                 Navigator.pushNamed(context, Routes.aboutScreenRoute);
               },
             ),
-            AppSettingItem(
-              text: AppStrings.rateUsScreenName.tr(),
-              onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return RatingDialog();
-                  },
-                );
-              },
-            ),
+            // AppSettingItem(
+            //   text: AppStrings.rateUsScreenName.tr(),
+            //   onTap: () {
+            //     showDialog(
+            //       context: context,
+            //       builder: (BuildContext context) {
+            //         return RatingDialog();
+            //       },
+            //     );
+            //   },
+            // ),
             AppSettingItem(
               text: AppStrings.needHelpScreenName.tr(),
               onTap: () {
                 Navigator.pushNamed(context, Routes.needHelpScreenRoute);
+              },
+            ),
+            AppSettingItem(
+              text: AppStrings.logOut.tr(),
+              onTap: () {
               },
             ),
           ],

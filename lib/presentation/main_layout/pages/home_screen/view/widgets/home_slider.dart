@@ -73,7 +73,8 @@ class HomeSlider extends StatelessWidget {
               id: data['uuid'],
               description: data['description'],
               coardinaties:data['coordinates'],
-
+              rating: data['rating']??0,
+              numberOfRatings:data['numberOfRatings']??0,
             ),
           );
         }).toList();

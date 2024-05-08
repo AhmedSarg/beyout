@@ -59,7 +59,6 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
 
 
-  @override
   Future<String> saveHomesToDateBase({
     required String title,
     required String name,
@@ -74,10 +73,9 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     required String location,
     required GeoPoint coordinates,
   }) async {
-    String uuid = const Uuid().v4();
+    String uuid = Uuid().v4();
 
     DocumentReference docRef = await _firestore.collection('Homes').add({
-      'uuid': uuid,
       'title': title,
       'price': price,
       'area': area,
@@ -93,8 +91,12 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       'name': DataIntent.getUser().name,
 
     });
+
+    await docRef.update({'uuid': docRef.id});
+
     return docRef.id;
   }
+
   @override
   Future<String> registerTenantToDataBase(
       {required String uuid,

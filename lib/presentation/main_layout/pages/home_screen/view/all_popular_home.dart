@@ -83,7 +83,6 @@ class AllPopularHome extends StatelessWidget {
                 id: data['uuid'],
                 description: data['description'],
                 coardinaties:data['coordinates'],
-
               ),
             );
           }).toList();

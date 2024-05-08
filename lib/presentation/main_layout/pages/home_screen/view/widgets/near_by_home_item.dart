@@ -69,9 +69,11 @@ class _NearByHomeItemState extends State<NearByHomeItem> {
         .doc(widget.id)
         .get();
 
-    setState(() {
-      isFav = docSnapshot.exists;
-    });
+    if (mounted) {
+      setState(() {
+        isFav = docSnapshot.exists;
+      });
+    }
   }
 
   void addToFavorites() async {

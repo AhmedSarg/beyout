@@ -2,6 +2,7 @@
   "noRouteFound": "No Route Found",
   "retryAgain": "Retry Again",
   "success": "Success",
+  "submit": "Submit  ",
 
   "splashScreenTitle": "Temp house",
   "splashScreenSubTitle": "Very Easy To Book a Home",
@@ -199,6 +200,7 @@
   "aboutContact" : "Contact",
   "aboutContactEmail" : "developer@gmail.com",
   "aboutContactWebSite" :"www.website.com",
+  "logOut" :"log out",
 
 
 

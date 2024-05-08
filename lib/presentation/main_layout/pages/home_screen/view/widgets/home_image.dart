@@ -18,10 +18,11 @@ class HomeImageWidget extends StatefulWidget {
     super.key,
     required this.price,
     required this.imageUrl,
-    required this.date,
+    required this.date, required this.id,
   });
 
   final String price;
+  final String id;
   final String imageUrl;
   final String date;
 
@@ -127,7 +128,7 @@ class _HomeImageWidgetState extends State<HomeImageWidget> {
                                   showDialog(
                                     context: context,
                                     builder: (BuildContext context) {
-                                      return RatingDialog();
+                                      return RatingDialog(homeItemId: widget.id);
                                     },
                                   );
                                 },

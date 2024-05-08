@@ -2,6 +2,7 @@
   "noRouteFound": "المسار غير موجود",
   "retryAgain": "حاول مرة أخري",
   "success": "تم بنجاح",
+  "submit": "إرسال ",
 
   "splashScreenTitle": "Temp house",
   "splashScreenSubTitle": "أحجز منزلك بسهولة",
@@ -162,6 +163,7 @@
   "profilePropertyFinder": "الباحث عن العقارات",
   "profileAbout": "حول التطبيق",
   "personalInfoBtn": "حفظ",
+  "logOut" :"تسجيل الخروج",
 
   "personalInfoTitle": "المعلومات الشخصيه",
   "personalInfoSubTitleInformation": "المعلومات",

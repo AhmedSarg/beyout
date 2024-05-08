@@ -1,26 +1,25 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:temp_house/presentation/resources/values_manager.dart';
+import 'package:temp_house/presentation/common/widget/main_button.dart';
+import 'package:temp_house/presentation/resources/color_manager.dart';
+import 'package:temp_house/presentation/resources/font_manager.dart';
 
-import '../../../../../common/widget/main_button.dart';
-import '../../../../../resources/color_manager.dart';
 import '../../../../../resources/strings_manager.dart';
 import '../../../../../resources/text_styles.dart';
 
 class RatingDialog extends StatefulWidget {
+  final String homeItemId;
+
+  RatingDialog({required this.homeItemId});
+
   @override
   _RatingDialogState createState() => _RatingDialogState();
 }
 
 class _RatingDialogState extends State<RatingDialog> {
   int _rating = 0;
-  late TextEditingController _feedbackController;
-
-  @override
-  void initState() {
-    super.initState();
-    _feedbackController = TextEditingController();
-  }
+  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -37,132 +36,67 @@ class _RatingDialogState extends State<RatingDialog> {
           ),
         ],
       ),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          const SizedBox(height: AppSize.s10),
-          FittedBox(
-            child: Row(
-              children: [
-                RatingStars(
-                  onRatingChanged: (rating) {
-                    setState(() {
-                      _rating = rating;
-                    });
-                  },
+      content: _isLoading
+          ? const CircularProgressIndicator(
+              color: ColorManager.offwhite,
+            )
+          : Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(5, (index) {
+                    return IconButton(
+                      onPressed: () {
+                        setState(() {
+                          _rating = index + 1;
+                        });
+                      },
+                      icon: Icon(
+                        index < _rating ? Icons.star : Icons.star_border,
+                        color: index < _rating ? ColorManager.orange : null,
+                      ),
+                    );
+                  }),
                 ),
-                Text(
-                  '$_rating/5 ${AppStrings.feedBackStarRate.tr()}',
-                  style: AppTextStyles.feedBackSubHeadTextStyle(context),
-                ), // Display current star rating
               ],
             ),
-          ),
-          const SizedBox(height: AppSize.s20),
-          FeedbackText(controller: _feedbackController),
-        ],
-      ),
       actions: [
-        Center(
-          child: MainButton(
-            backgroundColor: ColorManager.movi,
-            text: AppStrings.feedBackBotton.tr(),
-            textStyle: AppTextStyles.feedBackBtnTextStyle(context),
-            onTap: () {
-              // _homeServices.saveUsersFeedBackToFirestore(feedBack: [_feedbackController.text]);
-              print('_____________________');
-              print(_feedbackController.text);
-
-              Navigator.pop(context);
-            },
-          ),
-        )
+        SizedBox(
+            width: MediaQuery.of(context).size.width * .8,
+            child: ElevatedButton(
+                onPressed: _isLoading ? null : _submitRating,
+                child: Text(AppStrings.submit.tr()))),
       ],
     );
   }
 
-  @override
-  void dispose() {
-    _feedbackController.dispose();
-    super.dispose();
-  }
-}
-
-class RatingStars extends StatefulWidget {
-  final ValueChanged<int> onRatingChanged;
-
-  RatingStars({required this.onRatingChanged});
-
-  @override
-  _RatingStarsState createState() => _RatingStarsState();
-}
-
-class _RatingStarsState extends State<RatingStars> {
-  int _rating = 0;
-
-  void _setRating(int rating) {
+  Future<void> _submitRating() async {
     setState(() {
-      _rating = rating;
-      print('_____________________________________________________');
-      print(_rating);
+      _isLoading = true;
     });
-    widget.onRatingChanged(rating);
-  }
 
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: List.generate(5, (index) {
-        return GestureDetector(
-          onTap: () => _setRating(index + 1),
-          child: Icon(
-            Icons.star_rounded,
-            size: 40,
-            color: index < _rating ? Colors.orange : Colors.grey,
-          ),
-        );
-      }),
-    );
-  }
-}
+    final docSnapshot = await FirebaseFirestore.instance
+        .collection('Homes')
+        .doc(widget.homeItemId)
+        .get();
 
-class FeedbackText extends StatefulWidget {
-  final TextEditingController controller;
+    if (docSnapshot.exists) {
+      await FirebaseFirestore.instance
+          .collection('Homes')
+          .doc(widget.homeItemId)
+          .update({
+        'rating': FieldValue.increment(_rating),
+        'numberOfRatings': FieldValue.increment(1),
+      });
+    } else {
+      print('Document not found in Firestore');
+    }
 
-  FeedbackText({required this.controller});
+    setState(() {
+      _isLoading = false;
+    });
 
-  @override
-  _FeedbackTextState createState() => _FeedbackTextState();
-}
-
-class _FeedbackTextState extends State<FeedbackText> {
-  final int maxCharacters = 150;
-  String feedBack = '';
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        TextFormField(
-          controller: widget.controller,
-          maxLength: maxCharacters,
-          decoration: InputDecoration(
-            hintText: AppStrings.feedBackTextHint.tr(),
-            border: OutlineInputBorder(),
-            errorText: widget.controller.text != null && widget.controller.text.length > maxCharacters
-                ? 'Feedback exceeds $maxCharacters characters'
-                : null,
-          ),
-          maxLines: 3,
-onFieldSubmitted: (value) {
-  print('__________________________');
-  print(value);
-},
-        ),
-        const SizedBox(height: AppPadding.p10),
-      ],
-    );
+    Navigator.pop(context);
   }
 }

@@ -48,7 +48,7 @@ class FavouriteBody extends StatelessWidget {
               numnerofbathroom: data['number_of_bathrooms']?.toString() ?? '',
               date: data['category'] ?? '',
               id: doc.id,
-              description: data['description'] ?? '',
+              description: data['description']  ?? '',
               coardinaties: data['coordinates'] ?? GeoPoint(0, 0),
             );
           },

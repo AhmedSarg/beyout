@@ -3,6 +3,7 @@ class AppStrings {
   static const noRouteFound = "noRouteFound";
   static const retryAgain = "retryAgain";
   static const success = "success";
+  static const submit = "submit";
 
   ///splash screen
   static const splashScreenTitle = "splashScreenTitle";
@@ -229,6 +230,7 @@ class AppStrings {
   static const rateUsScreenName = "rateUsScreenName";
   static const needHelpScreenName = "needHelpScreenName";
   static const paymentDetailsScreen = "paymentDetailsScreen";
+  static const logOut = "logOut";
 
 
   // about app screen

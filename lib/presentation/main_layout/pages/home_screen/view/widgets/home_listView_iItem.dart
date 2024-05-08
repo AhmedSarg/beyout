@@ -22,13 +22,15 @@ class BuildCarouselItem extends StatelessWidget {
     required this.numnerofbathroom,
     required this.date,
     required this.id,
-    required this.description, required this.coardinaties,
+    required this.description, required this.coardinaties, required this.rating, required this.numberOfRatings,
   }) : super(key: key);
 
   final Color color;
   final String title;
   final String id;
   final num price;
+  final num rating;
+  final num numberOfRatings;
   final String location;
   final String imageUrl;
   final String numnerofBeds;
@@ -40,6 +42,8 @@ class BuildCarouselItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double displayedRating = (rating / numberOfRatings).clamp(0, 5); // Ensure the displayed rating is capped at 5 or less
+
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: AppPadding.p10,
@@ -73,7 +77,7 @@ class BuildCarouselItem extends StatelessWidget {
                           locale: 'en', symbol: '', decimalDigits: 2)
                       .format(price),
                   imageUrl: imageUrl,
-                  date: date,
+                  date: date, id:id,
                 ),
               ),
               const SizedBox(height: AppPadding.p5),
@@ -86,11 +90,11 @@ class BuildCarouselItem extends StatelessWidget {
                     ),
                     const SizedBox(width: 3),
                     Text(
-                      '4.4',
+                      displayedRating.toStringAsFixed(1),
                       style: AppTextStyles.homeItemRateTextStyle(context),
                     ),
                     Text(
-                      '(480)',
+                      ' ($numberOfRatings)',
                       style: AppTextStyles.homeItemSecondTextStyle(context),
                     ),
                   ],
