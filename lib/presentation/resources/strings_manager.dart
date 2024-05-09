@@ -3,6 +3,7 @@ class AppStrings {
   static const noRouteFound = "noRouteFound";
   static const retryAgain = "retryAgain";
   static const success = "success";
+  static const ok = "ok";
   static const submit = "submit";
 
   ///splash screen
@@ -224,6 +225,8 @@ class AppStrings {
   static const feedBackStarRate = "feedBackStarRate";
   static const feedBackTextHint = "feedBackTextHint";
   static const feedBackBotton = "feedBackBotton";
+  static const homeRated = "homeRated";
+  static const homeRatederror = "homeRatederror";
 
 
 

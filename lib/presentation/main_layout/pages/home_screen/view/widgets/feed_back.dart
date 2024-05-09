@@ -1,12 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:temp_house/presentation/common/widget/main_button.dart';
+import 'package:temp_house/presentation/common/data_intent/data_intent.dart';
 import 'package:temp_house/presentation/resources/color_manager.dart';
-import 'package:temp_house/presentation/resources/font_manager.dart';
-
-import '../../../../../resources/strings_manager.dart';
-import '../../../../../resources/text_styles.dart';
+import 'package:temp_house/presentation/resources/strings_manager.dart';
+import 'package:temp_house/presentation/resources/text_styles.dart';
 
 class RatingDialog extends StatefulWidget {
   final String homeItemId;
@@ -37,36 +36,36 @@ class _RatingDialogState extends State<RatingDialog> {
         ],
       ),
       content: _isLoading
-          ? const CircularProgressIndicator(
-              color: ColorManager.offwhite,
-            )
+          ? const Center(child: CircularProgressIndicator(color: ColorManager.offwhite))
           : Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(5, (index) {
-                    return IconButton(
-                      onPressed: () {
-                        setState(() {
-                          _rating = index + 1;
-                        });
-                      },
-                      icon: Icon(
-                        index < _rating ? Icons.star : Icons.star_border,
-                        color: index < _rating ? ColorManager.orange : null,
-                      ),
-                    );
-                  }),
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(5, (index) {
+              return IconButton(
+                onPressed: () {
+                  setState(() {
+                    _rating = index + 1;
+                  });
+                },
+                icon: Icon(
+                  index < _rating ? Icons.star : Icons.star_border,
+                  color: index < _rating ? Colors.orange : null,
                 ),
-              ],
-            ),
+              );
+            }),
+          ),
+        ],
+      ),
       actions: [
         SizedBox(
-            width: MediaQuery.of(context).size.width * .8,
-            child: ElevatedButton(
-                onPressed: _isLoading ? null : _submitRating,
-                child: Text(AppStrings.submit.tr()))),
+          width: MediaQuery.of(context).size.width * .8,
+          child: ElevatedButton(
+            onPressed: _isLoading ? null : _submitRating,
+            child: Text(AppStrings.submit.tr()),
+          ),
+        ),
       ],
     );
   }
@@ -76,27 +75,52 @@ class _RatingDialogState extends State<RatingDialog> {
       _isLoading = true;
     });
 
-    final docSnapshot = await FirebaseFirestore.instance
-        .collection('Homes')
-        .doc(widget.homeItemId)
-        .get();
+    final user = DataIntent.getUser();
 
-    if (docSnapshot.exists) {
-      await FirebaseFirestore.instance
-          .collection('Homes')
-          .doc(widget.homeItemId)
-          .update({
-        'rating': FieldValue.increment(_rating),
-        'numberOfRatings': FieldValue.increment(1),
-      });
-    } else {
-      print('Document not found in Firestore');
+    if (user != null) {
+      try {
+        final userRatingRef = FirebaseFirestore.instance
+            .collection('Homes')
+            .doc(widget.homeItemId)
+            .collection('ratings')
+            .doc(user.uid);
+
+        final userRatingDoc = await userRatingRef.get();
+
+        if (!userRatingDoc.exists) {
+          await userRatingRef.set({'rating': _rating});
+
+          await FirebaseFirestore.instance.collection('Homes').doc(widget.homeItemId).update({
+            'rating': FieldValue.increment(_rating),
+            'numberOfRatings': FieldValue.increment(1),
+          });
+
+          Navigator.pop(context);
+        } else {
+          _showAlertDialog(AppStrings.homeRated.tr());
+        }
+      } catch (error) {
+        _showAlertDialog(AppStrings.homeRatederror.tr());
+      }
     }
 
     setState(() {
       _isLoading = false;
     });
+  }
 
-    Navigator.pop(context);
+  void _showAlertDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(AppStrings.ok.tr()),
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -84,6 +84,9 @@
   "feedBackStarRate": "stars",
   "feedBackTextHint": "My feedback!!",
   "feedBackBotton": "Submit feedback",
+  "homeRated": "You have already rated this home",
+  "homeRatederror": "An error occurred.\n Please try again later.",
+  "ok": "Ok",
 
   "chatNoMessages": "No Message",
   "chatNoUsers": "No users found.",
