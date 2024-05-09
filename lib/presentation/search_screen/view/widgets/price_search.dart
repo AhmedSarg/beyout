@@ -57,7 +57,8 @@ class PriceSearch extends StatelessWidget {
                     period: data['category'],
                     name: data['name'],
                     numberOfRatings:data['numberOfRatings']??0,
-                    coardinaties: data['coordinates'],                    rating: data['rating']??0,
+                    coardinaties: data['coordinates'],
+                    rating: data['rating']??0,
 
                   ),
                 ),
