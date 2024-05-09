@@ -49,6 +49,8 @@ class NearByHomeList extends StatelessWidget {
                     period: data['category'],
                     coardinaties:data['coordinates'],
                     name: data['name'],
+                    numberOfRatings:data['numberOfRatings']??0,
+                    rating: data['rating']??0,
 
                   ),
                 ),
@@ -68,7 +70,8 @@ class NearByHomeList extends StatelessWidget {
               date: data['category'],
               id: data['uuid'],
               description: data['description'],
-              coardinaties:data['coordinates'],
+              coardinaties:data['coordinates'], rating: data['rating']??0,
+              numberOfRatings:data['numberOfRatings']??0,
 
             ),
           );

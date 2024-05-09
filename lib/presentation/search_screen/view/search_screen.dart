@@ -208,7 +208,7 @@ _tabController.index ==3?
                     ],
                   ),
 
-                  SizedBox(height: AppSize.s30),
+                  const SizedBox(height: AppSize.s30),
                   RangeSlider(
                     activeColor: ColorManager.cobaltRed,
                     inactiveColor: ColorManager.cobaltPink,

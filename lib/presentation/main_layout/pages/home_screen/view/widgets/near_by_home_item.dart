@@ -32,13 +32,15 @@ class NearByHomeItem extends StatefulWidget {
     required this.numnerofbathroom,
     required this.date,
     required this.description,
-    required this.coardinaties,
+    required this.coardinaties, required this.rating, required this.numberOfRatings,
   }) : super(key: key);
 
   final Color color;
   final String title;
   final String id;
   final num price;
+  final num rating;
+  final num numberOfRatings;
   final String location;
   final String imageUrl;
   final String numnerofBeds;
@@ -121,6 +123,7 @@ class _NearByHomeItemState extends State<NearByHomeItem> {
 
   @override
   Widget build(BuildContext context) {
+    final double displayedRating = (widget.rating / widget.numberOfRatings).clamp(0, 5);
     return Container(
       margin: const EdgeInsets.all(AppMargin.m10),
       color: ColorManager.transparent,
@@ -213,12 +216,16 @@ class _NearByHomeItemState extends State<NearByHomeItem> {
                         color: Colors.orange,
                         size: AppSize.s20,
                       ),
-                      Text('4.4',
-                          style: AppTextStyles.homeItemRateTextStyle(context)),
+                      Text(
+                        displayedRating.toStringAsFixed(1),
+                        style: AppTextStyles.homeItemRateTextStyle(context),
+                      ),
                       const SizedBox(width: AppSize.s5),
-                      Text('(480)',
-                          style:
-                          AppTextStyles.homeItemSecondTextStyle(context)),
+                      Text(
+                        '(${widget.numberOfRatings})',
+                        style: AppTextStyles.homeItemSecondTextStyle(context),
+                      ),
+
                     ],
                   ),
                 ],

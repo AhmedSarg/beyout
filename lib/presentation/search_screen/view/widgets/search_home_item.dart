@@ -15,8 +15,6 @@ import '../../../resources/color_manager.dart';
 import '../../../resources/strings_manager.dart';
 import '../../../resources/text_styles.dart';
 
-
-
 class SearchHomeItem extends StatefulWidget {
   const SearchHomeItem({
     super.key,
@@ -30,12 +28,17 @@ class SearchHomeItem extends StatefulWidget {
     required this.wifiServices,
     required this.numnerofbathroom,
     required this.date,
-    required this.description, required this.coardinaties,
+    required this.description,
+    required this.coardinaties,
+    required this.rating,
+    required this.numberOfRatings,
   });
   final Color color;
   final String title;
   final String id;
   final num price;
+  final num rating;
+  final num numberOfRatings;
   final String location;
   final String imageUrl;
   final String numnerofBeds;
@@ -55,6 +58,8 @@ class _NearByHomeItemState extends State<SearchHomeItem> {
 
   @override
   Widget build(BuildContext context) {
+    final double displayedRating = (widget.rating / widget.numberOfRatings).clamp(0, 5);
+
     return Container(
       margin: const EdgeInsets.all(AppMargin.m10),
       color: ColorManager.primary,
@@ -65,7 +70,6 @@ class _NearByHomeItemState extends State<SearchHomeItem> {
           children: [
             Container(
               width: MediaQuery.of(context).size.width * 0.45,
-
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(AppSize.s12),
                 child: CachedImage(
@@ -89,7 +93,8 @@ class _NearByHomeItemState extends State<SearchHomeItem> {
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           widget.title,
-                          style: AppTextStyles.homegenertalTextStyle(context,ColorManager.offwhite,FontSize.f18),
+                          style: AppTextStyles.homegenertalTextStyle(
+                              context, ColorManager.offwhite, FontSize.f18),
                         ),
                       ),
                       IconButton(
@@ -132,7 +137,8 @@ class _NearByHomeItemState extends State<SearchHomeItem> {
                         child: Text(
                           widget.location,
                           maxLines: 1,
-                          style: AppTextStyles.homegenertalTextStyle(context,ColorManager.offwhite,FontSize.f14),
+                          style: AppTextStyles.homegenertalTextStyle(
+                              context, ColorManager.offwhite, FontSize.f14),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
@@ -144,7 +150,8 @@ class _NearByHomeItemState extends State<SearchHomeItem> {
                       const SizedBox(width: AppSize.s10),
                       Text(
                         '${AppStrings.coin.tr()} ${widget.price}${widget.date}',
-                        style: AppTextStyles.homegenertalTextStyle(context,ColorManager.offwhite,FontSize.f14),
+                        style: AppTextStyles.homegenertalTextStyle(
+                            context, ColorManager.offwhite, FontSize.f14),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ],
@@ -158,12 +165,18 @@ class _NearByHomeItemState extends State<SearchHomeItem> {
                         color: Colors.orange,
                         size: AppSize.s20,
                       ),
-                      Text('4.4',
-                        style: AppTextStyles.homegenertalTextStyle(context,ColorManager.offwhite,FontSize.f12),
+                      Text(
+                        displayedRating.toStringAsFixed(1),
+                        style: AppTextStyles.homegenertalTextStyle(
+                            context, ColorManager.offwhite, FontSize.f12),
                       ),
                       const SizedBox(width: AppSize.s5),
-                      Text('(480)',
-                        style: AppTextStyles.homegenertalTextStyle(context,ColorManager.tertiary.withOpacity(.7),FontSize.f12),
+                      Text(
+                        '(${widget.numberOfRatings})',
+                        style: AppTextStyles.homegenertalTextStyle(
+                            context,
+                            ColorManager.tertiary.withOpacity(.7),
+                            FontSize.f12),
                       ),
                     ],
                   ),

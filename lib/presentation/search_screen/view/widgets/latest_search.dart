@@ -50,7 +50,9 @@ class LeatestSearch extends StatelessWidget {
                     location: data['location'],
                     period: data['category'],
                     name: data['name'],
-                    coardinaties: data['coordinates'],
+                    coardinaties: data['coordinates'],                    rating: data['rating']??0,
+                    numberOfRatings:data['numberOfRatings']??0,
+
                   ),
                 ),
               );
@@ -68,6 +70,8 @@ class LeatestSearch extends StatelessWidget {
               id: data['uuid'],
               description: data['description'],
               coardinaties: data['coordinates'],
+              rating: data['rating']??0,
+              numberOfRatings:data['numberOfRatings']??0,
             ),
           );
         }).toList();

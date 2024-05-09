@@ -27,6 +27,8 @@ class HomeDetailsScreen extends StatefulWidget {
   final String title;
   final String name;
   final num price;
+  final num numberOfRatings;
+  final num rating;
   final num area;
   final String location;
   final List<String> imageUrls;
@@ -52,7 +54,7 @@ class HomeDetailsScreen extends StatefulWidget {
     required this.period,
     required this.area,
     required this.coardinaties,
-    required this.name,
+    required this.name, required this.rating, required this.numberOfRatings,
   }) : super(key: key);
 
   @override
@@ -61,10 +63,15 @@ class HomeDetailsScreen extends StatefulWidget {
 
 class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
   int _currentIndex = 0;
-  double _rating = 4;
+  double _rating = 2.4;
 ChatServices chatServices = ChatServices();
   @override
   Widget build(BuildContext context) {
+    int rating = widget.rating.toInt();
+    print(rating);
+    print('________________________________');
+    final int displayedRating = (widget.rating / widget.numberOfRatings).clamp(0, 5).floor();
+
     return Scaffold(
       bottomNavigationBar: SizedBox(
         height: AppSize.s80,
@@ -304,7 +311,7 @@ ChatServices chatServices = ChatServices();
                           children: List.generate(5, (index) {
                             return Icon(
                               Icons.star_rounded,
-                              color: index < _rating.floor()
+                              color: index < displayedRating
                                   ? Colors.orange.withOpacity(.7)
                                   : Colors.grey.withOpacity(.7),
                               size: AppSize.s35,

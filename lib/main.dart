@@ -41,21 +41,21 @@ void main() async {
   //   ),
   // );
 
-    // DataIntent.pushUser(
-    //   User(
-    //     uid: '61094440-d2e0-4a4b-8103-3404a5036b2a',
-    //     email: 'xsarg22@gmail.com',
-    //     name: 'Ahmed',
-    //   ),
-    // );
+    DataIntent.pushUser(
+      User(
+        uid: '61094440-d2e0-4a4b-8103-3404a5036b2a',
+        email: 'xsarg22@gmail.com',
+        name: 'Ahmed',
+      ),
+    );
 
-   DataIntent.pushUser(
-     User(
-       uid: 'PQcEzxNiz6yPMkdZKo6C',
-       email: "salma@gmail.com",
-       name: 'Salma ',
-     ),
-   );
+   // DataIntent.pushUser(
+   //   User(
+   //     uid: 'PQcEzxNiz6yPMkdZKo6C',
+   //     email: "salma@gmail.com",
+   //     name: 'Salma ',
+   //   ),
+   // );
 
   runApp(
 

@@ -49,7 +49,8 @@ class FavouriteBody extends StatelessWidget {
               date: data['category'] ?? '',
               id: doc.id,
               description: data['description']  ?? '',
-              coardinaties: data['coordinates'] ?? GeoPoint(0, 0),
+              coardinaties: data['coordinates'] ?? GeoPoint(0, 0),rating: data['rating']??0,
+              numberOfRatings:data['numberOfRatings']??0,
             );
           },
         );

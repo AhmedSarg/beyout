@@ -50,7 +50,9 @@ class CheapestSearch extends StatelessWidget {
                     location: data['location'],
                     period: data['category'],
                     name: data['name'],
-                    coardinaties: data['coordinates'],
+                    coardinaties: data['coordinates'],                    rating: data['rating']??0,
+                    numberOfRatings:data['numberOfRatings']??0,
+
                   ),
                 ),
               );
@@ -67,7 +69,8 @@ class CheapestSearch extends StatelessWidget {
               date: data['category'],
               id: data['uuid'],
               description: data['description'],
-              coardinaties: data['coordinates'],
+              coardinaties: data['coordinates'], rating: data['rating']??0,
+              numberOfRatings:data['numberOfRatings']??0,
             ),
           );
         }).toList();

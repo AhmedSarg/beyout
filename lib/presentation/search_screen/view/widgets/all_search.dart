@@ -103,7 +103,9 @@ class _AllSearchState extends State<AllSearch> {
                           location: data['location'],
                           period: data['category'],
                           name: data['name'],
-                          coardinaties: data['coordinates'],
+                          numberOfRatings:data['numberOfRatings']??0,
+                          coardinaties: data['coordinates'],                    rating: data['rating']??0,
+
                         ),
                       ),
                     );
@@ -121,6 +123,8 @@ class _AllSearchState extends State<AllSearch> {
                     id: data['uuid'],
                     description: data['description'],
                     coardinaties: data['coordinates'],
+                    rating: data['rating']??0,
+                    numberOfRatings:data['numberOfRatings']??0,
                   ),
                 );
               }).toList();

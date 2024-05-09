@@ -55,7 +55,8 @@ class HomeSlider extends StatelessWidget {
                     location: data['location'],
                     period: data['category'],
                     coardinaties:data['coordinates'],
-
+                    numberOfRatings:data['numberOfRatings']??0,
+                    rating: data['rating']??0,
                   ),
                 ),
               );
