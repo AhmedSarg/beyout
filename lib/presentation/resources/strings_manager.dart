@@ -185,6 +185,7 @@ class AppStrings {
   static const tapBarSearchLatest = "tapBarSearchLatest";
   static const tapBarSearchPopular = "tapBarSearchPopular";
   static const tapBarSearchCheapest = "tapBarSearchCheapest";
+  static const emptyData = "emptyData";
 
 
   static const personalInfoTitle = "personalInfoTitle";
@@ -203,6 +204,7 @@ class AppStrings {
 
   /// favourite screen
   static const favouraiteScreenTitle = "favouraiteScreenTitle";
+  static const favouraiteScreenEmpty = "favouraiteScreenEmpty";
 
   ///chats screen
   static const chatsScreenTitle = "chatsScreenTitle";

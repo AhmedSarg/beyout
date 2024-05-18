@@ -1,11 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:temp_house/presentation/resources/font_manager.dart';
 import 'package:temp_house/presentation/search_screen/view/widgets/search_home_item.dart';
 
+import '../../../common/widget/empty_list.dart';
 import '../../../common/widget/main_circle_processIndicator.dart';
 import '../../../main_layout/pages/home_details/home_Details.dart';
 import '../../../main_layout/pages/home_screen/view/widgets/near_by_home_item.dart';
+import '../../../resources/assets_manager.dart';
 import '../../../resources/color_manager.dart';
+import '../../../resources/strings_manager.dart';
+import '../../../resources/text_styles.dart';
 
 class CheapestSearch extends StatelessWidget {
   const CheapestSearch({Key? key});
@@ -22,7 +28,7 @@ class CheapestSearch extends StatelessWidget {
           return Center(child: Text('Error: ${snapshot.error}'));
         }
         if (snapshot.data == null || snapshot.data!.docs.isEmpty) {
-          return const Text('No data available');
+          return  Center(child: EmptyListItem(content: AppStrings.emptyData.tr(), image: SVGAssets.delete,style: AppTextStyles.homegenertalTextStyle(context,ColorManager.offwhite,FontSize.f22),));
         }
 
         final items = snapshot.data!.docs.map((DocumentSnapshot document) {

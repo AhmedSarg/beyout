@@ -32,7 +32,9 @@ class NearByHomeItem extends StatefulWidget {
     required this.numnerofbathroom,
     required this.date,
     required this.description,
-    required this.coardinaties, required this.rating, required this.numberOfRatings,
+    required this.coardinaties,
+    required this.rating,
+    required this.numberOfRatings,
   }) : super(key: key);
 
   final Color color;
@@ -123,7 +125,8 @@ class _NearByHomeItemState extends State<NearByHomeItem> {
 
   @override
   Widget build(BuildContext context) {
-    final double displayedRating = (widget.rating / widget.numberOfRatings).clamp(0, 5);
+    final double displayedRating =
+        (widget.rating / widget.numberOfRatings).clamp(0, 5);
     return Container(
       margin: const EdgeInsets.all(AppMargin.m10),
       color: ColorManager.transparent,
@@ -134,7 +137,6 @@ class _NearByHomeItemState extends State<NearByHomeItem> {
           children: [
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.45,
-
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(AppSize.s12),
                 child: CachedImage(
@@ -167,14 +169,19 @@ class _NearByHomeItemState extends State<NearByHomeItem> {
                             if (!isFav) {
                               addToFavorites();
                             } else {
-                              removeFromFavorites(DataIntent.getUser().uid, widget.id);
+                              removeFromFavorites(
+                                  DataIntent.getUser().uid, widget.id);
                             }
                             isFav = !isFav;
                           });
-                        },                        icon: Icon(
-                          isFav ? Icons.favorite : Icons.favorite_outline,
-                          color: isFav ? Colors.red : null,
-                        ),
+                        },
+                        // icon: Icon(
+                        //   isFav ? Icons.favorite : Icons.favorite_outline,
+                        //   color: isFav ? Colors.red : null,
+                        // ),
+                        icon: isFav
+                            ? SvgPicture.asset(SVGAssets.favouraiteFill)
+                            : SvgPicture.asset(SVGAssets.favouraiteLight),
                       )
                     ],
                   ),
@@ -190,7 +197,7 @@ class _NearByHomeItemState extends State<NearByHomeItem> {
                           widget.location,
                           maxLines: 1,
                           style:
-                          AppTextStyles.nearHomeAddressTextStyle(context),
+                              AppTextStyles.nearHomeAddressTextStyle(context),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
@@ -225,7 +232,6 @@ class _NearByHomeItemState extends State<NearByHomeItem> {
                         '(${widget.numberOfRatings})',
                         style: AppTextStyles.homeItemSecondTextStyle(context),
                       ),
-
                     ],
                   ),
                 ],

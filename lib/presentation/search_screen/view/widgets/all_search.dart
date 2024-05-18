@@ -57,7 +57,7 @@ class _AllSearchState extends State<AllSearch> {
                 } else {
                   _searchStream = FirebaseFirestore.instance.collection('Homes')
 
-                      .where('description', isGreaterThanOrEqualTo: value.toLowerCase())
+                      .where('title', isGreaterThanOrEqualTo: value.toLowerCase())
                       .snapshots();
                 }
               });
@@ -75,7 +75,7 @@ class _AllSearchState extends State<AllSearch> {
                 return Center(child: Text('Error: ${snapshot.error}'));
               }
               if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                return Container(); // Return an empty container if no data or no search results
+                return Container();
               }
 
               final items = snapshot.data!.docs.map((DocumentSnapshot document) {
