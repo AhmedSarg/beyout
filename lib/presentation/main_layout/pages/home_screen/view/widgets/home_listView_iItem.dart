@@ -22,7 +22,10 @@ class BuildCarouselItem extends StatelessWidget {
     required this.numnerofbathroom,
     required this.date,
     required this.id,
-    required this.description, required this.coardinaties, required this.rating, required this.numberOfRatings,
+    required this.description,
+    required this.coardinaties,
+    required this.rating,
+    required this.numberOfRatings,
   }) : super(key: key);
 
   final Color color;
@@ -42,7 +45,8 @@ class BuildCarouselItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double displayedRating = (rating / numberOfRatings).clamp(0, 5); // Ensure the displayed rating is capped at 5 or less
+    final double displayedRating = (rating / numberOfRatings)
+        .clamp(0, 5); // Ensure the displayed rating is capped at 5 or less
 
     return Padding(
       padding: const EdgeInsets.symmetric(
@@ -73,11 +77,22 @@ class BuildCarouselItem extends StatelessWidget {
               SizedBox(
                 height: AppSize.s150,
                 child: HomeImageWidget(
-                  price: NumberFormat.compactCurrency(
-                          locale: 'en', symbol: '', decimalDigits: 2)
-                      .format(price),
+                   price: NumberFormat.compactCurrency(
+                           locale: 'en', symbol: '', decimalDigits: 2)
+                       .format(price),
                   imageUrl: imageUrl,
-                  date: date, id:id,
+                  date: date,
+                  id: id,
+                  color: ColorManager.offwhite,
+                  title: title,
+                  location: location,
+                  numnerofBeds: numnerofBeds,
+                  wifiServices: wifiServices,
+                  numnerofbathroom: numnerofbathroom,
+                  description: description,
+                  coardinaties: coardinaties,
+                  rating: rating,
+                  numberOfRatings: numberOfRatings,
                 ),
               ),
               const SizedBox(height: AppPadding.p5),

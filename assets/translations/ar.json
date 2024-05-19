@@ -151,6 +151,8 @@
   "removeItem": "إزالة المنزل من القائمة المفضلة",
 
   "favouraiteScreenTitle": "قائمة المفضلين",
+  "favouraiteScreenEmpty":"لا يوجد منازل مفضلة",
+  "emptyData":"لا يوجد منازل",
 
 
   "profileAppBar": "حسابي",

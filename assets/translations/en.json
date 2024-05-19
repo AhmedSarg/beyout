@@ -109,6 +109,7 @@
   "warningProces": "Warning",
   "errorProces": "Error",
   "succesProces": "Success",
+  "emptyData":"No Homes",
 
   "conditionBad"     : "Bad",
   "conditionGood"    : "Good",
@@ -161,6 +162,7 @@
   "tapBarSearchCheapest": "Cheapest",
 
   "favouraiteScreenTitle": "Favourite List",
+  "favouraiteScreenEmpty":"NO Favourite homes",
 
 
   "profileAppBar": "My Account",

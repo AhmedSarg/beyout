@@ -17,7 +17,7 @@ class FavouriteBody extends StatelessWidget {
           .snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator(color: ColorManager.offwhite,));
         }
         if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
