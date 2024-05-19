@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class PlaceModel {
@@ -6,7 +5,7 @@ class PlaceModel {
   final String name;
   final LatLng latLng;
   final String phoneNumber;
-  final String addres;
+  final String address;
   final String description;
 
   PlaceModel(
@@ -14,65 +13,58 @@ class PlaceModel {
     this.name,
     this.latLng,
     this.phoneNumber,
-    this.addres,
+    this.address,
     this.description,
   );
 }
 
-class Home {
+class HomeModel {
   final String title;
-  final String homeid;
-  final String userid;
+  final String homeId;
+  final String ownerId;
   final num price;
   final String location;
   final String imageUrl;
-  final String numnerofBeds;
-  final String wifiServices;
-  final String numnerofbathroom;
-  final String date;
+  final int numberOfBeds;
+  final bool wifiServices;
+  final int numberOfBathrooms;
+  final DateTime date;
   final String description;
-  final GeoPoint coardinaties;
-  Home(
-      this.title,
-      this.price,
-      this.location,
-      this.imageUrl,
-      this.numnerofBeds,
-      this.wifiServices,
-      this.numnerofbathroom,
-      this.date,
-      this.description,
-      this.coardinaties, this.homeid, this.userid);
-}
+  final LatLng coordinates;
 
-class Message {
-  final String senderID;
-  final String senderEmail;
-  final String receiverID;
-  final String content;
-  final Timestamp timestamp;
-  final String type;
-  bool seen;
+  HomeModel({
+    required this.title,
+    required this.price,
+    required this.location,
+    required this.imageUrl,
+    required this.numberOfBeds,
+    required this.wifiServices,
+    required this.numberOfBathrooms,
+    required this.date,
+    required this.description,
+    required this.coordinates,
+    required this.homeId,
+    required this.ownerId,
+  });
 
-  Message(
-      this.senderID,
-      this.senderEmail,
-      this.receiverID,
-      this.content,
-      this.type,
-      this.seen,
-      this.timestamp); // Updated constructor to include 'type'
-
-  Map<String, dynamic> toMap() {
-    return {
-      'senderID': senderID,
-      'senderEmail': senderEmail,
-      'receiverID': receiverID,
-      'content': content,
-      'timestamp': timestamp,
-      'type': type,
-      'seen': seen,
-    };
+  factory HomeModel.fromMap(Map<String, dynamic> map) {
+    return HomeModel(
+      title: map['title'],
+      price: map['price'],
+      location: map['location'],
+      imageUrl: map['images'][0],
+      numberOfBeds: map['number_of_beds'],
+      wifiServices: map['wifi'],
+      numberOfBathrooms: map['number_of_bathrooms'],
+      date: map['timestamp'].toDate(),
+      description: map['description'],
+      coordinates: LatLng(
+        map['coordinates'].latitude,
+        map['coordinates'].longitude,
+      ),
+      homeId: map['uuid'],
+      ownerId: map['owner_id'],
+    );
   }
 }
 

@@ -2,13 +2,12 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:temp_house/domain/models/domain.dart';
 
 import '../../data/network/failure.dart';
 import '../models/enums.dart';
 
 abstract class Repository {
-
   // Future<Either<Failure, void>> register({
   //   required String username,
   //   required String email,
@@ -20,7 +19,6 @@ abstract class Repository {
   //   required DateTime? createdAt,
   //   required RegisterType registerType,
   // });
-
 
   Future<Either<Failure, void>> sharePost({
     required String title,
@@ -51,5 +49,5 @@ abstract class Repository {
     required RegisterType registerType,
   });
 
-
+  Future<Either<Failure, Stream<List<HomeModel>>>> getAllHomes();
 }

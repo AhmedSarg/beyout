@@ -33,12 +33,14 @@ class SVGAssets {
   static const String googleMaps = "${_basePath}Group 98.svg";
   static const String markAsRead = "${_basePath}Done_round.svg";
   static const String delete = "${_basePath}Trash.svg";
-  static const String feedBack = "${_basePath}fluent_person-feedback-20-regular.svg";
+  static const String feedBack =
+      "${_basePath}fluent_person-feedback-20-regular.svg";
   static const String favouraiteFill = "${_basePath}Favorite_fill.svg";
   static const String favouraiteLight = "${_basePath}Favorite_light.svg";
   static const String location = "${_basePath}COMPAS.svg";
   static const String card = "${_basePath}solar_card-bold.svg";
   static const String noMessage = "${_basePath}fi-sr-envelope-ban.svg";
+  static const String mapHome = "${_basePath}map_home_icon.svg";
 }
 
 class LottieAssets {

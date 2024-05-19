@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../domain/models/domain.dart';
 import '../../domain/models/enums.dart';
 import '../../domain/repository/repository.dart';
 import '../data_source/remote_data_source.dart';
@@ -14,9 +14,11 @@ import '../network/network_info.dart';
 
 class RepositoryImpl implements Repository {
   final RemoteDataSource _remoteDataSource;
+
   // final LocalDataSource _localDataSource;
   // final CacheDataSource _cacheDataSource;
   final NetworkInfo _networkInfo;
+
   // final Uuid _uuidGenerator = const Uuid();
   final Uuid _uuidGenerator = const Uuid();
 
@@ -106,7 +108,8 @@ class RepositoryImpl implements Repository {
           numberOfBathrooms: numberOfBathrooms,
           description: description,
           location: location,
-          coordinates: coordinates, name: name,
+          coordinates: coordinates,
+          name: name,
         );
         await _remoteDataSource.uploadImages(images, homeId);
         return const Right(null);
@@ -117,8 +120,6 @@ class RepositoryImpl implements Repository {
       return Left(ErrorHandler.handle(e).failure);
     }
   }
-
-
 
   @override
   Future<Either<Failure, void>> register({
@@ -139,21 +140,54 @@ class RepositoryImpl implements Repository {
         if (registerType == RegisterType.tenant) {
           await _remoteDataSource.registerTenantToDataBase(
             uuid: uuid,
-
             phoneNumber: phoneNumber,
-            email: email, username: username, gender: gender, job: job, salary: salary, age: age, martialStatus: martialStatus,
-
+            email: email,
+            username: username,
+            gender: gender,
+            job: job,
+            salary: salary,
+            age: age,
+            martialStatus: martialStatus,
           );
         } else {
           await _remoteDataSource.registerOwnerToDataBase(
             uuid: uuid,
-
             phoneNumber: phoneNumber,
-            email: email, username: username, gender: gender, age: age, martialStatus: martialStatus,
-
+            email: email,
+            username: username,
+            gender: gender,
+            age: age,
+            martialStatus: martialStatus,
           );
         }
         return const Right(null);
+      } else {
+        return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+      }
+    } catch (e) {
+      return Left(ErrorHandler.handle(e).failure);
+    }
+  }
+
+  @override
+  Future<Either<Failure, Stream<List<HomeModel>>>> getAllHomes() async {
+    try {
+      if (await _networkInfo.isConnected) {
+        Stream<List<HomeModel>> homesStream =
+            await _remoteDataSource.getAllHomes().then(
+          (stream) {
+            return stream.map(
+              (homes) {
+                return homes.map(
+                  (home) {
+                    return HomeModel.fromMap(home);
+                  },
+                ).toList();
+              },
+            );
+          },
+        );
+        return Right(homesStream);
       } else {
         return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
       }
