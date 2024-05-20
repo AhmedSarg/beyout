@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:temp_house/presentation/resources/font_manager.dart';
 import 'package:temp_house/presentation/search_screen/view/widgets/search_home_item.dart';
 
+import '../../../../domain/models/domain.dart';
 import '../../../common/widget/empty_list.dart';
 import '../../../common/widget/main_circle_processIndicator.dart';
-import '../../../main_layout/pages/home_details/home_Details.dart';
-import '../../../main_layout/pages/home_screen/view/widgets/near_by_home_item.dart';
+import '../../../main_layout/pages/home_details/home_details.dart';
 import '../../../resources/assets_manager.dart';
 import '../../../resources/color_manager.dart';
 import '../../../resources/strings_manager.dart';
@@ -19,7 +19,10 @@ class CheapestSearch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection('Homes').orderBy('price').snapshots(),
+      stream: FirebaseFirestore.instance
+          .collection('Homes')
+          .orderBy('price')
+          .snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const MainCicleProcessIndicator();
@@ -28,12 +31,18 @@ class CheapestSearch extends StatelessWidget {
           return Center(child: Text('Error: ${snapshot.error}'));
         }
         if (snapshot.data == null || snapshot.data!.docs.isEmpty) {
-          return  Center(child: EmptyListItem(content: AppStrings.emptyData.tr(), image: SVGAssets.delete,style: AppTextStyles.homegenertalTextStyle(context,ColorManager.offwhite,FontSize.f22),));
+          return Center(
+              child: EmptyListItem(
+            content: AppStrings.emptyData.tr(),
+            image: SVGAssets.delete,
+            style: AppTextStyles.homegenertalTextStyle(
+                context, ColorManager.offwhite, FontSize.f22),
+          ));
         }
 
         final items = snapshot.data!.docs.map((DocumentSnapshot document) {
           final Map<String, dynamic> data =
-          document.data()! as Map<String, dynamic>;
+              document.data()! as Map<String, dynamic>;
           List<dynamic> images = data['images'] ?? [];
           String firstImage = images.isNotEmpty ? images[0] : '';
 
@@ -56,27 +65,15 @@ class CheapestSearch extends StatelessWidget {
                     location: data['location'],
                     period: data['category'],
                     name: data['name'],
-                    coardinaties: data['coordinates'],                    rating: data['rating']??0,
-                    numberOfRatings:data['numberOfRatings']??0,
-
+                    coardinaties: data['coordinates'],
+                    rating: data['rating'] ?? 0,
+                    numberOfRatings: data['numberOfRatings'] ?? 0,
                   ),
                 ),
               );
             },
             child: SearchHomeItem(
-              color: ColorManager.offwhite,
-              title: data['title'],
-              price: data['price'],
-              location: data['location'],
-              imageUrl: firstImage,
-              numnerofBeds: data['number_of_beds'].toString(),
-              wifiServices: data['wifi'] == true ? 'Yes' : 'No',
-              numnerofbathroom: data['number_of_bathrooms'].toString(),
-              date: data['category'],
-              id: data['uuid'],
-              description: data['description'],
-              coardinaties: data['coordinates'], rating: data['rating']??0,
-              numberOfRatings:data['numberOfRatings']??0,
+              home: HomeModel.fromMap(data),
             ),
           );
         }).toList();

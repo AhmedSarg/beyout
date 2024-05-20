@@ -214,4 +214,75 @@ class RepositoryImpl implements Repository {
       return Left(ErrorHandler.handle(e).failure);
     }
   }
+
+  @override
+  Future<Either<Failure, void>> addToFavorites({
+    required String userId,
+    required String homeId,
+  }) async {
+    try {
+      if (await _networkInfo.isConnected) {
+        await _remoteDataSource.addToFavorites(userId: userId, homeId: homeId);
+        return const Right(null);
+      } else {
+        return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+      }
+    } catch (e) {
+      return Left(ErrorHandler.handle(e).failure);
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> removeFromFavorites({
+    required String userId,
+    required String homeId,
+  }) async {
+    try {
+      if (await _networkInfo.isConnected) {
+        await _remoteDataSource.removeFromFavorites(
+            userId: userId, homeId: homeId);
+        return const Right(null);
+      } else {
+        return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+      }
+    } catch (e) {
+      return Left(ErrorHandler.handle(e).failure);
+    }
+  }
+
+  @override
+  Future<Either<Failure, Stream<List<Future<HomeModel>>>>> getAllFavorites({
+    required String userId,
+  }) async {
+    try {
+      if (await _networkInfo.isConnected) {
+        Stream<List<Future<HomeModel>>> favoriteHomesStream =
+            await _remoteDataSource
+                .getAllFavorites(
+          userId: userId,
+        )
+                .then(
+          (homesStream) {
+            return homesStream.map(
+              (homes) {
+                return homes.map(
+                  (homeId) async {
+                    final home = await _remoteDataSource.getHomeById(
+                      homeId: homeId,
+                    );
+                    return HomeModel.fromMap(home);
+                  },
+                ).toList();
+              },
+            );
+          },
+        );
+        return Right(favoriteHomesStream);
+      } else {
+        return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+      }
+    } catch (e) {
+      return Left(ErrorHandler.handle(e).failure);
+    }
+  }
 }

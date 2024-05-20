@@ -31,6 +31,9 @@ class HomeModel {
   final DateTime date;
   final String description;
   final LatLng coordinates;
+  final double rate;
+  final int numberOfRates;
+  final String rentPeriod;
 
   HomeModel({
     required this.title,
@@ -45,6 +48,9 @@ class HomeModel {
     required this.coordinates,
     required this.homeId,
     required this.ownerId,
+    required this.rate,
+    required this.numberOfRates,
+    required this.rentPeriod,
   });
 
   factory HomeModel.fromMap(Map<String, dynamic> map) {
@@ -64,6 +70,9 @@ class HomeModel {
       ),
       homeId: map['uuid'],
       ownerId: map['owner_id'],
+      rate: map['rating'].toDouble(),
+      numberOfRates: map['numberOfRatings'],
+      rentPeriod: map['category'],
     );
   }
 }
@@ -72,10 +81,24 @@ class User {
   final String uid;
   final String email;
   final String name;
+  final List<String> favoriteHomes;
 
   User({
     required this.uid,
     required this.email,
     required this.name,
+    required this.favoriteHomes,
   });
+
+  addHomeToFavorites(String homeId) {
+    favoriteHomes.add(homeId);
+  }
+
+  removeHomeFromFavorites(String homeId) {
+    favoriteHomes.remove(homeId);
+  }
+
+  bool isHomeInFavorites(String homeId) {
+    return favoriteHomes.contains(homeId);
+  }
 }

@@ -288,8 +288,10 @@ class HomeDetails extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const Divider(height: AppSize.s30,
-                    color: ColorManager.lightGray,),
+                  const Divider(
+                    height: AppSize.s30,
+                    color: ColorManager.lightGray,
+                  ),
                   TextButton(
                     onPressed: () {},
                     child: Row(

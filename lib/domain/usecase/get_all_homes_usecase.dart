@@ -11,7 +11,7 @@ class GetAllHomesUseCase extends BaseUseCase<void, Stream<List<HomeModel>>> {
   GetAllHomesUseCase(this._repository);
 
   @override
-  Future<Either<Failure, Stream<List<HomeModel>>>> call(void input) async {
+  Future<Either<Failure, Stream<List<HomeModel>>>> call(input) async {
     return _repository.getAllHomes();
   }
 }

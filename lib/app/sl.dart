@@ -19,7 +19,10 @@ import '../data/network/firestore_factory.dart';
 import '../data/network/network_info.dart';
 import '../data/repository/repository_impl.dart';
 import '../domain/repository/repository.dart';
+import '../domain/usecase/add_to_favorites_usecase.dart';
+import '../domain/usecase/get_all_favorites_usecase.dart';
 import '../domain/usecase/get_all_homes_usecase.dart';
+import '../domain/usecase/remove_from_favorites_usecase.dart';
 import 'date_ntp.dart';
 
 final sl = GetIt.instance;
@@ -67,5 +70,26 @@ void initSharePostUseCase() {
 void initGetAllHomesUseCase() {
   if (GetIt.instance.isRegistered<GetAllHomesUseCase>() == false) {
     sl.registerFactory<GetAllHomesUseCase>(() => GetAllHomesUseCase(sl()));
+  }
+}
+
+void initAddToFavoritesUseCase() {
+  if (GetIt.instance.isRegistered<AddToFavoritesUseCase>() == false) {
+    sl.registerFactory<AddToFavoritesUseCase>(
+        () => AddToFavoritesUseCase(sl()));
+  }
+}
+
+void initRemoveFromFavoritesUseCase() {
+  if (GetIt.instance.isRegistered<RemoveFromFavoritesUseCase>() == false) {
+    sl.registerFactory<RemoveFromFavoritesUseCase>(
+        () => RemoveFromFavoritesUseCase(sl()));
+  }
+}
+
+void initGetAllFavoritesUseCase() {
+  if (GetIt.instance.isRegistered<GetAllFavoritesUseCase>() == false) {
+    sl.registerFactory<GetAllFavoritesUseCase>(
+        () => GetAllFavoritesUseCase(sl()));
   }
 }

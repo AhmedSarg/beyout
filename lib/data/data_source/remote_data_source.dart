@@ -8,25 +8,27 @@ import 'package:temp_house/domain/models/enums.dart';
 import 'package:temp_house/presentation/common/data_intent/data_intent.dart';
 
 abstract class RemoteDataSource {
-  Future<void> registerTenantToDataBase(
-      {required String uuid,
-      required String username,
-      required String email,
-      required String phoneNumber,
-      required Gender gender,
-      required String? job,
-      required num? salary,
-      required num age,
-      required String martialStatus});
+  Future<void> registerTenantToDataBase({
+    required String uuid,
+    required String username,
+    required String email,
+    required String phoneNumber,
+    required Gender gender,
+    required String? job,
+    required num? salary,
+    required num age,
+    required String martialStatus,
+  });
 
-  Future<void> registerOwnerToDataBase(
-      {required String uuid,
-      required String username,
-      required String email,
-      required String phoneNumber,
-      required Gender gender,
-      required num age,
-      required String martialStatus});
+  Future<void> registerOwnerToDataBase({
+    required String uuid,
+    required String username,
+    required String email,
+    required String phoneNumber,
+    required Gender gender,
+    required num age,
+    required String martialStatus,
+  });
 
   Future<String> saveHomesToDateBase({
     required String title,
@@ -52,6 +54,24 @@ abstract class RemoteDataSource {
 
   Future<Map<String, dynamic>> calculateTwoPoints(
       LatLng pickup, LatLng destination);
+
+  Future<void> addToFavorites({
+    required String userId,
+    required String homeId,
+  });
+
+  Future<void> removeFromFavorites({
+    required String userId,
+    required String homeId,
+  });
+
+  Future<Stream<List<dynamic>>> getAllFavorites({
+    required String userId,
+  });
+
+  Future<Map<String, dynamic>> getHomeById({
+    required String homeId,
+  });
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
@@ -84,6 +104,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       'salary': salary,
       'age': age,
       'martialStatus': martialStatus,
+      'favorites': [],
       'userType': 'tenant',
     });
     return docRef.id;
@@ -107,6 +128,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       'gender': gender,
       'age': age,
       'martialStatus': martialStatus,
+      'favorites': [],
       'userType': 'owner',
     });
     return uuid;
@@ -184,5 +206,45 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   Future<Map<String, dynamic>> calculateTwoPoints(
       LatLng pointA, LatLng pointB) async {
     return await _appServiceClient.calculateTwoPoints(pointA, pointB);
+  }
+
+  @override
+  Future<void> addToFavorites({
+    required String userId,
+    required String homeId,
+  }) async {
+    await _firestore.collection('users').doc(userId).update({
+      'favorites': FieldValue.arrayUnion([homeId]),
+    });
+  }
+
+  @override
+  Future<void> removeFromFavorites({
+    required String userId,
+    required String homeId,
+  }) async {
+    await _firestore.collection('users').doc(userId).update({
+      'favorites': FieldValue.arrayRemove([homeId]),
+    });
+  }
+
+  @override
+  Future<Stream<List<dynamic>>> getAllFavorites({
+    required String userId,
+  }) async {
+    return _firestore.collection('users').doc(userId).snapshots().map(
+          (user) => user.data()!['favorites'],
+        );
+  }
+
+  @override
+  Future<Map<String, dynamic>> getHomeById({
+    required String homeId,
+  }) async {
+    return await _firestore
+        .collection('Homes')
+        .doc(homeId)
+        .get()
+        .then((value) => value.data()!);
   }
 }

@@ -53,4 +53,5 @@ class LottieAssets {
   static const String error = "${_basePath}error.json";
   static const String call = "${_basePath}viber.json";
   static const String underConstruction = "${_basePath}under_construction.json";
+  static const String noContent = "${_basePath}no_content.json";
 }

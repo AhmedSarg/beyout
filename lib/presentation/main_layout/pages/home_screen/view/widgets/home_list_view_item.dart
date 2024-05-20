@@ -1,53 +1,26 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:temp_house/domain/models/domain.dart';
 import 'package:temp_house/presentation/resources/assets_manager.dart';
 import 'package:temp_house/presentation/resources/color_manager.dart';
 import 'package:temp_house/presentation/resources/values_manager.dart';
+
 import '../../../../../resources/strings_manager.dart';
 import '../../../../../resources/text_styles.dart';
 import 'home_image.dart';
 
 class BuildCarouselItem extends StatelessWidget {
   const BuildCarouselItem({
-    Key? key,
-    required this.color,
-    required this.title,
-    required this.price,
-    required this.location,
-    required this.imageUrl,
-    required this.numnerofBeds,
-    required this.wifiServices,
-    required this.numnerofbathroom,
-    required this.date,
-    required this.id,
-    required this.description,
-    required this.coardinaties,
-    required this.rating,
-    required this.numberOfRatings,
-  }) : super(key: key);
+    super.key,
+    required this.home,
+  });
 
-  final Color color;
-  final String title;
-  final String id;
-  final num price;
-  final num rating;
-  final num numberOfRatings;
-  final String location;
-  final String imageUrl;
-  final String numnerofBeds;
-  final String wifiServices;
-  final String numnerofbathroom;
-  final String date;
-  final String description;
-  final GeoPoint coardinaties;
+  final HomeModel home;
 
   @override
   Widget build(BuildContext context) {
-    final double displayedRating = (rating / numberOfRatings)
-        .clamp(0, 5); // Ensure the displayed rating is capped at 5 or less
-
+    final double displayedRating = (home.rate / home.numberOfRates).clamp(0, 5);
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: AppPadding.p10,
@@ -55,7 +28,7 @@ class BuildCarouselItem extends StatelessWidget {
       ),
       child: Container(
         decoration: BoxDecoration(
-          color: color,
+          color: ColorManager.offwhite,
           borderRadius: BorderRadius.circular(AppPadding.p16),
           boxShadow: [
             BoxShadow(
@@ -77,22 +50,7 @@ class BuildCarouselItem extends StatelessWidget {
               SizedBox(
                 height: AppSize.s150,
                 child: HomeImageWidget(
-                   price: NumberFormat.compactCurrency(
-                           locale: 'en', symbol: '', decimalDigits: 2)
-                       .format(price),
-                  imageUrl: imageUrl,
-                  date: date,
-                  id: id,
-                  color: ColorManager.offwhite,
-                  title: title,
-                  location: location,
-                  numnerofBeds: numnerofBeds,
-                  wifiServices: wifiServices,
-                  numnerofbathroom: numnerofbathroom,
-                  description: description,
-                  coardinaties: coardinaties,
-                  rating: rating,
-                  numberOfRatings: numberOfRatings,
+                  home: home,
                 ),
               ),
               const SizedBox(height: AppPadding.p5),
@@ -109,7 +67,7 @@ class BuildCarouselItem extends StatelessWidget {
                       style: AppTextStyles.homeItemRateTextStyle(context),
                     ),
                     Text(
-                      ' ($numberOfRatings)',
+                      ' (${home.numberOfRates})',
                       style: AppTextStyles.homeItemSecondTextStyle(context),
                     ),
                   ],
@@ -117,9 +75,9 @@ class BuildCarouselItem extends StatelessWidget {
               ),
               Expanded(
                 child: Text(
-                  title,
-                  maxLines: 2,
+                  home.title,
                   overflow: TextOverflow.ellipsis,
+                  textDirection: TextDirection.rtl,
                   style: AppTextStyles.homeNameTextStyle(context),
                 ),
               ),
@@ -132,7 +90,7 @@ class BuildCarouselItem extends StatelessWidget {
                   ),
                   Expanded(
                     child: Text(
-                      location,
+                      home.location,
                       overflow: TextOverflow.ellipsis,
                       style: AppTextStyles.homeAddressTextStyle(context),
                     ),
@@ -140,26 +98,71 @@ class BuildCarouselItem extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: AppPadding.p10),
-              FittedBox(
+              Expanded(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    HomeContent(
-                      object: ' ${AppStrings.bedHome.tr()} ',
-                      icon: SVGAssets.bed,
-                      number: numnerofBeds,
+                    Row(
+                      children: [
+                        SvgPicture.asset(
+                          SVGAssets.bed,
+                          colorFilter: const ColorFilter.mode(
+                            ColorManager.primary,
+                            BlendMode.dstIn,
+                          ),
+                        ),
+                        Text(
+                          ' ${home.numberOfBeds} ',
+                          style: AppTextStyles.homeContentTextStyle(context),
+                        ),
+                        Text(
+                          '${AppStrings.bedHome.tr()} ',
+                          style: AppTextStyles.homeContentTextStyle(context),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
                     ),
-                    HomeContent(
-                      object: ' ${AppStrings.wifiHome.tr()} ',
-                      icon: wifiServices == AppStrings.wifiServicesYes.tr()
-                          ? SVGAssets.wifi
-                          : Icons.wifi_off_outlined,
-                      number: '',
+                    Row(
+                      children: [
+                        SvgPicture.asset(
+                          SVGAssets.wifi,
+                          colorFilter: const ColorFilter.mode(
+                            ColorManager.primary,
+                            BlendMode.dstIn,
+                          ),
+                        ),
+                        Text(
+                          ' ${home.wifiServices ? AppStrings.wifiServicesYes.tr() : AppStrings.wifiServicesNo.tr()} ',
+                          style: AppTextStyles.homeContentTextStyle(context),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
                     ),
-                    HomeContent(
-                      object: ' ${AppStrings.bathroomHome.tr()} ',
-                      icon: SVGAssets.bathRoom,
-                      number: numnerofbathroom,
+                    Expanded(
+                      child: Row(
+                        children: [
+                          SvgPicture.asset(
+                            SVGAssets.bathRoom,
+                            colorFilter: const ColorFilter.mode(
+                              ColorManager.primary,
+                              BlendMode.dstIn,
+                            ),
+                          ),
+                          Text(
+                            ' ${home.numberOfBathrooms} ',
+                            style: AppTextStyles.homeContentTextStyle(context),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          Expanded(
+                            child: Text(
+                              AppStrings.bathroomHome.tr(),
+                              style:
+                                  AppTextStyles.homeContentTextStyle(context),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -174,16 +177,16 @@ class BuildCarouselItem extends StatelessWidget {
 
 class HomeContent extends StatelessWidget {
   const HomeContent({
-    Key? key,
+    super.key,
     required this.object,
     required this.icon,
-    required this.number,
+    this.number,
     this.color,
-  }) : super(key: key);
+  });
 
   final String object;
   final dynamic icon;
-  final String number;
+  final int? number;
   final Color? color;
 
   @override
@@ -203,13 +206,13 @@ class HomeContent extends StatelessWidget {
             color: ColorManager.primary,
           ),
         Text(
-          number,
+          number?.toString() ?? '',
           style: AppTextStyles.homeContentTextStyle(context),
         ),
         Text(
-          overflow: TextOverflow.ellipsis,
           object,
           style: AppTextStyles.homeContentTextStyle(context),
+          overflow: TextOverflow.ellipsis,
         ),
       ],
     );

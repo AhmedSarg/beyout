@@ -1,5 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:temp_house/presentation/base/base_states.dart';
+import 'package:temp_house/presentation/base/cubit_builder.dart';
+import 'package:temp_house/presentation/base/cubit_listener.dart';
+import 'package:temp_house/presentation/main_layout/viewmodel/main_layout_viewmodel.dart';
 import 'package:temp_house/presentation/resources/color_manager.dart';
 import 'package:temp_house/presentation/resources/values_manager.dart';
 import 'package:temp_house/presentation/search_screen/view/widgets/all_search.dart';
@@ -113,26 +118,40 @@ class _SearchScreenState extends State<SearchScreen>
           ],
         ),
       ),
-      body: Column(
-        children: [
-          const SizedBox(height: AppSize.s10),
-          Expanded(
-            child: TabBarView(
-              controller: _tabController,
-              children: [
-                const AllSearch(),
-                const LeatestSearch(),
-                const LeatestSearch(),
-                PriceSearch(
-                  minPrice: _minValue,
-                  maxPrice: _maxValue,
-                ),
-                const CheapestSearch(),
-              ],
-            ),
-          ),
-        ],
+      body: BlocProvider(
+        create: (context) => MainLayoutViewModel()..start(),
+        child: BlocConsumer<MainLayoutViewModel, BaseStates>(
+          listener: (context, state) {
+            baseListener(context, state);
+          },
+          builder: (context, state) {
+            return baseBuilder(context, state, buildContent());
+          },
+        ),
       ),
+    );
+  }
+
+  Widget buildContent() {
+    return Column(
+      children: [
+        const SizedBox(height: AppSize.s10),
+        Expanded(
+          child: TabBarView(
+            controller: _tabController,
+            children: [
+              const AllSearch(),
+              const LeatestSearch(),
+              const LeatestSearch(),
+              PriceSearch(
+                minPrice: _minValue,
+                maxPrice: _maxValue,
+              ),
+              const CheapestSearch(),
+            ],
+          ),
+        ),
+      ],
     );
   }
 

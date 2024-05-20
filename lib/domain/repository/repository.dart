@@ -56,4 +56,18 @@ abstract class Repository {
     required LatLng pointA,
     required LatLng pointB,
   });
+
+  Future<Either<Failure, void>> addToFavorites({
+    required String userId,
+    required String homeId,
+  });
+
+  Future<Either<Failure, void>> removeFromFavorites({
+    required String userId,
+    required String homeId,
+  });
+
+  Future<Either<Failure, Stream<List<Future<HomeModel>>>>> getAllFavorites({
+    required String userId,
+  });
 }

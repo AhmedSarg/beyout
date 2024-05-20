@@ -2,13 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:temp_house/domain/models/domain.dart';
 import 'package:temp_house/presentation/search_screen/view/widgets/search_home_item.dart';
 
 import '../../../common/widget/main_circle_processIndicator.dart';
 import '../../../common/widget/main_seach_field.dart';
-import '../../../main_layout/pages/home_details/home_Details.dart';
+import '../../../main_layout/pages/home_details/home_details.dart';
 import '../../../resources/assets_manager.dart';
-import '../../../resources/color_manager.dart';
 import '../../../resources/strings_manager.dart';
 
 class AllSearch extends StatefulWidget {
@@ -106,20 +106,7 @@ class _AllSearchState extends State<AllSearch> {
                     );
                   },
                   child: SearchHomeItem(
-                    color: ColorManager.offwhite,
-                    title: data['title'],
-                    price: data['price'],
-                    location: data['location'],
-                    imageUrl: firstImage,
-                    numnerofBeds: data['number_of_beds'].toString(),
-                    wifiServices: data['wifi'] == true ? 'Yes' : 'No',
-                    numnerofbathroom: data['number_of_bathrooms'].toString(),
-                    date: data['category'],
-                    id: data['uuid'],
-                    description: data['description'],
-                    coardinaties: data['coordinates'],
-                    rating: data['rating'] ?? 0,
-                    numberOfRatings: data['numberOfRatings'] ?? 0,
+                    home: HomeModel.fromMap(data),
                   ),
                 );
               }).toList();

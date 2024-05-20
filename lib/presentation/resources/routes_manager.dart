@@ -5,6 +5,7 @@ import 'package:temp_house/presentation/homes_map_screen/view/homes_map_view.dar
 import 'package:temp_house/presentation/main_layout/pages/home_screen/view/all_nearby_home.dart';
 import 'package:temp_house/presentation/main_layout/pages/home_screen/view/all_popular_home.dart';
 import 'package:temp_house/presentation/main_layout/pages/profile_screen/view/personal_info_screen.dart';
+import 'package:temp_house/presentation/main_layout/view/main_layout_view.dart';
 import 'package:temp_house/presentation/search_screen/view/search_screen.dart';
 
 import '../chat_screen/view/chat_view.dart';
@@ -14,7 +15,6 @@ import '../main_layout/pages/notifications_screen/view/notifications_view.dart';
 import '../main_layout/pages/profile_screen/view/about_screen.dart';
 import '../main_layout/pages/profile_screen/view/need_help_screen.dart';
 import '../main_layout/pages/profile_screen/view/payment_screen.dart';
-import '../main_layout/view/main_layout_view.dart';
 import '../map_screen/view/map_screen.dart';
 import '../map_screen/view/map_screen_share.dart';
 import '../onboarding_screen/view/onboarding_view.dart';
@@ -69,6 +69,9 @@ class RouteGenerator {
       case Routes.registerRoute:
         return MaterialPageRoute(builder: (_) => const RegisterScreen());
       case Routes.mainLayoutRoute:
+        initAddToFavoritesUseCase();
+        initRemoveFromFavoritesUseCase();
+        initGetAllFavoritesUseCase();
         return MaterialPageRoute(builder: (_) => const MainLayoutScreen());
       case Routes.chatsRoute:
         return MaterialPageRoute(builder: (_) => ChatsScreen());
