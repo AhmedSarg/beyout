@@ -37,7 +37,10 @@ class ProfileImage extends StatelessWidget {
           clipBehavior: Clip.antiAliasWithSaveLayer,
           width: AppSize.s60,
           height: AppSize.s60,
-          child: Image.asset(ImageAssets.unknownUserImage),
+          child: Image.asset(
+            ImageAssets.unknownUserImage,
+            fit: BoxFit.cover,
+          ),
         ),
       ),
     );

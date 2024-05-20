@@ -64,7 +64,10 @@ class ChatsItem extends StatelessWidget {
             shape: BoxShape.circle,
           ),
           clipBehavior: Clip.antiAliasWithSaveLayer,
-          child: Image.asset(ImageAssets.unknownUserImage),
+          child: Image.asset(
+            ImageAssets.unknownUserImage,
+            fit: BoxFit.cover,
+          ),
         ),
         trailing: Container(
           width: width * .35,

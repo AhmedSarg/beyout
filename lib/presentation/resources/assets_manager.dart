@@ -8,7 +8,7 @@ class ImageAssets {
   static const String call = "${imagePath}call.gif";
   static const String map = "${imagePath}mapscreen.png";
   static const String pin = "${imagePath}Pin_duotone_line.png";
-  static const String unknownUserImage = "${imagePath}unknown_user.png";
+  static const String unknownUserImage = "${imagePath}unknown_user.jpg";
 }
 
 class IconsAssets {

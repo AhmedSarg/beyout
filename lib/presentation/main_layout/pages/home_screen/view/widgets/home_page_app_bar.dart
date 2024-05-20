@@ -24,7 +24,10 @@ class HomePageAppBar extends StatelessWidget {
             clipBehavior: Clip.antiAliasWithSaveLayer,
             width: AppSize.s50,
             height: AppSize.s50,
-            child: Image.asset(ImageAssets.unknownUserImage),
+            child: Image.asset(
+              ImageAssets.unknownUserImage,
+              fit: BoxFit.cover,
+            ),
           ),
           const SizedBox(width: AppSize.s10),
           SvgPicture.asset(SVGAssets.pin),

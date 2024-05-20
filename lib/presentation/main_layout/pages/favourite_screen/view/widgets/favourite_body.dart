@@ -10,6 +10,7 @@ import 'package:temp_house/presentation/resources/styles_manager.dart';
 import 'package:temp_house/presentation/resources/values_manager.dart';
 
 import '../../../../../../domain/models/domain.dart';
+import '../../../home_details/home_details.dart';
 
 class FavouriteBody extends StatelessWidget {
   const FavouriteBody({super.key});
@@ -79,8 +80,20 @@ class FavouriteBody extends StatelessWidget {
               future: snapshot.data![index],
               builder: (context, futureHome) {
                 if (futureHome.hasData) {
-                  return NearByHomeItem(
-                    home: futureHome.data!,
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => HomeDetailsScreen(
+                            home: futureHome.data!,
+                          ),
+                        ),
+                      );
+                    },
+                    child: NearByHomeItem(
+                      home: futureHome.data!,
+                    ),
                   );
                 } else if (futureHome.hasError) {
                   return Padding(
@@ -88,8 +101,11 @@ class FavouriteBody extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Lottie.asset(LottieAssets.error,
-                            width: context.width() * .4),
+                        Lottie.asset(
+                          LottieAssets.error,
+                          repeat: false,
+                          width: context.width() * .4,
+                        ),
                         const SizedBox(height: AppSize.s10),
                         Text(
                           'Error: ${snapshot.error}',
