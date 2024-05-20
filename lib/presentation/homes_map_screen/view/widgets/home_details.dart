@@ -211,7 +211,10 @@ class HomeDetails extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                      const Divider(height: AppSize.s20),
+                      const Divider(
+                        height: AppSize.s20,
+                        color: ColorManager.lightGray,
+                      ),
                       Text(
                         'Address',
                         style: AppTextStyles
@@ -285,7 +288,8 @@ class HomeDetails extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const Divider(height: AppSize.s30),
+                  const Divider(height: AppSize.s30,
+                    color: ColorManager.lightGray,),
                   TextButton(
                     onPressed: () {},
                     child: Row(
