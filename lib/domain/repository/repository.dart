@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:temp_house/domain/models/domain.dart';
 
@@ -38,16 +39,20 @@ abstract class Repository {
   });
 
   Future<Either<Failure, void>> register({
-    required String uuid,
     required String username,
     required String email,
     required String phoneNumber,
     required Gender gender,
     required String? job,
-    required num? salary,
-    required num age,
-    required String martialStatus,
-    required RegisterType registerType,
+    required int? salary,
+    required int age,
+    required String? martialStatus,
+    required UserRole userType,
+  });
+
+  Future<Either<Failure, void>> login({
+    required String email,
+    required String password,
   });
 
   Future<Either<Failure, Stream<List<HomeModel>>>> getAllHomes();
@@ -70,4 +75,6 @@ abstract class Repository {
   Future<Either<Failure, Stream<List<Future<HomeModel>>>>> getAllFavorites({
     required String userId,
   });
+
+  Future<Either<Failure, User?>> fetchCurrentUser();
 }

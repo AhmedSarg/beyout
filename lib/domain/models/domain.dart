@@ -1,4 +1,5 @@
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:temp_house/domain/models/enums.dart';
 
 class PlaceModel {
   final int id;
@@ -22,9 +23,11 @@ class HomeModel {
   final String title;
   final String homeId;
   final String ownerId;
+  final String ownerName;
   final num price;
   final String location;
   final String imageUrl;
+  final List<dynamic> imageUrls;
   final int numberOfBeds;
   final bool wifiServices;
   final int numberOfBathrooms;
@@ -40,6 +43,7 @@ class HomeModel {
     required this.price,
     required this.location,
     required this.imageUrl,
+    required this.imageUrls,
     required this.numberOfBeds,
     required this.wifiServices,
     required this.numberOfBathrooms,
@@ -48,6 +52,7 @@ class HomeModel {
     required this.coordinates,
     required this.homeId,
     required this.ownerId,
+    required this.ownerName,
     required this.rate,
     required this.numberOfRates,
     required this.rentPeriod,
@@ -59,6 +64,7 @@ class HomeModel {
       price: map['price'],
       location: map['location'],
       imageUrl: map['images'][0],
+      imageUrls: map['images'],
       numberOfBeds: map['number_of_beds'],
       wifiServices: map['wifi'],
       numberOfBathrooms: map['number_of_bathrooms'],
@@ -70,6 +76,7 @@ class HomeModel {
       ),
       homeId: map['uuid'],
       ownerId: map['owner_id'],
+      ownerName: map['name'],
       rate: map['rating'].toDouble(),
       numberOfRates: map['numberOfRatings'],
       rentPeriod: map['category'],
@@ -77,18 +84,60 @@ class HomeModel {
   }
 }
 
-class User {
+class UserModel {
   final String uid;
+  final String username;
   final String email;
-  final String name;
-  final List<String> favoriteHomes;
+  final String phoneNumber;
+  final Gender gender;
+  final int age;
+  final String? currentJob;
+  final int? currentSalary;
+  final String? martialStatus;
+  final UserRole userRole;
+  final List<dynamic> favoriteHomes;
 
-  User({
+  UserModel({
     required this.uid,
+    required this.username,
     required this.email,
-    required this.name,
+    required this.phoneNumber,
+    required this.gender,
+    required this.age,
+    this.currentJob,
+    this.currentSalary,
+    this.martialStatus,
+    required this.userRole,
     required this.favoriteHomes,
   });
+
+  factory UserModel.fromMap(Map<String, dynamic> map) {
+    UserRole userRole;
+    if (map['user_type'].toLowerCase() == 'owner') {
+      userRole = UserRole.owner;
+    } else {
+      userRole = UserRole.tenant;
+    }
+    Gender gender;
+    if (map['gender'].toLowerCase() == 'female') {
+      gender = Gender.female;
+    } else {
+      gender = Gender.male;
+    }
+    return UserModel(
+      uid: map['id'],
+      username: map['username'],
+      email: map['email'],
+      phoneNumber: map['phone_number'],
+      gender: gender,
+      age: map['age'],
+      currentJob: map['current_job'],
+      currentSalary: map['current_salary'],
+      martialStatus: map['martial_status'],
+      userRole: userRole,
+      favoriteHomes: map['favorites'],
+    );
+  }
 
   addHomeToFavorites(String homeId) {
     favoriteHomes.add(homeId);

@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -9,11 +8,19 @@ import '../../resources/text_styles.dart';
 import '../../resources/values_manager.dart';
 
 class GoogleMapHomeDetailsScreen extends StatefulWidget {
-  const GoogleMapHomeDetailsScreen({Key? key, this.coordinates, required this.title, required this.address, required this.description}) : super(key: key);
-  final GeoPoint? coordinates;
-final String title;
-final String address;
-final String description;
+  const GoogleMapHomeDetailsScreen({
+    super.key,
+    this.coordinates,
+    required this.title,
+    required this.address,
+    required this.description,
+  });
+
+  final LatLng? coordinates;
+  final String title;
+  final String address;
+  final String description;
+
   @override
   State<GoogleMapHomeDetailsScreen> createState() => _GoogleMapScreenState();
 }
@@ -26,7 +33,8 @@ class _GoogleMapScreenState extends State<GoogleMapHomeDetailsScreen> {
   void initState() {
     if (widget.coordinates != null) {
       initialCameraPosition = CameraPosition(
-        target: LatLng(widget.coordinates!.latitude, widget.coordinates!.longitude),
+        target:
+            LatLng(widget.coordinates!.latitude, widget.coordinates!.longitude),
         zoom: 19,
       );
     } else {
@@ -59,7 +67,8 @@ class _GoogleMapScreenState extends State<GoogleMapHomeDetailsScreen> {
                       ),
                     Text(
                       AppStrings.homeDetails.tr(),
-                      style: AppTextStyles.googleMapHomeTitleDescriptionTextStyle(),
+                      style: AppTextStyles
+                          .googleMapHomeTitleDescriptionTextStyle(),
                     ),
                     Container(
                       width: double.infinity,
@@ -68,32 +77,42 @@ class _GoogleMapScreenState extends State<GoogleMapHomeDetailsScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: AppPadding.p16),
                               child: Text(
                                 AppStrings.title.tr(),
-                                style: AppTextStyles.googleMapHomeDetailsSubTitleTextStyle(),
+                                style: AppTextStyles
+                                    .googleMapHomeDetailsSubTitleTextStyle(),
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: AppPadding.p16),
                               child: Text(
                                 widget.title,
-                                style: AppTextStyles.googleMapHomeDetailsSubTitleContantTextStyle(),
+                                style: AppTextStyles
+                                    .googleMapHomeDetailsSubTitleContantTextStyle(),
                               ),
                             ),
-                            const Divider(color: ColorManager.grey,),
+                            const Divider(
+                              color: ColorManager.grey,
+                            ),
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: AppPadding.p16),
                               child: Text(
                                 AppStrings.location.tr(),
-                                style: AppTextStyles.googleMapHomeDetailsSubTitleTextStyle(),
+                                style: AppTextStyles
+                                    .googleMapHomeDetailsSubTitleTextStyle(),
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: AppPadding.p16),
                               child: Text(
                                 widget.address,
-                                style: AppTextStyles.googleMapHomeDetailsSubTitleContantTextStyle(),
+                                style: AppTextStyles
+                                    .googleMapHomeDetailsSubTitleContantTextStyle(),
                               ),
                             ),
                           ],
@@ -107,17 +126,21 @@ class _GoogleMapScreenState extends State<GoogleMapHomeDetailsScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: AppPadding.p16),
                               child: Text(
                                 AppStrings.description.tr(),
-                                style: AppTextStyles.googleMapHomeDetailsSubTitleTextStyle(),
+                                style: AppTextStyles
+                                    .googleMapHomeDetailsSubTitleTextStyle(),
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: AppPadding.p16),
                               child: Text(
                                 widget.description,
-                                style: AppTextStyles.googleMapHomeDetailsSubTitleContantTextStyle(),
+                                style: AppTextStyles
+                                    .googleMapHomeDetailsSubTitleContantTextStyle(),
                               ),
                             ),
                           ],
@@ -164,5 +187,4 @@ class _GoogleMapScreenState extends State<GoogleMapHomeDetailsScreen> {
       ),
     );
   }
-
 }

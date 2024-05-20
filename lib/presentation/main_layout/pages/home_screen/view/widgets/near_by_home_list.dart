@@ -47,22 +47,7 @@ class NearByHomeList extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => HomeDetailsScreen(
-                    id: document.id,
-                    imageUrls: images.cast<String>(),
-                    title: data['title'],
-                    price: data['price'],
-                    area: data['area'],
-                    numnerofBeds: data['number_of_beds'].toString(),
-                    wifiServices: data['wifi'] == true ? 'Yes' : 'No',
-                    numnerofbathroom: data['number_of_bathrooms'].toString(),
-                    date: data['category'],
-                    description: data['description'],
-                    location: data['location'],
-                    period: data['category'],
-                    coardinaties: data['coordinates'],
-                    name: data['name'],
-                    numberOfRatings: data['numberOfRatings'] ?? 0,
-                    rating: data['rating'] ?? 0,
+                    home: HomeModel.fromMap(data),
                   ),
                 ),
               );

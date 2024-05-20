@@ -11,11 +11,13 @@ class PopularRow extends StatelessWidget {
       required this.routeName,
       required this.rowStartedcolor,
       required this.rowEndedcolor});
+
   String startedText;
   String endedText;
   String routeName;
   final Color rowStartedcolor;
   final Color rowEndedcolor;
+
   @override
   Widget build(BuildContext context) {
     return Padding(

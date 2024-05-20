@@ -1,8 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:temp_house/domain/models/domain.dart';
 import 'package:temp_house/presentation/chat_screen/chat_service/chat_services.dart';
 import 'package:temp_house/presentation/chat_screen/view/chat_view.dart';
 import 'package:temp_house/presentation/common/widget/cached_image.dart';
@@ -18,57 +18,24 @@ import '../../../resources/color_manager.dart';
 import '../../../resources/text_styles.dart';
 
 class HomeDetailsScreen extends StatefulWidget {
-  final String id;
-  final String title;
-  final String name;
-  final num price;
-  final num numberOfRatings;
-  final num rating;
-  final num area;
-  final String location;
-  final List<String> imageUrls;
-  final String numnerofBeds;
-  final String wifiServices;
-  final String numnerofbathroom;
-  final String description;
-  final String period;
-  final GeoPoint coardinaties;
+  final HomeModel home;
 
   const HomeDetailsScreen({
-    Key? key,
-    required this.title,
-    required this.price,
-    required this.location,
-    required this.imageUrls,
-    required this.numnerofBeds,
-    required this.wifiServices,
-    required this.numnerofbathroom,
-    required this.id,
-    required this.description,
-    required date,
-    required this.period,
-    required this.area,
-    required this.coardinaties,
-    required this.name,
-    required this.rating,
-    required this.numberOfRatings,
-  }) : super(key: key);
+    super.key,
+    required this.home,
+  });
 
   @override
-  _HomeDetailsScreenState createState() => _HomeDetailsScreenState();
+  State<HomeDetailsScreen> createState() => _HomeDetailsScreenState();
 }
 
 class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
   int _currentIndex = 0;
-  double _rating = 2.4;
   ChatServices chatServices = ChatServices();
   @override
   Widget build(BuildContext context) {
-    int rating = widget.rating.toInt();
-    print(rating);
-    print('________________________________');
     final int displayedRating =
-        (widget.rating / widget.numberOfRatings).clamp(0, 5).floor();
+        (widget.home.rate / widget.home.numberOfRates).clamp(0, 5).floor();
 
     return Scaffold(
       bottomNavigationBar: SizedBox(
@@ -82,38 +49,23 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                     horizontal: AppMargin.m10, vertical: AppMargin.m8),
                 child: ElevatedButton(
                   style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
+                      backgroundColor: WidgetStateProperty.all<Color>(
                     ColorManager.blue.withOpacity(.7),
                   )),
                   onPressed: () {
-                    if (chatServices.getChatRoomID(
-                            DataIntent.getUser().uid, widget.id) ==
-                        chatServices.getChatRoomID(
-                            widget.id, DataIntent.getUser().uid)) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ChatScreen(
-                            receiveEmail: widget.name,
-                            receiveID: widget.id,
-                            chatID: chatServices.getChatRoomID(
-                                DataIntent.getUser().uid, widget.id),
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ChatScreen(
+                          receiveEmail: widget.home.ownerName,
+                          receiveID: widget.home.ownerId,
+                          chatID: chatServices.getChatRoomID(
+                            DataIntent.getUser().uid,
+                            widget.home.ownerId,
                           ),
                         ),
-                      );
-                    } else {
-                      String chatID = chatServices.getChatRoomID(
-                          DataIntent.getUser().uid, widget.id);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ChatScreen(
-                              receiveEmail: widget.name,
-                              receiveID: widget.id,
-                              chatID: chatID),
-                        ),
-                      );
-                    }
+                      ),
+                    );
                   },
                   child: SvgPicture.asset(
                     SVGAssets.chat,
@@ -128,7 +80,7 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
       appBar: buildMainAppBar(
         context,
         Text(
-          widget.title,
+          widget.home.title,
           style: AppTextStyles.notificationsScreenTitleTextStyle(context),
         ),
       ),
@@ -142,13 +94,16 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                 aspectRatio: 16 / 9,
                 viewportFraction: 1.0,
                 enlargeCenterPage: false,
+                scrollPhysics: widget.home.imageUrls.length > 1
+                    ? null
+                    : const NeverScrollableScrollPhysics(),
                 onPageChanged: (index, reason) {
                   setState(() {
                     _currentIndex = index;
                   });
                 },
               ),
-              items: widget.imageUrls.map((imageUrl) {
+              items: widget.home.imageUrls.map((imageUrl) {
                 return Builder(
                   builder: (BuildContext context) {
                     return Container(
@@ -169,27 +124,30 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
             const SizedBox(height: AppSize.s10),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(widget.imageUrls.length, (index) {
-                return AnimatedContainer(
-                  duration: const Duration(milliseconds: 300),
-                  margin: const EdgeInsets.symmetric(horizontal: 4.0),
-                  width: _currentIndex == index ? 12.0 : 8.0,
-                  height: 8.0,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: _currentIndex == index
-                        ? Colors.grey
-                        : Colors.grey.withOpacity(0.5),
-                  ),
-                );
-              }),
+              children: List.generate(
+                widget.home.imageUrls.length,
+                (index) {
+                  return AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    margin: const EdgeInsets.symmetric(horizontal: 4.0),
+                    width: _currentIndex == index ? 12.0 : 8.0,
+                    height: 8.0,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: _currentIndex == index
+                          ? Colors.grey
+                          : Colors.grey.withOpacity(0.5),
+                    ),
+                  );
+                },
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Spacer(),
                 Text(
-                  "${_currentIndex + 1}/${widget.imageUrls.length}",
+                  "${_currentIndex + 1}/${widget.home.imageUrls.length}",
                   style: AppTextStyles.smallTitleTextStyle(context),
                 ),
                 const SizedBox(
@@ -223,24 +181,7 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                           ),
                           TextSpan(
                             text:
-                                '${widget.price} ${AppStrings.priceHome.tr()}${widget.period}',
-                            style: AppTextStyles
-                                .homeDetailsDescriptionContactTextStyle(),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: AppSize.s10),
-                    RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: '${AppStrings.area.tr()} : ',
-                            style:
-                                AppTextStyles.homeDetailsDescriptionTextStyle(),
-                          ),
-                          TextSpan(
-                            text: '${widget.area} ${AppStrings.meter.tr()}',
+                                '${widget.home.price} ${AppStrings.priceHome.tr()}${widget.home.rentPeriod}',
                             style: AppTextStyles
                                 .homeDetailsDescriptionContactTextStyle(),
                           ),
@@ -272,15 +213,14 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                           HomeDetailsContent(
                             object: ' ${AppStrings.bedHome.tr()} ',
                             icon: SVGAssets.bed,
-                            number: widget.numnerofBeds,
+                            number: widget.home.numberOfBeds.toString(),
                           ),
                           SizedBox(
                             width: MediaQuery.of(context).size.width * .1,
                           ),
                           HomeDetailsContent(
                             object: ' ${AppStrings.wifiHome.tr()} ',
-                            icon: widget.wifiServices ==
-                                    AppStrings.wifiServicesYes.tr()
+                            icon: widget.home.wifiServices
                                 ? SVGAssets.wifi
                                 : Icons.wifi_off_outlined,
                             number: '',
@@ -291,7 +231,7 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                           HomeDetailsContent(
                             object: ' ${AppStrings.bathroomHome.tr()} ',
                             icon: SVGAssets.bathRoom,
-                            number: widget.numnerofbathroom,
+                            number: widget.home.numberOfBathrooms.toString(),
                           ),
                         ],
                       ),
@@ -327,7 +267,7 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                                 AppTextStyles.homeDetailsDescriptionTextStyle(),
                           ),
                           TextSpan(
-                            text: widget.description,
+                            text: widget.home.description,
                             style: AppTextStyles
                                 .homeDetailsDescriptionContactTextStyle(),
                           ),
@@ -344,7 +284,7 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                                 AppTextStyles.homeDetailsDescriptionTextStyle(),
                           ),
                           TextSpan(
-                            text: widget.location,
+                            text: widget.home.location,
                             style: AppTextStyles
                                 .homeDetailsDescriptionContactTextStyle(),
                           ),
@@ -377,10 +317,10 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                                 MaterialPageRoute(
                                   builder: (context) =>
                                       GoogleMapHomeDetailsScreen(
-                                    coordinates: widget.coardinaties,
-                                    title: widget.title,
-                                    address: widget.location,
-                                    description: widget.description,
+                                    coordinates: widget.home.coordinates,
+                                    title: widget.home.title,
+                                    address: widget.home.location,
+                                    description: widget.home.description,
                                   ),
                                 ),
                               );
@@ -389,10 +329,11 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                               width: MediaQuery.of(context).size.width * .4,
                               height: AppSize.s50,
                               decoration: BoxDecoration(
-                                  border: Border.all(color: ColorManager.error),
-                                  borderRadius:
-                                      BorderRadius.circular(AppSize.s12),
-                                  color: ColorManager.offwhite),
+                                border: Border.all(color: ColorManager.error),
+                                borderRadius:
+                                    BorderRadius.circular(AppSize.s12),
+                                color: ColorManager.offwhite,
+                              ),
                               child: Row(
                                 children: [
                                   SvgPicture.asset(
@@ -428,11 +369,11 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
 
 class HomeDetailsContent extends StatelessWidget {
   const HomeDetailsContent({
-    Key? key,
+    super.key,
     required this.object,
     required this.icon,
     required this.number,
-  }) : super(key: key);
+  });
 
   final String object;
   final dynamic icon;

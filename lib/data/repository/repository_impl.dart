@@ -2,12 +2,15 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:temp_house/presentation/common/data_intent/data_intent.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../domain/models/domain.dart';
 import '../../domain/models/enums.dart';
 import '../../domain/repository/repository.dart';
+import '../data_source/cache_data_source.dart';
 import '../data_source/remote_data_source.dart';
 import '../network/error_handler.dart';
 import '../network/failure.dart';
@@ -16,69 +19,16 @@ import '../network/network_info.dart';
 class RepositoryImpl implements Repository {
   final RemoteDataSource _remoteDataSource;
 
-  // final LocalDataSource _localDataSource;
-  // final CacheDataSource _cacheDataSource;
+  final CacheDataSource _cacheDataSource;
   final NetworkInfo _networkInfo;
 
-  // final Uuid _uuidGenerator = const Uuid();
   final Uuid _uuidGenerator = const Uuid();
 
   RepositoryImpl(
     this._remoteDataSource,
-    // this._localDataSource,
     this._networkInfo,
-    // this._cacheDataSource,
+    this._cacheDataSource,
   );
-
-  // @override
-  // Future<Either<Failure, void>> register({
-  //   required String username,
-  //   required String email,
-  //   required String password,
-  //   required String phoneNumber,
-  //   required String gender,
-  //   required String age,
-  //   required String maritalStatus,
-  //   required DateTime createdAt,
-  //   required RegisterType registerType,
-  // }) async {
-  //   try {
-  //     if (await _networkInfo.isConnected) {
-  //       // String uuid = _uuidGenerator.v1();
-  //
-  //       if (registerType == RegisterType.owner) {
-  //         await _remoteDataSource.registerOwnerToDataBase(
-  //           uuid: uuid,
-  //           createdAt: DateTime.now(),
-  //           username: username,
-  //           email: email,
-  //           password: password,
-  //           phoneNumber: phoneNumber,
-  //           gender: gender,
-  //           age: age,
-  //           maritalStatus: maritalStatus,
-  //         );
-  //       } else {
-  //         await _remoteDataSource.registerTenantToDataBase(
-  //           uuid: uuid,
-  //           createdAt: DateTime.now(),
-  //           username: username,
-  //           email: email,
-  //           password: password,
-  //           phoneNumber: phoneNumber,
-  //           gender: gender,
-  //           age: age,
-  //           maritalStatus: maritalStatus,
-  //         );
-  //       }
-  //       return const Right(null);
-  //     } else {
-  //       return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
-  //     }
-  //   } catch (e) {
-  //     return Left(ErrorHandler.handle(e).failure);
-  //   }
-  // }
 
   @override
   Future<Either<Failure, void>> sharePost({
@@ -124,31 +74,30 @@ class RepositoryImpl implements Repository {
 
   @override
   Future<Either<Failure, void>> register({
-    required String uuid,
     required String username,
     required String email,
     required String phoneNumber,
     required Gender gender,
     required String? job,
-    required num? salary,
-    required num age,
-    required String martialStatus,
-    required RegisterType registerType,
+    required int? salary,
+    required int age,
+    required String? martialStatus,
+    required UserRole userType,
   }) async {
     try {
       if (await _networkInfo.isConnected) {
         String uuid = _uuidGenerator.v1();
-        if (registerType == RegisterType.tenant) {
+        if (userType == UserRole.tenant) {
           await _remoteDataSource.registerTenantToDataBase(
             uuid: uuid,
             phoneNumber: phoneNumber,
             email: email,
             username: username,
             gender: gender,
-            job: job,
-            salary: salary,
+            job: job!,
+            salary: salary!,
             age: age,
-            martialStatus: martialStatus,
+            martialStatus: martialStatus!,
           );
         } else {
           await _remoteDataSource.registerOwnerToDataBase(
@@ -158,9 +107,27 @@ class RepositoryImpl implements Repository {
             username: username,
             gender: gender,
             age: age,
-            martialStatus: martialStatus,
           );
         }
+        await fetchCurrentUser(email);
+        return const Right(null);
+      } else {
+        return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+      }
+    } catch (e) {
+      return Left(ErrorHandler.handle(e).failure);
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> login({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      if (await _networkInfo.isConnected) {
+        await _remoteDataSource.login(email: email, password: password);
+        await fetchCurrentUser(email);
         return const Right(null);
       } else {
         return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
@@ -240,7 +207,9 @@ class RepositoryImpl implements Repository {
     try {
       if (await _networkInfo.isConnected) {
         await _remoteDataSource.removeFromFavorites(
-            userId: userId, homeId: homeId);
+          userId: userId,
+          homeId: homeId,
+        );
         return const Right(null);
       } else {
         return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
@@ -281,6 +250,42 @@ class RepositoryImpl implements Repository {
       } else {
         return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
       }
+    } catch (e) {
+      return Left(ErrorHandler.handle(e).failure);
+    }
+  }
+
+  @override
+  Future<Either<Failure, User?>> fetchCurrentUser(
+      [String email = 'xsarg22@gmail.com']) async {
+    try {
+      if (await _networkInfo.isConnected) {
+        print('in fetch');
+        //todo uncomment the 2 lines below
+        //var data = _cacheDataSource.getSignedUser();
+        //if (data != null) {
+        Map<String, dynamic> userData = await _remoteDataSource.getUserData(
+          email: email,
+          //todo uncomment the line below and remove the line above
+          //email: data.email!,
+        );
+        print(userData);
+        UserModel userModel = UserModel.fromMap(userData);
+        print(userModel.username);
+        DataIntent.pushUser(userModel);
+        if (userData['user_type'].toLowerCase() == 'owner') {
+          DataIntent.setUserRole(UserRole.owner);
+        } else {
+          DataIntent.setUserRole(UserRole.tenant);
+        }
+      }
+      //todo remove this
+      return const Right(null);
+      //todo uncomment the 4 lines below
+      //return Right(data);
+      //} else {
+      //  return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+      //}
     } catch (e) {
       return Left(ErrorHandler.handle(e).failure);
     }

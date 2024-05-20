@@ -65,8 +65,10 @@ class RouteGenerator {
       case Routes.selectionRoute:
         return MaterialPageRoute(builder: (_) => const SelectionScreen());
       case Routes.loginRoute:
+        initLoginUseCase();
         return MaterialPageRoute(builder: (_) => const LoginScreen());
       case Routes.registerRoute:
+        initRegisterUseCase();
         return MaterialPageRoute(builder: (_) => const RegisterScreen());
       case Routes.mainLayoutRoute:
         initAddToFavoritesUseCase();

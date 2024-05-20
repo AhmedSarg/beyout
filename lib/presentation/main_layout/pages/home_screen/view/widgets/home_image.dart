@@ -77,9 +77,9 @@ class HomeImageWidget extends StatelessWidget {
                                 : SvgPicture.asset(SVGAssets.favouraiteLight),
                             onPressed: () {
                               if (viewModel.isHomeFavorite(home.homeId)) {
-                                viewModel.addToFavorites(home.homeId);
-                              } else {
                                 viewModel.removeFromFavorites(home.homeId);
+                              } else {
+                                viewModel.addToFavorites(home.homeId);
                               }
                             },
                           ),

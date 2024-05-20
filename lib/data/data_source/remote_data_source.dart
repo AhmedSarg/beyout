@@ -14,9 +14,9 @@ abstract class RemoteDataSource {
     required String email,
     required String phoneNumber,
     required Gender gender,
-    required String? job,
-    required num? salary,
-    required num age,
+    required String job,
+    required int salary,
+    required int age,
     required String martialStatus,
   });
 
@@ -26,8 +26,12 @@ abstract class RemoteDataSource {
     required String email,
     required String phoneNumber,
     required Gender gender,
-    required num age,
-    required String martialStatus,
+    required int age,
+  });
+
+  Future<void> login({
+    required String email,
+    required String password,
   });
 
   Future<String> saveHomesToDateBase({
@@ -72,6 +76,10 @@ abstract class RemoteDataSource {
   Future<Map<String, dynamic>> getHomeById({
     required String homeId,
   });
+
+  Future<Map<String, dynamic>> getUserData({
+    required String email,
+  });
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
@@ -83,55 +91,51 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       this._firestore, this._firebaseStorage, this._appServiceClient);
 
   @override
-  Future<String> registerTenantToDataBase({
+  Future<void> registerTenantToDataBase({
     required String uuid,
     required String username,
     required String email,
     required String phoneNumber,
     required Gender gender,
-    required String? job,
-    required num? salary,
-    required num age,
-    required String martialStatus,
-  }) async {
-    DocumentReference docRef = await _firestore.collection('users').add({
-      'uuid': uuid,
-      'username': username,
-      'email': email,
-      'phoneNumber': phoneNumber,
-      'gender': gender,
-      'job': job,
-      'salary': salary,
-      'age': age,
-      'martialStatus': martialStatus,
-      'favorites': [],
-      'userType': 'tenant',
-    });
-    return docRef.id;
-  }
-
-  @override
-  Future<String> registerOwnerToDataBase({
-    required String uuid,
-    required String username,
-    required String email,
-    required String phoneNumber,
-    required Gender gender,
-    required num age,
+    required String job,
+    required int salary,
+    required int age,
     required String martialStatus,
   }) async {
     await _firestore.collection('users').doc(uuid).set({
-      'uuid': uuid,
+      'id': uuid,
       'username': username,
       'email': email,
-      'phoneNumber': phoneNumber,
-      'gender': gender,
+      'phone_number': phoneNumber,
+      'gender': gender.name,
       'age': age,
-      'martialStatus': martialStatus,
+      'current_job': job,
+      'current_salary': salary,
+      'martial_status': martialStatus,
+      'user_type': 'tenant',
       'favorites': [],
-      'userType': 'owner',
     });
-    return uuid;
+  }
+
+  @override
+  Future<void> registerOwnerToDataBase({
+    required String uuid,
+    required String username,
+    required String email,
+    required String phoneNumber,
+    required Gender gender,
+    required int age,
+  }) async {
+    await _firestore.collection('users').doc(uuid).set({
+      'id': uuid,
+      'username': username,
+      'email': email,
+      'phone_number': phoneNumber,
+      'gender': gender.name,
+      'age': age,
+      'user_type': 'owner',
+      'favorites': [],
+    });
   }
 
   @override
@@ -168,6 +172,14 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     await docRef.update({'uuid': docRef.id});
 
     return docRef.id;
+  }
+
+  @override
+  Future<void> login({
+    required String email,
+    required String password,
+  }) async {
+    //todo create login logic
   }
 
   @override
@@ -246,5 +258,22 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         .doc(homeId)
         .get()
         .then((value) => value.data()!);
+  }
+
+  @override
+  Future<Map<String, dynamic>> getUserData({
+    required String email,
+  }) async {
+    late Map<String, dynamic> user;
+    await _firestore
+        .collection('users')
+        .where('email', isEqualTo: email)
+        .get()
+        .then(
+      (value) {
+        user = value.docs[0].data();
+      },
+    );
+    return user;
   }
 }

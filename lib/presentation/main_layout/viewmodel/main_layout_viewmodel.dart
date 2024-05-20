@@ -119,7 +119,7 @@ class MainLayoutViewModel extends BaseCubit
   UserRole get getUserRole => _userRole!;
 
   @override
-  User get getUser => _user;
+  UserModel get getUser => _user;
 
   @override
   Stream<List<Future<HomeModel>>> get getFavouriteHomesStream =>
@@ -131,7 +131,7 @@ abstract class MainLayoutViewModelInput {}
 abstract class MainLayoutViewModelOutput {
   UserRole get getUserRole;
 
-  User get getUser;
+  UserModel get getUser;
 
   Stream<List<Future<HomeModel>>> get getFavouriteHomesStream;
 }

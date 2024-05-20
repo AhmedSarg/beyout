@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:temp_house/data/network/fireauth_factory.dart';
 import 'package:temp_house/domain/usecase/share_post_usecase.dart';
 
 import '../data/data_source/cache_data_source.dart';
@@ -22,6 +24,8 @@ import '../domain/repository/repository.dart';
 import '../domain/usecase/add_to_favorites_usecase.dart';
 import '../domain/usecase/get_all_favorites_usecase.dart';
 import '../domain/usecase/get_all_homes_usecase.dart';
+import '../domain/usecase/login_usecase.dart';
+import '../domain/usecase/register_usecase.dart';
 import '../domain/usecase/remove_from_favorites_usecase.dart';
 import 'date_ntp.dart';
 
@@ -45,6 +49,9 @@ Future<void> initAppModule() async {
   var firestore = await FirestoreFactoryImpl().create();
   sl.registerLazySingleton<FirebaseFirestore>(() => firestore);
 
+  var fireAuth = await FireAuthFactoryImpl().create();
+  sl.registerLazySingleton<FirebaseAuth>(() => fireAuth);
+
   var fireStorage = await FireStorageFactoryImpl().create();
   sl.registerLazySingleton<FirebaseStorage>(() => fireStorage);
 
@@ -53,12 +60,24 @@ Future<void> initAppModule() async {
       () => RemoteDataSourceImpl(sl(), sl(), sl()));
   sl.registerLazySingleton<RuntimeDataSource>(() => RuntimeDataSourceImpl());
   sl.registerLazySingleton<CacheDataSource>(
-    () => CacheDataSourceImpl(sl(), sl()),
+    () => CacheDataSourceImpl(sl()),
   );
 
   sl.registerLazySingleton<LocalDataSource>(() => LocalDataSourceImpl(sl()));
 
-  sl.registerLazySingleton<Repository>(() => RepositoryImpl(sl(), sl()));
+  sl.registerLazySingleton<Repository>(() => RepositoryImpl(sl(), sl(), sl()));
+}
+
+void initRegisterUseCase() {
+  if (GetIt.instance.isRegistered<RegisterUseCase>() == false) {
+    sl.registerFactory<RegisterUseCase>(() => RegisterUseCase(sl()));
+  }
+}
+
+void initLoginUseCase() {
+  if (GetIt.instance.isRegistered<LoginUseCase>() == false) {
+    sl.registerFactory<LoginUseCase>(() => LoginUseCase(sl()));
+  }
 }
 
 void initSharePostUseCase() {

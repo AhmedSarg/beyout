@@ -24,14 +24,14 @@ class HomePageAppBar extends StatelessWidget {
             clipBehavior: Clip.antiAliasWithSaveLayer,
             width: AppSize.s50,
             height: AppSize.s50,
-            child: Image.asset(ImageAssets.personImage),
+            child: Image.asset(ImageAssets.unknownUserImage),
           ),
           const SizedBox(width: AppSize.s10),
           SvgPicture.asset(SVGAssets.pin),
           const SizedBox(width: AppSize.s10),
           Expanded(
             child: Text(
-              DataIntent.getUser().name,
+              DataIntent.getUser().username,
               style: AppTextStyles.mainAppBarText(context),
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
