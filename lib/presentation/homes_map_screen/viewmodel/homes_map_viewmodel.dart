@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:temp_house/presentation/resources/color_manager.dart';
 
 import '../../../app/sl.dart';
 import '../../../domain/models/domain.dart';
@@ -32,10 +33,8 @@ class HomesMapViewModel extends BaseCubit
   BitmapDescriptor? _pin;
 
   _fetchUserLocation() async {
-    emit(LoadingState());
     Position userPosition = await Geolocator.getCurrentPosition();
     _userLocation = LatLng(userPosition.latitude, userPosition.longitude);
-    emit(ContentState());
   }
 
   goToMyLocation() {
@@ -79,12 +78,11 @@ class HomesMapViewModel extends BaseCubit
   }
 
   Future<void> _getAllHomes() async {
-    emit(LoadingState());
     await _getAllHomesUseCase(null).then(
       (value) {
         value.fold(
           (l) {
-            emit(ErrorState(failure: l));
+            emit(ErrorState(failure: l, textColor: ColorManager.black));
           },
           (r) {
             r.listen(
@@ -115,6 +113,7 @@ class HomesMapViewModel extends BaseCubit
 
   @override
   void start() async {
+    emit(LoadingState());
     await _fetchUserLocation();
     await _fetchPinIcon();
     _getAllHomes();

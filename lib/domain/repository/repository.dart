@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:temp_house/domain/models/domain.dart';
 
 import '../../data/network/failure.dart';
@@ -50,4 +51,9 @@ abstract class Repository {
   });
 
   Future<Either<Failure, Stream<List<HomeModel>>>> getAllHomes();
+
+  Future<Either<Failure, Map<String, dynamic>>> calculateTwoPoints({
+    required LatLng pointA,
+    required LatLng pointB,
+  });
 }

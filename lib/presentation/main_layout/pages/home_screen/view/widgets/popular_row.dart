@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:temp_house/presentation/resources/color_manager.dart';
 import 'package:temp_house/presentation/resources/values_manager.dart';
 
 import '../../../../../resources/text_styles.dart';
@@ -9,7 +8,7 @@ class PopularRow extends StatelessWidget {
       {super.key,
       required this.startedText,
       required this.endedText,
-        required this.routeName,
+      required this.routeName,
       required this.rowStartedcolor,
       required this.rowEndedcolor});
   String startedText;
@@ -26,7 +25,7 @@ class PopularRow extends StatelessWidget {
         children: [
           Text(
             startedText ?? "",
-            style: AppTextStyles.PopularRowStartedTextStyle(
+            style: AppTextStyles.popularRowStartedTextStyle(
                 context, rowStartedcolor),
           ),
           InkWell(
@@ -35,7 +34,7 @@ class PopularRow extends StatelessWidget {
             },
             child: Text(
               endedText ?? "",
-              style: AppTextStyles.PopularRowEndedTextStyle(
+              style: AppTextStyles.popularRowEndedTextStyle(
                   context, rowEndedcolor),
             ),
           ),

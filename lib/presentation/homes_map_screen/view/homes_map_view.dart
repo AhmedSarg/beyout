@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:temp_house/app/extensions.dart';
 import 'package:temp_house/domain/models/domain.dart';
 import 'package:temp_house/presentation/base/base_states.dart';
 import 'package:temp_house/presentation/base/cubit_builder.dart';
@@ -42,13 +41,13 @@ class HomesMapScreen extends StatelessWidget {
       context: context,
       isScrollControlled: true,
       useSafeArea: true,
-      barrierColor: ColorManager.black.withOpacity(.2),
-      constraints: BoxConstraints(
-        maxHeight: context.height() * .8,
+      barrierColor: ColorManager.black.withOpacity(.1),
+      constraints: const BoxConstraints(
         minWidth: AppSize.infinity,
       ),
+      backgroundColor: const Color(0xfff7f7f6),
       builder: (context) => DraggableScrollableSheet(
-        initialChildSize: AppSize.s0_5,
+        initialChildSize: AppSize.s0_8,
         maxChildSize: AppSize.s1,
         minChildSize: AppSize.s0_5,
         expand: false,

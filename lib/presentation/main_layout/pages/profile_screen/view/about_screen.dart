@@ -11,8 +11,8 @@ class AboutScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorManager.offwhite,
       appBar: AppBar(
-        // title: Text(AppStrings.aboutAppItem,style: AppTextStyles.profileSettingAppBarTextStyle(),),
-      ),
+          // title: Text(AppStrings.aboutAppItem,style: AppTextStyles.profileSettingAppBarTextStyle(),),
+          ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -51,18 +51,19 @@ class AboutScreen extends StatelessWidget {
             ),
             const SizedBox(height: AppSize.s10),
             Text(
-              AppStrings.aboutDevNames.tr(), // Replace with your name or company name
+              AppStrings.aboutDevNames
+                  .tr(), // Replace with your name or company name
               style: AppTextStyles.aboutAppDevNameTextStyle(),
             ),
             const SizedBox(height: AppSize.s20),
             Text(
               AppStrings.aboutContact.tr(),
-              style: AppTextStyles.aboutAppContantTextStyle(),
+              style: AppTextStyles.aboutAppContactTextStyle(),
             ),
             const SizedBox(height: AppSize.s10),
             Text(
               '${AppStrings.aboutContactEmail.tr()}\n ${AppStrings.aboutContactWebSite.tr()}', // Replace with your contact information
-              style: AppTextStyles.aboutAppContantDetailsTextStyle(),
+              style: AppTextStyles.aboutAppContactDetailsTextStyle(),
             ),
           ],
         ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:temp_house/presentation/resources/color_manager.dart';
+
 import '../resources/text_styles.dart';
 import '../resources/values_manager.dart';
 import 'base_states.dart';
@@ -13,11 +14,12 @@ class BaseWidgets {
         height: AppSize.s100, width: AppSize.s100, child: Image.asset(imgPath));
   }
 
-  static Widget buildAnimatedImage(String lottiePath) {
+  static Widget buildAnimatedImage(String lottiePath, [repeat = true]) {
     return SizedBox(
-        height: AppSize.s200,
-        width: AppSize.s200,
-        child: Lottie.asset(lottiePath));
+      height: AppSize.s200,
+      width: AppSize.s200,
+      child: Lottie.asset(lottiePath, repeat: repeat),
+    );
   }
 
   static Widget buildItemsColumn(List<Widget> children) {
@@ -63,13 +65,14 @@ class BaseWidgets {
             ));
   }
 
-  static Widget buildMessage(BuildContext context, String message) {
+  static Widget buildMessage(BuildContext context, String message,
+      [Color? textColor]) {
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(AppPadding.p8),
         child: Text(
           message,
-          style: AppTextStyles.baseStatesMessageTextStyle(context),
+          style: AppTextStyles.baseStatesMessageTextStyle(context, textColor),
         ),
       ),
     );

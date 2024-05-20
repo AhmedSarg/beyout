@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:temp_house/data/network/app_api.dart';
 import 'package:temp_house/domain/models/enums.dart';
 import 'package:temp_house/presentation/common/data_intent/data_intent.dart';
 
@@ -47,13 +49,18 @@ abstract class RemoteDataSource {
   );
 
   Future<Stream<List<Map<String, dynamic>>>> getAllHomes();
+
+  Future<Map<String, dynamic>> calculateTwoPoints(
+      LatLng pickup, LatLng destination);
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
   final FirebaseFirestore _firestore;
   final FirebaseStorage _firebaseStorage;
+  final AppServiceClient _appServiceClient;
 
-  RemoteDataSourceImpl(this._firestore, this._firebaseStorage);
+  RemoteDataSourceImpl(
+      this._firestore, this._firebaseStorage, this._appServiceClient);
 
   @override
   Future<String> registerTenantToDataBase({
@@ -171,5 +178,11 @@ class RemoteDataSourceImpl implements RemoteDataSource {
               )
               .toList(),
         );
+  }
+
+  @override
+  Future<Map<String, dynamic>> calculateTwoPoints(
+      LatLng pointA, LatLng pointB) async {
+    return await _appServiceClient.calculateTwoPoints(pointA, pointB);
   }
 }

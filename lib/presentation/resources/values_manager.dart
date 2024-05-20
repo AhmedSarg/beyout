@@ -16,7 +16,6 @@ class AppMargin {
   static const double m100 = 100;
   static const double m150 = 150;
   static const double m200 = 200;
-
 }
 
 class AppPadding {
@@ -48,6 +47,7 @@ class AppSize {
   static const double s0 = 0.0;
   static const double s0_5 = 0.5;
   static const double s0_7 = 0.7;
+  static const double s0_8 = 0.8;
   static const double s1 = 1.0;
   static const double s1_2 = 1.2;
   static const double s1_4 = 1.4;
@@ -86,8 +86,8 @@ class AppSize {
   static const double s62 = 62.0;
   static const double s64 = 64.0;
   static const double s70 = 70.0;
-  static const double s75= 75.0;
-  static const double s76= 76.0;
+  static const double s75 = 75.0;
+  static const double s76 = 76.0;
   static const double s80 = 80.0;
   static const double s90 = 90.0;
   static const double s100 = 100.0;
@@ -121,7 +121,7 @@ class AppSize {
   static const double infinity = double.infinity;
 }
 
-class AppDuration{
+class AppDuration {
   static const int m1200 = 1200;
   static const int m300 = 300;
   static const int s3 = 3;
@@ -132,5 +132,4 @@ class AppDuration{
   static const int s8 = 8;
   static const int s9 = 9;
   static const int s10 = 10;
-
 }

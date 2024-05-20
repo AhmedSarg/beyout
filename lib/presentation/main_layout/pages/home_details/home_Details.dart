@@ -1,26 +1,21 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:intl/intl.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:temp_house/presentation/chat_screen/chat_service/chat_services.dart';
 import 'package:temp_house/presentation/chat_screen/view/chat_view.dart';
 import 'package:temp_house/presentation/common/widget/cached_image.dart';
 import 'package:temp_house/presentation/map_screen/view/home_deatils_inMap.dart';
 import 'package:temp_house/presentation/resources/font_manager.dart';
-import 'package:temp_house/presentation/resources/routes_manager.dart';
 import 'package:temp_house/presentation/resources/strings_manager.dart';
 import 'package:temp_house/presentation/resources/values_manager.dart';
-import 'package:temp_house/presentation/share_post_screen/viewmodel/share_view_model.dart';
+
 import '../../../common/data_intent/data_intent.dart';
 import '../../../common/widget/main_app_bar.dart';
 import '../../../resources/assets_manager.dart';
 import '../../../resources/color_manager.dart';
 import '../../../resources/text_styles.dart';
-import '../home_screen/view/widgets/home_listView_iItem.dart';
 
 class HomeDetailsScreen extends StatefulWidget {
   final String id;
@@ -54,7 +49,9 @@ class HomeDetailsScreen extends StatefulWidget {
     required this.period,
     required this.area,
     required this.coardinaties,
-    required this.name, required this.rating, required this.numberOfRatings,
+    required this.name,
+    required this.rating,
+    required this.numberOfRatings,
   }) : super(key: key);
 
   @override
@@ -64,13 +61,14 @@ class HomeDetailsScreen extends StatefulWidget {
 class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
   int _currentIndex = 0;
   double _rating = 2.4;
-ChatServices chatServices = ChatServices();
+  ChatServices chatServices = ChatServices();
   @override
   Widget build(BuildContext context) {
     int rating = widget.rating.toInt();
     print(rating);
     print('________________________________');
-    final int displayedRating = (widget.rating / widget.numberOfRatings).clamp(0, 5).floor();
+    final int displayedRating =
+        (widget.rating / widget.numberOfRatings).clamp(0, 5).floor();
 
     return Scaffold(
       bottomNavigationBar: SizedBox(
@@ -88,22 +86,24 @@ ChatServices chatServices = ChatServices();
                     ColorManager.blue.withOpacity(.7),
                   )),
                   onPressed: () {
-
-
-                    if (chatServices.getChatRoomID(DataIntent.getUser().uid, widget.id)==chatServices.getChatRoomID( widget.id,DataIntent.getUser().uid)) {
-
+                    if (chatServices.getChatRoomID(
+                            DataIntent.getUser().uid, widget.id) ==
+                        chatServices.getChatRoomID(
+                            widget.id, DataIntent.getUser().uid)) {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => ChatScreen(
                             receiveEmail: widget.name,
                             receiveID: widget.id,
-                            chatID: chatServices.getChatRoomID(DataIntent.getUser().uid, widget.id),
+                            chatID: chatServices.getChatRoomID(
+                                DataIntent.getUser().uid, widget.id),
                           ),
-                        ),);
-
-                    }else{
-                      String chatID = chatServices.getChatRoomID(DataIntent.getUser().uid, widget.id);
+                        ),
+                      );
+                    } else {
+                      String chatID = chatServices.getChatRoomID(
+                          DataIntent.getUser().uid, widget.id);
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -113,11 +113,8 @@ ChatServices chatServices = ChatServices();
                               chatID: chatID),
                         ),
                       );
-
                     }
-
                   },
-
                   child: SvgPicture.asset(
                     SVGAssets.chat,
                     width: AppSize.s35,
@@ -228,7 +225,7 @@ ChatServices chatServices = ChatServices();
                             text:
                                 '${widget.price} ${AppStrings.priceHome.tr()}${widget.period}',
                             style: AppTextStyles
-                                .homeDetailsDescriptionContantTextStyle(),
+                                .homeDetailsDescriptionContactTextStyle(),
                           ),
                         ],
                       ),
@@ -245,7 +242,7 @@ ChatServices chatServices = ChatServices();
                           TextSpan(
                             text: '${widget.area} ${AppStrings.meter.tr()}',
                             style: AppTextStyles
-                                .homeDetailsDescriptionContantTextStyle(),
+                                .homeDetailsDescriptionContactTextStyle(),
                           ),
                         ],
                       ),
@@ -262,7 +259,7 @@ ChatServices chatServices = ChatServices();
                           TextSpan(
                             text: AppStrings.paymentCash.tr(),
                             style: AppTextStyles
-                                .homeDetailsDescriptionContantTextStyle(),
+                                .homeDetailsDescriptionContactTextStyle(),
                           ),
                         ],
                       ),
@@ -332,7 +329,7 @@ ChatServices chatServices = ChatServices();
                           TextSpan(
                             text: widget.description,
                             style: AppTextStyles
-                                .homeDetailsDescriptionContantTextStyle(),
+                                .homeDetailsDescriptionContactTextStyle(),
                           ),
                         ],
                       ),
@@ -349,7 +346,7 @@ ChatServices chatServices = ChatServices();
                           TextSpan(
                             text: widget.location,
                             style: AppTextStyles
-                                .homeDetailsDescriptionContantTextStyle(),
+                                .homeDetailsDescriptionContactTextStyle(),
                           ),
                         ],
                       ),
@@ -461,7 +458,7 @@ class HomeDetailsContent extends StatelessWidget {
         ),
         Text(
           number,
-          style: AppTextStyles.homeDetailsDescriptionContantTextStyle(),
+          style: AppTextStyles.homeDetailsDescriptionContactTextStyle(),
         ),
         Text(
           overflow: TextOverflow.ellipsis,

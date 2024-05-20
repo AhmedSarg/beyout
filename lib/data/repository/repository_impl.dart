@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../domain/models/domain.dart';
@@ -188,6 +189,24 @@ class RepositoryImpl implements Repository {
           },
         );
         return Right(homesStream);
+      } else {
+        return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+      }
+    } catch (e) {
+      return Left(ErrorHandler.handle(e).failure);
+    }
+  }
+
+  @override
+  Future<Either<Failure, Map<String, dynamic>>> calculateTwoPoints({
+    required LatLng pointA,
+    required LatLng pointB,
+  }) async {
+    try {
+      if (await _networkInfo.isConnected) {
+        Map<String, dynamic> res =
+            await _remoteDataSource.calculateTwoPoints(pointA, pointB);
+        return Right(res);
       } else {
         return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
       }
