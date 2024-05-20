@@ -167,6 +167,9 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       'coordinates': GeoPoint(coordinates.latitude, coordinates.longitude),
       'timestamp': Timestamp.now(),
       'owner_id': DataIntent.getUser().uid,
+      'rating': 3.5,
+      'numberOfRatings': 1,
+      'name': name,
     });
 
     await docRef.update({'uuid': docRef.id});
