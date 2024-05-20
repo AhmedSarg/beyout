@@ -24,9 +24,11 @@ import '../domain/repository/repository.dart';
 import '../domain/usecase/add_to_favorites_usecase.dart';
 import '../domain/usecase/get_all_favorites_usecase.dart';
 import '../domain/usecase/get_all_homes_usecase.dart';
+import '../domain/usecase/get_current_user_usecase.dart';
 import '../domain/usecase/login_usecase.dart';
 import '../domain/usecase/register_usecase.dart';
 import '../domain/usecase/remove_from_favorites_usecase.dart';
+import '../domain/usecase/report_home_usecase.dart';
 import 'date_ntp.dart';
 
 final sl = GetIt.instance;
@@ -66,6 +68,13 @@ Future<void> initAppModule() async {
   sl.registerLazySingleton<LocalDataSource>(() => LocalDataSourceImpl(sl()));
 
   sl.registerLazySingleton<Repository>(() => RepositoryImpl(sl(), sl(), sl()));
+}
+
+void initGetCurrentUserUseCase() {
+  if (GetIt.instance.isRegistered<GetCurrentUserUseCase>() == false) {
+    sl.registerFactory<GetCurrentUserUseCase>(
+        () => GetCurrentUserUseCase(sl()));
+  }
 }
 
 void initRegisterUseCase() {
@@ -110,5 +119,11 @@ void initGetAllFavoritesUseCase() {
   if (GetIt.instance.isRegistered<GetAllFavoritesUseCase>() == false) {
     sl.registerFactory<GetAllFavoritesUseCase>(
         () => GetAllFavoritesUseCase(sl()));
+  }
+}
+
+void initReportHomeUseCase() {
+  if (GetIt.instance.isRegistered<ReportHomeUseCase>() == false) {
+    sl.registerFactory<ReportHomeUseCase>(() => ReportHomeUseCase(sl()));
   }
 }

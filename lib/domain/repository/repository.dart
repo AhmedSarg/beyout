@@ -77,4 +77,11 @@ abstract class Repository {
   });
 
   Future<Either<Failure, User?>> fetchCurrentUser();
+
+  Future<Either<Failure, void>> reportHome({
+    required String userId,
+    required String homeId,
+    required String report,
+    required DateTime submittedAt,
+  });
 }

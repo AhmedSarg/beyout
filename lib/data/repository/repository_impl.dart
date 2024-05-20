@@ -257,37 +257,215 @@ class RepositoryImpl implements Repository {
 
   @override
   Future<Either<Failure, User?>> fetchCurrentUser(
-      [String email = 'xsarg22@gmail.com']) async {
+      [String email = 'xsarg221@gmail.com']) async {
     try {
       if (await _networkInfo.isConnected) {
-        print('in fetch');
         //todo uncomment the 2 lines below
         //var data = _cacheDataSource.getSignedUser();
         //if (data != null) {
-        Map<String, dynamic> userData = await _remoteDataSource.getUserData(
+        Map<String, dynamic>? userData = await _remoteDataSource.getUserData(
           email: email,
           //todo uncomment the line below and remove the line above
           //email: data.email!,
         );
-        print(userData);
-        UserModel userModel = UserModel.fromMap(userData);
-        print(userModel.username);
+        //todo remove the line below
+        // if (userData != null) {
+        UserModel userModel = UserModel.fromMap(userData!);
         DataIntent.pushUser(userModel);
         if (userData['user_type'].toLowerCase() == 'owner') {
           DataIntent.setUserRole(UserRole.owner);
         } else {
           DataIntent.setUserRole(UserRole.tenant);
         }
+        return Right(FakeUser());
+        //todo remove the 3 lines below
+        // } else {
+        //   return const Right(null);
+        // }
+        //todo uncomment the line below
+        //return Right(data);
+      } else {
+        return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
       }
-      //todo remove this
-      return const Right(null);
-      //todo uncomment the 4 lines below
-      //return Right(data);
-      //} else {
-      //  return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
-      //}
     } catch (e) {
       return Left(ErrorHandler.handle(e).failure);
     }
+  }
+
+  @override
+  Future<Either<Failure, void>> reportHome({
+    required String userId,
+    required String homeId,
+    required String report,
+    required DateTime submittedAt,
+  }) async {
+    try {
+      if (await _networkInfo.isConnected) {
+        await _remoteDataSource.reportHome(
+          userId: userId,
+          homeId: homeId,
+          report: report,
+          submittedAt: submittedAt,
+        );
+        return const Right(null);
+      } else {
+        return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+      }
+    } catch (e) {
+      return Left(ErrorHandler.handle(e).failure);
+    }
+  }
+}
+
+//todo remove this class
+class FakeUser implements User {
+  @override
+  Future<void> delete() {
+    // TODO: implement delete
+    throw UnimplementedError();
+  }
+
+  @override
+  String? get displayName => throw UnimplementedError();
+
+  @override
+  String? get email => throw UnimplementedError();
+
+  @override
+  bool get emailVerified => throw UnimplementedError();
+
+  @override
+  Future<String?> getIdToken([bool forceRefresh = false]) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<IdTokenResult> getIdTokenResult([bool forceRefresh = false]) {
+    throw UnimplementedError();
+  }
+
+  @override
+  bool get isAnonymous => throw UnimplementedError();
+
+  @override
+  Future<UserCredential> linkWithCredential(AuthCredential credential) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<ConfirmationResult> linkWithPhoneNumber(String phoneNumber,
+      [RecaptchaVerifier? verifier]) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<UserCredential> linkWithPopup(AuthProvider provider) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<UserCredential> linkWithProvider(AuthProvider provider) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> linkWithRedirect(AuthProvider provider) {
+    throw UnimplementedError();
+  }
+
+  @override
+  UserMetadata get metadata => throw UnimplementedError();
+
+  @override
+  MultiFactor get multiFactor => throw UnimplementedError();
+
+  @override
+  String? get phoneNumber => throw UnimplementedError();
+
+  @override
+  String? get photoURL => throw UnimplementedError();
+
+  @override
+  List<UserInfo> get providerData => throw UnimplementedError();
+
+  @override
+  Future<UserCredential> reauthenticateWithCredential(
+      AuthCredential credential) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<UserCredential> reauthenticateWithPopup(AuthProvider provider) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<UserCredential> reauthenticateWithProvider(AuthProvider provider) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> reauthenticateWithRedirect(AuthProvider provider) {
+    throw UnimplementedError();
+  }
+
+  @override
+  String? get refreshToken => throw UnimplementedError();
+
+  @override
+  Future<void> reload() {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> sendEmailVerification([ActionCodeSettings? actionCodeSettings]) {
+    throw UnimplementedError();
+  }
+
+  @override
+  String? get tenantId => throw UnimplementedError();
+
+  @override
+  String get uid => throw UnimplementedError();
+
+  @override
+  Future<User> unlink(String providerId) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> updateDisplayName(String? displayName) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> updateEmail(String newEmail) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> updatePassword(String newPassword) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> updatePhoneNumber(PhoneAuthCredential phoneCredential) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> updatePhotoURL(String? photoURL) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> updateProfile({String? displayName, String? photoURL}) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> verifyBeforeUpdateEmail(String newEmail,
+      [ActionCodeSettings? actionCodeSettings]) {
+    throw UnimplementedError();
   }
 }

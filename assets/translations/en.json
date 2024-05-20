@@ -4,7 +4,7 @@
   "success": "Success",
   "submit": "Submit  ",
 
-  "splashScreenTitle": "Temp house",
+  "splashScreenTitle": "Beyout",
   "splashScreenSubTitle": "Very Easy To Book a Home",
 
   "onBoardingScreenTitle1": "Booking Home Anywhere Is Easier",
@@ -12,7 +12,7 @@
   "onBoardingScreenNextButton": "Next",
   "onBoardingScreenGetStartedButton": "Get Started",
 
-  "selectionScreenTitle": "Temp house",
+  "selectionScreenTitle": "Beyout",
   "selectionScreenSubTitle": "Choose your role in our app",
   "selectionScreenOwner": "Owner",
   "selectionScreenTenant": "Tenant",
@@ -196,10 +196,10 @@
   "rateUsScreenName" : "Rate Us",
   "needHelpScreenName": "Need Help ?",
 
-  "aboutAppName": "Temp House",
+  "aboutAppName": "Beyout",
   "aboutAppVersion": "Versoin 1.0.0",
   "aboutAppDescription": "Description",
-  "aboutAppDescriptionDetails" : "Stress-free rental starts here! Find your perfect place, apply online & manage everything - all with Temp House.",
+  "aboutAppDescriptionDetails" : "Stress-free rental starts here! Find your perfect place, apply online & manage everything - all with Beyout.",
   "aboutDev" : "Develpers",
   "aboutDevNames" : "developer 1\ndeveloper 2",
   "aboutContact" : "Contact",

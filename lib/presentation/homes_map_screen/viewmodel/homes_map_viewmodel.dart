@@ -1,10 +1,13 @@
 import 'dart:math';
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:temp_house/domain/usecase/report_home_usecase.dart';
+import 'package:temp_house/presentation/common/data_intent/data_intent.dart';
 import 'package:temp_house/presentation/resources/color_manager.dart';
 
 import '../../../app/sl.dart';
@@ -20,9 +23,15 @@ class HomesMapViewModel extends BaseCubit
     implements HomesMapViewModelInput, HomesMapViewModelOutput {
   static HomesMapViewModel get(context) => BlocProvider.of(context);
 
+  late final LatLng? _initialLocation;
+
   final GetAllHomesUseCase _getAllHomesUseCase = sl<GetAllHomesUseCase>();
 
+  final ReportHomeUseCase _reportHomeUseCase = sl<ReportHomeUseCase>();
+
   late final GoogleMapController _mapController;
+
+  final TextEditingController _reportController = TextEditingController();
 
   late LatLng _userLocation;
 
@@ -111,9 +120,27 @@ class HomesMapViewModel extends BaseCubit
     );
   }
 
+  showReportHome() {
+    emit(HomeReportState());
+  }
+
+  Future<void> reportHome(String homeId) async {
+    await _reportHomeUseCase(
+      ReportHomeUseCaseInput(
+        userId: DataIntent.getUser().uid,
+        homeId: homeId,
+        report: _reportController.text,
+        submittedAt: DateTime.now(),
+      ),
+    ).whenComplete(() {
+      _reportController.clear();
+    });
+  }
+
   @override
   void start() async {
     emit(LoadingState());
+    _initialLocation = DataIntent.popInitialLocation();
     await _fetchUserLocation();
     await _fetchPinIcon();
     _getAllHomes();
@@ -128,10 +155,16 @@ class HomesMapViewModel extends BaseCubit
   LatLng get getUserLocation => _userLocation;
 
   @override
+  LatLng? get getInitialLocation => _initialLocation;
+
+  @override
   List<HomeModel> get getHomesList => _homesList;
 
   @override
   Set<Marker> get getHomesMarkers => _homesMarkers;
+
+  @override
+  TextEditingController get getReportController => _reportController;
 }
 
 abstract class HomesMapViewModelInput {
@@ -141,7 +174,11 @@ abstract class HomesMapViewModelInput {
 abstract class HomesMapViewModelOutput {
   LatLng get getUserLocation;
 
+  LatLng? get getInitialLocation;
+
   List<HomeModel> get getHomesList;
 
   Set<Marker> get getHomesMarkers;
+
+  TextEditingController get getReportController;
 }

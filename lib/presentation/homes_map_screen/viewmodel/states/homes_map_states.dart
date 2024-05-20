@@ -6,3 +6,5 @@ class HomeClickedState extends BaseStates {
 
   HomeClickedState(this.home);
 }
+
+class HomeReportState extends BaseStates {}

@@ -1,3 +1,5 @@
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 import '../../../domain/models/domain.dart';
 import '../../../domain/models/enums.dart';
 
@@ -20,6 +22,18 @@ class DataIntent {
 
   static UserModel getUser() {
     return _user;
+  }
+
+  static LatLng? _initialLocation;
+
+  static void pushInitialLocation(LatLng initialLocation) {
+    _initialLocation = initialLocation;
+  }
+
+  static LatLng? popInitialLocation() {
+    LatLng? v = _initialLocation;
+    _initialLocation = null;
+    return v;
   }
 
 //-----------------------------------

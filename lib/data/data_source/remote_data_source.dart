@@ -77,8 +77,15 @@ abstract class RemoteDataSource {
     required String homeId,
   });
 
-  Future<Map<String, dynamic>> getUserData({
+  Future<Map<String, dynamic>?> getUserData({
     required String email,
+  });
+
+  Future<void> reportHome({
+    required String userId,
+    required String homeId,
+    required String report,
+    required DateTime submittedAt,
   });
 }
 
@@ -264,19 +271,35 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   }
 
   @override
-  Future<Map<String, dynamic>> getUserData({
+  Future<Map<String, dynamic>?> getUserData({
     required String email,
   }) async {
-    late Map<String, dynamic> user;
+    Map<String, dynamic>? user;
     await _firestore
         .collection('users')
         .where('email', isEqualTo: email)
         .get()
         .then(
       (value) {
-        user = value.docs[0].data();
+        user = value.docs.firstOrNull?.data();
       },
     );
     return user;
+  }
+
+  @override
+  Future<void> reportHome({
+    required String userId,
+    required String homeId,
+    required String report,
+    required DateTime submittedAt,
+  }) async {
+    await _firestore.collection('Homes').doc(homeId).collection('reports').add(
+      {
+        'userId': userId,
+        'content': report,
+        'submitted_at': submittedAt,
+      },
+    );
   }
 }

@@ -59,6 +59,7 @@ class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.splashRoute:
+        initGetCurrentUserUseCase();
         return MaterialPageRoute(builder: (_) => const SplashScreen());
       case Routes.onboardingRoute:
         return MaterialPageRoute(builder: (_) => const OnboardingScreen());
@@ -112,6 +113,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const PersonalInfoScreen());
       case Routes.homesMapRoute:
         initGetAllHomesUseCase();
+        initReportHomeUseCase();
         return MaterialPageRoute(builder: (_) => const HomesMapScreen());
       default:
         return unDefinedRoute();

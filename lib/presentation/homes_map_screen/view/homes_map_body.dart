@@ -22,7 +22,7 @@ class HomesMapBody extends StatelessWidget {
         width: AppSize.infinity,
         child: GoogleMap(
           initialCameraPosition: CameraPosition(
-            target: _viewModel.getUserLocation,
+            target: _viewModel.getInitialLocation ?? _viewModel.getUserLocation,
             zoom: AppSize.s16,
           ),
           myLocationEnabled: true,

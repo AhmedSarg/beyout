@@ -6,8 +6,8 @@ import 'package:temp_house/domain/models/domain.dart';
 import 'package:temp_house/presentation/chat_screen/chat_service/chat_services.dart';
 import 'package:temp_house/presentation/chat_screen/view/chat_view.dart';
 import 'package:temp_house/presentation/common/widget/cached_image.dart';
-import 'package:temp_house/presentation/map_screen/view/home_deatils_inMap.dart';
 import 'package:temp_house/presentation/resources/font_manager.dart';
+import 'package:temp_house/presentation/resources/routes_manager.dart';
 import 'package:temp_house/presentation/resources/strings_manager.dart';
 import 'package:temp_house/presentation/resources/values_manager.dart';
 
@@ -312,18 +312,10 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                           ),
                           InkWell(
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      GoogleMapHomeDetailsScreen(
-                                    coordinates: widget.home.coordinates,
-                                    title: widget.home.title,
-                                    address: widget.home.location,
-                                    description: widget.home.description,
-                                  ),
-                                ),
-                              );
+                              DataIntent.pushInitialLocation(
+                                  widget.home.coordinates);
+                              Navigator.pushNamed(
+                                  context, Routes.homesMapRoute);
                             },
                             child: Container(
                               width: MediaQuery.of(context).size.width * .4,
