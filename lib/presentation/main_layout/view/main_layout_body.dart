@@ -55,7 +55,7 @@ class _MainLayoutBodyState extends State<MainLayoutBody> {
               BottomNavigationBarItem(
                 backgroundColor: Theme.of(context).primaryColor,
                 icon: const Icon(Icons.home_outlined),
-                activeIcon: const Icon(Icons.home),
+                activeIcon: const Icon(Icons.home_rounded),
                 label: AppStrings.homeNavBarHome.tr(),
               ),
               BottomNavigationBarItem(
