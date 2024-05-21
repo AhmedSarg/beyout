@@ -6,6 +6,8 @@ import 'package:temp_house/presentation/base/cubit_builder.dart';
 import 'package:temp_house/presentation/base/cubit_listener.dart';
 import 'package:temp_house/presentation/main_layout/viewmodel/main_layout_viewmodel.dart';
 import 'package:temp_house/presentation/resources/color_manager.dart';
+import 'package:temp_house/presentation/resources/font_manager.dart';
+import 'package:temp_house/presentation/resources/styles_manager.dart';
 import 'package:temp_house/presentation/resources/values_manager.dart';
 import 'package:temp_house/presentation/search_screen/view/widgets/all_search.dart';
 import 'package:temp_house/presentation/search_screen/view/widgets/cheapest_price.dart';
@@ -49,11 +51,16 @@ class _SearchScreenState extends State<SearchScreen>
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        elevation: 0,
-        toolbarHeight: 10,
+        elevation: AppSize.s0,
+        toolbarHeight: AppSize.s30,
         bottom: TabBar(
           isScrollable: true,
+          tabAlignment: TabAlignment.start,
           indicatorColor: ColorManager.grey,
+          labelPadding: const EdgeInsets.symmetric(
+            vertical: AppPadding.p15,
+            horizontal: AppPadding.p15,
+          ),
           indicator: BoxDecoration(
             borderRadius: BorderRadius.circular(AppSize.s8),
             border: Border.all(
@@ -69,6 +76,8 @@ class _SearchScreenState extends State<SearchScreen>
               ),
             ],
           ),
+          indicatorPadding:
+              const EdgeInsets.symmetric(vertical: AppPadding.p15),
           controller: _tabController,
           tabs: [
             Tab(
