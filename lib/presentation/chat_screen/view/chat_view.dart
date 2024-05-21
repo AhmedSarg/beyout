@@ -70,7 +70,7 @@ class _ChatScreenState extends State<ChatScreen> {
             Expanded(
               child: Text(
                 widget.receiveEmail,
-                style: AppTextStyles.chatScreenUsreNameTextStyle(context),
+                style: AppTextStyles.chatScreenUserNameTextStyle(context),
               ),
             ),
           ],
@@ -216,7 +216,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                 Text(
                   _formatTimestamp(timestamp),
-                  style: AppTextStyles.chatTimpTimeTextStyle(context),
+                  style: AppTextStyles.chatTimeTextStyle(context),
                 ),
                 if (isCurrentUser && seen)
                   const Icon(

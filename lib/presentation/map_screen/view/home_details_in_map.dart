@@ -63,12 +63,14 @@ class _GoogleMapScreenState extends State<GoogleMapHomeDetailsScreen> {
                     if (tappedMarker != null)
                       Text(
                         '${tappedMarker!.infoWindow.snippet}',
-                        style: AppTextStyles.googleMapHomeTitleTextStyle(),
+                        style:
+                            AppTextStyles.googleMapHomeTitleTextStyle(context),
                       ),
                     Text(
                       AppStrings.homeDetails.tr(),
-                      style: AppTextStyles
-                          .googleMapHomeTitleDescriptionTextStyle(),
+                      style:
+                          AppTextStyles.googleMapHomeTitleDescriptionTextStyle(
+                              context),
                     ),
                     Container(
                       width: double.infinity,
@@ -82,7 +84,8 @@ class _GoogleMapScreenState extends State<GoogleMapHomeDetailsScreen> {
                               child: Text(
                                 AppStrings.title.tr(),
                                 style: AppTextStyles
-                                    .googleMapHomeDetailsSubTitleTextStyle(),
+                                    .googleMapHomeDetailsSubTitleTextStyle(
+                                        context),
                               ),
                             ),
                             Padding(
@@ -91,7 +94,8 @@ class _GoogleMapScreenState extends State<GoogleMapHomeDetailsScreen> {
                               child: Text(
                                 widget.title,
                                 style: AppTextStyles
-                                    .googleMapHomeDetailsSubTitleContantTextStyle(),
+                                    .googleMapHomeDetailsSubTitleContactTextStyle(
+                                        context),
                               ),
                             ),
                             const Divider(
@@ -103,7 +107,8 @@ class _GoogleMapScreenState extends State<GoogleMapHomeDetailsScreen> {
                               child: Text(
                                 AppStrings.location.tr(),
                                 style: AppTextStyles
-                                    .googleMapHomeDetailsSubTitleTextStyle(),
+                                    .googleMapHomeDetailsSubTitleTextStyle(
+                                        context),
                               ),
                             ),
                             Padding(
@@ -112,7 +117,8 @@ class _GoogleMapScreenState extends State<GoogleMapHomeDetailsScreen> {
                               child: Text(
                                 widget.address,
                                 style: AppTextStyles
-                                    .googleMapHomeDetailsSubTitleContantTextStyle(),
+                                    .googleMapHomeDetailsSubTitleContactTextStyle(
+                                        context),
                               ),
                             ),
                           ],
@@ -131,7 +137,8 @@ class _GoogleMapScreenState extends State<GoogleMapHomeDetailsScreen> {
                               child: Text(
                                 AppStrings.description.tr(),
                                 style: AppTextStyles
-                                    .googleMapHomeDetailsSubTitleTextStyle(),
+                                    .googleMapHomeDetailsSubTitleTextStyle(
+                                        context),
                               ),
                             ),
                             Padding(
@@ -140,7 +147,8 @@ class _GoogleMapScreenState extends State<GoogleMapHomeDetailsScreen> {
                               child: Text(
                                 widget.description,
                                 style: AppTextStyles
-                                    .googleMapHomeDetailsSubTitleContantTextStyle(),
+                                    .googleMapHomeDetailsSubTitleContactTextStyle(
+                                        context),
                               ),
                             ),
                           ],

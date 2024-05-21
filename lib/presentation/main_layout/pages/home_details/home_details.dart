@@ -32,6 +32,7 @@ class HomeDetailsScreen extends StatefulWidget {
 class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
   int _currentIndex = 0;
   ChatServices chatServices = ChatServices();
+
   @override
   Widget build(BuildContext context) {
     final int displayedRating =
@@ -177,13 +178,35 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                           TextSpan(
                             text: '${AppStrings.price.tr()} : ',
                             style:
-                                AppTextStyles.homeDetailsDescriptionTextStyle(),
+                                AppTextStyles.homeDetailsDescriptionTextStyle(
+                                    context),
                           ),
                           TextSpan(
                             text:
                                 '${widget.home.price} ${AppStrings.priceHome.tr()}${widget.home.rentPeriod}',
                             style: AppTextStyles
-                                .homeDetailsDescriptionContactTextStyle(),
+                                .homeDetailsDescriptionContactTextStyle(
+                                    context),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: AppSize.s10),
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: '${AppStrings.area.tr()} : ',
+                            style:
+                                AppTextStyles.homeDetailsDescriptionTextStyle(
+                                    context),
+                          ),
+                          TextSpan(
+                            text:
+                                '${widget.home.area} ${AppStrings.meter.tr()}',
+                            style: AppTextStyles
+                                .homeDetailsDescriptionContactTextStyle(
+                                    context),
                           ),
                         ],
                       ),
@@ -195,12 +218,14 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                           TextSpan(
                             text: '${AppStrings.paymentScreenTitle.tr()} : ',
                             style:
-                                AppTextStyles.homeDetailsDescriptionTextStyle(),
+                                AppTextStyles.homeDetailsDescriptionTextStyle(
+                                    context),
                           ),
                           TextSpan(
                             text: AppStrings.paymentCash.tr(),
                             style: AppTextStyles
-                                .homeDetailsDescriptionContactTextStyle(),
+                                .homeDetailsDescriptionContactTextStyle(
+                                    context),
                           ),
                         ],
                       ),
@@ -241,8 +266,8 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                       children: [
                         Text(
                           '${AppStrings.homeDetailsRating.tr()} : ',
-                          style:
-                              AppTextStyles.homeDetailsDescriptionTextStyle(),
+                          style: AppTextStyles.homeDetailsDescriptionTextStyle(
+                              context),
                         ),
                         Row(
                           children: List.generate(5, (index) {
@@ -264,12 +289,14 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                           TextSpan(
                             text: '${AppStrings.description.tr()} : ',
                             style:
-                                AppTextStyles.homeDetailsDescriptionTextStyle(),
+                                AppTextStyles.homeDetailsDescriptionTextStyle(
+                                    context),
                           ),
                           TextSpan(
                             text: widget.home.description,
                             style: AppTextStyles
-                                .homeDetailsDescriptionContactTextStyle(),
+                                .homeDetailsDescriptionContactTextStyle(
+                                    context),
                           ),
                         ],
                       ),
@@ -281,12 +308,14 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                           TextSpan(
                             text: '${AppStrings.location.tr()} : ',
                             style:
-                                AppTextStyles.homeDetailsDescriptionTextStyle(),
+                                AppTextStyles.homeDetailsDescriptionTextStyle(
+                                    context),
                           ),
                           TextSpan(
                             text: widget.home.location,
                             style: AppTextStyles
-                                .homeDetailsDescriptionContactTextStyle(),
+                                .homeDetailsDescriptionContactTextStyle(
+                                    context),
                           ),
                         ],
                       ),
@@ -336,7 +365,7 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                                   ),
                                   Text(
                                     AppStrings.seeLocation.tr(),
-                                    style: AppTextStyles.homegenertalTextStyle(
+                                    style: AppTextStyles.homeGeneralTextStyle(
                                         context,
                                         ColorManager.black,
                                         FontSize.f18),
@@ -391,12 +420,12 @@ class HomeDetailsContent extends StatelessWidget {
         ),
         Text(
           number,
-          style: AppTextStyles.homeDetailsDescriptionContactTextStyle(),
+          style: AppTextStyles.homeDetailsDescriptionContactTextStyle(context),
         ),
         Text(
           overflow: TextOverflow.ellipsis,
           object,
-          style: AppTextStyles.homeDetailsDescriptionTextStyle(),
+          style: AppTextStyles.homeDetailsDescriptionTextStyle(context),
         ),
       ],
     );

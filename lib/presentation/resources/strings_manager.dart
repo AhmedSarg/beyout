@@ -258,6 +258,13 @@ class AppStrings {
   static const paymentsaveCardBtn = "paymentsaveCardBtn";
   static const paymentAddCardBtn = "paymentAddCardBtn";
 
+  //Need Help Screen
+  static const needHelpScreenNavBar = "needHelpScreenNavBar";
+  static const needHelpScreenTitle = "needHelpScreenTitle";
+  static const needHelpScreenSubtitle = "needHelpScreenSubtitle";
+  static const needHelpScreenHint = "needHelpScreenHint";
+  static const needHelpScreenButton = "needHelpScreenButton";
+
   ///error handler
   static const String badRequestError = "badRequestError";
   static const String noContent = "noContent";

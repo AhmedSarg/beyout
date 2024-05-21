@@ -18,7 +18,7 @@ class FavouriteScreen extends StatelessWidget {
         context,
         Text(
           AppStrings.favouraiteScreenTitle.tr(),
-          style: AppTextStyles.homegenertalTextStyle(
+          style: AppTextStyles.homeGeneralTextStyle(
               context, ColorManager.white, FontSize.f24),
         ),
         ColorManager.primary,

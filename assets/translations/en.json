@@ -227,6 +227,12 @@
   "optionsMenuMarkAllRead": "Mark All as Read",
   "optionsMenuRemoveAll": "Remove All",
 
+  "needHelpScreenNavBar": "Need Help?",
+  "needHelpScreenTitle": "How can we assist you?",
+  "needHelpScreenSubtitle": "Please describe the issue or assistance you need",
+  "needHelpScreenHint": "Type your message here...",
+  "needHelpScreenButton": "Submit",
+
   "badRequestError": "Bad Request Error",
   "noContent": "No Content",
   "forbiddenError": "Forbidden Error",

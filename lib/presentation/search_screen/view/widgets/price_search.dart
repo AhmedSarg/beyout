@@ -39,7 +39,7 @@ class PriceSearch extends StatelessWidget {
               child: EmptyListItem(
             content: AppStrings.emptyData.tr(),
             image: SVGAssets.delete,
-            style: AppTextStyles.homegenertalTextStyle(
+            style: AppTextStyles.homeGeneralTextStyle(
                 context, ColorManager.offwhite, FontSize.f22),
           ));
         }

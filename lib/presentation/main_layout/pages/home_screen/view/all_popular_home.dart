@@ -25,7 +25,7 @@ class AllPopularHome extends StatelessWidget {
           context,
           Text(
             AppStrings.popularStartedTextRow.tr(),
-            style: AppTextStyles.homegenertalTextStyle(
+            style: AppTextStyles.homeGeneralTextStyle(
                 context, ColorManager.white, FontSize.f24),
           ),
           ColorManager.primary),
@@ -33,8 +33,8 @@ class AllPopularHome extends StatelessWidget {
         create: (context) => MainLayoutViewModel()..start(),
         child: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance.collection('Homes').snapshots(),
-          builder: (BuildContext context,
-              AsyncSnapshot<QuerySnapshot> snapshot) {
+          builder:
+              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const MainCicleProcessIndicator();
             }
@@ -47,7 +47,7 @@ class AllPopularHome extends StatelessWidget {
 
             final items = snapshot.data!.docs.map((DocumentSnapshot document) {
               final Map<String, dynamic> data =
-              document.data()! as Map<String, dynamic>;
+                  document.data()! as Map<String, dynamic>;
               List<dynamic> images = data['images'] ?? [];
               String firstImage = images.isNotEmpty ? images[0] : '';
 
@@ -56,10 +56,9 @@ class AllPopularHome extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          HomeDetailsScreen(
-                            home: HomeModel.fromMap(data),
-                          ),
+                      builder: (context) => HomeDetailsScreen(
+                        home: HomeModel.fromMap(data),
+                      ),
                     ),
                   );
                 },

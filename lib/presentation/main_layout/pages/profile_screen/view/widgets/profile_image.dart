@@ -22,11 +22,11 @@ class ProfileImage extends StatelessWidget {
         ),
         title: Text(
           DataIntent.getUser().username,
-          style: AppTextStyles.profileinfoNameTextStyle(context),
+          style: AppTextStyles.profileInfoNameTextStyle(context),
         ),
         subtitle: Text(
           DataIntent.getUser().email,
-          style: AppTextStyles.profileinfoEmailTextStyle(context),
+          style: AppTextStyles.profileInfoEmailTextStyle(context),
         ),
         leading: MainImage(
           imageUrl: DataIntent.getUser().imageUrl,

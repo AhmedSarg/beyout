@@ -283,7 +283,7 @@ class AppTextStyles {
         fontSize: FontSize.f16,
       );
 
-  static TextStyle homegenertalTextStyle(
+  static TextStyle homeGeneralTextStyle(
           BuildContext context, Color color, double fontSize) =>
       getSemiBoldStyle(
         fontFamily: AppLanguages.getSecondaryFont(context),
@@ -299,17 +299,24 @@ class AppTextStyles {
       );
 
   ///home screen
-  static TextStyle homeDetailsNameTextStyle() => getExtraBoldStyle(
+  static TextStyle homeDetailsNameTextStyle(BuildContext context) =>
+      getExtraBoldStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
         color: ColorManager.white,
         fontSize: FontSize.f30,
       );
 
-  static TextStyle homeDetailsDescriptionTextStyle() => getBoldStyle(
+  static TextStyle homeDetailsDescriptionTextStyle(BuildContext context) =>
+      getBoldStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
         color: ColorManager.white,
         fontSize: FontSize.f22,
       );
 
-  static TextStyle homeDetailsDescriptionContactTextStyle() => getRegularStyle(
+  static TextStyle homeDetailsDescriptionContactTextStyle(
+          BuildContext context) =>
+      getRegularStyle(
+        fontFamily: AppLanguages.getSecondaryFont(context),
         color: ColorManager.white.withOpacity(.95),
         fontSize: FontSize.f18,
       );
@@ -380,7 +387,7 @@ class AppTextStyles {
         fontSize: FontSize.f15,
       );
 
-  static TextStyle unSelectedsearchTabTextStyle(BuildContext context) =>
+  static TextStyle unselectedSearchTabTextStyle(BuildContext context) =>
       getMediumStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
         color: ColorManager.white,
@@ -394,7 +401,7 @@ class AppTextStyles {
         fontSize: FontSize.f18,
       );
 
-  static TextStyle modalBottomSheetBottonTextStyle(
+  static TextStyle modalBottomSheetButtonTextStyle(
           BuildContext context, Color color) =>
       getMediumStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
@@ -443,28 +450,40 @@ class AppTextStyles {
       );
 
 //// google map
-  static TextStyle googleMapHomeTitleTextStyle() => getBoldStyle(
+  static TextStyle googleMapHomeTitleTextStyle(BuildContext context) =>
+      getBoldStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
         color: ColorManager.black,
         fontSize: FontSize.f24,
       );
 
-  static TextStyle googleMapHomeTitleDescriptionTextStyle() => getRegularStyle(
+  static TextStyle googleMapHomeTitleDescriptionTextStyle(
+          BuildContext context) =>
+      getRegularStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
         color: ColorManager.black,
         fontSize: FontSize.f22,
       );
 
-  static TextStyle googleMapHomeDetailsTitleTextStyle() => getSemiBoldStyle(
+  static TextStyle googleMapHomeDetailsTitleTextStyle(BuildContext context) =>
+      getSemiBoldStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
         color: ColorManager.black,
         fontSize: FontSize.f22,
       );
 
-  static TextStyle googleMapHomeDetailsSubTitleTextStyle() => getSemiBoldStyle(
+  static TextStyle googleMapHomeDetailsSubTitleTextStyle(
+          BuildContext context) =>
+      getSemiBoldStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
         color: ColorManager.grey.withOpacity(.5),
         fontSize: FontSize.f16,
       );
 
-  static TextStyle googleMapHomeDetailsSubTitleContantTextStyle() =>
+  static TextStyle googleMapHomeDetailsSubTitleContactTextStyle(
+          BuildContext context) =>
       getRegularStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
         color: ColorManager.black,
         fontSize: FontSize.f22,
       );
@@ -593,8 +612,7 @@ class AppTextStyles {
         fontSize: FontSize.f20,
       );
 
-  static TextStyle chatTimpTimeTextStyle(BuildContext context) =>
-      getExtraBoldStyle(
+  static TextStyle chatTimeTextStyle(BuildContext context) => getExtraBoldStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
         color: ColorManager.grey.withOpacity(.6),
         fontSize: FontSize.f12,
@@ -635,7 +653,7 @@ class AppTextStyles {
         fontSize: FontSize.f16,
       );
 
-  static TextStyle chatScreenUsreNameTextStyle(BuildContext context) =>
+  static TextStyle chatScreenUserNameTextStyle(BuildContext context) =>
       getSemiBoldStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
         color: ColorManager.white,
@@ -651,46 +669,53 @@ class AppTextStyles {
 
   ///profile screen
 
-  static TextStyle profileinfoNameTextStyle(BuildContext context) =>
+  static TextStyle profileInfoNameTextStyle(BuildContext context) =>
       getMediumStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
         color: ColorManager.offwhite,
         fontSize: FontSize.f20,
       );
 
-  static TextStyle profileinfoEmailTextStyle(BuildContext context) =>
+  static TextStyle profileInfoEmailTextStyle(BuildContext context) =>
       getMediumStyle(
         fontFamily: AppLanguages.getPrimaryFont(context),
         color: ColorManager.offwhite.withOpacity(.6),
         fontSize: FontSize.f12,
       );
 
-  static TextStyle profileSettingTextStyle() => getBoldStyle(
+  static TextStyle profileSettingTextStyle(BuildContext context) =>
+      getBoldStyle(
         color: ColorManager.primary,
         fontSize: FontSize.f24,
       );
 
-  static TextStyle profileSettingInfoTextStyle() => getSemiBoldStyle(
+  static TextStyle profileSettingInfoTextStyle(BuildContext context) =>
+      getSemiBoldStyle(
         color: ColorManager.black,
         fontSize: FontSize.f20,
       );
 
-  static TextStyle profileSettingInfoDetailsTextStyle() => getMediumStyle(
+  static TextStyle profileSettingInfoDetailsTextStyle(BuildContext context) =>
+      getMediumStyle(
         color: ColorManager.grey,
         fontSize: FontSize.f18,
       );
 
-  static TextStyle profileSettingAppBarTextStyle() => getSemiBoldStyle(
+  static TextStyle profileSettingAppBarTextStyle(BuildContext context) =>
+      getSemiBoldStyle(
         color: ColorManager.white,
         fontSize: FontSize.f22,
       );
 
-  static TextStyle profileSettingHeadQAppBarTextStyle() => getSemiBoldStyle(
+  static TextStyle profileSettingHeadQAppBarTextStyle(BuildContext context) =>
+      getSemiBoldStyle(
         color: ColorManager.black,
         fontSize: FontSize.f24,
       );
 
-  static TextStyle profileSettingSubHeadQAppBarTextStyle() => getSemiBoldStyle(
+  static TextStyle profileSettingSubHeadQAppBarTextStyle(
+          BuildContext context) =>
+      getSemiBoldStyle(
         color: ColorManager.grey,
         fontSize: FontSize.f18,
       );
@@ -708,7 +733,9 @@ class AppTextStyles {
         fontSize: FontSize.f22,
       );
 
-  static TextStyle profileSettingBtnTextStyle() => getBoldStyle(
+  static TextStyle profileSettingBtnTextStyle(BuildContext context) =>
+      getBoldStyle(
+        fontFamily: AppLanguages.getPrimaryFont(context),
         color: ColorManager.white,
         fontSize: FontSize.f22,
       );
@@ -719,52 +746,68 @@ class AppTextStyles {
         fontSize: FontSize.f24,
       );
 
-  static TextStyle aboutAppNameTextStyle() => getBoldStyle(
+  static TextStyle aboutAppNameTextStyle(BuildContext context) => getBoldStyle(
+        fontFamily: AppLanguages.getSecondaryFont(context),
         color: ColorManager.black,
         fontSize: FontSize.f30,
       );
 
-  static TextStyle aboutAppVersionTextStyle() => getSemiBoldStyle(
+  static TextStyle aboutAppVersionTextStyle(BuildContext context) =>
+      getSemiBoldStyle(
+        fontFamily: AppLanguages.getSecondaryFont(context),
         color: ColorManager.grey.withOpacity(.8),
         fontSize: FontSize.f15,
       );
 
-  static TextStyle aboutAppDescriptionTextStyle() => getSemiBoldStyle(
+  static TextStyle aboutAppDescriptionTextStyle(BuildContext context) =>
+      getSemiBoldStyle(
+        fontFamily: AppLanguages.getSecondaryFont(context),
         color: ColorManager.black,
         fontSize: FontSize.f24,
       );
 
-  static TextStyle aboutAppDescriptionDetailsTextStyle() => getSemiBoldStyle(
+  static TextStyle aboutAppDescriptionDetailsTextStyle(BuildContext context) =>
+      getRegularStyle(
+        fontFamily: AppLanguages.getSecondaryFont(context),
         color: ColorManager.black.withOpacity(.7),
         fontSize: FontSize.f18,
       );
 
-  static TextStyle aboutAppDevTextStyle() => getSemiBoldStyle(
+  static TextStyle aboutAppDevTextStyle(BuildContext context) =>
+      getSemiBoldStyle(
+        fontFamily: AppLanguages.getSecondaryFont(context),
         color: ColorManager.black,
         fontSize: FontSize.f24,
       );
 
-  static TextStyle aboutAppDevNameTextStyle() => getSemiBoldStyle(
+  static TextStyle aboutAppDevNameTextStyle(BuildContext context) =>
+      getRegularStyle(
         color: ColorManager.black.withOpacity(.7),
         fontSize: FontSize.f18,
       );
 
-  static TextStyle aboutAppContactTextStyle() => getSemiBoldStyle(
+  static TextStyle aboutAppContactTextStyle(BuildContext context) =>
+      getSemiBoldStyle(
+        fontFamily: AppLanguages.getSecondaryFont(context),
         color: ColorManager.black,
         fontSize: FontSize.f24,
       );
 
-  static TextStyle aboutAppContactDetailsTextStyle() => getSemiBoldStyle(
+  static TextStyle aboutAppContactDetailsTextStyle(BuildContext context) =>
+      getSemiBoldStyle(
         color: ColorManager.black.withOpacity(.7),
         fontSize: FontSize.f18,
       );
 
-  static TextStyle paymentTextStyle() => getSemiBoldStyle(
+  static TextStyle paymentTextStyle(BuildContext context) => getSemiBoldStyle(
+        fontFamily: AppLanguages.getSecondaryFont(context),
         color: ColorManager.white,
         fontSize: FontSize.f20,
       );
 
-  static TextStyle paymentAppBarTextStyle() => getBoldStyle(
+  static TextStyle paymentAppBarTextStyle(BuildContext context) =>
+      getSemiBoldStyle(
+        fontFamily: AppLanguages.getSecondaryFont(context),
         color: ColorManager.white,
         fontSize: FontSize.f24,
       );

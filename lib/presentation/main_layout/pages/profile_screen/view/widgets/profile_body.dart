@@ -92,7 +92,7 @@ class _ProfileBodyState extends State<ProfileBody> {
               padding: const EdgeInsets.symmetric(horizontal: AppPadding.p32),
               child: Text(
                 AppStrings.profileSetting.tr(),
-                style: AppTextStyles.profileSettingTextStyle(),
+                style: AppTextStyles.profileSettingTextStyle(context),
               ),
             ),
             ModelSheetItem(
@@ -121,7 +121,8 @@ class _ProfileBodyState extends State<ProfileBody> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(AppStrings.paymentScreenTitle.tr(),
-                        style: AppTextStyles.profileSettingInfoTextStyle()),
+                        style:
+                            AppTextStyles.profileSettingInfoTextStyle(context)),
                     const Icon(Icons.arrow_forward_ios)
                   ],
                 ),
@@ -131,7 +132,7 @@ class _ProfileBodyState extends State<ProfileBody> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: AppPadding.p32),
               child: Text(AppStrings.profilePropertyFinder.tr(),
-                  style: AppTextStyles.profileSettingTextStyle()),
+                  style: AppTextStyles.profileSettingTextStyle(context)),
             ),
             AppSettingItem(
               text: AppStrings.profileAbout.tr(),

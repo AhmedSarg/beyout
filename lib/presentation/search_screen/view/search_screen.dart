@@ -6,8 +6,6 @@ import 'package:temp_house/presentation/base/cubit_builder.dart';
 import 'package:temp_house/presentation/base/cubit_listener.dart';
 import 'package:temp_house/presentation/main_layout/viewmodel/main_layout_viewmodel.dart';
 import 'package:temp_house/presentation/resources/color_manager.dart';
-import 'package:temp_house/presentation/resources/font_manager.dart';
-import 'package:temp_house/presentation/resources/styles_manager.dart';
 import 'package:temp_house/presentation/resources/values_manager.dart';
 import 'package:temp_house/presentation/search_screen/view/widgets/all_search.dart';
 import 'package:temp_house/presentation/search_screen/view/widgets/cheapest_price.dart';
@@ -84,21 +82,21 @@ class _SearchScreenState extends State<SearchScreen>
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: AppPadding.p12),
                 child: Text(AppStrings.tapBarSearchAll.tr(),
-                    style: AppTextStyles.unSelectedsearchTabTextStyle(context)),
+                    style: AppTextStyles.unselectedSearchTabTextStyle(context)),
               ),
             ),
             Tab(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: AppPadding.p12),
                 child: Text(AppStrings.tapBarSearchLatest.tr(),
-                    style: AppTextStyles.unSelectedsearchTabTextStyle(context)),
+                    style: AppTextStyles.unselectedSearchTabTextStyle(context)),
               ),
             ),
             Tab(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: AppPadding.p12),
                 child: Text(AppStrings.tapBarSearchPopular.tr(),
-                    style: AppTextStyles.unSelectedsearchTabTextStyle(context)),
+                    style: AppTextStyles.unselectedSearchTabTextStyle(context)),
               ),
             ),
             GestureDetector(
@@ -113,7 +111,7 @@ class _SearchScreenState extends State<SearchScreen>
                       const EdgeInsets.symmetric(horizontal: AppPadding.p12),
                   child: Text(AppStrings.tapBarSearchPrice.tr(),
                       style:
-                          AppTextStyles.unSelectedsearchTabTextStyle(context)),
+                          AppTextStyles.unselectedSearchTabTextStyle(context)),
                 ),
               ),
             ),
@@ -121,7 +119,7 @@ class _SearchScreenState extends State<SearchScreen>
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: AppPadding.p12),
                 child: Text(AppStrings.tapBarSearchCheapest.tr(),
-                    style: AppTextStyles.unSelectedsearchTabTextStyle(context)),
+                    style: AppTextStyles.unselectedSearchTabTextStyle(context)),
               ),
             ),
           ],

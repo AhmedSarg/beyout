@@ -25,7 +25,7 @@ class AllNearByHome extends StatelessWidget {
           context,
           Text(
             AppStrings.nearByHome.tr(),
-            style: AppTextStyles.homegenertalTextStyle(
+            style: AppTextStyles.homeGeneralTextStyle(
                 context, ColorManager.white, FontSize.f24),
           ),
           ColorManager.primary),

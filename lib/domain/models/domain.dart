@@ -34,6 +34,7 @@ class HomeModel {
   final int numberOfBathrooms;
   final DateTime date;
   final String description;
+  final int area;
   final LatLng coordinates;
   final double rate;
   final int numberOfRates;
@@ -50,6 +51,7 @@ class HomeModel {
     required this.numberOfBathrooms,
     required this.date,
     required this.description,
+    required this.area,
     required this.coordinates,
     required this.homeId,
     required this.ownerId,
@@ -71,6 +73,7 @@ class HomeModel {
       numberOfBathrooms: map['number_of_bathrooms'],
       date: map['timestamp'].toDate(),
       description: map['description'],
+      area: map['area'].toInt(),
       coordinates: LatLng(
         map['coordinates'].latitude,
         map['coordinates'].longitude,

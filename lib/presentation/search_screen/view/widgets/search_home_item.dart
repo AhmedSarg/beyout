@@ -62,7 +62,7 @@ class SearchHomeItem extends StatelessWidget {
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               home.title,
-                              style: AppTextStyles.homegenertalTextStyle(
+                              style: AppTextStyles.homeGeneralTextStyle(
                                   context, ColorManager.offwhite, FontSize.f18),
                             ),
                           ),
@@ -95,7 +95,7 @@ class SearchHomeItem extends StatelessWidget {
                             child: Text(
                               home.location,
                               maxLines: 1,
-                              style: AppTextStyles.homegenertalTextStyle(
+                              style: AppTextStyles.homeGeneralTextStyle(
                                   context, ColorManager.offwhite, FontSize.f14),
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -108,7 +108,7 @@ class SearchHomeItem extends StatelessWidget {
                           const SizedBox(width: AppSize.s10),
                           Text(
                             '${AppStrings.coin.tr()} ${home.price}${home.rentPeriod}',
-                            style: AppTextStyles.homegenertalTextStyle(
+                            style: AppTextStyles.homeGeneralTextStyle(
                                 context, ColorManager.offwhite, FontSize.f14),
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -125,13 +125,13 @@ class SearchHomeItem extends StatelessWidget {
                           ),
                           Text(
                             displayedRating.toStringAsFixed(1),
-                            style: AppTextStyles.homegenertalTextStyle(
+                            style: AppTextStyles.homeGeneralTextStyle(
                                 context, ColorManager.offwhite, FontSize.f12),
                           ),
                           const SizedBox(width: AppSize.s5),
                           Text(
                             '(${home.numberOfRates})',
-                            style: AppTextStyles.homegenertalTextStyle(
+                            style: AppTextStyles.homeGeneralTextStyle(
                                 context,
                                 ColorManager.tertiary.withOpacity(.7),
                                 FontSize.f12),
