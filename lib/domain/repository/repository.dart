@@ -93,4 +93,11 @@ abstract class Repository {
     required bool pictureChanged,
     File? picture,
   });
+
+  Future<Either<Failure, void>> addPaymentCard({
+    required String userId,
+    required String cardName,
+    required String cardNumber,
+    required String cardExpirationDate,
+  });
 }

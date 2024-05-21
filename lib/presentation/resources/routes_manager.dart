@@ -18,7 +18,7 @@ import '../main_layout/pages/profile_screen/view/payment_screen.dart';
 import '../map_screen/view/map_screen.dart';
 import '../map_screen/view/map_screen_share.dart';
 import '../onboarding_screen/view/onboarding_view.dart';
-import '../payment_details/view/payment_details.dart';
+import '../payment_details/view/payment_details_view.dart';
 import '../register_screen/view/register_view.dart';
 import '../selection_screen/selection_view.dart';
 import '../share_post_screen/view/share_post_screen.dart';
@@ -108,6 +108,7 @@ class RouteGenerator {
       case Routes.paymentScreenRoute:
         return MaterialPageRoute(builder: (_) => const PaymentScreen());
       case Routes.paymentScreenDetailsRoute:
+        initAddPaymentCardUseCase();
         return MaterialPageRoute(builder: (_) => const PaymentScreenDetails());
       case Routes.personalInfoRoute:
         initChangeAccountInfoUseCase();

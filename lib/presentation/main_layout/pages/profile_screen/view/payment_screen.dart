@@ -56,7 +56,7 @@ class PaymentScreen extends StatelessWidget {
           ),
           MainButton(
             backgroundColor: ColorManager.offwhite,
-            text: AppStrings.paymentAddCardBtn.tr(),
+            text: AppStrings.paymentAddCardButton.tr(),
             textStyle: AppTextStyles.paymentBtnTextStyle(context),
             onTap: () {
               Navigator.pushNamed(context, Routes.paymentScreenDetailsRoute);

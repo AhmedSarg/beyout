@@ -50,7 +50,7 @@ class LanguageSelectionModal {
                     await _saveLanguageSelection(
                         AppStrings.profileLanguageEnglish.tr());
 
-                    AppLanguages.toggleLocal(context);
+                    AppLanguages.setLanguageEnglish(context);
 
                     onSelect(AppStrings.profileLanguageEnglish.tr());
                     Navigator.pop(context);
@@ -70,8 +70,9 @@ class LanguageSelectionModal {
                 GestureDetector(
                   onTap: () async {
                     await _saveLanguageSelection(
-                        AppStrings.profileLanguageArabic.tr());
-                    AppLanguages.toggleLocal(context);
+                      AppStrings.profileLanguageArabic.tr(),
+                    );
+                    AppLanguages.setLanguageArabic(context);
 
                     onSelect(AppStrings.profileLanguageArabic.tr());
                     Navigator.pop(context);

@@ -189,8 +189,8 @@
   "paymentCardNumber" : "Card number *",
   "paymentExpiration" : "Expiration date * ",
 
-  "paymentsaveCardBtn" : "Save Card",
-  "paymentAddCardBtn" : "Add Card",
+  "paymentSaveCardButton" : "Save Card",
+  "paymentAddCardButton" : "Add Card",
 
 
   "rateUsScreenName" : "Rate Us",
@@ -263,10 +263,13 @@
   "validationsFieldLengthMoreThan6": "length must be more than 6 characters",
   "validationsValidEmail": "enter a valid email",
   "validationsNumbersOnly": "enter numbers only",
+  "validationsNumbersMustEqual16Digit": "field must contain more than 16 digits",
   "validationsNumbersMustEqual14Digit": "field must contain more than 14 digits",
   "validationsNumbersMustEqual11Digit": "field must contain more than 11 digits",
+  "validationsNumbersMustEqual4Digit": "field must contain more than 4 digits",
   "validationsPasswordSpecifications": "- must be more than or equal to 8 characters\n- must contain letters and numbers",
   "validationsEnterTheSamePassword": "please enter the same password",
+  "validationsInvalidCardExpirationDate": "Card Expiration Date is Invalid",
   "validationsUsername": "use letters and numbers only",
   "validationsTitle": "Enter an appropriate title "
 }

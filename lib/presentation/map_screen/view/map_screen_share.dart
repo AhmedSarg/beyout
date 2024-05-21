@@ -22,7 +22,7 @@ class GoogleMapScreenShare extends StatefulWidget {
   const GoogleMapScreenShare({Key? key, this.viewModel}) : super(key: key);
 
   @override
-  _GoogleMapScreenState createState() => _GoogleMapScreenState();
+  State<GoogleMapScreenShare> createState() => _GoogleMapScreenState();
 }
 
 class _GoogleMapScreenState extends State<GoogleMapScreenShare> {

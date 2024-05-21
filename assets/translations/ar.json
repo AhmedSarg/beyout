@@ -186,8 +186,8 @@
   "paymentCardholder": "اسم حامل البطاقة *",
   "paymentCardNumber": "رقم البطاقة*",
   "paymentExpiration": "تاريخ انتهاء الصلاحية* ",
-  "paymentsaveCardBtn": "حفظ البطاقة",
-  "paymentAddCardBtn": "أضف البطاقة",
+  "paymentSaveCardButton": "حفظ البطاقة",
+  "paymentAddCardButton": "أضف البطاقة",
 
   "needHelpScreenNavBar": "هل تحتاج الي مساعدة؟",
   "needHelpScreenTitle": "كيف يمكننا ان نساعدك؟",
@@ -223,10 +223,13 @@
   "validationsFieldLengthMoreThan6": "يجب ان يحتوي علي 6 حروف او اكتر",
   "validationsValidEmail": "أدخل بريد ألكتروني صحيح",
   "validationsNumbersOnly": "استعمل أرقام فقط",
+  "validationsNumbersMustEqual16Digit": "يرجي كتابة 16 رقما",
   "validationsNumbersMustEqual14Digit": "يرجي كتابة 14 رقما",
   "validationsNumbersMustEqual11Digit": "يرجي كتابة 11 رقما",
+  "validationsNumbersMustEqual4Digit": "يرجي كتابة 4 رقما",
   "validationsPasswordSpecifications": "- يجب أن يتكون من 8 احرف او اكتر\n- يجب أن يحتوي علي حروف و أرقام",
   "validationsEnterTheSamePassword": "يرجي كتابة نفس كلمة المرور",
+  "validationsInvalidCardExpirationDate": "تاريخ البطاقة غير صالح",
   "validationsUsername": "استعمل حروف و أرقام فقط",
   "validationsTitle": "ادخل عنوان مناسب"
 }

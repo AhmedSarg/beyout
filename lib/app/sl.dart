@@ -21,6 +21,7 @@ import '../data/network/firestore_factory.dart';
 import '../data/network/network_info.dart';
 import '../data/repository/repository_impl.dart';
 import '../domain/repository/repository.dart';
+import '../domain/usecase/add_payment_card_usecase.dart';
 import '../domain/usecase/add_to_favorites_usecase.dart';
 import '../domain/usecase/change_account_info_usecase.dart';
 import '../domain/usecase/get_all_favorites_usecase.dart';
@@ -133,5 +134,12 @@ void initChangeAccountInfoUseCase() {
   if (GetIt.instance.isRegistered<ChangeAccountInfoUseCase>() == false) {
     sl.registerFactory<ChangeAccountInfoUseCase>(
         () => ChangeAccountInfoUseCase(sl()));
+  }
+}
+
+void initAddPaymentCardUseCase() {
+  if (GetIt.instance.isRegistered<AddPaymentCardUseCase>() == false) {
+    sl.registerFactory<AddPaymentCardUseCase>(
+        () => AddPaymentCardUseCase(sl()));
   }
 }

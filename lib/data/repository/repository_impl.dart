@@ -127,8 +127,18 @@ class RepositoryImpl implements Repository {
     try {
       if (await _networkInfo.isConnected) {
         await _remoteDataSource.login(email: email, password: password);
-        await fetchCurrentUser(email);
-        return const Right(null);
+        //todo remove the 8 lines below
+        return await fetchCurrentUser(email).then(
+          (value) {
+            return value.fold(
+              (l) => Left(l),
+              (r) => const Right(null),
+            );
+          },
+        );
+        //todo uncomment the 2 lines below
+        //await fetchCurrentUser(email);
+        //return const Right(null);
       } else {
         return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
       }
@@ -257,31 +267,33 @@ class RepositoryImpl implements Repository {
 
   @override
   Future<Either<Failure, User?>> fetchCurrentUser(
-      [String email = 'xsarg22@gmail.com']) async {
+      [String email = 'xsarg221@gmail.com']) async {
     try {
       if (await _networkInfo.isConnected) {
         //todo uncomment the 2 lines below
-        //var data = _cacheDataSource.getSignedUser();
-        //if (data != null) {
+        // var data = _cacheDataSource.getSignedUser();
+        // if (data != null) {
         Map<String, dynamic>? userData = await _remoteDataSource.getUserData(
           email: email,
           //todo uncomment the line below and remove the line above
           //email: data.email!,
         );
         //todo remove the line below
-        // if (userData != null) {
-        UserModel userModel = UserModel.fromMap(userData!);
-        DataIntent.pushUser(userModel);
-        if (userData['user_type'].toLowerCase() == 'owner') {
-          DataIntent.setUserRole(UserRole.owner);
-        } else {
-          DataIntent.setUserRole(UserRole.tenant);
+        if (userData != null) {
+          UserModel userModel = UserModel.fromMap(userData!);
+          DataIntent.pushUser(userModel);
+          if (userData['user_type'].toLowerCase() == 'owner') {
+            DataIntent.setUserRole(UserRole.owner);
+          } else {
+            DataIntent.setUserRole(UserRole.tenant);
+          }
+          //todo remove the line below
+          return Right(FakeUser());
         }
-        return Right(FakeUser());
         //todo remove the 3 lines below
-        // } else {
-        //   return const Right(null);
-        // }
+        else {
+          return Left(DataSource.EMAIL_LOGIN_FAILED.getFailure());
+        }
         //todo uncomment the line below
         //return Right(data);
       } else {
@@ -347,6 +359,30 @@ class RepositoryImpl implements Repository {
         } else {
           return Left(DataSource.EMAIL_ALREADY_EXISTS.getFailure());
         }
+      } else {
+        return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+      }
+    } catch (e) {
+      return Left(ErrorHandler.handle(e).failure);
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> addPaymentCard({
+    required String userId,
+    required String cardName,
+    required String cardNumber,
+    required String cardExpirationDate,
+  }) async {
+    try {
+      if (await _networkInfo.isConnected) {
+        await _remoteDataSource.addPaymentCard(
+          userId: userId,
+          cardName: cardName,
+          cardNumber: cardNumber,
+          cardExpirationDate: cardExpirationDate,
+        );
+        return const Right(null);
       } else {
         return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
       }

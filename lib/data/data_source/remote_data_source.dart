@@ -99,6 +99,13 @@ abstract class RemoteDataSource {
   Future<RegisteredBeforeError?> doesUserExists({
     required String email,
   });
+
+  Future<void> addPaymentCard({
+    required String userId,
+    required String cardName,
+    required String cardNumber,
+    required String cardExpirationDate,
+  });
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
@@ -370,5 +377,26 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     } else {
       return null;
     }
+  }
+
+  @override
+  Future<void> addPaymentCard({
+    required String userId,
+    required String cardName,
+    required String cardNumber,
+    required String cardExpirationDate,
+  }) async {
+    await _firestore
+        .collection('users')
+        .doc(userId)
+        .collection('payment_cards')
+        .doc(cardNumber)
+        .set(
+      {
+        'card_name': cardName,
+        'card_number': cardNumber,
+        'card_expiration_date': cardExpirationDate,
+      },
+    );
   }
 }

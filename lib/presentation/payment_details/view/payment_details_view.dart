@@ -9,7 +9,7 @@ import '../../base/cubit_listener.dart';
 import '../../common/widget/main_app_bar.dart';
 import '../../resources/strings_manager.dart';
 import '../../resources/text_styles.dart';
-import '../viewmodel/payment_view_model.dart';
+import '../viewmodel/payment_viewmodel.dart';
 
 class PaymentScreenDetails extends StatelessWidget {
   const PaymentScreenDetails({super.key});
@@ -25,18 +25,22 @@ class PaymentScreenDetails extends StatelessWidget {
         ),
       ),
       body: BlocProvider(
-        create: (_) => PaymentViewModel()..start(),
+        create: (context) => PaymentViewModel()..start(),
         child: BlocConsumer<PaymentViewModel, BaseStates>(
           listener: (context, state) {
+            if (state is ErrorState || state is SuccessState) {
+              Navigator.pop(context);
+            }
             baseListener(context, state);
           },
           builder: (context, state) {
             return baseBuilder(
-                context,
-                state,
-                PaymentDetailsBody(
-                  viewModel: PaymentViewModel(),
-                ));
+              context,
+              state,
+              PaymentDetailsBody(
+                viewModel: PaymentViewModel.get(context),
+              ),
+            );
           },
         ),
       ),

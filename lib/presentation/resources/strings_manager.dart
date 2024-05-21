@@ -255,8 +255,8 @@ class AppStrings {
   static const paymentCardNumber = "paymentCardNumber";
   static const paymentExpiration = "paymentExpiration";
 
-  static const paymentsaveCardBtn = "paymentsaveCardBtn";
-  static const paymentAddCardBtn = "paymentAddCardBtn";
+  static const paymentSaveCardButton = "paymentSaveCardButton";
+  static const paymentAddCardButton = "paymentAddCardButton";
 
   //Need Help Screen
   static const needHelpScreenNavBar = "needHelpScreenNavBar";
@@ -301,10 +301,16 @@ class AppStrings {
   static const validationsNumbersOnly = "validationsNumbersOnly";
   static const validationsUsername = "validationsUsername";
   static const validationsTitle = "validationsTitle";
+  static const validationsNumbersMustEqual16Digit =
+      "validationsNumbersMustEqual16Digit";
   static const validationsNumbersMustEqual14Digit =
       "validationsNumbersMustEqual14Digit";
   static const validationsNumbersMustEqual11Digit =
       "validationsNumbersMustEqual11Digit";
+  static const validationsNumbersMustEqual4Digit =
+      "validationsNumbersMustEqual4Digit";
+  static const validationsInvalidCardExpirationDate =
+      "validationsInvalidCardExpirationDate";
   static const String validationsPasswordSpecifications =
       "validationsPasswordSpecifications";
   static const String validationsEnterTheSamePassword =
