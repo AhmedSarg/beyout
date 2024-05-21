@@ -84,4 +84,13 @@ abstract class Repository {
     required String report,
     required DateTime submittedAt,
   });
+
+  Future<Either<Failure, void>> changeAccountInfo({
+    required String userId,
+    required bool emailChanged,
+    required String email,
+    required String phoneNumber,
+    required bool pictureChanged,
+    File? picture,
+  });
 }

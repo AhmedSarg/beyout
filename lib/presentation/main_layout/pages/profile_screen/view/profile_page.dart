@@ -6,13 +6,12 @@ import 'package:temp_house/presentation/resources/strings_manager.dart';
 import '../../../../common/widget/main_app_bar.dart';
 import '../../../../resources/text_styles.dart';
 
-
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       appBar: buildMainAppBar(
         context,
         Text(

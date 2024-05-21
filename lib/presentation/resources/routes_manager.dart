@@ -4,7 +4,7 @@ import 'package:temp_house/app/sl.dart';
 import 'package:temp_house/presentation/homes_map_screen/view/homes_map_view.dart';
 import 'package:temp_house/presentation/main_layout/pages/home_screen/view/all_nearby_home.dart';
 import 'package:temp_house/presentation/main_layout/pages/home_screen/view/all_popular_home.dart';
-import 'package:temp_house/presentation/main_layout/pages/profile_screen/view/personal_info_screen.dart';
+import 'package:temp_house/presentation/main_layout/pages/profile_screen/view/pages/view/personal_info_page_view.dart';
 import 'package:temp_house/presentation/main_layout/view/main_layout_view.dart';
 import 'package:temp_house/presentation/search_screen/view/search_screen.dart';
 
@@ -110,7 +110,8 @@ class RouteGenerator {
       case Routes.paymentScreenDetailsRoute:
         return MaterialPageRoute(builder: (_) => const PaymentScreenDetails());
       case Routes.personalInfoRoute:
-        return MaterialPageRoute(builder: (_) => const PersonalInfoScreen());
+        initChangeAccountInfoUseCase();
+        return MaterialPageRoute(builder: (_) => const PersonalInfoPage());
       case Routes.homesMapRoute:
         initGetAllHomesUseCase();
         initReportHomeUseCase();

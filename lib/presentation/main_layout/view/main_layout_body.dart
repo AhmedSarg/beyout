@@ -7,7 +7,7 @@ import 'package:temp_house/presentation/resources/strings_manager.dart';
 import '../../resources/text_styles.dart';
 import '../pages/home_screen/view/home_page.dart';
 import '../pages/notifications_screen/view/notifications_view.dart';
-import '../pages/profile_screen/view/ProfilePage.dart';
+import '../pages/profile_screen/view/profile_page.dart';
 
 class MainLayoutBody extends StatefulWidget {
   const MainLayoutBody({super.key});

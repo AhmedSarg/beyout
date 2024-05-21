@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:temp_house/presentation/chat_screen/chat_service/chat_services.dart';
@@ -57,12 +58,20 @@ class ChatsScreen extends StatelessWidget {
               participantsNames.remove(DataIntent.getUser().username);
               final String receiverName = participantsNames.first;
 
+              final Future<String?> chatImage = FirebaseFirestore.instance
+                  .collection('users')
+                  .doc(receiverId)
+                  .get()
+                  .then(
+                    (value) => value.data()!['image_path'],
+                  );
               final String chatID = userData['id'];
 
               return ChatsItem(
                 name: receiverName,
                 lastMessage: userData['last_message'],
                 lastMessageDate: userData['last_message_date'].toDate(),
+                image: chatImage,
                 chatId: chatID,
                 personId: receiverId,
               );

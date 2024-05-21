@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:temp_house/presentation/common/data_intent/data_intent.dart';
+import 'package:temp_house/presentation/common/widget/main_image.dart';
 
 import '../../../../../resources/assets_manager.dart';
 import '../../../../../resources/routes_manager.dart';
@@ -16,18 +17,9 @@ class HomePageAppBar extends StatelessWidget {
       padding: const EdgeInsets.all(AppPadding.p16),
       child: Row(
         children: [
-          Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.grey.withOpacity(.3),
-            ),
-            clipBehavior: Clip.antiAliasWithSaveLayer,
+          MainImage(
+            imageUrl: DataIntent.getUser().imageUrl,
             width: AppSize.s50,
-            height: AppSize.s50,
-            child: Image.asset(
-              ImageAssets.unknownUserImage,
-              fit: BoxFit.cover,
-            ),
           ),
           const SizedBox(width: AppSize.s10),
           SvgPicture.asset(SVGAssets.pin),

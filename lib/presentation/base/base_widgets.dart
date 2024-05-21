@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:temp_house/presentation/resources/color_manager.dart';
@@ -46,23 +47,24 @@ class BaseWidgets {
   static void showPopUpDialog(BuildContext context, List<Widget> children,
       {List<Widget>? actions}) {
     showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-              actions: actions,
-              actionsAlignment: MainAxisAlignment.spaceEvenly,
-              backgroundColor: ColorManager.primary,
-              content: Padding(
-                padding: const EdgeInsets.all(AppPadding.p20),
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: children,
-                  ),
-                ),
-              ),
-            ));
+      context: context,
+      builder: (context) => AlertDialog(
+        actions: actions,
+        actionsAlignment: MainAxisAlignment.spaceEvenly,
+        backgroundColor: ColorManager.primary,
+        content: Padding(
+          padding: const EdgeInsets.all(AppPadding.p20),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: children,
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   static Widget buildMessage(BuildContext context, String message,
@@ -71,8 +73,9 @@ class BaseWidgets {
       child: Padding(
         padding: const EdgeInsets.all(AppPadding.p8),
         child: Text(
-          message,
+          message.tr(),
           style: AppTextStyles.baseStatesMessageTextStyle(context, textColor),
+          textAlign: TextAlign.center,
         ),
       ),
     );
@@ -89,19 +92,21 @@ class BaseWidgets {
       child: Padding(
         padding: const EdgeInsets.all(AppPadding.p8),
         child: SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-                style: ElevatedButton.styleFrom(padding: EdgeInsets.zero),
-                onPressed: () {
-                  if (displayType == DisplayType.popUpDialog) {
-                    Navigator.of(context).pop();
-                  }
-                  onTap();
-                },
-                child: Text(
-                  title,
-                  style: AppTextStyles.baseStatesElevatedBtnTextStyle(context),
-                ))),
+          width: double.infinity,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(padding: EdgeInsets.zero),
+            onPressed: () {
+              if (displayType == DisplayType.popUpDialog) {
+                Navigator.of(context).pop();
+              }
+              onTap();
+            },
+            child: Text(
+              title,
+              style: AppTextStyles.baseStatesElevatedBtnTextStyle(context),
+            ),
+          ),
+        ),
       ),
     );
   }

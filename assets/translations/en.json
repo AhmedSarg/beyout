@@ -178,8 +178,8 @@
   "personalInfoSubTitleInformation": "Infomation",
   "personalInfoSubTitleInformationFirstHint": "First Name",
   "personalInfoSubTitleInformationSecondHint": "Second Name",
-  "personalInfoSubTitleContact": "Contact",
-  "personalInfoSubTitleContactHint": "Email",
+  "personalInfoEmailHint": "Email",
+  "personalInfoPhoneNumberHint": "Phone Number",
   "personalInfoBtn": "Save",
 
   "paymentScreenTitle" : "Payment Details",
@@ -243,6 +243,11 @@
   "noInternetError": "No Internet Error",
   "emptyContent": "Empty Content",
   "intentError": "Intent Error",
+  "emailAlreadyExistsError": "Account Already Exists With The Same Email",
+  "phoneNumberAlreadyExistsError": "Account Already Exists With The Same Phone Number",
+  "emailAndPhoneNumberAlreadyExistsError": "Account Already Exists With The Same Email And Phone Number",
+  "emailLoginFailedError": "Incorrect Email or Password",
+  "invalidVerificationCodeError": "Verification Code is Incorrect Please Try Again",
 
   "areYouSure": "Are You Sure",
   "sure": "Sure",

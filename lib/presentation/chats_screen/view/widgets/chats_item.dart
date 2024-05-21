@@ -1,7 +1,10 @@
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:temp_house/app/extensions.dart';
+import 'package:temp_house/presentation/common/widget/main_image.dart';
 import 'package:temp_house/presentation/resources/assets_manager.dart';
+import 'package:temp_house/presentation/resources/color_manager.dart';
 import 'package:temp_house/presentation/resources/langauge_manager.dart';
 
 import '../../../chat_screen/view/chat_view.dart';
@@ -14,6 +17,7 @@ class ChatsItem extends StatelessWidget {
     required this.chatId,
     required this.personId,
     required this.name,
+    required this.image,
     required this.lastMessage,
     required this.lastMessageDate,
   });
@@ -21,12 +25,12 @@ class ChatsItem extends StatelessWidget {
   final String chatId;
   final String personId;
   final String name;
+  final Future<String?> image;
   final String lastMessage;
   final DateTime lastMessageDate;
 
   @override
   Widget build(BuildContext context) {
-    print(lastMessageDate.difference(DateTime.now()).inDays);
     double width = context.width();
     return GestureDetector(
       onTap: () {
@@ -61,12 +65,24 @@ class ChatsItem extends StatelessWidget {
           width: AppSize.s60,
           height: AppSize.s60,
           decoration: const BoxDecoration(
+            color: ColorManager.white,
             shape: BoxShape.circle,
           ),
           clipBehavior: Clip.antiAliasWithSaveLayer,
-          child: Image.asset(
-            ImageAssets.unknownUserImage,
-            fit: BoxFit.cover,
+          child: FutureBuilder<String?>(
+            future: image,
+            builder: (context, snap) {
+              if (snap.connectionState == ConnectionState.waiting) {
+                return Center(
+                  child: Lottie.asset(LottieAssets.loading),
+                );
+              } else {
+                return MainImage(
+                  imageUrl: snap.data ?? ImageAssets.unknownUserImage,
+                  width: AppSize.s60,
+                );
+              }
+            },
           ),
         ),
         trailing: Container(

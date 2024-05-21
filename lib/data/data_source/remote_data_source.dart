@@ -87,6 +87,18 @@ abstract class RemoteDataSource {
     required String report,
     required DateTime submittedAt,
   });
+
+  Future<void> changeAccountInfo({
+    required String userId,
+    required String email,
+    required String phoneNumber,
+    required bool pictureChanged,
+    File? picture,
+  });
+
+  Future<RegisteredBeforeError?> doesUserExists({
+    required String email,
+  });
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
@@ -301,5 +313,62 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         'submitted_at': submittedAt,
       },
     );
+  }
+
+  @override
+  Future<void> changeAccountInfo({
+    required String userId,
+    required String email,
+    required String phoneNumber,
+    required bool pictureChanged,
+    File? picture,
+  }) async {
+    DocumentReference docRef = _firestore.collection('users').doc(userId);
+    if (pictureChanged) {
+      String picturePath = '$userId-picture';
+      late TaskSnapshot imageUrl;
+      await docRef.get().then(
+        (value) async {
+          imageUrl = await _firebaseStorage
+              .ref('user_images')
+              .child(picturePath)
+              .putFile(
+                picture!,
+                SettableMetadata(contentType: 'image/jpeg'),
+              );
+        },
+      );
+      await docRef.update({
+        'image_path': await imageUrl.ref.getDownloadURL(),
+      });
+    }
+    await docRef.update({
+      'email': email,
+      'phone_number': phoneNumber,
+    });
+  }
+
+  @override
+  Future<RegisteredBeforeError?> doesUserExists({
+    required String email,
+  }) async {
+    bool emailUsed = false;
+    await _firestore
+        .collection('users')
+        .where('email', isEqualTo: email)
+        .get()
+        .then(
+      (value) {
+        if (value.docs.isNotEmpty) {
+          emailUsed = true;
+        }
+      },
+    );
+
+    if (emailUsed) {
+      return RegisteredBeforeError.emailUsed;
+    } else {
+      return null;
+    }
   }
 }

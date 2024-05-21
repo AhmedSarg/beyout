@@ -9,6 +9,8 @@ class ImageAssets {
   static const String map = "${imagePath}mapscreen.png";
   static const String pin = "${imagePath}Pin_duotone_line.png";
   static const String unknownUserImage = "${imagePath}unknown_user.jpg";
+  static const String appLogo = "${imagePath}app_logo.png";
+  static const String appImage = "${imagePath}app_image.png";
 }
 
 class IconsAssets {

@@ -26,7 +26,7 @@ class HomeSlider extends StatelessWidget {
         }
         if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
           NoHomesAvailable(
-            text: AppStrings.NoHomesAvailable.tr(),
+            text: AppStrings.noHomesAvailable.tr(),
           );
         }
 

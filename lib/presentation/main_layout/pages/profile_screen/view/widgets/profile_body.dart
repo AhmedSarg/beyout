@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:country_picker/country_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:temp_house/presentation/main_layout/pages/profile_screen/view/widgets/profile_image.dart';
 import 'package:temp_house/presentation/resources/color_manager.dart';
@@ -9,14 +8,13 @@ import 'package:temp_house/presentation/resources/text_styles.dart';
 
 import '../../../../../resources/strings_manager.dart';
 import '../../../../../resources/values_manager.dart';
-import '../../../home_screen/view/widgets/feed_back.dart';
 import 'bottom_sheet_item.dart';
 import 'country_selection_modal.dart';
 import 'language_selection_modal.dart';
 import 'measurement_selection_modal.dart';
 
 class ProfileBody extends StatefulWidget {
-  ProfileBody({super.key});
+  const ProfileBody({super.key});
 
   @override
   State<ProfileBody> createState() => _ProfileBodyState();
@@ -26,7 +24,6 @@ class _ProfileBodyState extends State<ProfileBody> {
   String selectedLanguage = 'English';
   String selectedMeasurement = 'Metric (m^2 , Km)';
   String selectedCountry = 'Egypt';
-
 
   @override
   void initState() {
@@ -41,19 +38,11 @@ class _ProfileBodyState extends State<ProfileBody> {
     });
   }
 
-  // void _showLanguageSelectionModal(BuildContext context) {
-  //   LanguageSelectionModal().show(context, (selectedLanguage) {
-  //     _saveLanguageSelection(selectedLanguage);
-  //     setState(() {
-  //       this.selectedLanguage = selectedLanguage;
-  //     });
-  //   });
-  // }
-
   Future<void> _saveLanguageSelection(String selectedLanguage) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('selectedLanguage', selectedLanguage);
   }
+
   void _showLanguageSelectionModal(BuildContext context) {
     LanguageSelectionModal().show(context, (selectedLanguage) {
       _saveLanguageSelection(selectedLanguage);
@@ -150,17 +139,6 @@ class _ProfileBodyState extends State<ProfileBody> {
                 Navigator.pushNamed(context, Routes.aboutScreenRoute);
               },
             ),
-            // AppSettingItem(
-            //   text: AppStrings.rateUsScreenName.tr(),
-            //   onTap: () {
-            //     showDialog(
-            //       context: context,
-            //       builder: (BuildContext context) {
-            //         return RatingDialog();
-            //       },
-            //     );
-            //   },
-            // ),
             AppSettingItem(
               text: AppStrings.needHelpScreenName.tr(),
               onTap: () {
@@ -169,8 +147,7 @@ class _ProfileBodyState extends State<ProfileBody> {
             ),
             AppSettingItem(
               text: AppStrings.logOut.tr(),
-              onTap: () {
-              },
+              onTap: () {},
             ),
           ],
         ),

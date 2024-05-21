@@ -93,11 +93,11 @@ class AppStrings {
   static const homeNavBarFavourite = "homeNavBarFavourite";
   static const homeNavBarNotifications = "homeNavBarNotifications";
   static const homeNavBarProfile = "homeNavBarProfile";
-  static const NoHomesAvailable = "NoHomesAvailable";
+  static const noHomesAvailable = "NoHomesAvailable";
 
   ///home screen
   static const searchTextHint = "searchTextHint";
-  static const lastText= "lastText";
+  static const lastText = "lastText";
   static const clearText = "clearText";
 
   ///home details
@@ -109,7 +109,6 @@ class AppStrings {
   static const call = "call";
   static const seeLocation = "seeLocation";
 
-
   static const popularStartedTextRow = "popularStartedTextRow";
   static const popularEndedTextRow = "popularEndedTextRow";
   static const priceHome = "priceHome";
@@ -119,7 +118,8 @@ class AppStrings {
   static const wifiHome = "wifiHome";
   static const nearByHome = "nearByHome";
   static const allNearbyTitle = "allNearbyTitle";
-/// profile screen
+
+  /// profile screen
   static const profileAppBar = "profileAppBar";
   static const profileSetting = "profileSetting";
   static const profileLanguage = "profileLanguage";
@@ -130,14 +130,13 @@ class AppStrings {
   static const profilePropertyFinder = "profilePropertyFinder";
   static const profileAbout = "profileAbout";
 
-
   //Snackbar
   static const addItem = "addItem";
   static const removeItem = "removeItem";
 
 // publish home post
   static const publishHomeAppBarTextRow = "publishHomeAppBarTextRow";
-  static const addPhotos  = "addPhotos";
+  static const addPhotos = "addPhotos";
   static const addPhotosDescription1 = "addPhotosDescription1";
   static const addPhotosDescription2 = "addPhotosDescription2";
   static const title = "title";
@@ -155,16 +154,15 @@ class AppStrings {
   static const locationSelection = "locationSelection";
   static const String homeDetails = "homeDetails";
 
-
   static const categoryDaily = "categoryDaily";
-  static const categoryMonthly= "categoryMonthly";
+  static const categoryMonthly = "categoryMonthly";
   static const categoryYearly = "categoryYearly";
 
   static const conditionBad = "conditionBad";
-  static const conditionGood= "conditionGood";
+  static const conditionGood = "conditionGood";
   static const conditionVeryGood = "conditionVeryGood";
 
-  static const wifiServicesNo= "wifiServicesNo";
+  static const wifiServicesNo = "wifiServicesNo";
   static const wifiServicesYes = "wifiServicesYes";
 
   static const warningProces = "warning";
@@ -187,20 +185,21 @@ class AppStrings {
   static const tapBarSearchCheapest = "tapBarSearchCheapest";
   static const emptyData = "emptyData";
 
-
   static const personalInfoTitle = "personalInfoTitle";
-  static const personalInfoSubTitleInformation = "personalInfoSubTitleInformation";
-  static const personalInfoSubTitleInformationFirstHint = "personalInfoSubTitleInformationFirstHint";
-  static const personalInfoSubTitleInformationSecondHint = "personalInfoSubTitleInformationSecondHint";
-  static const personalInfoSubTitleContact = "personalInfoSubTitleContact";
-  static const personalInfoSubTitleContactHint = "personalInfoSubTitleContactHint";
+  static const personalInfoSubTitleInformation =
+      "personalInfoSubTitleInformation";
+  static const personalInfoSubTitleInformationFirstHint =
+      "personalInfoSubTitleInformationFirstHint";
+  static const personalInfoSubTitleInformationSecondHint =
+      "personalInfoSubTitleInformationSecondHint";
+  static const personalInfoEmailHint = "personalInfoEmailHint";
+  static const personalInfoPhoneNumberHint = "personalInfoPhoneNumberHint";
   static const personalInfoBtn = "personalInfoBtn";
 
   ///notifications screen
   static const notificationsScreenTitle = "notificationsScreenTitle";
   static const notificationsScreenUnread = "notificationsScreenUnread";
   static const notificationsScreenAll = "notificationsScreenAll";
-
 
   /// favourite screen
   static const favouraiteScreenTitle = "favouraiteScreenTitle";
@@ -221,7 +220,7 @@ class AppStrings {
   static const optionsMenuAddAddToFavorite = "optionsMenuAddAddToFavorite";
   static const optionsMenuFeedback = "optionsMenuFeedback";
 
-///feed back
+  ///feed back
   static const feedBackHeader = "feedBackHeader";
   static const feedBackSubHead = "feedBackSubHead";
   static const feedBackStarRate = "feedBackStarRate";
@@ -230,13 +229,10 @@ class AppStrings {
   static const homeRated = "homeRated";
   static const homeRatederror = "homeRatederror";
 
-
-
   static const rateUsScreenName = "rateUsScreenName";
   static const needHelpScreenName = "needHelpScreenName";
   static const paymentDetailsScreen = "paymentDetailsScreen";
   static const logOut = "logOut";
-
 
   // about app screen
   static const aboutAppItem = "aboutAppItem";
@@ -275,6 +271,14 @@ class AppStrings {
   static const String defaultError = "defaultError";
   static const String cacheError = "cacheError";
   static const String noInternetError = "noInternetError";
+  static const String emailAlreadyExistsError = "emailAlreadyExistsError";
+  static const String phoneNumberAlreadyExistsError =
+      "phoneNumberAlreadyExistsError";
+  static const String emailAndPhoneNumberAlreadyExistsError =
+      "emailAndPhoneNumberAlreadyExistsError";
+  static const String emailLoginFailedError = "emailLoginFailedError";
+  static const String invalidVerificationCodeError =
+      "invalidVerificationCodeError";
 
   static const String emptyContent = "emptyContent";
   static const String intentError = "intentError";

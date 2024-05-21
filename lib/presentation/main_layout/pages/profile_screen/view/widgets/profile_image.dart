@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:temp_house/presentation/common/data_intent/data_intent.dart';
+import 'package:temp_house/presentation/common/widget/main_image.dart';
 import 'package:temp_house/presentation/resources/color_manager.dart';
 import 'package:temp_house/presentation/resources/text_styles.dart';
 import 'package:temp_house/presentation/resources/values_manager.dart';
-
-import '../../../../../resources/assets_manager.dart';
 
 class ProfileImage extends StatelessWidget {
   const ProfileImage({super.key});
@@ -29,18 +28,9 @@ class ProfileImage extends StatelessWidget {
           DataIntent.getUser().email,
           style: AppTextStyles.profileinfoEmailTextStyle(context),
         ),
-        leading: Container(
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Colors.grey.withOpacity(.3),
-          ),
-          clipBehavior: Clip.antiAliasWithSaveLayer,
+        leading: MainImage(
+          imageUrl: DataIntent.getUser().imageUrl,
           width: AppSize.s60,
-          height: AppSize.s60,
-          child: Image.asset(
-            ImageAssets.unknownUserImage,
-            fit: BoxFit.cover,
-          ),
         ),
       ),
     );

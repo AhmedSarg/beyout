@@ -257,7 +257,7 @@ class RepositoryImpl implements Repository {
 
   @override
   Future<Either<Failure, User?>> fetchCurrentUser(
-      [String email = 'xsarg221@gmail.com']) async {
+      [String email = 'xsarg22@gmail.com']) async {
     try {
       if (await _networkInfo.isConnected) {
         //todo uncomment the 2 lines below
@@ -308,6 +308,45 @@ class RepositoryImpl implements Repository {
           submittedAt: submittedAt,
         );
         return const Right(null);
+      } else {
+        return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+      }
+    } catch (e) {
+      return Left(ErrorHandler.handle(e).failure);
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> changeAccountInfo({
+    required String userId,
+    required bool emailChanged,
+    required String email,
+    required String phoneNumber,
+    required bool pictureChanged,
+    File? picture,
+  }) async {
+    try {
+      if (await _networkInfo.isConnected) {
+        RegisteredBeforeError? registeredBeforeError;
+        if (emailChanged) {
+          registeredBeforeError =
+              await _remoteDataSource.doesUserExists(email: email);
+        } else {
+          registeredBeforeError = null;
+        }
+        if (registeredBeforeError == null) {
+          await _remoteDataSource.changeAccountInfo(
+            userId: userId,
+            email: email,
+            phoneNumber: phoneNumber,
+            pictureChanged: pictureChanged,
+            picture: picture,
+          );
+          await fetchCurrentUser(email);
+          return const Right(null);
+        } else {
+          return Left(DataSource.EMAIL_ALREADY_EXISTS.getFailure());
+        }
       } else {
         return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
       }

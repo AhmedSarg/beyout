@@ -1,5 +1,6 @@
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:temp_house/domain/models/enums.dart';
+import 'package:temp_house/presentation/resources/assets_manager.dart';
 
 class PlaceModel {
   final int id;
@@ -91,6 +92,7 @@ class UserModel {
   final String phoneNumber;
   final Gender gender;
   final int age;
+  final String imageUrl;
   final String? currentJob;
   final int? currentSalary;
   final String? martialStatus;
@@ -104,6 +106,7 @@ class UserModel {
     required this.phoneNumber,
     required this.gender,
     required this.age,
+    required this.imageUrl,
     this.currentJob,
     this.currentSalary,
     this.martialStatus,
@@ -131,6 +134,7 @@ class UserModel {
       phoneNumber: map['phone_number'],
       gender: gender,
       age: map['age'],
+      imageUrl: map['image_path'] ?? ImageAssets.unknownUserImage,
       currentJob: map['current_job'],
       currentSalary: map['current_salary'],
       martialStatus: map['martial_status'],
