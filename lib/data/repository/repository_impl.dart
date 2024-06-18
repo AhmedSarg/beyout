@@ -276,11 +276,11 @@ class RepositoryImpl implements Repository {
         Map<String, dynamic>? userData = await _remoteDataSource.getUserData(
           email: email,
           //todo uncomment the line below and remove the line above
-          //email: data.email!,
+          // email: data.email!,
         );
         //todo remove the line below
         if (userData != null) {
-          UserModel userModel = UserModel.fromMap(userData!);
+          UserModel userModel = UserModel.fromMap(userData);
           DataIntent.pushUser(userModel);
           if (userData['user_type'].toLowerCase() == 'owner') {
             DataIntent.setUserRole(UserRole.owner);
@@ -295,7 +295,7 @@ class RepositoryImpl implements Repository {
           return Left(DataSource.EMAIL_LOGIN_FAILED.getFailure());
         }
         //todo uncomment the line below
-        //return Right(data);
+        // return Right(data);
       } else {
         return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
       }
@@ -396,7 +396,6 @@ class RepositoryImpl implements Repository {
 class FakeUser implements User {
   @override
   Future<void> delete() {
-    // TODO: implement delete
     throw UnimplementedError();
   }
 

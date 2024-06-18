@@ -158,3 +158,15 @@ class UserModel {
     return favoriteHomes.contains(homeId);
   }
 }
+
+class OfferModel {
+  final String userId;
+  final String houseId;
+  final int offerPrice;
+
+  OfferModel({
+    required this.userId,
+    required this.houseId,
+    required this.offerPrice,
+  });
+}
