@@ -6,7 +6,6 @@ import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:temp_house/data/network/fireauth_factory.dart';
-import 'package:temp_house/domain/usecase/share_post_usecase.dart';
 
 import '../data/data_source/cache_data_source.dart';
 import '../data/data_source/local_data_source.dart';
@@ -21,9 +20,11 @@ import '../data/network/firestore_factory.dart';
 import '../data/network/network_info.dart';
 import '../data/repository/repository_impl.dart';
 import '../domain/repository/repository.dart';
+import '../domain/usecase/accept_offer_usecase.dart';
 import '../domain/usecase/add_payment_card_usecase.dart';
 import '../domain/usecase/add_to_favorites_usecase.dart';
 import '../domain/usecase/change_account_info_usecase.dart';
+import '../domain/usecase/decline_offer_usecase.dart';
 import '../domain/usecase/get_all_favorites_usecase.dart';
 import '../domain/usecase/get_all_homes_usecase.dart';
 import '../domain/usecase/get_current_user_usecase.dart';
@@ -32,6 +33,8 @@ import '../domain/usecase/login_usecase.dart';
 import '../domain/usecase/register_usecase.dart';
 import '../domain/usecase/remove_from_favorites_usecase.dart';
 import '../domain/usecase/report_home_usecase.dart';
+import '../domain/usecase/send_offer_usecase.dart';
+import '../domain/usecase/share_post_usecase.dart';
 import 'date_ntp.dart';
 
 final sl = GetIt.instance;
@@ -148,5 +151,23 @@ void initAddPaymentCardUseCase() {
 void initGetOffersUseCase() {
   if (GetIt.instance.isRegistered<GetOffersUseCase>() == false) {
     sl.registerFactory<GetOffersUseCase>(() => GetOffersUseCase(sl()));
+  }
+}
+
+void initSendOfferUseCase() {
+  if (GetIt.instance.isRegistered<SendOfferUseCase>() == false) {
+    sl.registerFactory<SendOfferUseCase>(() => SendOfferUseCase(sl()));
+  }
+}
+
+void initAcceptOfferUseCase() {
+  if (GetIt.instance.isRegistered<AcceptOfferUseCase>() == false) {
+    sl.registerFactory<AcceptOfferUseCase>(() => AcceptOfferUseCase(sl()));
+  }
+}
+
+void initDeclineOfferUseCase() {
+  if (GetIt.instance.isRegistered<DeclineOfferUseCase>() == false) {
+    sl.registerFactory<DeclineOfferUseCase>(() => DeclineOfferUseCase(sl()));
   }
 }

@@ -390,6 +390,101 @@ class RepositoryImpl implements Repository {
       return Left(ErrorHandler.handle(e).failure);
     }
   }
+
+  @override
+  Future<Either<Failure, List<Future<OfferModel>>>> getOffers({
+    required String ownerId,
+  }) async {
+    try {
+      if (await _networkInfo.isConnected) {
+        List<Future<OfferModel>> offers =
+            await _remoteDataSource.getOffers(userId: ownerId).then(
+          (offersMap) {
+            return offersMap.map(
+              (offerMap) async {
+                Map<String, dynamic> homeMap =
+                    await _remoteDataSource.getHomeById(
+                  homeId: offerMap['home_id'],
+                );
+                Map<String, dynamic> userMap =
+                    await _remoteDataSource.getUserById(
+                  userId: offerMap['user_id'],
+                );
+                offerMap['home'] = homeMap;
+                offerMap['user'] = userMap;
+                return OfferModel.fromMap(offerMap);
+              },
+            ).toList();
+          },
+        );
+        return Right(offers);
+      } else {
+        return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+      }
+    } catch (e) {
+      return Left(ErrorHandler.handle(e).failure);
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> sendOffer({
+    required String userId,
+    required String ownerId,
+    required String homeId,
+    required int price,
+  }) async {
+    try {
+      if (await _networkInfo.isConnected) {
+        await _remoteDataSource.sendOffer(
+          userId: userId,
+          ownerId: ownerId,
+          homeId: homeId,
+          price: price,
+        );
+        return const Right(null);
+      } else {
+        return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+      }
+    } catch (e) {
+      return Left(ErrorHandler.handle(e).failure);
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> acceptOffer({
+    required String offerId,
+    required String userId,
+    required String homeId,
+  }) async {
+    try {
+      if (await _networkInfo.isConnected) {
+        await _remoteDataSource.acceptOffer(
+          offerId: offerId,
+          userId: userId,
+          homeId: homeId,
+        );
+        return const Right(null);
+      } else {
+        return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+      }
+    } catch (e) {
+      return Left(ErrorHandler.handle(e).failure);
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> declineOffer({required String offerId}) async {
+    try {
+      if (await _networkInfo.isConnected) {
+        await _remoteDataSource.declineOffer(offerId: offerId);
+        return const Right(null);
+      } else {
+        return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+      }
+    } catch (e) {
+      return Left(ErrorHandler.handle(e).failure);
+    }
+  }
 }
 
 //todo remove this class

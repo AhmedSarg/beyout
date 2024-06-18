@@ -100,4 +100,23 @@ abstract class Repository {
     required String cardNumber,
     required String cardExpirationDate,
   });
+
+  Future<Either<Failure, List<Future<OfferModel>>>> getOffers({
+    required String ownerId,
+  });
+
+  Future<Either<Failure, void>> sendOffer({
+    required String userId,
+    required String ownerId,
+    required String homeId,
+    required int price,
+  });
+
+  Future<Either<Failure, void>> acceptOffer({
+    required String offerId,
+    required String userId,
+    required String homeId,
+  });
+
+  Future<Either<Failure, void>> declineOffer({required String offerId});
 }

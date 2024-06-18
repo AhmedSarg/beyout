@@ -36,5 +36,17 @@ class DataIntent {
     return v;
   }
 
+  static HomeModel? _homeModel;
+
+  static void pushHome(HomeModel homeModel) {
+    _homeModel = homeModel;
+  }
+
+  static HomeModel popHome() {
+    HomeModel v = _homeModel!;
+    _homeModel = null;
+    return v;
+  }
+
 //-----------------------------------
 }

@@ -106,6 +106,25 @@ abstract class RemoteDataSource {
     required String cardNumber,
     required String cardExpirationDate,
   });
+
+  Future<List<Map<String, dynamic>>> getOffers({required String userId});
+
+  Future<Map<String, dynamic>> getUserById({required String userId});
+
+  Future<void> sendOffer({
+    required String userId,
+    required String ownerId,
+    required String homeId,
+    required int price,
+  });
+
+  Future<void> acceptOffer({
+    required String offerId,
+    required String userId,
+    required String homeId,
+  });
+
+  Future<void> declineOffer({required String offerId});
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
@@ -234,7 +253,11 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
   @override
   Future<Stream<List<Map<String, dynamic>>>> getAllHomes() async {
-    return _firestore.collection('Homes').snapshots().map(
+    return _firestore
+        .collection('Homes')
+        .where('sold', isEqualTo: false)
+        .snapshots()
+        .map(
           (homes) => homes.docs
               .map(
                 (home) => home.data(),
@@ -398,5 +421,62 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         'card_expiration_date': cardExpirationDate,
       },
     );
+  }
+
+  @override
+  Future<Map<String, dynamic>> getUserById({required String userId}) async {
+    return await _firestore
+        .collection('users')
+        .doc(userId)
+        .get()
+        .then((value) => value.data()!);
+  }
+
+  @override
+  Future<List<Map<String, dynamic>>> getOffers({
+    required String userId,
+  }) async {
+    return await _firestore.collection('offers').where('owner_id').get().then(
+      (value) {
+        return value.docs.map((offer) {
+          Map<String, dynamic> ret = offer.data();
+          ret['id'] = offer.id;
+          return ret;
+        }).toList();
+      },
+    );
+  }
+
+  @override
+  Future<void> sendOffer({
+    required String userId,
+    required String ownerId,
+    required String homeId,
+    required int price,
+  }) async {
+    await _firestore.collection('offers').add({
+      'user_id': userId,
+      'owner_id': ownerId,
+      'home_id': homeId,
+      'price': price,
+    });
+  }
+
+  @override
+  Future<void> acceptOffer({
+    required String offerId,
+    required String userId,
+    required String homeId,
+  }) async {
+    await _firestore.collection('Homes').doc(homeId).update({
+      'sold': true,
+      'tenant_id': userId,
+    });
+    await _firestore.collection('offers').doc(offerId).delete();
+  }
+
+  @override
+  Future<void> declineOffer({required String offerId}) async {
+    await _firestore.collection('offers').doc(offerId).delete();
   }
 }

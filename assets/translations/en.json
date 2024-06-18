@@ -215,6 +215,7 @@
 
   "homeNavBarHome": "Home",
   "homeNavBarFavourite": "Favourite",
+  "homeNavBarOffers": "Offers",
   "homeNavBarNotifications": "Notifications",
   "homeNavBarProfile": "Profile",
 
@@ -254,6 +255,7 @@
   "emailAndPhoneNumberAlreadyExistsError": "Account Already Exists With The Same Email And Phone Number",
   "emailLoginFailedError": "Incorrect Email or Password",
   "invalidVerificationCodeError": "Verification Code is Incorrect Please Try Again",
+  "offerScreenTitle": "Offers List",
 
   "areYouSure": "Are You Sure",
   "sure": "Sure",

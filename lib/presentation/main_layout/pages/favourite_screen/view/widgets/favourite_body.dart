@@ -10,7 +10,8 @@ import 'package:temp_house/presentation/resources/styles_manager.dart';
 import 'package:temp_house/presentation/resources/values_manager.dart';
 
 import '../../../../../../domain/models/domain.dart';
-import '../../../home_details/home_details.dart';
+import '../../../../../common/data_intent/data_intent.dart';
+import '../../../../../resources/routes_manager.dart';
 
 class FavouriteBody extends StatelessWidget {
   const FavouriteBody({super.key});
@@ -82,14 +83,8 @@ class FavouriteBody extends StatelessWidget {
                 if (futureHome.hasData) {
                   return GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => HomeDetailsScreen(
-                            home: futureHome.data!,
-                          ),
-                        ),
-                      );
+                      DataIntent.pushHome(futureHome.data!);
+                      Navigator.pushNamed(context, Routes.homeDetailsRoute);
                     },
                     child: NearByHomeItem(
                       home: futureHome.data!,

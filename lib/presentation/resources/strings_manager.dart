@@ -91,6 +91,7 @@ class AppStrings {
   ///nav bar
   static const homeNavBarHome = "homeNavBarHome";
   static const homeNavBarFavourite = "homeNavBarFavourite";
+  static const homeNavBarOffers = "homeNavBarOffers";
   static const homeNavBarNotifications = "homeNavBarNotifications";
   static const homeNavBarProfile = "homeNavBarProfile";
   static const noHomesAvailable = "NoHomesAvailable";
@@ -265,6 +266,9 @@ class AppStrings {
   static const needHelpScreenHint = "needHelpScreenHint";
   static const needHelpScreenButton = "needHelpScreenButton";
 
+  ///Offers Screen
+  static const String offerScreenTitle = "offerScreenTitle";
+
   ///error handler
   static const String badRequestError = "badRequestError";
   static const String noContent = "noContent";
@@ -295,6 +299,7 @@ class AppStrings {
 
   ///validations
   static const validationsFieldRequired = "validationsFieldRequired";
+  static const validationsLowerPrice = "validationsLowerPrice";
   static const validationsFieldLengthMoreThen6 =
       "validationsFieldLengthMoreThen6";
   static const validationsValidEmail = "validationsValidEmail";

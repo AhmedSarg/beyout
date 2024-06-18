@@ -1,7 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:temp_house/app/sl.dart';
+import 'package:temp_house/domain/models/enums.dart';
+import 'package:temp_house/presentation/common/data_intent/data_intent.dart';
 import 'package:temp_house/presentation/homes_map_screen/view/homes_map_view.dart';
+import 'package:temp_house/presentation/main_layout/pages/home_details/home_details.dart';
 import 'package:temp_house/presentation/main_layout/pages/home_screen/view/all_nearby_home.dart';
 import 'package:temp_house/presentation/main_layout/pages/home_screen/view/all_popular_home.dart';
 import 'package:temp_house/presentation/main_layout/pages/profile_screen/view/pages/view/personal_info_page_view.dart';
@@ -77,6 +80,11 @@ class RouteGenerator {
         initAddToFavoritesUseCase();
         initRemoveFromFavoritesUseCase();
         initGetAllFavoritesUseCase();
+        if (DataIntent.getUserRole() == UserRole.owner) {
+          initGetOffersUseCase();
+          initAcceptOfferUseCase();
+          initDeclineOfferUseCase();
+        }
         return MaterialPageRoute(builder: (_) => const MainLayoutScreen());
       case Routes.chatsRoute:
         return MaterialPageRoute(builder: (_) => ChatsScreen());
@@ -122,6 +130,9 @@ class RouteGenerator {
       case Routes.offersRoute:
         initGetOffersUseCase();
         return MaterialPageRoute(builder: (_) => const OffersScreen());
+      case Routes.homeDetailsRoute:
+        initSendOfferUseCase();
+        return MaterialPageRoute(builder: (_) => const HomeDetailsScreen());
       default:
         return unDefinedRoute();
     }

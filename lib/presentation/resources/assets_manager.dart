@@ -45,6 +45,7 @@ class SVGAssets {
   static const String card = "${_basePath}solar_card-bold.svg";
   static const String noMessage = "${_basePath}fi-sr-envelope-ban.svg";
   static const String mapHome = "${_basePath}map_home_icon.svg";
+  static const String cart = "${_basePath}cart_icon.svg";
 }
 
 class LottieAssets {

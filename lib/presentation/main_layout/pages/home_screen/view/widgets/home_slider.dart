@@ -6,7 +6,8 @@ import 'package:temp_house/domain/models/domain.dart';
 import 'package:temp_house/presentation/common/widget/main_circle_processIndicator.dart';
 import 'package:temp_house/presentation/resources/strings_manager.dart';
 
-import '../../../home_details/home_details.dart';
+import '../../../../../common/data_intent/data_intent.dart';
+import '../../../../../resources/routes_manager.dart';
 import 'home_list_view_item.dart';
 import 'no_homes_available.dart';
 
@@ -39,14 +40,8 @@ class HomeSlider extends StatelessWidget {
 
             return GestureDetector(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => HomeDetailsScreen(
-                      home: HomeModel.fromMap(data),
-                    ),
-                  ),
-                );
+                DataIntent.pushHome(HomeModel.fromMap(data));
+                Navigator.pushNamed(context, Routes.homeDetailsRoute);
               },
               child: BuildCarouselItem(
                 home: HomeModel.fromMap(data),

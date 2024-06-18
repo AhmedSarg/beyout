@@ -2,9 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:temp_house/presentation/common/data_intent/data_intent.dart';
 import 'package:temp_house/presentation/common/widget/main_circle_processIndicator.dart';
 import 'package:temp_house/presentation/main_layout/pages/home_screen/view/widgets/near_by_home_item.dart';
 import 'package:temp_house/presentation/main_layout/viewmodel/main_layout_viewmodel.dart';
+import 'package:temp_house/presentation/resources/routes_manager.dart';
 
 import '../../../../../domain/models/domain.dart';
 import '../../../../common/widget/main_app_bar.dart';
@@ -12,7 +14,6 @@ import '../../../../resources/color_manager.dart';
 import '../../../../resources/font_manager.dart';
 import '../../../../resources/strings_manager.dart';
 import '../../../../resources/text_styles.dart';
-import '../../home_details/home_details.dart';
 
 class AllPopularHome extends StatelessWidget {
   const AllPopularHome({Key? key}) : super(key: key);
@@ -53,14 +54,8 @@ class AllPopularHome extends StatelessWidget {
 
               return GestureDetector(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => HomeDetailsScreen(
-                        home: HomeModel.fromMap(data),
-                      ),
-                    ),
-                  );
+                  DataIntent.pushHome(HomeModel.fromMap(data));
+                  Navigator.pushNamed(context, Routes.homeDetailsRoute);
                 },
                 child: NearByHomeItem(
                   home: HomeModel.fromMap(data),

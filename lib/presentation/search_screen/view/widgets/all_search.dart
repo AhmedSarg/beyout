@@ -5,10 +5,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:temp_house/domain/models/domain.dart';
 import 'package:temp_house/presentation/search_screen/view/widgets/search_home_item.dart';
 
+import '../../../common/data_intent/data_intent.dart';
 import '../../../common/widget/main_circle_processIndicator.dart';
 import '../../../common/widget/main_seach_field.dart';
-import '../../../main_layout/pages/home_details/home_details.dart';
 import '../../../resources/assets_manager.dart';
+import '../../../resources/routes_manager.dart';
 import '../../../resources/strings_manager.dart';
 
 class AllSearch extends StatefulWidget {
@@ -80,14 +81,8 @@ class _AllSearchState extends State<AllSearch> {
                 String firstImage = images.isNotEmpty ? images[0] : '';
                 return GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => HomeDetailsScreen(
-                          home: HomeModel.fromMap(data),
-                        ),
-                      ),
-                    );
+                    DataIntent.pushHome(HomeModel.fromMap(data));
+                    Navigator.pushNamed(context, Routes.homeDetailsRoute);
                   },
                   child: SearchHomeItem(
                     home: HomeModel.fromMap(data),

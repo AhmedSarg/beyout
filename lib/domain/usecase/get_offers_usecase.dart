@@ -6,15 +6,15 @@ import '../repository/repository.dart';
 import 'base_usecase.dart';
 
 class GetOffersUseCase
-    extends BaseUseCase<GetOffersUseCaseInput, List<OfferModel>> {
+    extends BaseUseCase<GetOffersUseCaseInput, List<Future<OfferModel>>> {
   final Repository _repository;
 
   GetOffersUseCase(this._repository);
 
   @override
-  Future<Either<Failure, List<OfferModel>>> call(
+  Future<Either<Failure, List<Future<OfferModel>>>> call(
       GetOffersUseCaseInput input) async {
-    throw UnimplementedError();
+    return _repository.getOffers(ownerId: input.userId);
   }
 }
 

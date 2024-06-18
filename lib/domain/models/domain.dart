@@ -160,13 +160,24 @@ class UserModel {
 }
 
 class OfferModel {
-  final String userId;
-  final String houseId;
-  final int offerPrice;
+  final String id;
+  final UserModel user;
+  final HomeModel home;
+  final int price;
 
   OfferModel({
-    required this.userId,
-    required this.houseId,
-    required this.offerPrice,
+    required this.id,
+    required this.user,
+    required this.home,
+    required this.price,
   });
+
+  factory OfferModel.fromMap(Map<String, dynamic> map) {
+    return OfferModel(
+      id: map['id'],
+      user: UserModel.fromMap(map['user']),
+      home: HomeModel.fromMap(map['home']),
+      price: map['price'],
+    );
+  }
 }

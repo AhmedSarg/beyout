@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:temp_house/presentation/search_screen/view/widgets/search_home_item.dart';
 
 import '../../../../domain/models/domain.dart';
+import '../../../common/data_intent/data_intent.dart';
 import '../../../common/widget/empty_list.dart';
 import '../../../common/widget/main_circle_processIndicator.dart';
-import '../../../main_layout/pages/home_details/home_details.dart';
 import '../../../resources/assets_manager.dart';
 import '../../../resources/color_manager.dart';
 import '../../../resources/font_manager.dart';
+import '../../../resources/routes_manager.dart';
 import '../../../resources/strings_manager.dart';
 import '../../../resources/text_styles.dart';
 
@@ -52,14 +53,8 @@ class PriceSearch extends StatelessWidget {
 
           return GestureDetector(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => HomeDetailsScreen(
-                    home: HomeModel.fromMap(data),
-                  ),
-                ),
-              );
+              DataIntent.pushHome(HomeModel.fromMap(data));
+              Navigator.pushNamed(context, Routes.homeDetailsRoute);
             },
             child: SearchHomeItem(
               home: HomeModel.fromMap(data),
