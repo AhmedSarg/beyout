@@ -27,6 +27,7 @@ import '../domain/usecase/change_account_info_usecase.dart';
 import '../domain/usecase/get_all_favorites_usecase.dart';
 import '../domain/usecase/get_all_homes_usecase.dart';
 import '../domain/usecase/get_current_user_usecase.dart';
+import '../domain/usecase/get_offers_usecase.dart';
 import '../domain/usecase/login_usecase.dart';
 import '../domain/usecase/register_usecase.dart';
 import '../domain/usecase/remove_from_favorites_usecase.dart';
@@ -141,5 +142,11 @@ void initAddPaymentCardUseCase() {
   if (GetIt.instance.isRegistered<AddPaymentCardUseCase>() == false) {
     sl.registerFactory<AddPaymentCardUseCase>(
         () => AddPaymentCardUseCase(sl()));
+  }
+}
+
+void initGetOffersUseCase() {
+  if (GetIt.instance.isRegistered<GetOffersUseCase>() == false) {
+    sl.registerFactory<GetOffersUseCase>(() => GetOffersUseCase(sl()));
   }
 }

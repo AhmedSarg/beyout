@@ -6,6 +6,7 @@ import 'package:temp_house/presentation/main_layout/pages/home_screen/view/all_n
 import 'package:temp_house/presentation/main_layout/pages/home_screen/view/all_popular_home.dart';
 import 'package:temp_house/presentation/main_layout/pages/profile_screen/view/pages/view/personal_info_page_view.dart';
 import 'package:temp_house/presentation/main_layout/view/main_layout_view.dart';
+import 'package:temp_house/presentation/offers_screen/view/offers_view.dart';
 import 'package:temp_house/presentation/search_screen/view/search_screen.dart';
 
 import '../chat_screen/view/chat_view.dart';
@@ -51,6 +52,7 @@ class Routes {
   static const String addUsersRoute = "/addUsers";
   static const String googleMapScreenShareRoute = "/googleMapScreenShare";
   static const String homesMapRoute = "/homesMap";
+  static const String offersRoute = "/offers";
 }
 
 class RouteGenerator {
@@ -117,6 +119,9 @@ class RouteGenerator {
         initGetAllHomesUseCase();
         initReportHomeUseCase();
         return MaterialPageRoute(builder: (_) => const HomesMapScreen());
+      case Routes.offersRoute:
+        initGetOffersUseCase();
+        return MaterialPageRoute(builder: (_) => const OffersScreen());
       default:
         return unDefinedRoute();
     }
