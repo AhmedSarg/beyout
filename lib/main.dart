@@ -8,8 +8,15 @@ import 'app/sl.dart';
 import 'firebase_options.dart';
 import 'presentation/base/bloc_observer.dart';
 import 'presentation/resources/langauge_manager.dart';
-
+  // jhih
 late final WidgetsBinding engine;
+
+
+
+
+
+
+
 
 void main() async {
   engine = WidgetsFlutterBinding.ensureInitialized();
