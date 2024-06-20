@@ -14,9 +14,9 @@ import '../../viewmodel/register_viewmodel.dart';
 
 class RegisterOwnerBody extends StatelessWidget {
   RegisterOwnerBody({
-    super.key,
+    Key? key,
     required this.viewModel,
-  });
+  }) : super(key: key);
 
   final RegisterViewModel viewModel;
 
@@ -122,7 +122,7 @@ class RegisterOwnerBody extends StatelessWidget {
                 readOnly: true,
                 hint: AppStrings.registerScreenGenderHint.tr(),
                 validation: AppValidators.validateGender,
-                textInputType: TextInputType.number,
+                textInputType: TextInputType.text,
                 onTap: () {
                   showRegisterDialog(
                     context,
@@ -145,7 +145,7 @@ class RegisterOwnerBody extends StatelessWidget {
                 isObscured: false,
                 validation: AppValidators.validateAge,
                 hint: AppStrings.registerScreenAgeHint.tr(),
-                textInputType: TextInputType.phone,
+                textInputType: TextInputType.number,
               ),
             ),
             Padding(
@@ -163,13 +163,9 @@ class RegisterOwnerBody extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: SocialContainer(
-                title: AppStrings.registerScreenFacebook.tr(),
-                image: SVGAssets.facebook,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
-              child: SocialContainer(
+                onTap: () {
+                  viewModel.signInWithGoogle();
+                },
                 title: AppStrings.registerScreenGoogle.tr(),
                 image: SVGAssets.gmail,
               ),

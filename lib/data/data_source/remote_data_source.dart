@@ -1,8 +1,11 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:temp_house/data/network/app_api.dart';
 import 'package:temp_house/domain/models/enums.dart';
 import 'package:temp_house/presentation/common/data_intent/data_intent.dart';
@@ -19,6 +22,8 @@ abstract class RemoteDataSource {
     required int age,
     required String martialStatus,
   });
+
+  Future<User?> signInWithGoogle();
 
   Future<void> registerOwnerToDataBase({
     required String uuid,
@@ -48,6 +53,11 @@ abstract class RemoteDataSource {
     required String location,
     required GeoPoint coordinates,
   });
+
+  // Future<void> signInWithGoogle({
+  //   required String accessToken,
+  //   required String idToken,
+  // });
 
   Future<void> uploadImages(
     List<File> images,
@@ -162,6 +172,11 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     });
   }
 
+
+
+
+
+
   @override
   Future<void> registerOwnerToDataBase({
     required String uuid,
@@ -229,6 +244,10 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   }) async {
     //todo create login logic
   }
+
+
+
+
 
   @override
   Future<void> uploadImages(List<File> images, String homeId) async {
@@ -462,6 +481,8 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     });
   }
 
+
+
   @override
   Future<void> acceptOffer({
     required String offerId,
@@ -479,4 +500,31 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   Future<void> declineOffer({required String offerId}) async {
     await _firestore.collection('offers').doc(offerId).delete();
   }
+
+  @override
+  Future<User?> signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+
+      final userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+
+      return userCredential.user;
+    } on FirebaseAuthException catch (e) {
+      print('FirebaseAuthException: ${e.message}');
+      throw e;
+    } on PlatformException catch (e) {
+      print('PlatformException: ${e.message}');
+      throw e;
+    } catch (e) {
+      print('Exception: $e');
+      throw e;
+    }
+  }
 }
+

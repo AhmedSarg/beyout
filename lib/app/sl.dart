@@ -35,6 +35,7 @@ import '../domain/usecase/remove_from_favorites_usecase.dart';
 import '../domain/usecase/report_home_usecase.dart';
 import '../domain/usecase/send_offer_usecase.dart';
 import '../domain/usecase/share_post_usecase.dart';
+import '../domain/usecase/sign_with_google_usecase.dart';
 import 'date_ntp.dart';
 
 final sl = GetIt.instance;
@@ -80,6 +81,11 @@ void initGetCurrentUserUseCase() {
   if (GetIt.instance.isRegistered<GetCurrentUserUseCase>() == false) {
     sl.registerFactory<GetCurrentUserUseCase>(
         () => GetCurrentUserUseCase(sl()));
+  }
+}
+void initSignWithGoogleUseCase() {
+  if (GetIt.instance.isRegistered<SignWithGoogleUseCase>() == false) {
+    sl.registerFactory<SignWithGoogleUseCase>(() => SignWithGoogleUseCase(sl()));
   }
 }
 

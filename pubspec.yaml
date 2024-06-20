@@ -37,12 +37,14 @@ dependencies:
   firebase_auth:
   firebase_storage:
   cached_network_image:
-  geolocator:
+  geolocator: 8.2.0
   geocoding:
   awesome_dialog:
   uuid:
   intl_phone_field:
   permission_handler: ^11.3.1
+  firebase_messaging: ^15.0.1
+  google_sign_in: ^6.2.1
 
 dev_dependencies:
   flutter_test:

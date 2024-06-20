@@ -6,11 +6,11 @@ import '../../resources/text_styles.dart';
 import '../../resources/values_manager.dart';
 
 class SocialContainer extends StatelessWidget {
-  const SocialContainer({super.key, required this.title, required this.image});
+   SocialContainer({super.key, required this.title, required this.image,  this.onTap});
 
   final String title;
   final String image;
-
+   void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,7 +21,7 @@ class SocialContainer extends StatelessWidget {
         color: ColorManager.darkGrey.withOpacity(.15),
       ),
       child: TextButton(
-        onPressed: () {},
+        onPressed: onTap,
         child: Row(
           children: [
             Padding(

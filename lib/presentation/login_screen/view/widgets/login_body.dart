@@ -123,11 +123,19 @@ class LoginBody extends StatelessWidget {
                 child: Column(
                   children: [
                     SocialContainer(
+                      onTap: () {
+
+                      },
                       title: AppStrings.loginScreenFacebook.tr(),
                       image: SVGAssets.facebook,
                     ),
                     const SizedBox(height: AppSize.s10),
                     SocialContainer(
+                      onTap: () {
+                        viewModel.signInWithGoogle();
+                        print('________________________________');
+                      },
+
                       title: AppStrings.loginScreenGoogle.tr(),
                       image: SVGAssets.gmail,
                     ),

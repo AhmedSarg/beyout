@@ -72,6 +72,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const SelectionScreen());
       case Routes.loginRoute:
         initLoginUseCase();
+        initSignWithGoogleUseCase();
         return MaterialPageRoute(builder: (_) => const LoginScreen());
       case Routes.registerRoute:
         initRegisterUseCase();
@@ -80,10 +81,14 @@ class RouteGenerator {
         initAddToFavoritesUseCase();
         initRemoveFromFavoritesUseCase();
         initGetAllFavoritesUseCase();
+        initSignWithGoogleUseCase();
+
         if (DataIntent.getUserRole() == UserRole.owner) {
           initGetOffersUseCase();
           initAcceptOfferUseCase();
           initDeclineOfferUseCase();
+          initSignWithGoogleUseCase();
+
         }
         return MaterialPageRoute(builder: (_) => const MainLayoutScreen());
       case Routes.chatsRoute:

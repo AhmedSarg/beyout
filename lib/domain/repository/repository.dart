@@ -55,6 +55,9 @@ abstract class Repository {
     required String password,
   });
 
+  Future<Either<Failure, User?>> signInWithGoogle();
+
+
   Future<Either<Failure, Stream<List<HomeModel>>>> getAllHomes();
 
   Future<Either<Failure, Map<String, dynamic>>> calculateTwoPoints({

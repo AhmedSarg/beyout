@@ -27,7 +27,7 @@ class LoginScreen extends StatelessWidget {
         ),
       ),
       body: BlocProvider(
-        create: (_) => LoginViewModel(sl())..start(),
+        create: (_) => LoginViewModel(sl(),sl())..start(),
         child: BlocConsumer<LoginViewModel, BaseStates>(
           listener: (context, state) {
             if (state is ErrorState) {

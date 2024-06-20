@@ -1,24 +1,17 @@
 import 'package:bloc/bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:temp_house/presentation/main_layout/pages/notifications_screen/notiFun.dart';
 
 import 'app/app.dart';
 import 'app/sl.dart';
 import 'firebase_options.dart';
 import 'presentation/base/bloc_observer.dart';
 import 'presentation/resources/langauge_manager.dart';
-  // jhih
+
 late final WidgetsBinding engine;
-
-
-
-
-
-
-
-
-
 
 void main() async {
   engine = WidgetsFlutterBinding.ensureInitialized();

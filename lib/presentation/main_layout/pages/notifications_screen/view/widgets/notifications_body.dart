@@ -58,7 +58,7 @@ class NotificationsBody extends StatelessWidget {
         Text(
           AppStrings.notificationsScreenAll.tr(),
           style:
-              AppTextStyles.notificationsScreenSectionHeaderTextStyle(context),
+          AppTextStyles.notificationsScreenSectionHeaderTextStyle(context),
         ),
         const SizedBox(height: AppSize.s20),
         ListView.separated(

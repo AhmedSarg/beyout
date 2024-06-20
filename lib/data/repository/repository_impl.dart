@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:temp_house/presentation/common/data_intent/data_intent.dart';
 import 'package:uuid/uuid.dart';
 
@@ -67,6 +68,16 @@ class RepositoryImpl implements Repository {
       } else {
         return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
       }
+    } catch (e) {
+      return Left(ErrorHandler.handle(e).failure);
+    }
+  }
+
+  @override
+  Future<Either<Failure, User?>> signInWithGoogle() async {
+    try {
+      final user = await _remoteDataSource.signInWithGoogle();
+      return Right(user);
     } catch (e) {
       return Left(ErrorHandler.handle(e).failure);
     }

@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:temp_house/presentation/base/base_states.dart';
 
 import '../../../domain/models/enums.dart';
@@ -76,6 +78,28 @@ class RegisterViewModel extends BaseCubit
       },
     );
   }
+
+  Future<void> signInWithGoogle() async {
+    emit(LoadingState(displayType: DisplayType.popUpDialog));
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    if (googleUser == null) {
+      return;
+    }
+
+    final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+
+    final AuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+
+    try {
+      await FirebaseAuth.instance.signInWithCredential(credential);
+      emit(SuccessState('Signed in with Google successfully'));
+    } catch (e) {
+    }
+  }
+
 
   @override
   UserRole get getRegisterType => _registerType;

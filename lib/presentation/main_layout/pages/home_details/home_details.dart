@@ -63,7 +63,7 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                           horizontal: AppMargin.m10, vertical: AppMargin.m8),
                       child: ElevatedButton(
                         style: ButtonStyle(
-                          backgroundColor: WidgetStateProperty.all<Color>(
+                          backgroundColor: MaterialStateProperty.all<Color>(
                             ColorManager.blue.withOpacity(.7),
                           ),
                         ),
@@ -96,7 +96,7 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                           horizontal: AppMargin.m10, vertical: AppMargin.m8),
                       child: ElevatedButton(
                         style: ButtonStyle(
-                          backgroundColor: WidgetStateProperty.all<Color>(
+                          backgroundColor: MaterialStateProperty.all<Color>(
                             ColorManager.blue.withOpacity(.7),
                           ),
                         ),
@@ -182,23 +182,17 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                                         width: AppSize.infinity,
                                         child: ElevatedButton(
                                           onPressed: () {
-                                            if (formKey.currentState!
-                                                .validate()) {
+                                            if (formKey.currentState!.validate()) {
                                               viewModel.sendOffer(
-                                                int.parse(
-                                                  priceController.text.trim(),
-                                                ),
+                                                int.parse(priceController.text.trim()),
                                               );
                                             }
                                           },
                                           style: ElevatedButton.styleFrom(
-                                            backgroundColor:
-                                                ColorManager.primary,
+                                            backgroundColor: ColorManager.primary,
                                             foregroundColor: ColorManager.white,
                                             shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                      AppSize.s15),
+                                              borderRadius: BorderRadius.circular(AppSize.s15),
                                             ),
                                           ),
                                           child: Text(
@@ -209,6 +203,7 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                                             ),
                                           ),
                                         ),
+
                                       ),
                                     ],
                                   ),
