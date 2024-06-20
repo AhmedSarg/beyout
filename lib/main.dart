@@ -18,6 +18,8 @@ late final WidgetsBinding engine;
 
 
 
+
+
 void main() async {
   engine = WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
