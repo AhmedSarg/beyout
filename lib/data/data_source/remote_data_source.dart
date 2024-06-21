@@ -36,6 +36,10 @@ abstract class RemoteDataSource {
     required String password,
   });
 
+  Future<void> passwordReset({
+    required String email,
+  });
+
   Future<GoogleSignInAccount?> selectGoogleAccount();
 
   Future<User?> signInWithGoogle(GoogleSignInAccount? googleAccount);
@@ -243,6 +247,27 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       password: password,
     );
   }
+
+  @override
+  Future<void> passwordReset({
+    required String email,
+  }) async {
+    await _firebaseAuth.sendPasswordResetEmail(
+      email: email,
+    );
+  }
+
+  // Future<void> passwordReset() async {
+  //
+  //   try {
+  //     await FirebaseAuth.instance.sendPasswordResetEmail(email: _emailController.text.trim());
+  //   } on FirebaseAuthException catch (e) {
+  //     print(e);
+  //   }
+  // }
+
+
+
 
   @override
   Future<void> uploadImages(List<File> images, String homeId) async {

@@ -72,6 +72,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const SelectionScreen());
       case Routes.loginRoute:
         initLoginUseCase();
+        initPasswordResetUseCase();
         initSignWithGoogleUseCase();
         return MaterialPageRoute(builder: (_) => const LoginScreen());
       case Routes.registerRoute:

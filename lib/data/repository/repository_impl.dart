@@ -168,6 +168,27 @@ class RepositoryImpl implements Repository {
   }
 
   @override
+  Future<Either<Failure, void>> passwordReset({
+    required String email,
+  }) async {
+    try {
+      if (await _networkInfo.isConnected) {
+        void response;
+        await _remoteDataSource.passwordReset(
+          email: email,
+        );
+        return Right(response);
+      } else {
+        return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+      }
+    } on FirebaseAuthException {
+      return Left(DataSource.LOGIN_FAILED.getFailure());
+    } catch (e) {
+      return Left(ErrorHandler.handle(e).failure);
+    }
+  }
+
+  @override
   Future<Either<Failure, Stream<List<HomeModel>>>> getAllHomes() async {
     try {
       if (await _networkInfo.isConnected) {

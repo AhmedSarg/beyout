@@ -30,6 +30,7 @@ import '../domain/usecase/get_all_homes_usecase.dart';
 import '../domain/usecase/get_current_user_usecase.dart';
 import '../domain/usecase/get_offers_usecase.dart';
 import '../domain/usecase/login_usecase.dart';
+import '../domain/usecase/passwordReset_usecase.dart';
 import '../domain/usecase/register_usecase.dart';
 import '../domain/usecase/remove_from_favorites_usecase.dart';
 import '../domain/usecase/report_home_usecase.dart';
@@ -101,6 +102,12 @@ void initRegisterUseCase() {
 void initLoginUseCase() {
   if (GetIt.instance.isRegistered<LoginUseCase>() == false) {
     sl.registerFactory<LoginUseCase>(() => LoginUseCase(sl()));
+  }
+}
+
+void initPasswordResetUseCase() {
+  if (GetIt.instance.isRegistered<PasswordResetUseCase>() == false) {
+    sl.registerFactory<PasswordResetUseCase>(() => PasswordResetUseCase(sl()));
   }
 }
 

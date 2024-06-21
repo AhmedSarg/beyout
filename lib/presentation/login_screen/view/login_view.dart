@@ -1,7 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'package:temp_house/presentation/login_screen/viewmodel/states/login_states.dart';
+import 'package:temp_house/presentation/resources/assets_manager.dart';
+import 'package:temp_house/presentation/resources/color_manager.dart';
 
 import '../../../app/sl.dart';
 import '../../base/base_states.dart';
@@ -28,7 +31,7 @@ class LoginScreen extends StatelessWidget {
         ),
       ),
       body: BlocProvider(
-        create: (_) => LoginViewModel(sl(), sl())..start(),
+        create: (_) => LoginViewModel(sl(), sl(), sl())..start(),
         child: BlocConsumer<LoginViewModel, BaseStates>(
           listener: (context, state) {
             if (state is ErrorState) {
@@ -42,6 +45,24 @@ class LoginScreen extends StatelessWidget {
               );
             } else if (state is SocialLoginState) {
               Navigator.pushNamed(context, Routes.registerRoute);
+            } else if (state is ResetPasswordState) {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    content: Column(
+                      children: [
+                        Lottie.asset(LottieAssets.success),
+                        Text(
+                          'password reset link sent! check your email',
+                          style: AppTextStyles.baseStatesMessageTextStyle(
+                              context, ColorManager.white),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              );
             }
             baseListener(context, state);
           },

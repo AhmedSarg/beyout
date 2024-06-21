@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temp_house/domain/usecase/login_usecase.dart';
 import 'package:temp_house/presentation/base/base_states.dart';
+import '../../../domain/usecase/passwordReset_usecase.dart';
 
 import '../../../data/network/error_handler.dart';
 import '../../../domain/usecase/sign_with_google_usecase.dart';
@@ -15,9 +16,10 @@ class LoginViewModel extends BaseCubit
       BlocProvider.of<LoginViewModel>(context);
 
   final LoginUseCase _loginUseCase;
+  final PasswordResetUseCase _passwordResetUseCase;
   final SignWithGoogleUseCase _signWithGoogleUseCase;
 
-  LoginViewModel(this._loginUseCase, this._signWithGoogleUseCase);
+  LoginViewModel(this._loginUseCase, this._signWithGoogleUseCase,this._passwordResetUseCase);
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -74,6 +76,25 @@ class LoginViewModel extends BaseCubit
       },
     );
   }
+  void passwordReset() {
+    emit(LoadingState(displayType: DisplayType.popUpDialog));
+    _passwordResetUseCase(
+      PasswordResetUseCaseInput(
+        email: _emailController.text.trim(),
+      ),
+    ).then(
+          (value) {
+        value.fold(
+              (l) {
+            emit(ErrorState(failure: l, displayType: DisplayType.popUpDialog));
+          },
+              (r) {
+            emit(ResetPasswordState());
+          },
+        );
+      },
+    );
+  }
 
   Future<void> signInWithGoogle() async {
     emit(LoadingState(displayType: DisplayType.popUpDialog));
@@ -100,14 +121,6 @@ class LoginViewModel extends BaseCubit
     );
   }
 
-  Future<void> passwordReset() async {
-    try {
-      await FirebaseAuth.instance
-          .sendPasswordResetEmail(email: _emailController.text.trim());
-    } on FirebaseAuthException catch (e) {
-      print(e);
-    }
-  }
 }
 
 abstract class LoginViewModelInput {}

@@ -55,6 +55,11 @@ abstract class Repository {
     required String password,
   });
 
+
+  Future<Either<Failure, void>> passwordReset({
+    required String email,
+  });
+
   Future<Either<Failure, User?>> signInWithGoogle();
 
 
