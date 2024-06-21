@@ -67,7 +67,9 @@ class PersonalInfoViewModel extends BaseCubit
         email: _emailController.text.trim().isEmpty
             ? DataIntent.getUser().email
             : _emailController.text.trim(),
-        phoneNumber: DataIntent.getUser().phoneNumber,
+        phoneNumber: _phoneNumberController.text.trim().isEmpty
+            ? DataIntent.getUser().phoneNumber
+            : _phoneNumberController.text,
         pictureChanged: _imageChanged,
         picture: _userImage,
       ),

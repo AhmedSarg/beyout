@@ -405,6 +405,7 @@ class RepositoryImpl implements Repository {
           registeredBeforeError = null;
         }
         if (registeredBeforeError == null) {
+          print(phoneNumber);
           await _remoteDataSource.changeAccountInfo(
             userId: userId,
             email: email,
@@ -543,6 +544,7 @@ class RepositoryImpl implements Repository {
       return Left(ErrorHandler.handle(e).failure);
     }
   }
+
   @override
   Future<Either<Failure, void>> logout() async {
     try {

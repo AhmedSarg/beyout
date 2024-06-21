@@ -416,10 +416,6 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         await user.updateEmail(email);
       } catch (e) {
         print('Failed to update email in FirebaseAuth: $e');
-
-        await docRef.update({
-          'email': user.email,
-        });
         return;
       }
     }
