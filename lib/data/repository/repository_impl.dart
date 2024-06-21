@@ -87,6 +87,7 @@ class RepositoryImpl implements Repository {
           DataIntent.pushFireAuthUser(user);
           return Left(DataSource.MISSING_DATA.getFailure());
         } else {
+          await fetchCurrentUser();
           return Right(user);
         }
       } else {
@@ -531,6 +532,7 @@ class RepositoryImpl implements Repository {
     try {
       void response;
       await _cacheDataSource.logout();
+      await fetchCurrentUser();
       return Right(response);
     } catch (e) {
       return Left(ErrorHandler.handle(e).failure);

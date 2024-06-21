@@ -102,7 +102,7 @@ class PersonalInfoPageBody extends StatelessWidget {
                 textStyle: AppTextStyles.personalInfoBtn(context),
                 onTap: _viewModel.update,
               ),
-            )
+            ),
           ],
         ),
       ),

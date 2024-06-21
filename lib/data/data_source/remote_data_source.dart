@@ -139,6 +139,8 @@ abstract class RemoteDataSource {
   });
 
   Future<void> declineOffer({required String offerId});
+
+  Stream<Map<String, dynamic>> getOffersStream({required String userId});
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
@@ -403,44 +405,6 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     );
   }
 
-  // @override
-  // Future<void> changeAccountInfo({
-  //   required String userId,
-  //   required String email,
-  //   required String phoneNumber,
-  //   required bool pictureChanged,
-  //   File? picture,
-  // }) async {
-  //   print(userId);
-  //   DocumentReference docRef = _firestore.collection('users').doc(userId);
-  //   await docRef.update({
-  //     'email': email,
-  //     'phone_number': phoneNumber,
-  //   });
-  //   if (pictureChanged) {
-  //     String picturePath = '$userId-picture';
-  //     late TaskSnapshot imageUrl;
-  //     await docRef.get().then(
-  //       (value) async {
-  //         imageUrl = await _firebaseStorage
-  //             .ref('user_images')
-  //             .child(picturePath)
-  //             .putFile(
-  //               picture!,
-  //               SettableMetadata(contentType: 'image/jpeg'),
-  //             );
-  //       },
-  //     );
-  //     await docRef.update({
-  //       'image_path': await imageUrl.ref.getDownloadURL(),
-  //     });
-  //   }
-  //   await docRef.update({
-  //     'email': email,
-  //     'phone_number': phoneNumber,
-  //   });
-  // }
-
   @override
   Future<void> changeAccountInfo({
     required String userId,
@@ -532,7 +496,11 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   Future<List<Map<String, dynamic>>> getOffers({
     required String userId,
   }) async {
-    return await _firestore.collection('offers').where('owner_id').get().then(
+    return await _firestore
+        .collection('offers')
+        .where('owner_id', isEqualTo: userId)
+        .get()
+        .then(
       (value) {
         return value.docs.map((offer) {
           Map<String, dynamic> ret = offer.data();
@@ -555,6 +523,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       'owner_id': ownerId,
       'home_id': homeId,
       'price': price,
+      'time': DateTime.now(),
     });
   }
 
@@ -593,5 +562,24 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     UserCredential userCredential =
         await _firebaseAuth.signInWithCredential(credential);
     return userCredential.user;
+  }
+
+  @override
+  Stream<Map<String, dynamic>> getOffersStream({required userId}) {
+    return _firestore
+        .collection('offers')
+        .where('owner_id', isEqualTo: userId)
+        .orderBy('time', descending: false)
+        .snapshots()
+        .map(
+      (offersSnapshot) {
+        List<Map<String, dynamic>> offerList = offersSnapshot.docs.map(
+          (offerSnapshot) {
+            return offerSnapshot.data();
+          },
+        ).toList();
+        return offerList[0];
+      },
+    );
   }
 }
