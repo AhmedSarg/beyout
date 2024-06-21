@@ -141,9 +141,10 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   final FirebaseFirestore _firestore;
   final FirebaseStorage _firebaseStorage;
   final AppServiceClient _appServiceClient;
+  final FirebaseAuth _firebaseAuth;
 
   RemoteDataSourceImpl(
-      this._firestore, this._firebaseStorage, this._appServiceClient);
+      this._firestore, this._firebaseStorage, this._appServiceClient, this._firebaseAuth);
 
   @override
   Future<void> registerTenantToDataBase({
@@ -242,7 +243,10 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     required String email,
     required String password,
   }) async {
-    //todo create login logic
+    await _firebaseAuth.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
   }
 
 

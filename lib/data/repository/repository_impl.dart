@@ -137,22 +137,17 @@ class RepositoryImpl implements Repository {
   }) async {
     try {
       if (await _networkInfo.isConnected) {
-        await _remoteDataSource.login(email: email, password: password);
-        //todo remove the 8 lines below
-        return await fetchCurrentUser(email).then(
-          (value) {
-            return value.fold(
-              (l) => Left(l),
-              (r) => const Right(null),
-            );
-          },
+        void response;
+        await _remoteDataSource.login(
+          email: email,
+          password: password,
         );
-        //todo uncomment the 2 lines below
-        //await fetchCurrentUser(email);
-        //return const Right(null);
+        return Right(response);
       } else {
         return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
       }
+    } on FirebaseAuthException {
+      return Left(DataSource.LOGIN_FAILED.getFailure());
     } catch (e) {
       return Left(ErrorHandler.handle(e).failure);
     }

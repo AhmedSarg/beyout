@@ -30,7 +30,10 @@ enum DataSource {
   EMAIL_LOGIN_FAILED,
   INVALID_VERIFICATION_CODE,
   TOKEN_EXPIRED,
+  LOGIN_FAILED,
+
   DEFAULT
+
 }
 
 class ResponseCode {
@@ -56,6 +59,8 @@ class ResponseCode {
   static const int EMAIL_AND_PHONE_NUMBER_ALREADY_EXISTS = -13;
   static const int INVALID_VERIFICATION_CODE = -14;
   static const int TOKEN_EXPIRED = -15;
+  static const int LOGIN_FAILED = -17;
+
 }
 
 class ResponseMessage {
@@ -72,6 +77,7 @@ class ResponseMessage {
       AppStrings.internalServerError; // failure, crash in server side
   static const String NOT_FOUND =
       AppStrings.notFoundError; // failure, crash in server side
+  static const String LOGIN_FAILED = AppStrings.loginFailed;
 
   // local status code
   static const String CONNECT_TIMEOUT = AppStrings.timeoutError;
@@ -142,6 +148,12 @@ extension DataSourceExtension on DataSource {
           ResponseCode.CANCEL,
           ResponseMessage.CANCEL,
         );
+      // case DataSource.LOGIN_FAILED:
+      //   return Failure(ResponseCode.LOGIN_FAILED,
+      //       ResponseMessage.LOGIN_FAILED);
+
+
+
       case DataSource.RECIEVE_TIMEOUT:
         return Failure(
           ResponseCode.RECIEVE_TIMEOUT,
@@ -192,6 +204,12 @@ extension DataSourceExtension on DataSource {
           ResponseCode.TOKEN_EXPIRED,
           ResponseMessage.TOKEN_EXPIRED,
         );
+
+      case DataSource.LOGIN_FAILED:
+        return Failure(
+            ResponseCode.LOGIN_FAILED ,
+            ResponseMessage.LOGIN_FAILED);
+
       case DataSource.DEFAULT:
         return Failure(
           ResponseCode.DEFAULT,

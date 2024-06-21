@@ -66,7 +66,7 @@ Future<void> initAppModule() async {
 
   sl.registerLazySingleton<AppServiceClient>(() => AppServiceClientImpl(sl()));
   sl.registerLazySingleton<RemoteDataSource>(
-      () => RemoteDataSourceImpl(sl(), sl(), sl()));
+      () => RemoteDataSourceImpl(sl(), sl(), sl(),sl()));
   sl.registerLazySingleton<RuntimeDataSource>(() => RuntimeDataSourceImpl());
   sl.registerLazySingleton<CacheDataSource>(
     () => CacheDataSourceImpl(sl()),

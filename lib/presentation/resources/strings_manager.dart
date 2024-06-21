@@ -234,6 +234,7 @@ class AppStrings {
   static const needHelpScreenName = "needHelpScreenName";
   static const paymentDetailsScreen = "paymentDetailsScreen";
   static const logOut = "logOut";
+  static const String loginFailed = "loginFailed";
 
   // about app screen
   static const aboutAppItem = "aboutAppItem";
