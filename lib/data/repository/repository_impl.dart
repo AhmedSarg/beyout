@@ -112,11 +112,8 @@ class RepositoryImpl implements Repository {
   }) async {
     try {
       if (await _networkInfo.isConnected) {
-        print(-1);
         String uuid = _uuidGenerator.v1();
         if (userType == UserRole.tenant) {
-          print(-2);
-          print(password);
           await _remoteDataSource.registerTenantToDataBase(
             uuid: uuid,
             phoneNumber: phoneNumber,
@@ -129,10 +126,7 @@ class RepositoryImpl implements Repository {
             age: age,
             martialStatus: martialStatus!,
           );
-          print(-3);
         } else {
-          print(-4);
-          print(password);
           await _remoteDataSource.registerOwnerToDataBase(
             uuid: uuid,
             phoneNumber: phoneNumber,
@@ -142,11 +136,8 @@ class RepositoryImpl implements Repository {
             gender: gender,
             age: age,
           );
-          print(-5);
         }
-        print(-6);
         await fetchCurrentUser(email);
-        print(-7);
         return const Right(null);
       } else {
         return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
@@ -405,7 +396,6 @@ class RepositoryImpl implements Repository {
           registeredBeforeError = null;
         }
         if (registeredBeforeError == null) {
-          print(phoneNumber);
           await _remoteDataSource.changeAccountInfo(
             userId: userId,
             email: email,
