@@ -19,7 +19,6 @@ import '../main_layout/pages/notifications_screen/view/notifications_view.dart';
 import '../main_layout/pages/profile_screen/view/widgets/about_screen.dart';
 import '../main_layout/pages/profile_screen/view/widgets/need_help_screen.dart';
 import '../main_layout/pages/profile_screen/view/widgets/payment_screen.dart';
-import '../map_screen/view/map_screen.dart';
 import '../map_screen/view/map_screen_share.dart';
 import '../onboarding_screen/view/onboarding_view.dart';
 import '../payment_details/view/payment_details_view.dart';
@@ -117,8 +116,6 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const AboutScreen());
       case Routes.needHelpScreenRoute:
         return MaterialPageRoute(builder: (_) => const NeedHelpScreen());
-      case Routes.googleMapScreenRoute:
-        return MaterialPageRoute(builder: (_) => const GoogleMapScreen());
       case Routes.googleMapScreenShareRoute:
         return MaterialPageRoute(builder: (_) => const GoogleMapScreenShare());
       case Routes.paymentScreenRoute:

@@ -41,6 +41,9 @@ class HomesMapViewModel extends BaseCubit
 
   BitmapDescriptor? _pin;
 
+
+
+
   _fetchUserLocation() async {
     Position userPosition = await Geolocator.getCurrentPosition();
     _userLocation = LatLng(userPosition.latitude, userPosition.longitude);
@@ -51,6 +54,8 @@ class HomesMapViewModel extends BaseCubit
       CameraUpdate.newLatLng(_userLocation),
     );
   }
+
+
 
   Future<BitmapDescriptor> _bitmapDescriptorFromSvgAsset(
     String assetName, [

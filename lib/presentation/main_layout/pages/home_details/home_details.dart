@@ -3,6 +3,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:lottie/lottie.dart';
 import 'package:temp_house/presentation/base/base_states.dart';
 import 'package:temp_house/presentation/base/cubit_listener.dart';
 import 'package:temp_house/presentation/chat_screen/chat_service/chat_services.dart';
@@ -182,17 +184,22 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                                         width: AppSize.infinity,
                                         child: ElevatedButton(
                                           onPressed: () {
-                                            if (formKey.currentState!.validate()) {
+                                            if (formKey.currentState!
+                                                .validate()) {
                                               viewModel.sendOffer(
-                                                int.parse(priceController.text.trim()),
+                                                int.parse(priceController.text
+                                                    .trim()),
                                               );
                                             }
                                           },
                                           style: ElevatedButton.styleFrom(
-                                            backgroundColor: ColorManager.primary,
+                                            backgroundColor:
+                                                ColorManager.primary,
                                             foregroundColor: ColorManager.white,
                                             shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(AppSize.s15),
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      AppSize.s15),
                                             ),
                                           ),
                                           child: Text(
@@ -203,7 +210,6 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                                             ),
                                           ),
                                         ),
-
                                       ),
                                     ],
                                   ),
@@ -485,11 +491,53 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
                                   ),
                                 ),
                                 InkWell(
-                                  onTap: () {
+                                  onTap: () async {
                                     DataIntent.pushInitialLocation(
                                         viewModel.getHome.coordinates);
                                     Navigator.pushNamed(
                                         context, Routes.homesMapRoute);
+
+                                    if (await checkPermission(context)) {
+                                      Navigator.pushNamed(
+                                          context, Routes.homesMapRoute);
+                                    } else {
+                                      await requestPermission(context);
+                                      if (await checkPermission(context)) {
+                                        Navigator.pushNamed(
+                                            context, Routes.homesMapRoute);
+                                      } else {
+                                        if (await Geolocator
+                                            .isLocationServiceEnabled()) {
+                                          showDialog(
+                                            context: context,
+                                            builder: (context) => AlertDialog(
+                                              content: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  Lottie.asset(
+                                                      LottieAssets.error,
+                                                      repeat: false),
+                                                  const Text(
+                                                    'Please enable Location Services and Location Permissions',
+                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                ],
+                                              ),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () async {
+                                                    await Geolocator
+                                                        .openAppSettings();
+                                                  },
+                                                  child: const Text(
+                                                      'Open Settings'),
+                                                )
+                                              ],
+                                            ),
+                                          );
+                                        }
+                                      }
+                                    }
                                   },
                                   child: Container(
                                     width:
@@ -537,6 +585,42 @@ class _HomeDetailsScreenState extends State<HomeDetailsScreen> {
         },
       ),
     );
+  }
+
+
+  Future<bool> checkPermission(BuildContext context) async {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        content: Lottie.asset(LottieAssets.loading),
+      ),
+    );
+    LocationPermission locationPermission = await Geolocator.checkPermission();
+    bool locationServices = await Geolocator.isLocationServiceEnabled();
+    print(locationPermission);
+    print(locationServices);
+    if (locationPermission == LocationPermission.deniedForever ||
+        locationPermission == LocationPermission.denied ||
+        !locationServices) {
+      Navigator.pop(context);
+      return false;
+    } else {
+      Navigator.pop(context);
+      return true;
+    }
+  }
+
+  requestPermission(BuildContext context) async {
+    bool services = await Geolocator.isLocationServiceEnabled();
+    if (!services) {
+      await Geolocator.openLocationSettings();
+    }
+    LocationPermission locationPermission = await Geolocator.checkPermission();
+    if (locationPermission == LocationPermission.deniedForever) {
+      await Geolocator.openAppSettings();
+    } else if (locationPermission == LocationPermission.denied) {
+      await Geolocator.requestPermission();
+    }
   }
 }
 

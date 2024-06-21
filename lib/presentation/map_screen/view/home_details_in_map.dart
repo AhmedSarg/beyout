@@ -72,7 +72,7 @@ class _GoogleMapScreenState extends State<GoogleMapHomeDetailsScreen> {
                           AppTextStyles.googleMapHomeTitleDescriptionTextStyle(
                               context),
                     ),
-                    Container(
+                    SizedBox(
                       width: double.infinity,
                       child: Card(
                         child: Column(
