@@ -44,7 +44,7 @@ dependencies:
   intl_phone_field:
   permission_handler: ^11.3.1
   firebase_messaging: ^15.0.1
-  google_sign_in: ^6.2.1
+  google_sign_in:
 
 dev_dependencies:
   flutter_test:

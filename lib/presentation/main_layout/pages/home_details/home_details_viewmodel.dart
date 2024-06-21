@@ -6,12 +6,10 @@ import 'package:temp_house/presentation/base/base_cubit.dart';
 import 'package:temp_house/presentation/base/base_states.dart';
 import 'package:temp_house/presentation/common/data_intent/data_intent.dart';
 
-import '../notifications_screen/notiFun.dart';
-
-class HomeDetailsViewModel extends BaseCubit implements HomeDetailsViewModelOutput {
+class HomeDetailsViewModel extends BaseCubit
+    implements HomeDetailsViewModelOutput {
   static HomeDetailsViewModel get(context) => BlocProvider.of(context);
   final SendOfferUseCase _sendOfferUseCase = sl<SendOfferUseCase>();
-  final NotificationService _notificationService = NotificationService();
 
   late HomeModel _home;
 
@@ -30,18 +28,14 @@ class HomeDetailsViewModel extends BaseCubit implements HomeDetailsViewModelOutp
         price: price,
       ),
     ).then(
-          (value) {
+      (value) {
         value.fold(
-              (l) {
+          (l) {
             emit(ErrorState(failure: l, displayType: DisplayType.popUpDialog));
           },
-              (r) {
-            emit(SuccessState('Offer Sent Successfully\nWait for a Notification'));
-            _notificationService.sendNotification(
-              _home.ownerId,
-              DataIntent.getUser().username,
-              'You have received a new offer for your home!',
-            );
+          (r) {
+            emit(SuccessState(
+                'Offer Sent Successfully\nWait for a Notification'));
           },
         );
       },
