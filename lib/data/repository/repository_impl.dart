@@ -543,4 +543,14 @@ class RepositoryImpl implements Repository {
       return Left(ErrorHandler.handle(e).failure);
     }
   }
+  @override
+  Future<Either<Failure, void>> logout() async {
+    try {
+      void response;
+      await _cacheDataSource.logout();
+      return Right(response);
+    } catch (e) {
+      return Left(ErrorHandler.handle(e).failure);
+    }
+  }
 }

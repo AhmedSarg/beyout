@@ -404,8 +404,6 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     File? picture,
   }) async {
     DocumentReference docRef = _firestore.collection('users').doc(userId);
-
-    // Step 1: Update Firestore with email and phone number
     await docRef.update({
       'email': email,
       'phone_number': phoneNumber,
