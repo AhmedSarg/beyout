@@ -383,7 +383,6 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       },
     );
   }
-
   @override
   Future<void> changeAccountInfo({
     required String userId,
@@ -393,18 +392,40 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     File? picture,
   }) async {
     DocumentReference docRef = _firestore.collection('users').doc(userId);
+
+    // Step 1: Update Firestore with email and phone number
+    await docRef.update({
+      'email': email,
+      'phone_number': phoneNumber,
+    });
+
+    User? user = _firebaseAuth.currentUser;
+
+    if (user != null && email != user.email) {
+      try {
+        await user.updateEmail(email);
+      } catch (e) {
+        print('Failed to update email in FirebaseAuth: $e');
+
+        await docRef.update({
+          'email': user.email,
+        });
+        return;
+      }
+    }
+
     if (pictureChanged) {
       String picturePath = '$userId-picture';
       late TaskSnapshot imageUrl;
       await docRef.get().then(
-        (value) async {
+            (value) async {
           imageUrl = await _firebaseStorage
               .ref('user_images')
               .child(picturePath)
               .putFile(
-                picture!,
-                SettableMetadata(contentType: 'image/jpeg'),
-              );
+            picture!,
+            SettableMetadata(contentType: 'image/jpeg'),
+          );
         },
       );
       await docRef.update({
@@ -415,7 +436,42 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       'email': email,
       'phone_number': phoneNumber,
     });
+
   }
+
+  // @override
+  // Future<void> changeAccountInfo({
+  //   required String userId,
+  //   required String email,
+  //   required String phoneNumber,
+  //   required bool pictureChanged,
+  //   File? picture,
+  // }) async {
+  //   DocumentReference docRef = _firestore.collection('users').doc(userId);
+  //
+  //   if (pictureChanged) {
+  //     String picturePath = '$userId-picture';
+  //     late TaskSnapshot imageUrl;
+  //     await docRef.get().then(
+  //       (value) async {
+  //         imageUrl = await _firebaseStorage
+  //             .ref('user_images')
+  //             .child(picturePath)
+  //             .putFile(
+  //               picture!,
+  //               SettableMetadata(contentType: 'image/jpeg'),
+  //             );
+  //       },
+  //     );
+  //     await docRef.update({
+  //       'image_path': await imageUrl.ref.getDownloadURL(),
+  //     });
+  //   }
+  //   await docRef.update({
+  //     'email': email,
+  //     'phone_number': phoneNumber,
+  //   });
+  // }
 
   @override
   Future<RegisteredBeforeError?> doesUserExists({

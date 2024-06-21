@@ -156,7 +156,7 @@ class RepositoryImpl implements Repository {
           email: email,
           password: password,
         );
-        await fetchCurrentUser(email);
+        // await fetchCurrentUser(email);
         return Right(response);
       } else {
         return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
@@ -178,6 +178,7 @@ class RepositoryImpl implements Repository {
         await _remoteDataSource.passwordReset(
           email: email,
         );
+        fetchCurrentUser(email);
         return Right(response);
       } else {
         return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());

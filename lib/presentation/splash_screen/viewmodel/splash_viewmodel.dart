@@ -21,16 +21,17 @@ class SplashViewModel extends BaseCubit
       (value) {
         value.fold(
           (l) {
-            ErrorState(
+            emit(ErrorState(
               failure: l,
               retry: () {
                 start();
               },
-            );
+            ));
           },
           (r) {
             if (r == null) {
               emit(UserNotSignedState());
+
             } else {
               emit(UserSignedState());
             }
