@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:temp_house/presentation/login_screen/viewmodel/login_viewmodel.dart';
 
@@ -53,7 +52,7 @@ class ForgotPassword extends StatelessWidget {
                 hint: AppStrings.forgotPasswordEmailValue.tr(),
                 backgroundColor: ColorManager.darkGrey.withOpacity(.1),
                 hintTextStyle:
-                AppTextStyles.forgotPasswordEmailValueTextStyle(context),
+                    AppTextStyles.forgotPasswordEmailValueTextStyle(context),
                 cursorColor: ColorManager.primary.withOpacity(.3),
               ),
             ),
@@ -63,7 +62,6 @@ class ForgotPassword extends StatelessWidget {
             MainButton(
               text: AppStrings.forgotPasswordSendCode.tr(),
               onTap: () {
-                print(emailFocusNode.hasFocus);
                 if (formKey.currentState!.validate()) {
                   viewModel.passwordReset();
                   // showModalBottomSheet(

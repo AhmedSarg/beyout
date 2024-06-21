@@ -46,17 +46,22 @@ class LoginScreen extends StatelessWidget {
             } else if (state is SocialLoginState) {
               Navigator.pushNamed(context, Routes.registerRoute);
             } else if (state is ResetPasswordState) {
+              Navigator.pop(context);
+              Navigator.pop(context);
               showDialog(
                 context: context,
                 builder: (context) {
                   return AlertDialog(
+                    backgroundColor: ColorManager.primary,
                     content: Column(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         Lottie.asset(LottieAssets.success),
                         Text(
-                          'password reset link sent! check your email',
+                          'Password reset link sent! check your email',
                           style: AppTextStyles.baseStatesMessageTextStyle(
                               context, ColorManager.white),
+                          textAlign: TextAlign.center,
                         ),
                       ],
                     ),

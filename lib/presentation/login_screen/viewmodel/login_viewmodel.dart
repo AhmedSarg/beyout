@@ -1,11 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temp_house/domain/usecase/login_usecase.dart';
 import 'package:temp_house/presentation/base/base_states.dart';
-import '../../../domain/usecase/passwordReset_usecase.dart';
 
 import '../../../data/network/error_handler.dart';
+import '../../../domain/usecase/passwordReset_usecase.dart';
 import '../../../domain/usecase/sign_with_google_usecase.dart';
 import '../../base/base_cubit.dart';
 import 'states/login_states.dart';
@@ -19,7 +18,8 @@ class LoginViewModel extends BaseCubit
   final PasswordResetUseCase _passwordResetUseCase;
   final SignWithGoogleUseCase _signWithGoogleUseCase;
 
-  LoginViewModel(this._loginUseCase, this._signWithGoogleUseCase,this._passwordResetUseCase);
+  LoginViewModel(this._loginUseCase, this._signWithGoogleUseCase,
+      this._passwordResetUseCase);
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -76,19 +76,20 @@ class LoginViewModel extends BaseCubit
       },
     );
   }
+
   void passwordReset() {
     emit(LoadingState(displayType: DisplayType.popUpDialog));
     _passwordResetUseCase(
       PasswordResetUseCaseInput(
-        email: _emailController.text.trim(),
+        email: _forgotPasswordEmailController.text.trim(),
       ),
     ).then(
-          (value) {
+      (value) {
         value.fold(
-              (l) {
+          (l) {
             emit(ErrorState(failure: l, displayType: DisplayType.popUpDialog));
           },
-              (r) {
+          (r) {
             emit(ResetPasswordState());
           },
         );
@@ -120,7 +121,6 @@ class LoginViewModel extends BaseCubit
       },
     );
   }
-
 }
 
 abstract class LoginViewModelInput {}
