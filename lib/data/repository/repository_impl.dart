@@ -156,6 +156,7 @@ class RepositoryImpl implements Repository {
           email: email,
           password: password,
         );
+        await fetchCurrentUser(email);
         return Right(response);
       } else {
         return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
