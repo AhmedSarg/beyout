@@ -68,6 +68,7 @@ class RegisterViewModel extends BaseCubit
             : null,
         age: int.parse(_ageController.text.trim()),
         martialStatus: _martialStatusController?.text.trim(),
+        image: _fireAuthUser?.photoURL,
         userType: _registerType,
       ),
     ).then(

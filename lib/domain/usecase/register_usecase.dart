@@ -22,6 +22,7 @@ class RegisterUseCase extends BaseUseCase<RegisterUseCaseInput, void> {
       salary: input.salary,
       age: input.age,
       martialStatus: input.martialStatus,
+      image: input.image,
       userType: input.userType,
     );
   }
@@ -37,6 +38,7 @@ class RegisterUseCaseInput {
   final int? salary;
   final int age;
   final String? martialStatus;
+  final String? image;
   final UserRole userType;
 
   RegisterUseCaseInput({
@@ -49,6 +51,7 @@ class RegisterUseCaseInput {
     required this.salary,
     required this.age,
     required this.martialStatus,
+    required this.image,
     required this.userType,
   });
 }

@@ -6,11 +6,9 @@ import '../../../../../app/sl.dart';
 import '../../../../base/base_states.dart';
 import '../../../../base/cubit_builder.dart';
 import '../../../../base/cubit_listener.dart';
-import '../../../../login_screen/viewmodel/login_viewmodel.dart';
 import '../../../../resources/routes_manager.dart';
 import '../viewmodel/stats.dart';
 import '../viewmodel/viewmodel.dart';
-
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -40,10 +38,8 @@ class ProfileScreen extends StatelessWidget {
               ),
             );
           },
-
         ),
       ),
     );
   }
-
 }

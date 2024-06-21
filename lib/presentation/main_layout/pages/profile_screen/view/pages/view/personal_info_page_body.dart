@@ -75,7 +75,6 @@ class PersonalInfoPageBody extends StatelessWidget {
                   child: MainTextField(
                     controller: _viewModel.getEmailController,
                     focusNode: _emailFocusNode,
-                    nextFocus: _phoneNumberFocusNode,
                     backgroundColor: Colors.transparent,
                     hint: AppStrings.personalInfoEmailHint.tr(),
                   ),

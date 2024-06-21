@@ -6,6 +6,7 @@ class CountrySelectionModal {
     showCountryPicker(
       context: context,
       showPhoneCode: false,
+      exclude: ['IL'],
       onSelect: (Country country) {
         onSelect(country.name);
       },

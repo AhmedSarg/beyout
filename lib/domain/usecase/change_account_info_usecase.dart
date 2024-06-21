@@ -17,8 +17,7 @@ class ChangeAccountInfoUseCase
       ChangeAccountInfoUseCaseInput input) async {
     return _repository.changeAccountInfo(
       userId: input.userId,
-      emailChanged: input.emailChanged,
-      email: input.email,
+      username: input.username,
       phoneNumber: input.phoneNumber,
       pictureChanged: input.pictureChanged,
       picture: input.picture,
@@ -28,16 +27,14 @@ class ChangeAccountInfoUseCase
 
 class ChangeAccountInfoUseCaseInput {
   final String userId;
-  final bool emailChanged;
-  final String email;
+  final String username;
   final String phoneNumber;
   final bool pictureChanged;
   final File? picture;
 
   ChangeAccountInfoUseCaseInput({
     required this.userId,
-    required this.emailChanged,
-    required this.email,
+    required this.username,
     required this.phoneNumber,
     required this.pictureChanged,
     required this.picture,

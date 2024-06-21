@@ -18,8 +18,8 @@ class PersonalInfoViewModel extends BaseCubit
   final ChangeAccountInfoUseCase _changeAccountInfoUseCase =
       sl<ChangeAccountInfoUseCase>();
 
-  final TextEditingController _emailController = TextEditingController(
-    text: DataIntent.getUser().email,
+  final TextEditingController _usernameController = TextEditingController(
+    text: DataIntent.getUser().username,
   );
   final TextEditingController _phoneNumberController = TextEditingController(
     text: DataIntent.getUser().phoneNumber,
@@ -62,11 +62,9 @@ class PersonalInfoViewModel extends BaseCubit
     await _changeAccountInfoUseCase(
       ChangeAccountInfoUseCaseInput(
         userId: DataIntent.getUser().uid,
-        emailChanged:
-            _emailController.text.trim() != DataIntent.getUser().email,
-        email: _emailController.text.trim().isEmpty
-            ? DataIntent.getUser().email
-            : _emailController.text.trim(),
+        username: _usernameController.text.trim().isEmpty
+            ? DataIntent.getUser().username
+            : _usernameController.text.trim(),
         phoneNumber: _phoneNumberController.text.trim().isEmpty
             ? DataIntent.getUser().phoneNumber
             : _phoneNumberController.text,
@@ -98,7 +96,7 @@ class PersonalInfoViewModel extends BaseCubit
   void start() {}
 
   @override
-  TextEditingController get getEmailController => _emailController;
+  TextEditingController get getEmailController => _usernameController;
 
   @override
   TextEditingController get getPhoneNumberController => _phoneNumberController;

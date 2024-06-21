@@ -108,6 +108,7 @@ class RepositoryImpl implements Repository {
     required int? salary,
     required int age,
     required String? martialStatus,
+    required String? image,
     required UserRole userType,
   }) async {
     try {
@@ -125,6 +126,7 @@ class RepositoryImpl implements Repository {
             salary: salary!,
             age: age,
             martialStatus: martialStatus!,
+            image: image,
           );
         } else {
           await _remoteDataSource.registerOwnerToDataBase(
@@ -135,6 +137,7 @@ class RepositoryImpl implements Repository {
             username: username,
             gender: gender,
             age: age,
+            image: image,
           );
         }
         await fetchCurrentUser(email);
@@ -380,34 +383,22 @@ class RepositoryImpl implements Repository {
   @override
   Future<Either<Failure, void>> changeAccountInfo({
     required String userId,
-    required bool emailChanged,
-    required String email,
+    required String username,
     required String phoneNumber,
     required bool pictureChanged,
     File? picture,
   }) async {
     try {
       if (await _networkInfo.isConnected) {
-        RegisteredBeforeError? registeredBeforeError;
-        if (emailChanged) {
-          registeredBeforeError =
-              await _remoteDataSource.doesUserExists(email: email);
-        } else {
-          registeredBeforeError = null;
-        }
-        if (registeredBeforeError == null) {
-          await _remoteDataSource.changeAccountInfo(
-            userId: userId,
-            email: email,
-            phoneNumber: phoneNumber,
-            pictureChanged: pictureChanged,
-            picture: picture,
-          );
-          await fetchCurrentUser(email);
-          return const Right(null);
-        } else {
-          return Left(DataSource.EMAIL_ALREADY_EXISTS.getFailure());
-        }
+        await _remoteDataSource.changeAccountInfo(
+          userId: userId,
+          username: username,
+          phoneNumber: phoneNumber,
+          pictureChanged: pictureChanged,
+          picture: picture,
+        );
+        await fetchCurrentUser(DataIntent.getUser().email);
+        return const Right(null);
       } else {
         return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
       }

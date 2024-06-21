@@ -36,6 +36,7 @@ abstract class Repository {
     required int? salary,
     required int age,
     required String? martialStatus,
+    required String? image,
     required UserRole userType,
   });
 
@@ -82,8 +83,7 @@ abstract class Repository {
 
   Future<Either<Failure, void>> changeAccountInfo({
     required String userId,
-    required bool emailChanged,
-    required String email,
+    required String username,
     required String phoneNumber,
     required bool pictureChanged,
     File? picture,
@@ -116,5 +116,4 @@ abstract class Repository {
   Future<Either<Failure, void>> declineOffer({required String offerId});
 
   Future<Either<Failure, void>> logout();
-
 }
