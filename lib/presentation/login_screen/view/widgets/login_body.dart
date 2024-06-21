@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-
 import '../../../common/validators/validators.dart';
 import '../../../common/widget/main_button.dart';
 import '../../../common/widget/main_text_field.dart';

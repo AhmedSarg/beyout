@@ -10,7 +10,6 @@ import '../../../resources/color_manager.dart';
 import '../../../resources/strings_manager.dart';
 import '../../../resources/text_styles.dart';
 import '../../../resources/values_manager.dart';
-import 'reset_password.dart';
 
 class ForgotPassword extends StatelessWidget {
   const ForgotPassword({
@@ -47,7 +46,6 @@ class ForgotPassword extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
               child: MainTextField(
                 maxLines: 1,
-
                 controller: viewModel.getForgotPasswordEmailController,
                 focusNode: emailFocusNode,
                 textInputType: TextInputType.emailAddress,
@@ -55,7 +53,7 @@ class ForgotPassword extends StatelessWidget {
                 hint: AppStrings.forgotPasswordEmailValue.tr(),
                 backgroundColor: ColorManager.darkGrey.withOpacity(.1),
                 hintTextStyle:
-                    AppTextStyles.forgotPasswordEmailValueTextStyle(context),
+                AppTextStyles.forgotPasswordEmailValueTextStyle(context),
                 cursorColor: ColorManager.primary.withOpacity(.3),
               ),
             ),
@@ -67,20 +65,20 @@ class ForgotPassword extends StatelessWidget {
               onTap: () {
                 print(emailFocusNode.hasFocus);
                 if (formKey.currentState!.validate()) {
-                  Navigator.pop(context);
-                  showModalBottomSheet(
-                    isScrollControlled: true,
-                    context: context,
-                    builder: (context) => Form(
-                      key: formKey,
-                      child: ResetPassword(
-                        viewModel: viewModel,
-                        formKey: formKey,
-                        passwordFocusNode: FocusNode(),
-                        confirmPasswordFocusNode: FocusNode(),
-                      ),
-                    ),
-                  );
+                  viewModel.passwordReset();
+                  // showModalBottomSheet(
+                  //   isScrollControlled: true,
+                  //   context: context,
+                  //   builder: (context) => Form(
+                  //     key: GlobalKey<FormState>(),
+                  //     child: ResetPassword(
+                  //       viewModel: viewModel,
+                  //       formKey: GlobalKey<FormState>(),
+                  //       passwordFocusNode: FocusNode(),
+                  //       confirmPasswordFocusNode: FocusNode(),
+                  //     ),
+                  //   ),
+                  // );
                 }
               },
               textStyle: AppTextStyles.forgotPasswordSendCodeTextStyle(context),

@@ -1,12 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:temp_house/data/network/error_handler.dart';
 import 'package:temp_house/domain/usecase/login_usecase.dart';
 import 'package:temp_house/presentation/base/base_states.dart';
-import 'package:temp_house/presentation/login_screen/viewmodel/states/login_states.dart';
 
+import '../../../data/network/error_handler.dart';
 import '../../../domain/usecase/sign_with_google_usecase.dart';
 import '../../base/base_cubit.dart';
+import 'states/login_states.dart';
 
 class LoginViewModel extends BaseCubit
     implements LoginViewModelInput, LoginViewModelOutput {
@@ -98,6 +99,16 @@ class LoginViewModel extends BaseCubit
       },
     );
   }
+
+
+  Future<void> passwordReset() async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: _emailController.text.trim());
+    } on FirebaseAuthException catch (e) {
+      print(e);
+    }
+  }
+
 }
 
 abstract class LoginViewModelInput {}
@@ -113,3 +124,5 @@ abstract class LoginViewModelOutput {
 
   TextEditingController get getResetPasswordConfirmController;
 }
+
+abstract class LoginViewModelOutput {}
