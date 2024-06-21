@@ -36,6 +36,7 @@ import '../domain/usecase/report_home_usecase.dart';
 import '../domain/usecase/send_offer_usecase.dart';
 import '../domain/usecase/share_post_usecase.dart';
 // import '../domain/usecase/sign_with_google_usecase.dart';
+import '../domain/usecase/sign_with_google_usecase.dart';
 import 'date_ntp.dart';
 
 final sl = GetIt.instance;
@@ -66,7 +67,7 @@ Future<void> initAppModule() async {
 
   sl.registerLazySingleton<AppServiceClient>(() => AppServiceClientImpl(sl()));
   sl.registerLazySingleton<RemoteDataSource>(
-      () => RemoteDataSourceImpl(sl(), sl(), sl()));
+      () => RemoteDataSourceImpl(sl(), sl(), sl(), sl()));
   sl.registerLazySingleton<RuntimeDataSource>(() => RuntimeDataSourceImpl());
   sl.registerLazySingleton<CacheDataSource>(
     () => CacheDataSourceImpl(sl()),
@@ -85,9 +86,10 @@ void initGetCurrentUserUseCase() {
 }
 
 void initSignWithGoogleUseCase() {
-  // if (GetIt.instance.isRegistered<SignWithGoogleUseCase>() == false) {
-  //   sl.registerFactory<SignWithGoogleUseCase>(() => SignWithGoogleUseCase(sl()));
-  // }
+  if (GetIt.instance.isRegistered<SignWithGoogleUseCase>() == false) {
+    sl.registerFactory<SignWithGoogleUseCase>(
+        () => SignWithGoogleUseCase(sl()));
+  }
 }
 
 void initRegisterUseCase() {

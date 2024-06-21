@@ -97,7 +97,7 @@ class LoginBody extends StatelessWidget {
                   const Spacer(),
                   TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, Routes.registerRoute);
+                      Navigator.pushNamed(context, Routes.selectionRoute);
                     },
                     child: Text(
                       AppStrings.loginScreenCreateAccount.tr(),
@@ -129,9 +129,7 @@ class LoginBody extends StatelessWidget {
                     ),
                     const SizedBox(height: AppSize.s10),
                     SocialContainer(
-                      onTap: () {
-                        // viewModel.signInWithGoogle();
-                      },
+                      onTap: viewModel.signInWithGoogle,
                       title: AppStrings.loginScreenGoogle.tr(),
                       image: SVGAssets.gmail,
                     ),

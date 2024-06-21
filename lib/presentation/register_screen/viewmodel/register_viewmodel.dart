@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:temp_house/presentation/base/base_states.dart';
 
 import '../../../domain/models/enums.dart';
@@ -11,7 +10,7 @@ import '../../common/data_intent/data_intent.dart';
 import '../states/register_states.dart';
 
 class RegisterViewModel extends BaseCubit
-    implements RegisterTenantViewModelInput, RegisterTenantViewModelOutput {
+    implements RegisterViewModelInput, RegisterViewModelOutput {
   static RegisterViewModel get(context) => BlocProvider.of(context);
   final RegisterUseCase _registerUseCase;
 
@@ -29,8 +28,17 @@ class RegisterViewModel extends BaseCubit
   final TextEditingController _ageController = TextEditingController();
   TextEditingController? _martialStatusController;
 
+  User? _fireAuthUser;
+  String? _fireAuthUsername;
+  String? _fireAuthEmail;
+  String? _fireAuthPhoneNumber;
+
   @override
   void start() {
+    _fireAuthUser = DataIntent.popFireAuthUser();
+    _fireAuthUsername = _fireAuthUser?.displayName;
+    _fireAuthEmail = _fireAuthUser?.email;
+    _fireAuthPhoneNumber = _fireAuthUser?.phoneNumber;
     _registerType = DataIntent.getUserRole()!;
     if (_registerType == UserRole.tenant) {
       _jobController = TextEditingController();
@@ -46,9 +54,9 @@ class RegisterViewModel extends BaseCubit
     emit(LoadingState(displayType: DisplayType.popUpDialog));
     await _registerUseCase(
       RegisterUseCaseInput(
-        username: _usernameController.text.trim(),
-        email: _emailController.text.trim(),
-        phoneNumber: _phoneNumberController.text.trim(),
+        username: _fireAuthUsername ?? _usernameController.text.trim(),
+        email: _fireAuthEmail ?? _emailController.text.trim(),
+        phoneNumber: _fireAuthPhoneNumber ?? _phoneNumberController.text.trim(),
         gender: _genderController.text.toLowerCase() == 'female'
             ? Gender.female
             : Gender.male,
@@ -78,28 +86,6 @@ class RegisterViewModel extends BaseCubit
       },
     );
   }
-
-  Future<void> signInWithGoogle() async {
-    emit(LoadingState(displayType: DisplayType.popUpDialog));
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-    if (googleUser == null) {
-      return;
-    }
-
-    final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-
-    final AuthCredential credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-
-    try {
-      await FirebaseAuth.instance.signInWithCredential(credential);
-      emit(SuccessState('Signed in with Google successfully'));
-    } catch (e) {
-    }
-  }
-
 
   @override
   UserRole get getRegisterType => _registerType;
@@ -131,11 +117,23 @@ class RegisterViewModel extends BaseCubit
 
   @override
   TextEditingController get getUsernameController => _usernameController;
+
+  @override
+  User? get getFireAuthUser => _fireAuthUser;
+
+  @override
+  String? get getFireAuthUsername => _fireAuthUsername;
+
+  @override
+  String? get getFireAuthEmail => _fireAuthEmail;
+
+  @override
+  String? get getFireAuthPhoneNumber => _fireAuthPhoneNumber;
 }
 
-abstract class RegisterTenantViewModelInput {}
+abstract class RegisterViewModelInput {}
 
-abstract class RegisterTenantViewModelOutput {
+abstract class RegisterViewModelOutput {
   UserRole get getRegisterType;
 
   TextEditingController get getUsernameController;
@@ -155,4 +153,12 @@ abstract class RegisterTenantViewModelOutput {
   TextEditingController get getAgeController;
 
   TextEditingController get getMartialStatusController;
+
+  User? get getFireAuthUser;
+
+  String? get getFireAuthUsername;
+
+  String? get getFireAuthEmail;
+
+  String? get getFireAuthPhoneNumber;
 }

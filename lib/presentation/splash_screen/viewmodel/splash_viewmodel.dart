@@ -29,14 +29,11 @@ class SplashViewModel extends BaseCubit
             );
           },
           (r) {
-            //todo remove the line below
-            emit(UserNotSignedState());
-            //todo uncomment the 5 lines below
-            //if (r == null) {
-            //  emit(UserNotSignedState());
-            //} else {
-            //  emit(UserSignedState());
-            //}
+            if (r == null) {
+              emit(UserNotSignedState());
+            } else {
+              emit(UserSignedState());
+            }
           },
         );
       },

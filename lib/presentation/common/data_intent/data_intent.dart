@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../domain/models/domain.dart';
@@ -45,6 +46,18 @@ class DataIntent {
   static HomeModel popHome() {
     HomeModel v = _homeModel!;
     _homeModel = null;
+    return v;
+  }
+
+  static User? _fireAuthUser;
+
+  static void pushFireAuthUser(User? fireAuthUser) {
+    _fireAuthUser = fireAuthUser;
+  }
+
+  static User? popFireAuthUser() {
+    User? v = _fireAuthUser;
+    _fireAuthUser = null;
     return v;
   }
 

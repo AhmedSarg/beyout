@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:temp_house/data/network/app_api.dart';
@@ -23,8 +22,6 @@ abstract class RemoteDataSource {
     required String martialStatus,
   });
 
-  Future<User?> signInWithGoogle();
-
   Future<void> registerOwnerToDataBase({
     required String uuid,
     required String username,
@@ -38,6 +35,10 @@ abstract class RemoteDataSource {
     required String email,
     required String password,
   });
+
+  Future<GoogleSignInAccount?> selectGoogleAccount();
+
+  Future<User?> signInWithGoogle(GoogleSignInAccount? googleAccount);
 
   Future<String> saveHomesToDateBase({
     required String title,
@@ -53,11 +54,6 @@ abstract class RemoteDataSource {
     required String location,
     required GeoPoint coordinates,
   });
-
-  // Future<void> signInWithGoogle({
-  //   required String accessToken,
-  //   required String idToken,
-  // });
 
   Future<void> uploadImages(
     List<File> images,
@@ -139,11 +135,16 @@ abstract class RemoteDataSource {
 
 class RemoteDataSourceImpl implements RemoteDataSource {
   final FirebaseFirestore _firestore;
+  final FirebaseAuth _firebaseAuth;
   final FirebaseStorage _firebaseStorage;
   final AppServiceClient _appServiceClient;
 
   RemoteDataSourceImpl(
-      this._firestore, this._firebaseStorage, this._appServiceClient);
+    this._firestore,
+    this._firebaseAuth,
+    this._firebaseStorage,
+    this._appServiceClient,
+  );
 
   @override
   Future<void> registerTenantToDataBase({
@@ -171,11 +172,6 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       'favorites': [],
     });
   }
-
-
-
-
-
 
   @override
   Future<void> registerOwnerToDataBase({
@@ -244,10 +240,6 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   }) async {
     //todo create login logic
   }
-
-
-
-
 
   @override
   Future<void> uploadImages(List<File> images, String homeId) async {
@@ -481,8 +473,6 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     });
   }
 
-
-
   @override
   Future<void> acceptOffer({
     required String offerId,
@@ -502,29 +492,23 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   }
 
   @override
-  Future<User?> signInWithGoogle() async {
-    try {
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+  Future<GoogleSignInAccount?> selectGoogleAccount() async {
+    return await GoogleSignIn().signIn();
+  }
 
-      final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth?.accessToken,
-        idToken: googleAuth?.idToken,
-      );
+  @override
+  Future<User?> signInWithGoogle(GoogleSignInAccount? googleAccount) async {
+    GoogleSignInAuthentication? googleAuth =
+        await googleAccount?.authentication;
 
-      final userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+    OAuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
 
-      return userCredential.user;
-    } on FirebaseAuthException catch (e) {
-      print('FirebaseAuthException: ${e.message}');
-      throw e;
-    } on PlatformException catch (e) {
-      print('PlatformException: ${e.message}');
-      throw e;
-    } catch (e) {
-      print('Exception: $e');
-      throw e;
-    }
+    UserCredential userCredential =
+        await _firebaseAuth.signInWithCredential(credential);
+
+    return userCredential.user;
   }
 }
-

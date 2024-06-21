@@ -79,7 +79,7 @@ class OnBoardingBody extends StatelessWidget {
                       } else {
                         Navigator.pushNamedAndRemoveUntil(
                           context,
-                          Routes.selectionRoute,
+                          Routes.loginRoute,
                           ModalRoute.withName('/'),
                         );
                       }

@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:temp_house/presentation/login_screen/viewmodel/states/login_states.dart';
 
 import '../../../app/sl.dart';
 import '../../base/base_states.dart';
@@ -27,7 +28,7 @@ class LoginScreen extends StatelessWidget {
         ),
       ),
       body: BlocProvider(
-        create: (_) => LoginViewModel(sl() /*, sl()*/)..start(),
+        create: (_) => LoginViewModel(sl(), sl())..start(),
         child: BlocConsumer<LoginViewModel, BaseStates>(
           listener: (context, state) {
             if (state is ErrorState) {
@@ -39,6 +40,8 @@ class LoginScreen extends StatelessWidget {
                 Routes.mainLayoutRoute,
                 ModalRoute.withName('/'),
               );
+            } else if (state is SocialLoginState) {
+              Navigator.pushNamed(context, Routes.registerRoute);
             }
             baseListener(context, state);
           },

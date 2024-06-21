@@ -30,6 +30,7 @@ enum DataSource {
   EMAIL_LOGIN_FAILED,
   INVALID_VERIFICATION_CODE,
   TOKEN_EXPIRED,
+  MISSING_DATA,
   DEFAULT
 }
 
@@ -56,6 +57,7 @@ class ResponseCode {
   static const int EMAIL_AND_PHONE_NUMBER_ALREADY_EXISTS = -13;
   static const int INVALID_VERIFICATION_CODE = -14;
   static const int TOKEN_EXPIRED = -15;
+  static const int MISSING_DATA = -16;
 }
 
 class ResponseMessage {
@@ -88,8 +90,8 @@ class ResponseMessage {
   static const String EMAIL_LOGIN_FAILED = AppStrings.emailLoginFailedError;
   static const String INVALID_VERIFICATION_CODE =
       AppStrings.invalidVerificationCodeError;
-  static const String TOKEN_EXPIRED =
-      'Please Login Again Before Changing Email';
+  static const String TOKEN_EXPIRED = AppStrings.tokenExpiredError;
+  static const String MISSING_DATA = AppStrings.missingDataError;
 
   static const String DEFAULT = AppStrings.defaultError;
 }
@@ -191,6 +193,11 @@ extension DataSourceExtension on DataSource {
         return Failure(
           ResponseCode.TOKEN_EXPIRED,
           ResponseMessage.TOKEN_EXPIRED,
+        );
+      case DataSource.MISSING_DATA:
+        return Failure(
+          ResponseCode.MISSING_DATA,
+          ResponseMessage.MISSING_DATA,
         );
       case DataSource.DEFAULT:
         return Failure(

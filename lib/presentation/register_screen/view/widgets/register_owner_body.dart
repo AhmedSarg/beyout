@@ -5,8 +5,6 @@ import '../../../common/validators/validators.dart';
 import '../../../common/widget/main_button.dart';
 import '../../../common/widget/main_text_field.dart';
 import '../../../common/widget/register_field_dialog.dart';
-import '../../../common/widget/social_container.dart';
-import '../../../resources/assets_manager.dart';
 import '../../../resources/strings_manager.dart';
 import '../../../resources/text_styles.dart';
 import '../../../resources/values_manager.dart';
@@ -53,63 +51,75 @@ class RegisterOwnerBody extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
-              child: MainTextField(
-                maxLines: 1,
-                controller: viewModel.getUsernameController,
-                focusNode: usernameFocusNode,
-                nextFocus: emailFocusNode,
-                label: AppStrings.registerScreenUsernameLabel.tr(),
-                validation: AppValidators.validateUsername,
-                isObscured: false,
-                hint: AppStrings.registerScreenUsernameHint.tr(),
-                textInputType: TextInputType.text,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
-              child: MainTextField(
-                maxLines: 1,
-                controller: viewModel.getEmailController,
-                focusNode: emailFocusNode,
-                nextFocus: passwordFocusNode,
-                label: AppStrings.registerScreenEmailLabel.tr(),
-                isObscured: false,
-                validation: AppValidators.validateEmail,
-                hint: AppStrings.registerScreenEmailHint.tr(),
-                textInputType: TextInputType.emailAddress,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
-              child: MainTextField(
-                maxLines: 1,
-                controller: viewModel.getPasswordController,
-                focusNode: passwordFocusNode,
-                nextFocus: phoneNumberFocusNode,
-                label: AppStrings.registerScreenPasswordLabel.tr(),
-                isObscured: true,
-                validation: AppValidators.validatePassword,
-                hint: AppStrings.registerScreenPasswordHint.tr(),
-                iconData: Icons.remove_red_eye_outlined,
-                textInputType: TextInputType.text,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
-              child: MainTextField(
-                maxLines: 1,
-                controller: viewModel.getPhoneNumberController,
-                focusNode: phoneNumberFocusNode,
-                nextFocus: genderFocusNode,
-                label: AppStrings.registerScreenPhoneNumberLabel.tr(),
-                isObscured: false,
-                validation: AppValidators.validatePhoneNumber,
-                hint: AppStrings.registerScreenPhoneNumberHint.tr(),
-                textInputType: TextInputType.phone,
-              ),
-            ),
+            viewModel.getFireAuthUsername == null
+                ? Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: AppPadding.p10),
+                    child: MainTextField(
+                      maxLines: 1,
+                      controller: viewModel.getUsernameController,
+                      focusNode: usernameFocusNode,
+                      nextFocus: emailFocusNode,
+                      label: AppStrings.registerScreenUsernameLabel.tr(),
+                      validation: AppValidators.validateUsername,
+                      isObscured: false,
+                      hint: AppStrings.registerScreenUsernameHint.tr(),
+                      textInputType: TextInputType.text,
+                    ),
+                  )
+                : const SizedBox.shrink(),
+            viewModel.getFireAuthEmail == null
+                ? Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: AppPadding.p10),
+                    child: MainTextField(
+                      maxLines: 1,
+                      controller: viewModel.getEmailController,
+                      focusNode: emailFocusNode,
+                      nextFocus: passwordFocusNode,
+                      label: AppStrings.registerScreenEmailLabel.tr(),
+                      isObscured: false,
+                      validation: AppValidators.validateEmail,
+                      hint: AppStrings.registerScreenEmailHint.tr(),
+                      textInputType: TextInputType.emailAddress,
+                    ),
+                  )
+                : const SizedBox.shrink(),
+            viewModel.getFireAuthUser == null
+                ? Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: AppPadding.p10),
+                    child: MainTextField(
+                      maxLines: 1,
+                      controller: viewModel.getPasswordController,
+                      focusNode: passwordFocusNode,
+                      nextFocus: phoneNumberFocusNode,
+                      label: AppStrings.registerScreenPasswordLabel.tr(),
+                      isObscured: true,
+                      validation: AppValidators.validatePassword,
+                      hint: AppStrings.registerScreenPasswordHint.tr(),
+                      iconData: Icons.remove_red_eye_outlined,
+                      textInputType: TextInputType.text,
+                    ),
+                  )
+                : const SizedBox.shrink(),
+            viewModel.getFireAuthPhoneNumber == null
+                ? Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: AppPadding.p10),
+                    child: MainTextField(
+                      maxLines: 1,
+                      controller: viewModel.getPhoneNumberController,
+                      focusNode: phoneNumberFocusNode,
+                      nextFocus: genderFocusNode,
+                      label: AppStrings.registerScreenPhoneNumberLabel.tr(),
+                      isObscured: false,
+                      validation: AppValidators.validatePhoneNumber,
+                      hint: AppStrings.registerScreenPhoneNumberHint.tr(),
+                      textInputType: TextInputType.phone,
+                    ),
+                  )
+                : const SizedBox.shrink(),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
               child: MainTextField(
@@ -158,16 +168,6 @@ class RegisterOwnerBody extends StatelessWidget {
                     viewModel.register();
                   }
                 },
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: AppPadding.p10),
-              child: SocialContainer(
-                onTap: () {
-                  viewModel.signInWithGoogle();
-                },
-                title: AppStrings.registerScreenGoogle.tr(),
-                image: SVGAssets.gmail,
               ),
             ),
           ],

@@ -290,6 +290,8 @@ class AppStrings {
   static const String emailLoginFailedError = "emailLoginFailedError";
   static const String invalidVerificationCodeError =
       "invalidVerificationCodeError";
+  static const String tokenExpiredError = "tokenExpiredError";
+  static const String missingDataError = "missingDataError";
 
   static const String emptyContent = "emptyContent";
   static const String intentError = "intentError";

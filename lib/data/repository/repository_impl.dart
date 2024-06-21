@@ -76,8 +76,22 @@ class RepositoryImpl implements Repository {
   @override
   Future<Either<Failure, User?>> signInWithGoogle() async {
     try {
-      final user = await _remoteDataSource.signInWithGoogle();
-      return Right(user);
+      if (await _networkInfo.isConnected) {
+        GoogleSignInAccount? googleAccount =
+            await _remoteDataSource.selectGoogleAccount();
+        bool userExists = (await _remoteDataSource.doesUserExists(
+                email: googleAccount!.email)) ==
+            RegisteredBeforeError.emailUsed;
+        User? user = await _remoteDataSource.signInWithGoogle(googleAccount);
+        if (!userExists) {
+          DataIntent.pushFireAuthUser(user);
+          return Left(DataSource.MISSING_DATA.getFailure());
+        } else {
+          return Right(user);
+        }
+      } else {
+        return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+      }
     } catch (e) {
       return Left(ErrorHandler.handle(e).failure);
     }
@@ -281,32 +295,20 @@ class RepositoryImpl implements Repository {
       [String email = 'xsarg221@gmail.com']) async {
     try {
       if (await _networkInfo.isConnected) {
-        //todo uncomment the 2 lines below
-        // var data = _cacheDataSource.getSignedUser();
-        // if (data != null) {
-        Map<String, dynamic>? userData = await _remoteDataSource.getUserData(
-          email: email,
-          //todo uncomment the line below and remove the line above
-          // email: data.email!,
-        );
-        //todo remove the line below
-        if (userData != null) {
-          UserModel userModel = UserModel.fromMap(userData);
+        var data = _cacheDataSource.getSignedUser();
+        if (data != null) {
+          Map<String, dynamic>? userData = await _remoteDataSource.getUserData(
+            email: data.email!,
+          );
+          UserModel userModel = UserModel.fromMap(userData!);
           DataIntent.pushUser(userModel);
           if (userData['user_type'].toLowerCase() == 'owner') {
             DataIntent.setUserRole(UserRole.owner);
           } else {
             DataIntent.setUserRole(UserRole.tenant);
           }
-          //todo remove the line below
-          return Right(FakeUser());
         }
-        //todo remove the 3 lines below
-        else {
-          return Left(DataSource.EMAIL_LOGIN_FAILED.getFailure());
-        }
-        //todo uncomment the line below
-        // return Right(data);
+        return Right(data);
       } else {
         return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
       }
@@ -495,157 +497,5 @@ class RepositoryImpl implements Repository {
     } catch (e) {
       return Left(ErrorHandler.handle(e).failure);
     }
-  }
-}
-
-//todo remove this class
-class FakeUser implements User {
-  @override
-  Future<void> delete() {
-    throw UnimplementedError();
-  }
-
-  @override
-  String? get displayName => throw UnimplementedError();
-
-  @override
-  String? get email => throw UnimplementedError();
-
-  @override
-  bool get emailVerified => throw UnimplementedError();
-
-  @override
-  Future<String?> getIdToken([bool forceRefresh = false]) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<IdTokenResult> getIdTokenResult([bool forceRefresh = false]) {
-    throw UnimplementedError();
-  }
-
-  @override
-  bool get isAnonymous => throw UnimplementedError();
-
-  @override
-  Future<UserCredential> linkWithCredential(AuthCredential credential) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<ConfirmationResult> linkWithPhoneNumber(String phoneNumber,
-      [RecaptchaVerifier? verifier]) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<UserCredential> linkWithPopup(AuthProvider provider) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<UserCredential> linkWithProvider(AuthProvider provider) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> linkWithRedirect(AuthProvider provider) {
-    throw UnimplementedError();
-  }
-
-  @override
-  UserMetadata get metadata => throw UnimplementedError();
-
-  @override
-  MultiFactor get multiFactor => throw UnimplementedError();
-
-  @override
-  String? get phoneNumber => throw UnimplementedError();
-
-  @override
-  String? get photoURL => throw UnimplementedError();
-
-  @override
-  List<UserInfo> get providerData => throw UnimplementedError();
-
-  @override
-  Future<UserCredential> reauthenticateWithCredential(
-      AuthCredential credential) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<UserCredential> reauthenticateWithPopup(AuthProvider provider) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<UserCredential> reauthenticateWithProvider(AuthProvider provider) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> reauthenticateWithRedirect(AuthProvider provider) {
-    throw UnimplementedError();
-  }
-
-  @override
-  String? get refreshToken => throw UnimplementedError();
-
-  @override
-  Future<void> reload() {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> sendEmailVerification([ActionCodeSettings? actionCodeSettings]) {
-    throw UnimplementedError();
-  }
-
-  @override
-  String? get tenantId => throw UnimplementedError();
-
-  @override
-  String get uid => throw UnimplementedError();
-
-  @override
-  Future<User> unlink(String providerId) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> updateDisplayName(String? displayName) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> updateEmail(String newEmail) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> updatePassword(String newPassword) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> updatePhoneNumber(PhoneAuthCredential phoneCredential) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> updatePhotoURL(String? photoURL) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> updateProfile({String? displayName, String? photoURL}) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> verifyBeforeUpdateEmail(String newEmail,
-      [ActionCodeSettings? actionCodeSettings]) {
-    throw UnimplementedError();
   }
 }
