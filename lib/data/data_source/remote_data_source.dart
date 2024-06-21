@@ -281,15 +281,6 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     );
   }
 
-  // Future<void> passwordReset() async {
-  //
-  //   try {
-  //     await FirebaseAuth.instance.sendPasswordResetEmail(email: _emailController.text.trim());
-  //   } on FirebaseAuthException catch (e) {
-  //     print(e);
-  //   }
-  // }
-
   @override
   Future<void> uploadImages(List<File> images, String homeId) async {
     List<String> imageUrls = [];
@@ -313,11 +304,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
   @override
   Future<Stream<List<Map<String, dynamic>>>> getAllHomes() async {
-    return _firestore
-        .collection('Homes')
-        .where('sold', isEqualTo: false)
-        .snapshots()
-        .map(
+    return _firestore.collection('Homes').snapshots().map(
           (homes) => homes.docs
               .map(
                 (home) => home.data(),
@@ -569,13 +556,15 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     return _firestore
         .collection('offers')
         .where('owner_id', isEqualTo: userId)
-        .orderBy('time', descending: false)
+        .orderBy('time', descending: true)
         .snapshots()
         .map(
       (offersSnapshot) {
         List<Map<String, dynamic>> offerList = offersSnapshot.docs.map(
           (offerSnapshot) {
-            return offerSnapshot.data();
+            Map<String, dynamic> ret = offerSnapshot.data();
+            ret['id'] = offerSnapshot.id;
+            return ret;
           },
         ).toList();
         return offerList[0];

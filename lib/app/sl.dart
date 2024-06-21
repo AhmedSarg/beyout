@@ -28,6 +28,7 @@ import '../domain/usecase/decline_offer_usecase.dart';
 import '../domain/usecase/get_all_favorites_usecase.dart';
 import '../domain/usecase/get_all_homes_usecase.dart';
 import '../domain/usecase/get_current_user_usecase.dart';
+import '../domain/usecase/get_offers_stream_usecase.dart';
 import '../domain/usecase/get_offers_usecase.dart';
 import '../domain/usecase/login_usecase.dart';
 import '../domain/usecase/logout_usecase.dart';
@@ -105,6 +106,7 @@ void initLoginUseCase() {
     sl.registerFactory<LoginUseCase>(() => LoginUseCase(sl()));
   }
 }
+
 void initLogOutUseCase() {
   if (GetIt.instance.isRegistered<LogOutUseCase>() == false) {
     sl.registerFactory<LogOutUseCase>(() => LogOutUseCase(sl()));
@@ -191,5 +193,12 @@ void initAcceptOfferUseCase() {
 void initDeclineOfferUseCase() {
   if (GetIt.instance.isRegistered<DeclineOfferUseCase>() == false) {
     sl.registerFactory<DeclineOfferUseCase>(() => DeclineOfferUseCase(sl()));
+  }
+}
+
+void initGetOffersStreamUseCase() {
+  if (GetIt.instance.isRegistered<GetOffersStreamUseCase>() == false) {
+    sl.registerFactory<GetOffersStreamUseCase>(
+        () => GetOffersStreamUseCase(sl()));
   }
 }

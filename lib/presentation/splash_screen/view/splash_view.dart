@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:temp_house/presentation/app/viewmodel/app_viewmodel.dart';
 import 'package:temp_house/presentation/base/base_states.dart';
 import 'package:temp_house/presentation/base/cubit_builder.dart';
 import 'package:temp_house/presentation/base/cubit_listener.dart';
@@ -22,6 +23,8 @@ class SplashScreen extends StatelessWidget {
         child: BlocConsumer<SplashViewModel, BaseStates>(
           listener: (context, state) {
             if (state is UserSignedState) {
+              AppViewModel appViewModel = AppViewModel.get(context);
+              appViewModel.fetchOffersStream();
               Navigator.pushReplacementNamed(context, Routes.mainLayoutRoute);
             } else if (state is UserNotSignedState) {
               Navigator.pushReplacementNamed(context, Routes.onboardingRoute);

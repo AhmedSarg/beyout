@@ -7,7 +7,6 @@ import 'package:temp_house/presentation/base/base_states.dart';
 import 'package:temp_house/presentation/common/data_intent/data_intent.dart';
 
 import '../../../app/sl.dart';
-import '../../../data/data_source/remote_data_source.dart';
 import '../../../domain/models/domain.dart';
 import '../../../domain/usecase/add_to_favorites_usecase.dart';
 import 'states/main_layout_states.dart';
@@ -114,14 +113,6 @@ class MainLayoutViewModel extends BaseCubit
   void start() {
     emit(LoadingState());
     getAllFavorites();
-    print(DataIntent.getUser().uid);
-    RemoteDataSourceImpl(sl(), sl(), sl(), sl())
-        .getOffersStream(userId: DataIntent.getUser().uid)
-        .listen(
-      (event) {
-        print(event);
-      },
-    );
   }
 
   @override

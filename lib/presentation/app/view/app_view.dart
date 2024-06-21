@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temp_house/presentation/app/viewmodel/app_viewmodel.dart';
 import 'package:temp_house/presentation/base/base_states.dart';
 
+import '../../../app/sl.dart';
 import '../../resources/routes_manager.dart';
 import '../../resources/theme_manager.dart';
 
@@ -12,19 +13,24 @@ class AppView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    initGetOffersStreamUseCase();
+    initGetOffersUseCase();
     return BlocProvider(
       create: (context) => AppViewModel()..start(),
-      child: BlocListener<AppViewModel, BaseStates>(
-        listener: (context, state) {},
-        child: MaterialApp(
-          localizationsDelegates: context.localizationDelegates,
-          supportedLocales: context.supportedLocales,
-          locale: context.locale,
-          debugShowCheckedModeBanner: false,
-          initialRoute: Routes.splashRoute,
-          theme: getApplicationTheme(),
-          onGenerateRoute: RouteGenerator.getRoute,
-        ),
+      child: BlocBuilder<AppViewModel, BaseStates>(
+        builder: (context, state) {
+          AppViewModel viewModel = AppViewModel.get(context);
+          return MaterialApp(
+            navigatorKey: viewModel.getNavigatorKey,
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            locale: context.locale,
+            debugShowCheckedModeBanner: false,
+            initialRoute: Routes.splashRoute,
+            theme: getApplicationTheme(),
+            onGenerateRoute: RouteGenerator.getRoute,
+          );
+        },
       ),
     );
   }

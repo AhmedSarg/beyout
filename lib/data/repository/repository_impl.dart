@@ -318,41 +318,25 @@ class RepositoryImpl implements Repository {
   @override
   Future<Either<Failure, User?>> fetchCurrentUser([String? email]) async {
     try {
-      print(1);
       if (await _networkInfo.isConnected) {
-        print(2);
         var data = _cacheDataSource.getSignedUser();
-        print(3);
-        print(data?.email);
         if (data != null) {
-          print(4);
           Map<String, dynamic>? userData = await _remoteDataSource.getUserData(
             email: data.email!,
           );
-          print(5);
-          print(userData);
           UserModel userModel = UserModel.fromMap(userData!);
-          print(6);
-          print(userModel.username);
           DataIntent.pushUser(userModel);
-          print(7);
           if (userData['user_type'].toLowerCase() == 'owner') {
-            print(8);
             DataIntent.setUserRole(UserRole.owner);
           } else {
-            print(9);
             DataIntent.setUserRole(UserRole.tenant);
           }
-          print(10);
         }
-        print(11);
         return Right(data);
       } else {
-        print(12);
         return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
       }
     } catch (e) {
-      print(13);
       return Left(ErrorHandler.handle(e).failure);
     }
   }
@@ -534,6 +518,35 @@ class RepositoryImpl implements Repository {
       await _cacheDataSource.logout();
       await fetchCurrentUser();
       return Right(response);
+    } catch (e) {
+      return Left(ErrorHandler.handle(e).failure);
+    }
+  }
+
+  @override
+  Future<Either<Failure, Stream<Future<OfferModel>>>> getOffersStream({
+    required String userId,
+  }) async {
+    try {
+      if (await _networkInfo.isConnected) {
+        Stream<Future<OfferModel>> offersStream =
+            _remoteDataSource.getOffersStream(userId: userId).map(
+          (offerMap) async {
+            Map<String, dynamic> homeMap = await _remoteDataSource.getHomeById(
+              homeId: offerMap['home_id'],
+            );
+            Map<String, dynamic> userMap = await _remoteDataSource.getUserById(
+              userId: offerMap['user_id'],
+            );
+            offerMap['home'] = homeMap;
+            offerMap['user'] = userMap;
+            return OfferModel.fromMap(offerMap);
+          },
+        );
+        return Right(offersStream);
+      } else {
+        return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+      }
     } catch (e) {
       return Left(ErrorHandler.handle(e).failure);
     }

@@ -40,7 +40,7 @@ class HomePageAppBar extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, Routes.notificationsRoute);
+              Navigator.pushNamed(context, Routes.offersRoute);
             },
             icon: SvgPicture.asset(SVGAssets.bell),
           )

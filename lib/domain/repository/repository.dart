@@ -116,4 +116,8 @@ abstract class Repository {
   Future<Either<Failure, void>> declineOffer({required String offerId});
 
   Future<Either<Failure, void>> logout();
+
+  Future<Either<Failure, Stream<Future<OfferModel>>>> getOffersStream({
+    required String userId,
+  });
 }

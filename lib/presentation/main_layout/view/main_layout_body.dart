@@ -10,7 +10,6 @@ import 'package:temp_house/presentation/resources/strings_manager.dart';
 
 import '../../resources/text_styles.dart';
 import '../pages/home_screen/view/home_page.dart';
-import '../pages/notifications_screen/view/notifications_view.dart';
 import '../pages/profile_screen/view/profile_page.dart';
 
 class MainLayoutBody extends StatefulWidget {
@@ -27,14 +26,12 @@ class _MainLayoutBodyState extends State<MainLayoutBody> {
     const HomePage(),
     const FavouriteScreen(),
     const OffersScreen(),
-    const NotificationsScreen(),
     const ProfileScreen()
   ];
 
   List<Widget> tenantTabs = [
     const HomePage(),
     const FavouriteScreen(),
-    const NotificationsScreen(),
     const ProfileScreen()
   ];
 
@@ -50,12 +47,6 @@ class _MainLayoutBodyState extends State<MainLayoutBody> {
       icon: const Icon(Icons.favorite_border),
       activeIcon: const Icon(Icons.favorite),
       label: AppStrings.homeNavBarFavourite.tr(),
-    ),
-    BottomNavigationBarItem(
-      backgroundColor: ColorManager.primary,
-      icon: const Icon(Icons.local_offer_outlined),
-      activeIcon: const Icon(Icons.local_offer_rounded),
-      label: AppStrings.homeNavBarOffers.tr(),
     ),
     BottomNavigationBarItem(
       backgroundColor: ColorManager.primary,
@@ -83,12 +74,6 @@ class _MainLayoutBodyState extends State<MainLayoutBody> {
       icon: const Icon(Icons.favorite_border),
       activeIcon: const Icon(Icons.favorite),
       label: AppStrings.homeNavBarFavourite.tr(),
-    ),
-    BottomNavigationBarItem(
-      backgroundColor: ColorManager.primary,
-      icon: const Icon(Icons.notifications_outlined),
-      activeIcon: const Icon(Icons.notifications),
-      label: AppStrings.homeNavBarNotifications.tr(),
     ),
     BottomNavigationBarItem(
       backgroundColor: ColorManager.primary,
@@ -123,6 +108,7 @@ class _MainLayoutBodyState extends State<MainLayoutBody> {
               },
               selectedLabelStyle: AppTextStyles.mainNavBarLabel(context),
               currentIndex: selectedTabIndex,
+              type: BottomNavigationBarType.shifting,
               items: DataIntent.getUserRole() == UserRole.owner
                   ? ownerNavBarItems
                   : tenantNavBarItems),
