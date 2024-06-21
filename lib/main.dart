@@ -2,8 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:temp_house/presentation/app/view/app_view.dart';
 
-import 'app/app.dart';
 import 'app/sl.dart';
 import 'firebase_options.dart';
 import 'presentation/base/bloc_observer.dart';
@@ -27,7 +27,7 @@ void main() async {
       startLocale: AppLanguages.startLocal,
       useOnlyLangCode: true,
       saveLocale: true,
-      child: const MyApp(),
+      child: const AppView(),
     ),
   );
 }

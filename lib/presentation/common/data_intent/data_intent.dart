@@ -15,14 +15,14 @@ class DataIntent {
     return _userRole;
   }
 
-  static late UserModel _user;
+  static UserModel? _user;
 
   static void pushUser(UserModel user) {
     _user = user;
   }
 
   static UserModel getUser() {
-    return _user;
+    return _user!;
   }
 
   static LatLng? _initialLocation;

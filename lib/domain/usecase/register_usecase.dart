@@ -16,6 +16,7 @@ class RegisterUseCase extends BaseUseCase<RegisterUseCaseInput, void> {
       username: input.username,
       email: input.email,
       phoneNumber: input.phoneNumber,
+      password: input.password,
       gender: input.gender,
       job: input.job,
       salary: input.salary,
@@ -30,6 +31,7 @@ class RegisterUseCaseInput {
   final String username;
   final String email;
   final String phoneNumber;
+  final String? password;
   final Gender gender;
   final String? job;
   final int? salary;
@@ -41,6 +43,7 @@ class RegisterUseCaseInput {
     required this.username,
     required this.email,
     required this.phoneNumber,
+    required this.password,
     required this.gender,
     required this.job,
     required this.salary,

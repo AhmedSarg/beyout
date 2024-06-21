@@ -15,6 +15,7 @@ abstract class RemoteDataSource {
     required String username,
     required String email,
     required String phoneNumber,
+    required String? password,
     required Gender gender,
     required String job,
     required int salary,
@@ -27,6 +28,7 @@ abstract class RemoteDataSource {
     required String username,
     required String email,
     required String phoneNumber,
+    required String? password,
     required Gender gender,
     required int age,
   });
@@ -156,6 +158,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     required String username,
     required String email,
     required String phoneNumber,
+    required String? password,
     required Gender gender,
     required String job,
     required int salary,
@@ -175,6 +178,10 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       'user_type': 'tenant',
       'favorites': [],
     });
+    if (password != null) {
+      await _firebaseAuth.createUserWithEmailAndPassword(
+          email: email, password: password);
+    }
   }
 
   @override
@@ -183,6 +190,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     required String username,
     required String email,
     required String phoneNumber,
+    required String? password,
     required Gender gender,
     required int age,
   }) async {
@@ -196,6 +204,12 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       'user_type': 'owner',
       'favorites': [],
     });
+    if (password != null) {
+      await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    }
   }
 
   @override
@@ -265,9 +279,6 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   //     print(e);
   //   }
   // }
-
-
-
 
   @override
   Future<void> uploadImages(List<File> images, String homeId) async {
@@ -383,6 +394,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       },
     );
   }
+
   @override
   Future<void> changeAccountInfo({
     required String userId,
@@ -418,14 +430,14 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       String picturePath = '$userId-picture';
       late TaskSnapshot imageUrl;
       await docRef.get().then(
-            (value) async {
+        (value) async {
           imageUrl = await _firebaseStorage
               .ref('user_images')
               .child(picturePath)
               .putFile(
-            picture!,
-            SettableMetadata(contentType: 'image/jpeg'),
-          );
+                picture!,
+                SettableMetadata(contentType: 'image/jpeg'),
+              );
         },
       );
       await docRef.update({
@@ -436,7 +448,6 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       'email': email,
       'phone_number': phoneNumber,
     });
-
   }
 
   // @override

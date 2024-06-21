@@ -42,7 +42,7 @@ class AppValidators {
   }
 
   static String? validateUsername(String? val) {
-    RegExp usernameRegex = RegExp(r'^[a-zA-Z,.-]+$');
+    RegExp usernameRegex = RegExp(r'^[a-zA-Z0-9,.-]+$');
     if (val == null) {
       return AppStrings.validationsFieldRequired.tr();
     } else if (val.isEmpty) {
@@ -148,13 +148,12 @@ class AppValidators {
     }
   }
 
-
   static String? validateText(String? val) {
     if (val == null) {
       return AppStrings.validationsFieldRequired.tr();
     } else if (val.isEmpty) {
       return AppStrings.validationsFieldRequired.tr();
-    } else if (val.length < 4 ) {
+    } else if (val.length < 4) {
       return AppStrings.validationsTitle.tr();
     } else {
       return null;

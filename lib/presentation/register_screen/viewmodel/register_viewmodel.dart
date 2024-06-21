@@ -57,6 +57,8 @@ class RegisterViewModel extends BaseCubit
         username: _fireAuthUsername ?? _usernameController.text.trim(),
         email: _fireAuthEmail ?? _emailController.text.trim(),
         phoneNumber: _fireAuthPhoneNumber ?? _phoneNumberController.text.trim(),
+        password:
+            _fireAuthUser == null ? _passwordController.text.trim() : null,
         gender: _genderController.text.toLowerCase() == 'female'
             ? Gender.female
             : Gender.male,

@@ -14,24 +14,27 @@ class SplashViewModel extends BaseCubit
       sl<GetCurrentUserUseCase>();
 
   @override
-  void start() {}
+  void start() {
+    print('splash started');
+  }
 
   Future<void> getCurrentUser() async {
     _getCurrentUserUseCase(null).then(
       (value) {
         value.fold(
           (l) {
-            emit(ErrorState(
-              failure: l,
-              retry: () {
-                start();
-              },
-            ));
+            emit(
+              ErrorState(
+                failure: l,
+                retry: () {
+                  start();
+                },
+              ),
+            );
           },
           (r) {
             if (r == null) {
               emit(UserNotSignedState());
-
             } else {
               emit(UserSignedState());
             }

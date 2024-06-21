@@ -113,9 +113,9 @@ class RouteGenerator {
       case Routes.searchScreenRoute:
         return MaterialPageRoute(builder: (_) => const SearchScreen());
       case Routes.aboutScreenRoute:
-        return MaterialPageRoute(builder: (_) => AboutScreen());
+        return MaterialPageRoute(builder: (_) => const AboutScreen());
       case Routes.needHelpScreenRoute:
-        return MaterialPageRoute(builder: (_) => NeedHelpScreen());
+        return MaterialPageRoute(builder: (_) => const NeedHelpScreen());
       case Routes.googleMapScreenRoute:
         return MaterialPageRoute(builder: (_) => const GoogleMapScreen());
       case Routes.googleMapScreenShareRoute:

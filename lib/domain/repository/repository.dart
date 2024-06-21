@@ -10,18 +10,6 @@ import '../../data/network/failure.dart';
 import '../models/enums.dart';
 
 abstract class Repository {
-  // Future<Either<Failure, void>> register({
-  //   required String username,
-  //   required String email,
-  //   required String password,
-  //   required String phoneNumber,
-  //   required String gender,
-  //   required String age,
-  //   required String maritalStatus,
-  //   required DateTime? createdAt,
-  //   required RegisterType registerType,
-  // });
-
   Future<Either<Failure, void>> sharePost({
     required String title,
     required String name,
@@ -42,6 +30,7 @@ abstract class Repository {
     required String username,
     required String email,
     required String phoneNumber,
+    required String? password,
     required Gender gender,
     required String? job,
     required int? salary,
@@ -55,13 +44,11 @@ abstract class Repository {
     required String password,
   });
 
-
   Future<Either<Failure, void>> passwordReset({
     required String email,
   });
 
   Future<Either<Failure, User?>> signInWithGoogle();
-
 
   Future<Either<Failure, Stream<List<HomeModel>>>> getAllHomes();
 

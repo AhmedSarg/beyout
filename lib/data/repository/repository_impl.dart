@@ -102,6 +102,7 @@ class RepositoryImpl implements Repository {
     required String username,
     required String email,
     required String phoneNumber,
+    required String? password,
     required Gender gender,
     required String? job,
     required int? salary,
@@ -111,30 +112,41 @@ class RepositoryImpl implements Repository {
   }) async {
     try {
       if (await _networkInfo.isConnected) {
+        print(-1);
         String uuid = _uuidGenerator.v1();
         if (userType == UserRole.tenant) {
+          print(-2);
+          print(password);
           await _remoteDataSource.registerTenantToDataBase(
             uuid: uuid,
             phoneNumber: phoneNumber,
             email: email,
             username: username,
+            password: password,
             gender: gender,
             job: job!,
             salary: salary!,
             age: age,
             martialStatus: martialStatus!,
           );
+          print(-3);
         } else {
+          print(-4);
+          print(password);
           await _remoteDataSource.registerOwnerToDataBase(
             uuid: uuid,
             phoneNumber: phoneNumber,
             email: email,
+            password: password,
             username: username,
             gender: gender,
             age: age,
           );
+          print(-5);
         }
+        print(-6);
         await fetchCurrentUser(email);
+        print(-7);
         return const Right(null);
       } else {
         return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
@@ -156,7 +168,7 @@ class RepositoryImpl implements Repository {
           email: email,
           password: password,
         );
-        // await fetchCurrentUser(email);
+        await fetchCurrentUser(email);
         return Right(response);
       } else {
         return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
@@ -309,28 +321,43 @@ class RepositoryImpl implements Repository {
   }
 
   @override
-  Future<Either<Failure, User?>> fetchCurrentUser(
-      [String email = 'xsarg221@gmail.com']) async {
+  Future<Either<Failure, User?>> fetchCurrentUser([String? email]) async {
     try {
+      print(1);
       if (await _networkInfo.isConnected) {
+        print(2);
         var data = _cacheDataSource.getSignedUser();
+        print(3);
+        print(data?.email);
         if (data != null) {
+          print(4);
           Map<String, dynamic>? userData = await _remoteDataSource.getUserData(
             email: data.email!,
           );
+          print(5);
+          print(userData);
           UserModel userModel = UserModel.fromMap(userData!);
+          print(6);
+          print(userModel.username);
           DataIntent.pushUser(userModel);
+          print(7);
           if (userData['user_type'].toLowerCase() == 'owner') {
+            print(8);
             DataIntent.setUserRole(UserRole.owner);
           } else {
+            print(9);
             DataIntent.setUserRole(UserRole.tenant);
           }
+          print(10);
         }
+        print(11);
         return Right(data);
       } else {
+        print(12);
         return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
       }
     } catch (e) {
+      print(13);
       return Left(ErrorHandler.handle(e).failure);
     }
   }
