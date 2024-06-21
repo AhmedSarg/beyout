@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:temp_house/presentation/main_layout/pages/profile_screen/view/widgets/profile_image.dart';
+import 'package:temp_house/presentation/main_layout/pages/profile_screen/viewmodel/viewmodel.dart';
 import 'package:temp_house/presentation/resources/color_manager.dart';
 import 'package:temp_house/presentation/resources/routes_manager.dart';
 import 'package:temp_house/presentation/resources/text_styles.dart';
@@ -14,7 +15,8 @@ import 'language_selection_modal.dart';
 import 'measurement_selection_modal.dart';
 
 class ProfileBody extends StatefulWidget {
-  const ProfileBody({super.key});
+  const ProfileBody({super.key, required this.viewModel});
+  final ProfileViewModel viewModel;
 
   @override
   State<ProfileBody> createState() => _ProfileBodyState();
@@ -148,7 +150,9 @@ class _ProfileBodyState extends State<ProfileBody> {
             ),
             AppSettingItem(
               text: AppStrings.logOut.tr(),
-              onTap: () {},
+              onTap: () {
+                widget.viewModel.logout();
+              },
             ),
           ],
         ),

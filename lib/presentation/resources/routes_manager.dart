@@ -16,9 +16,9 @@ import '../chat_screen/view/chat_view.dart';
 import '../chats_screen/view/chats_view.dart';
 import '../login_screen/view/login_view.dart';
 import '../main_layout/pages/notifications_screen/view/notifications_view.dart';
-import '../main_layout/pages/profile_screen/view/about_screen.dart';
-import '../main_layout/pages/profile_screen/view/need_help_screen.dart';
-import '../main_layout/pages/profile_screen/view/payment_screen.dart';
+import '../main_layout/pages/profile_screen/view/widgets/about_screen.dart';
+import '../main_layout/pages/profile_screen/view/widgets/need_help_screen.dart';
+import '../main_layout/pages/profile_screen/view/widgets/payment_screen.dart';
 import '../map_screen/view/map_screen.dart';
 import '../map_screen/view/map_screen_share.dart';
 import '../onboarding_screen/view/onboarding_view.dart';
@@ -83,6 +83,7 @@ class RouteGenerator {
         initRemoveFromFavoritesUseCase();
         initGetAllFavoritesUseCase();
         initSignWithGoogleUseCase();
+        initLogOutUseCase();
 
         if (DataIntent.getUserRole() == UserRole.owner) {
           initGetOffersUseCase();

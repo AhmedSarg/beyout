@@ -156,7 +156,7 @@ class RepositoryImpl implements Repository {
           email: email,
           password: password,
         );
-        // await fetchCurrentUser(email);
+        await fetchCurrentUser(email);
         return Right(response);
       } else {
         return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
@@ -512,6 +512,16 @@ class RepositoryImpl implements Repository {
       } else {
         return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
       }
+    } catch (e) {
+      return Left(ErrorHandler.handle(e).failure);
+    }
+  }
+  @override
+  Future<Either<Failure, void>> logout() async {
+    try {
+      void response;
+      await _cacheDataSource.logout();
+      return Right(response);
     } catch (e) {
       return Left(ErrorHandler.handle(e).failure);
     }

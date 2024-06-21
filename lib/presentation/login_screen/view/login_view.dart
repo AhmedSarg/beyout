@@ -47,7 +47,6 @@ class LoginScreen extends StatelessWidget {
               Navigator.pushNamed(context, Routes.registerRoute);
             } else if (state is ResetPasswordState) {
               Navigator.pop(context);
-              Navigator.pop(context);
               showDialog(
                 context: context,
                 builder: (context) {

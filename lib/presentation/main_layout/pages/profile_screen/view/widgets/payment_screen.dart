@@ -5,11 +5,11 @@ import 'package:temp_house/presentation/common/widget/main_button.dart';
 import 'package:temp_house/presentation/resources/color_manager.dart';
 import 'package:temp_house/presentation/resources/routes_manager.dart';
 
-import '../../../../common/widget/main_app_bar.dart';
-import '../../../../resources/assets_manager.dart';
-import '../../../../resources/strings_manager.dart';
-import '../../../../resources/text_styles.dart';
-import '../../../../resources/values_manager.dart';
+import '../../../../../common/widget/main_app_bar.dart';
+import '../../../../../resources/assets_manager.dart';
+import '../../../../../resources/strings_manager.dart';
+import '../../../../../resources/text_styles.dart';
+import '../../../../../resources/values_manager.dart';
 
 class PaymentScreen extends StatelessWidget {
   const PaymentScreen({super.key});
