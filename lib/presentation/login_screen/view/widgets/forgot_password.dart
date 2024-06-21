@@ -10,7 +10,6 @@ import '../../../resources/color_manager.dart';
 import '../../../resources/strings_manager.dart';
 import '../../../resources/text_styles.dart';
 import '../../../resources/values_manager.dart';
-import 'reset_password.dart';
 
 class ForgotPassword extends StatelessWidget {
   const ForgotPassword({
