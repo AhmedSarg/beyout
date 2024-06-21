@@ -28,7 +28,7 @@ class HomesMapScreen extends StatelessWidget {
             baseListener(context, state);
           },
           builder: (context, state) {
-            return baseBuilder(context, state, HomesMapBody());
+            return baseBuilder(context, state, const HomesMapBody());
           },
         ),
       ),
