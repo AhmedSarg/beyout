@@ -100,15 +100,14 @@ class LoginViewModel extends BaseCubit
     );
   }
 
-
   Future<void> passwordReset() async {
     try {
-      await FirebaseAuth.instance.sendPasswordResetEmail(email: _emailController.text.trim());
+      await FirebaseAuth.instance
+          .sendPasswordResetEmail(email: _emailController.text.trim());
     } on FirebaseAuthException catch (e) {
       print(e);
     }
   }
-
 }
 
 abstract class LoginViewModelInput {}
@@ -124,5 +123,3 @@ abstract class LoginViewModelOutput {
 
   TextEditingController get getResetPasswordConfirmController;
 }
-
-abstract class LoginViewModelOutput {}

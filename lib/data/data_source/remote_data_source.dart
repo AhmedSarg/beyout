@@ -238,7 +238,10 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     required String email,
     required String password,
   }) async {
-    //todo create login logic
+    await _firebaseAuth.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
   }
 
   @override
@@ -492,40 +495,10 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   }
 
   @override
-  Future<User?> signInWithGoogle() async {
-    try {
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-      final GoogleSignInAuthentication? googleAuth =
-          await googleUser?.authentication;
-
-      final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth?.accessToken,
-        idToken: googleAuth?.idToken,
-      );
-
-      final userCredential =
-          await FirebaseAuth.instance.signInWithCredential(credential);
-
-      return userCredential.user;
-    } on FirebaseAuthException catch (e) {
-      print('FirebaseAuthException: ${e.message}');
-      throw e;
-    } on PlatformException catch (e) {
-      print('PlatformException: ${e.message}');
-      throw e;
-    } catch (e) {
-      print('Exception: $e');
-      throw e;
-    }
-  }
-}
-    await _firebaseAuth.signInWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
   Future<GoogleSignInAccount?> selectGoogleAccount() async {
     return await GoogleSignIn().signIn();
   }
+
   @override
   Future<User?> signInWithGoogle(GoogleSignInAccount? googleAccount) async {
     GoogleSignInAuthentication? googleAuth =
@@ -538,3 +511,5 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     UserCredential userCredential =
         await _firebaseAuth.signInWithCredential(credential);
     return userCredential.user;
+  }
+}

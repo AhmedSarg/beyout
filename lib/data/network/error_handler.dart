@@ -34,7 +34,6 @@ enum DataSource {
   LOGIN_FAILED,
 
   DEFAULT
-
 }
 
 class ResponseCode {
@@ -62,7 +61,6 @@ class ResponseCode {
   static const int TOKEN_EXPIRED = -15;
   static const int MISSING_DATA = -16;
   static const int LOGIN_FAILED = -17;
-
 }
 
 class ResponseMessage {
@@ -154,8 +152,6 @@ extension DataSourceExtension on DataSource {
       //   return Failure(ResponseCode.LOGIN_FAILED,
       //       ResponseMessage.LOGIN_FAILED);
 
-
-
       case DataSource.RECIEVE_TIMEOUT:
         return Failure(
           ResponseCode.RECIEVE_TIMEOUT,
@@ -212,9 +208,7 @@ extension DataSourceExtension on DataSource {
           ResponseMessage.MISSING_DATA,
         );
       case DataSource.LOGIN_FAILED:
-        return Failure(
-            ResponseCode.LOGIN_FAILED ,
-            ResponseMessage.LOGIN_FAILED);
+        return Failure(ResponseCode.LOGIN_FAILED, ResponseMessage.LOGIN_FAILED);
 
       case DataSource.DEFAULT:
         return Failure(
