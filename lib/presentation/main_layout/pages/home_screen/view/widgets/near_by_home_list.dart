@@ -22,6 +22,9 @@ class NearByHomeList extends StatelessWidget {
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance.collection('Homes').snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        print(snapshot.data?.docs.map(
+          (e) => e.data(),
+        ));
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const MainCicleProcessIndicator();
         }

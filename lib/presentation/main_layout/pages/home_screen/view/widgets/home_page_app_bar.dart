@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:temp_house/domain/models/enums.dart';
 import 'package:temp_house/presentation/common/data_intent/data_intent.dart';
 import 'package:temp_house/presentation/common/widget/main_image.dart';
 
@@ -38,12 +39,14 @@ class HomePageAppBar extends StatelessWidget {
             },
             icon: SvgPicture.asset(SVGAssets.chat),
           ),
-          IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, Routes.offersRoute);
-            },
-            icon: SvgPicture.asset(SVGAssets.bell),
-          )
+          DataIntent.getUserRole() == UserRole.owner
+              ? IconButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, Routes.offersRoute);
+                  },
+                  icon: SvgPicture.asset(SVGAssets.bell),
+                )
+              : const SizedBox.shrink(),
         ],
       ),
     );
