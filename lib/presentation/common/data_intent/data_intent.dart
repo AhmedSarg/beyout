@@ -55,10 +55,12 @@ class DataIntent {
     _fireAuthUser = fireAuthUser;
   }
 
-  static User? popFireAuthUser() {
-    User? v = _fireAuthUser;
+  static User? getFireAuthUser() {
+    return _fireAuthUser;
+  }
+
+  static void deleteFireAuthUser() {
     _fireAuthUser = null;
-    return v;
   }
 
 //-----------------------------------

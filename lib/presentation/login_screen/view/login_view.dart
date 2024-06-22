@@ -44,7 +44,8 @@ class LoginScreen extends StatelessWidget {
                 ModalRoute.withName('/'),
               );
             } else if (state is SocialLoginState) {
-              Navigator.pushNamed(context, Routes.registerRoute);
+              Navigator.pop(context);
+              Navigator.pushNamed(context, Routes.selectionRoute);
             } else if (state is ResetPasswordState) {
               Navigator.pop(context);
               showDialog(

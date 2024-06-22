@@ -19,20 +19,22 @@ class SplashViewModel extends BaseCubit
   }
 
   Future<void> getCurrentUser() async {
-    _getCurrentUserUseCase(null).then(
+    await _getCurrentUserUseCase(null).then(
       (value) {
         value.fold(
           (l) {
             emit(
               ErrorState(
                 failure: l,
-                retry: () {
-                  start();
+                retry: () async {
+                  emit(LoadingState());
+                  await getCurrentUser();
                 },
               ),
             );
           },
           (r) {
+            print(r);
             if (r == null) {
               emit(UserNotSignedState());
             } else {

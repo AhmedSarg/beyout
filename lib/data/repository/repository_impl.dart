@@ -320,6 +320,8 @@ class RepositoryImpl implements Repository {
     try {
       if (await _networkInfo.isConnected) {
         var data = _cacheDataSource.getSignedUser();
+        print(1);
+        print(data);
         if (data != null) {
           Map<String, dynamic>? userData = await _remoteDataSource.getUserData(
             email: data.email!,

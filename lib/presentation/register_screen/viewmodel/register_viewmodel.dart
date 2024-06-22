@@ -35,7 +35,7 @@ class RegisterViewModel extends BaseCubit
 
   @override
   void start() {
-    _fireAuthUser = DataIntent.popFireAuthUser();
+    _fireAuthUser = DataIntent.getFireAuthUser();
     _fireAuthUsername = _fireAuthUser?.displayName;
     _fireAuthEmail = _fireAuthUser?.email;
     _fireAuthPhoneNumber = _fireAuthUser?.phoneNumber;
